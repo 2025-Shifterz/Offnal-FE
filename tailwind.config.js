@@ -1,21 +1,9 @@
-// This is a Tailwind CSS configuration file for a React Native project.
-// It specifies the content paths, disables dark mode, and extends the theme with custom colors,
-// fonts, font sizes, and spacing. It also imports unsupported core plugins from 'tailwindcss-react-native'.
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './src/**/*.{js,jsx,ts,tsx}',
-    './app/**/*.{js,jsx,ts,tsx}',
-  ],
-  darkMode: false,
+  content: ['./src/**/*.{js,ts,jsx,tsx}', '.App.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {
-      colors: { },
-      fontFamily: { },
-      fontSize: { },
-      spacing: { },
-    },
+    extend: {}
   },
   plugins: [],
-  corePlugins: require('tailwindcss-react-native/unsupported-core-plugins'),
 }
+
