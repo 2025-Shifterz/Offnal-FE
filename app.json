@@ -1,4 +1,10 @@
 {
   "name": "Shifterz",
-  "displayName": "Shifterz"
+  "displayName": "Shifterz",
+  "expo": {
+    "slug": "Shifterz",
+    "name": "Shifterz",
+    "sdkVersion": "53.0.0",
+    "entryPoint": ".vscode/exponentIndex.js"
+  }
 }
