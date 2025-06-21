@@ -1,5 +1,7 @@
 package com.shifterz.ocr
 
+import com.shifterz.code.OCRErrorCode
+
 /**
  * ### OCRResultListener
  *
@@ -11,6 +13,5 @@ package com.shifterz.ocr
 interface OCRResultListener {
     fun onOCRResult(code: Int, data: String)
 
-    fun onOCRError(code: Int, message: String)
+    fun onOCRError(error: OCRErrorCode)
 }
-
