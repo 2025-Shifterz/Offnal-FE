@@ -3,6 +3,7 @@ package com.shifterz.ocr
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.shifterz.code.OCRErrorCode
 
 class OCRModule(
     reactContext: ReactApplicationContext
@@ -20,7 +21,7 @@ class OCRModule(
         TODO("Not yet implemented")
     }
 
-    override fun onOCRError(code: Int, message: String) {
+    override fun onOCRError(error: OCRErrorCode) {
         TODO("Not yet implemented")
     }
 
