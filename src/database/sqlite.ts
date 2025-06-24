@@ -31,6 +31,7 @@ const initDatabase = async () => {
       );`,
       [],
     );
+
     console.log('Table "todos" created or already exists.');
   });
   return db;
