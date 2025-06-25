@@ -1,4 +1,4 @@
- import {initDatabase} from './database/sqlite';
+import {initDatabase} from './sqlite';
 
 // 할 일 추가
 const addTodo = async text => {
