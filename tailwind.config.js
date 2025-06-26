@@ -247,13 +247,13 @@ module.exports = {
 
       boxShadow: {
         // 그림자는 'x-offset y-offset blur-radius color' 형태로 정의함.
-        // --- Light Mode (기본값) ---
+        // --- Light Mode---
         'light-3':
           '0px var(--shadow-y-3) var(--shadow-blur-3) var(--color-alpha-shadow1)',
         'light-4':
           '0px var(--shadow-y-4) var(--shadow-blur-4) var(--color-alpha-shadow2)',
 
-        // --- Dark Mode (dark: 프리픽스와 함께 사용) ---
+        // --- Dark Mode---
         'dark-3':
           '0px var(--shadow-dark-y-3) var(--shadow-dark-blur-3) var(--color-dark-alpha-shadow1)',
         'dark-4':
