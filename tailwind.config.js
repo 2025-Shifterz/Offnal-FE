@@ -492,7 +492,7 @@ module.exports = {
 
       // --- fontFamily ---
       fontFamily: {
-        sans: ['Pretendard'],
+        pretendard: ['Pretendard'],
       },
     },
   },
