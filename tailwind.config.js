@@ -349,14 +349,13 @@ module.exports = {
       },
 
       boxShadow: {
-        // 그림자는 'x-offset y-offset blur-radius color' 형태로 정의함.
-        // --- Light Mode---
+        // --- light mode---
         'shadow-blur-3': '1px',
         'shadow-y-3': '1px',
         'shadow-blur-4': '2px',
         'shadow-y-4': '2px',
 
-        // --- Dark Mode---
+        // --- dark mode---
         'dark-shadow-blur-3': '1px',
         'dark-shadow-blur-4': '2px',
         'dark-shadow-y-3': '2px',
@@ -428,7 +427,7 @@ module.exports = {
       },
 
       lineHeight: {
-        // size-height
+        // --- size-height ---
         'h-1': '8px',
         'h-2': '16px',
         'h-3': '20px',
@@ -491,6 +490,7 @@ module.exports = {
         bold: 700,
       },
 
+      // --- fontFamily ---
       fontFamily: {
         sans: ['Pretendard'],
       },
