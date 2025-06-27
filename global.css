@@ -5,6 +5,6 @@
 
 @layer base {
   * {
-    @apply font-sans;
+    @apply font-pretendard;
   }
 }

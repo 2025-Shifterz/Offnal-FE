@@ -7,10 +7,10 @@ export default function App() {
   return (
     <View className="flex-1 items-center justify-center bg-white">
       <SafeAreaView className="flex-1 items-center justify-center bg-white">
-        <Text className="text-success-60 font-sans text-heading-l">
+        <Text className="text-success-60 text-heading-xl font-pretendard">
           Hello, Nativewind!
         </Text>
-        <Text className="text-warning-60 text-heading-xl font-sans">
+        <Text className="text-warning-60 text-heading-xl font-pretendard">
           Welcome to Nativewind!
         </Text>
       </SafeAreaView>
