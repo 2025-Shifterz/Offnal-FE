@@ -1,5 +1,5 @@
 // presentation 레이어는 사용자 인터페이스를 담당. domain 레이어의 useCases를 호출하여 비즈니스 로직을 실행하고, 결과를 화면에 표시한다.
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -17,23 +17,41 @@ import {
   getTodosUseCase,
   todoCompletionUseCase,
 } from '../../di/Dependencies';
+import {initDatabase} from '../../data/sources/TodoLocalSource';
 
 const TodoPage = () => {
   const [newTodoText, setNewTodoText] = useState('');
   const [loading, setLoading] = useState(false);
   const [todos, setTodos] = useState<Todo[]>([]);
 
+  useEffect(() => {
+    const initializeTodos = async () => {
+      try {
+        await initDatabase(); // 데이터베이스 초기화
+        const loadedTodos = await getTodosUseCase.execute(); // UseCase 호출
+        setTodos(loadedTodos);
+      } catch (error) {
+        console.error('Failed to initialize DB or load todos:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    initializeTodos();
+  }, []);
+
   // Todo 추가하는 핸들러
   const handleAddTodo = async () => {
     if (!newTodoText.trim()) {
       Alert.alert('알림', '할 일 내용을 압력해주세요');
+      return;
     }
     // 새로운 텍스트가 존재하므로 로딩 상태 true
     setLoading(true);
     try {
-      await addTodoUseCase.execute(newTodoText); // Use Case 호출
+      await addTodoUseCase.execute(newTodoText);
       setNewTodoText(''); // 초기화
-      const updatedTodos = await getTodosUseCase.execute(); // Use Case 호출
+      const updatedTodos = await getTodosUseCase.execute();
       setTodos(updatedTodos);
     } catch (error) {
       console.error('Error adding todo: ', error);
@@ -45,8 +63,8 @@ const TodoPage = () => {
   const handleCompleted = async (id: number, currentCompleted: boolean) => {
     setLoading(true);
     try {
-      await todoCompletionUseCase.execute(id, !currentCompleted); // Use Case 호충
-      const updatedTodos = await getTodosUseCase.execute(); // Use Case 호출
+      await todoCompletionUseCase.execute(id, !currentCompleted);
+      const updatedTodos = await getTodosUseCase.execute();
       setTodos(updatedTodos);
     } catch (error) {
       console.error('Error completing todo: ', error);
