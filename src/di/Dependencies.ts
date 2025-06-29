@@ -12,7 +12,7 @@ const todoLocalSource = new TodoLocalSource();
 const todoRepository = new TodoRepositoryImpl(todoLocalSource);
 
 // 3. Use Case 인스턴스 생성 (repository 주입)
-// ---> 이제 addTodoUseCase 사용가능! (AddTodoUseCase는 클래스이므로 이것을 직접 사용하는 것은 불가능함)
+// --> 이제 addTodoUseCase 사용가능!
 export const addTodoUseCase = new AddTodoUseCase(todoRepository);
 export const getTodosUseCase = new GetTodosUseCase(todoRepository);
 export const todoCompletionUseCase = new TodoCompletionUseCase(todoRepository);

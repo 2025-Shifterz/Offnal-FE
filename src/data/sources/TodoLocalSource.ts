@@ -15,8 +15,8 @@ const openDB = async (): Promise<SQLite.SQLiteDatabase> => {
   }
 
   const db = await SQLite.openDatabase({
-    name: 'myDatabase.db', // 생성될 파일 이름
-    location: 'default', // 저장 위치 (Android/iOS 모두 알아서 처리)
+    name: 'myDatabase.db',
+    location: 'default',
   });
 
   console.log('DB opened!');
@@ -28,12 +28,7 @@ const openDB = async (): Promise<SQLite.SQLiteDatabase> => {
 const initDatabase = async () => {
   const db = await openDB(); // dbInstance를 통해 기존 연결을 재사용한다.
 
-  // 트랜잭션 시작
   await db.transaction(async tx => {
-    // todos 테이블 생성 쿼리
-    // id: 고유 식별자 (자동 증가)
-    // text: 할 일 내용
-    // completed: 완료 여부 (0: 미완료, 1: 완료)
     await tx.executeSql(
       `CREATE TABLE IF NOT EXISTS todos (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
