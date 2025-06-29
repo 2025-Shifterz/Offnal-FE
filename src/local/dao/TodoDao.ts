@@ -1,4 +1,4 @@
-// addTodo, getTodos, todoCompleted, deleteTodo 실제 기능 구현하기
+// addTodo, getTodos, todoCompleted, deleteTodo 실제 기능 구현
 import {Todo} from '../../domain/entities/Todo';
 import {openDB} from '../tables/TodoTable';
 

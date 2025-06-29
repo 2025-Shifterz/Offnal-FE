@@ -19,7 +19,6 @@ import {
   todoCompletionUseCase,
 } from '../../di/Dependencies';
 import {createTodoTable} from '../../local/tables/TodoTable';
-// import {initDatabase} from '../../data/sources/TodoLocalSource';
 
 const TodoPage = () => {
   const [newTodoText, setNewTodoText] = useState('');
