@@ -11,13 +11,15 @@ import {
   View,
 } from 'react-native';
 import {Todo} from '../../domain/entities/Todo';
+
 import {
   addTodoUseCase,
   deleteTodoUseCase,
   getTodosUseCase,
   todoCompletionUseCase,
 } from '../../di/Dependencies';
-import {initDatabase} from '../../data/sources/TodoLocalSource';
+import {createTodoTable} from '../../local/tables/TodoTable';
+// import {initDatabase} from '../../data/sources/TodoLocalSource';
 
 const TodoPage = () => {
   const [newTodoText, setNewTodoText] = useState('');
@@ -27,7 +29,7 @@ const TodoPage = () => {
   useEffect(() => {
     const initializeTodos = async () => {
       try {
-        await initDatabase(); // 데이터베이스 초기화
+        await createTodoTable(); // 데이터베이스 초기화
         const loadedTodos = await getTodosUseCase.execute(); // UseCase 호출
         setTodos(loadedTodos);
       } catch (error) {

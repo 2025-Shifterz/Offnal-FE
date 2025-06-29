@@ -1,5 +1,5 @@
 // Repository 인터페이스 정의,
-// 실제 구현은 data 레이더에서 이루어진다.
+// 실제 구현은 data 레이어에서 이루어진다.
 import {Todo} from '../entities/Todo';
 
 export interface TodoRepository {

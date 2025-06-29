@@ -1,15 +1,15 @@
 // 의존성 관리
 import {AddTodoUseCase} from '../domain/useCases/AddTodo';
-import {TodoLocalSource} from '../data/sources/TodoLocalSource';
 import {TodoRepositoryImpl} from '../data/repositories/TodoRepositoryImpl';
 import {TodoCompletionUseCase} from '../domain/useCases/TodoCompletion';
 import {DeleteTodoUseCase} from '../domain/useCases/DeleteTodo';
 import {GetTodosUseCase} from '../domain/useCases/GetTodos';
+import {TodoDao} from '../local/dao/TodoDao';
 
 // 1. 구체적인 데이터 소스 인스턴스 생성
-const todoLocalSource = new TodoLocalSource();
-// 2. 구체적인 리포지토리 구현체 인스턴스 생성 (localSource 주입)
-const todoRepository = new TodoRepositoryImpl(todoLocalSource);
+const todoDao = new TodoDao();
+// 2. 구체적인 리포지토리 구현체 인스턴스 생성 (TodoDao 주입)
+const todoRepository = new TodoRepositoryImpl(todoDao);
 
 // 3. Use Case 인스턴스 생성 (repository 주입)
 // --> 이제 addTodoUseCase 사용가능!
