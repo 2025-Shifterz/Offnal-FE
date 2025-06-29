@@ -13,6 +13,6 @@ export interface TodoRepository {
 
   // Promise<number> : 비동기 처리의 결과를 숫자로 리턴한다는 의미이다.
   getTodos(): Promise<Todo[]>;
-  toggleTodoCompleted(id: number, completed: boolean): Promise<void>;
+  todoCompleted(id: number, completed: boolean): Promise<void>;
   deleteTodo(id: number): Promise<void>;
 }

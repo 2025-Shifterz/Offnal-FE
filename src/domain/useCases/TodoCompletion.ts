@@ -16,10 +16,10 @@ const toggleTodoCompleted = async (id, completed) => {
 
 import {TodoRepository} from '../repositories/TodoRepository';
 
-export class ToggleTodoCompletionUseCase {
+export class TodoCompletionUseCase {
   constructor(private todoRepository: TodoRepository) {}
 
   async execute(id: number, completed: boolean): Promise<void> {
-    await this.todoRepository.toggleTodoCompleted(id, completed);
+    await this.todoRepository.todoCompleted(id, completed);
   }
 }

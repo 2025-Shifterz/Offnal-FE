@@ -1,22 +1,32 @@
 // 데이터 소스에 직접 접근하는 로직을 포함한다. 여기서는 SQLite 관련 코드가 들어간다.
+// source 는 실제 데이터 저장 기술과 직접 통신하여 데이터를 읽고 쓴다.
 import SQLite from 'react-native-sqlite-storage';
+import {Todo} from '../../domain/entities/Todo';
 
 SQLite.enablePromise(true);
 
+let dbInstance: SQLite.SQLiteDatabase | null = null;
+
 // 데이터베이스를 열고 인스턴스를 반환하는 함수
-const openDB = async () => {
+const openDB = async (): Promise<SQLite.SQLiteDatabase> => {
+  // 데이터베이스를 한 번만 열고 재사용하기
+  if (dbInstance) {
+    return dbInstance;
+  }
+
   const db = await SQLite.openDatabase({
     name: 'myDatabase.db', // 생성될 파일 이름
     location: 'default', // 저장 위치 (Android/iOS 모두 알아서 처리)
   });
 
   console.log('DB opened!');
+  dbInstance = db;
   return db;
 };
 
-// 데이터베이스 테이블을 초기화하는 함수
+// 데이터베이스 테이블을 초기화하는 함수 (앱 시작 시 한 번만 호출된다.)
 const initDatabase = async () => {
-  const db = await openDB(); // 데이터베이스 열기
+  const db = await openDB(); // dbInstance를 통해 기존 연결을 재사용한다.
 
   // 트랜잭션 시작
   await db.transaction(async tx => {
@@ -44,7 +54,7 @@ export class TodoLocalSource {
   // addTodo, getTodos, todoCompleted, deleteTodo 함수 구현하기
 
   // todo 추가하기
-  async addTodo(todo: any) {
+  async addTodo(todo: Omit<Todo, 'id'>): Promise<number> {
     const db = await initDatabase(); // 데이터베이스 초기화 및 가져오기
     try {
       const [result] = await db.executeSql(
@@ -60,7 +70,7 @@ export class TodoLocalSource {
   }
 
   // 모든 todos 가져오기
-  getTodos = async () => {
+  getTodos = async (): Promise<Todo[]> => {
     const db = await initDatabase();
     try {
       const [result] = await db.executeSql('SELECT * FROM todos');
@@ -77,7 +87,7 @@ export class TodoLocalSource {
   };
 
   // todo 완료 상태 바꾸기
-  async toggleTodoCompleted(id: number, completed: boolean) {
+  async todoCompleted(id: number, completed: boolean): Promise<void> {
     const db = await initDatabase();
     try {
       await db.executeSql(
@@ -92,7 +102,7 @@ export class TodoLocalSource {
   }
 
   // todo 삭제하기
-  async deleteTodo(id: number) {
+  async deleteTodo(id: number): Promise<void> {
     const db = await initDatabase();
     try {
       await db.executeSql('DELETE FROM todos WHERE id = ?', [id]);

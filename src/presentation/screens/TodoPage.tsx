@@ -1,91 +1,55 @@
 // presentation 레이어는 사용자 인터페이스를 담당. domain 레이어의 useCases를 호출하여 비즈니스 로직을 실행하고, 결과를 화면에 표시한다.
-
-// 다시 이해하기!!!!!!!!!!!!!
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
-  View,
-  Text,
+  ActivityIndicator,
+  Alert,
   Button,
   FlatList,
-  ActivityIndicator,
   StyleSheet,
+  Text,
   TextInput,
-  Alert,
+  View,
 } from 'react-native';
-
-// DI를 위한 설정
-import {TodoRepositoryImpl} from '../../data/repositories/TodoRepositoryImpl';
+import {Todo} from '../../domain/entities/Todo';
 import {
-  TodoLocalSource,
-  initDatabase,
-} from '../../data/sources/TodoLocalSource';
-import {AddTodoUseCase} from '../../domain/useCases/AddTodo';
-import {GetTodosUseCase} from '../../domain/useCases/GetTodos';
-import {DeleteTodoUseCase} from '../../domain/useCases/DeleteTodo';
-import {Todo} from '../../domain/entities/Todo'; // Todo 엔티티 임포트
-import {ToggleTodoCompletionUseCase} from '../../domain/useCases/TodoCompletion';
-
-// 의존성 주입 (Dependency Injection)
-const todoLocalSource = new TodoLocalSource();
-const todoRepository = new TodoRepositoryImpl(todoLocalSource);
-
-const addTodoUseCase = new AddTodoUseCase(todoRepository);
-const getTodosUseCase = new GetTodosUseCase(todoRepository);
-const toggleTodoCompletionUseCase = new ToggleTodoCompletionUseCase(
-  todoRepository,
-);
-const deleteTodoUseCase = new DeleteTodoUseCase(todoRepository);
+  addTodoUseCase,
+  deleteTodoUseCase,
+  getTodosUseCase,
+  todoCompletionUseCase,
+} from '../../di/Dependencies';
 
 const TodoPage = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [loading, setLoading] = useState(true);
   const [newTodoText, setNewTodoText] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [todos, setTodos] = useState<Todo[]>([]);
 
-  useEffect(() => {
-    const initializeAndLoadTodos = async () => {
-      try {
-        await initDatabase(); // 데이터베이스 초기화
-        const loadedTodos = await getTodosUseCase.execute(); // UseCase 호출
-        setTodos(loadedTodos);
-      } catch (error) {
-        console.error('Failed to initialize DB or load todos:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    initializeAndLoadTodos();
-  }, []);
-
+  // Todo 추가하는 핸들러
   const handleAddTodo = async () => {
     if (!newTodoText.trim()) {
-      Alert.alert('알림', '할 일 내용을 입력해주세요.');
-      return;
+      Alert.alert('알림', '할 일 내용을 압력해주세요');
     }
+    // 새로운 텍스트가 존재하므로 로딩 상태 true
     setLoading(true);
     try {
-      await addTodoUseCase.execute(newTodoText); // UseCase 호출
-      setNewTodoText('');
-      const updatedTodos = await getTodosUseCase.execute(); // UseCase 호출
+      await addTodoUseCase.execute(newTodoText); // Use Case 호출
+      setNewTodoText(''); // 초기화
+      const updatedTodos = await getTodosUseCase.execute(); // Use Case 호출
       setTodos(updatedTodos);
     } catch (error) {
-      console.error('Error adding todo:', error);
+      console.error('Error adding todo: ', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleToggleCompleted = async (
-    id: number,
-    currentCompleted: boolean,
-  ) => {
+  const handleCompleted = async (id: number, currentCompleted: boolean) => {
     setLoading(true);
     try {
-      await toggleTodoCompletionUseCase.execute(id, !currentCompleted); // UseCase 호출
-      const updatedTodos = await getTodosUseCase.execute(); // UseCase 호출
+      await todoCompletionUseCase.execute(id, !currentCompleted); // Use Case 호충
+      const updatedTodos = await getTodosUseCase.execute(); // Use Case 호출
       setTodos(updatedTodos);
     } catch (error) {
-      console.error('Error toggling todo:', error);
+      console.error('Error completing todo: ', error);
     } finally {
       setLoading(false);
     }
@@ -94,8 +58,8 @@ const TodoPage = () => {
   const handleDeleteTodo = async (id: number) => {
     setLoading(true);
     try {
-      await deleteTodoUseCase.execute(id); // UseCase 호출
-      const updatedTodos = await getTodosUseCase.execute(); // UseCase 호출
+      await deleteTodoUseCase.execute(id);
+      const updatedTodos = await getTodosUseCase.execute();
       setTodos(updatedTodos);
     } catch (error) {
       console.error('Error deleting todo:', error);
@@ -135,7 +99,7 @@ const TodoPage = () => {
             <View style={styles.flexing}>
               <Button
                 title={item.completed ? 'Uncomplete' : 'Complete'}
-                onPress={() => handleToggleCompleted(item.id, item.completed)}
+                onPress={() => handleCompleted(item.id, item.completed)}
               />
               <Button
                 title="Delete"
