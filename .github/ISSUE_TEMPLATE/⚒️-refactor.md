@@ -2,8 +2,7 @@
 name: "⚒️ Refactor"
 about: '리펙토링 '
 title: "[Refactor] 리펙토링 제목 "
-labels: bug, documentation, duplicate, enhancement, help wanted, invalid, question,
-  wontfix
+labels: ''
 assignees: ''
 
 ---

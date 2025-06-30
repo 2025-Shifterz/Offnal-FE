@@ -2,7 +2,7 @@
 name: "\U0001F41E Bug"
 about: 버그 제보
 title: "[Bug] 버그 제목 "
-labels: bug, documentation, duplicate, help wanted, invalid, question, wontfix
+labels: bug
 assignees: ''
 
 ---

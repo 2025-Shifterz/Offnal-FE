@@ -2,8 +2,7 @@
 name: "✨ Feature "
 about: '새로운 기능 추가 '
 title: "[Feature] 이슈 제목 "
-labels: bug, documentation, duplicate, enhancement, help wanted, invalid, question,
-  wontfix
+labels: enhancement
 assignees: ''
 
 ---

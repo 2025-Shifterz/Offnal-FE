@@ -2,8 +2,7 @@
 name: "\U0001F680 Deploy"
 about: '배포 관련 작업 '
 title: "[Deploy] 배포 제목 "
-labels: bug, documentation, duplicate, enhancement, help wanted, invalid, question,
-  wontfix
+labels: ''
 assignees: ''
 
 ---
