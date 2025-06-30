@@ -3,7 +3,7 @@ module.exports = {
   // extends를 빈 배열로 설정하여 @commitlint/config-conventional의 영향을 받지 않도록.
   extends: [],
 
-  // 커스텀 파서 프리셋을 정의합니다.
+  // 커스텀 파서 프리셋을 정의
   parserPreset: {
     parserOpts: {
       // 이전에 정의했던 당신의 커스텀 headerPattern을 그대로 사용
