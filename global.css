@@ -16,6 +16,10 @@
   /* Font Family */
   --font-pretendard: 'Pretendard';
 
+  /* kako login guideline */
+  --color-kakao-bg: #fee500;
+  --color-kakao-text: #000000d9;
+
   /* Primitive Colors */
   --color-alpha-black0: #00000000;
   --color-alpha-black10: #0000001a;

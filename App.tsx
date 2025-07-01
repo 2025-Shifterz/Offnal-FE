@@ -1,10 +1,13 @@
 import './global.css';
-import React, {useEffect} from 'react';
-import {Text, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import React, { useEffect } from 'react';
+import { Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import {colorScheme} from 'nativewind';
-import {useColorScheme} from 'react-native';
+import { colorScheme } from 'nativewind';
+import { useColorScheme } from 'react-native';
+
+// 임시 화면 확인을 위한 코드
+import LoginScreen from './src/presentation/screens/LoginScreen';
 
 export default function App() {
   const scheme = useColorScheme(); // 'light' or 'dark'
@@ -19,12 +22,13 @@ export default function App() {
   return (
     <View className="flex-1 items-center justify-center bg-white">
       <SafeAreaView className="flex-1 items-center justify-center bg-white">
-        <Text className="bg-lime-500 font-pretendard text-heading-xl text-success-80 dark:bg-slate-500 dark:text-dark-action-primary">
+        {/* <Text className="bg-lime-500 font-pretendard text-heading-xl text-success-80 dark:bg-slate-500 dark:text-dark-action-primary">
           Hello, Nativewind!
         </Text>
         <Text className="bg-black font-pretendard text-heading-xl text-warning-60">
           Welcome to Nativewind!
-        </Text>
+        </Text> */}
+        <LoginScreen />
       </SafeAreaView>
     </View>
   );
