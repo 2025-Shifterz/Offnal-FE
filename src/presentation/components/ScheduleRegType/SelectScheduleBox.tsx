@@ -1,17 +1,18 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 const SelectScheduleBox = () => {
   return (
-    <View className="w-[160px] h-[148px] bg-[#ffffff] p-[5px] flex items-center justify-center border-[1px] border-solid rounded-[8px] border-[#2ECADC]">
-      {/*<Image source={require('../images/two-people.svg')} className="size-9" />*/}
-      <View className="w-[136px] flex gap-[10px] items-center">
-        <Text className=" text-[15px] font-semibold">전체 근무표 등록</Text>
-        <Text className="text-[11px] text-center">
-          여러 조의 스케줄이 담긴 {'\n'} 근무표를 등록할 수 있어요
+    <TouchableOpacity className="flex h-[148px] w-[160px] items-center justify-center rounded-lg border border-border-primary bg-surface-primary-light-2 p-[5px]">
+      <View className="flex w-[136px] items-center gap-[10px]">
+        <Text className="text-heading-xxs font-semibold leading-[1.2] text-text-basic">
+          전체 근무표 등록
+        </Text>
+        <Text className="text-center text-label-xxs leading-[1.2] text-text-subtle">
+          여러 조의 스케줄이 담긴 {'\n'}근무표를 등록할 수 있어요
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

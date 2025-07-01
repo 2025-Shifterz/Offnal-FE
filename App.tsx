@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { colorScheme } from 'nativewind';
 import { useColorScheme } from 'react-native';
+import ScheduleRegType from './src/presentation/screens/ScheduleRegType';
 
 export default function App() {
   const scheme = useColorScheme(); // 'light' or 'dark'
@@ -19,12 +20,16 @@ export default function App() {
   return (
     <View className="flex-1 items-center justify-center bg-white">
       <SafeAreaView className="flex-1 items-center justify-center bg-white">
-        <Text className="bg-lime-500 font-pretendard text-heading-xl text-success-80 dark:bg-slate-500 dark:text-dark-action-primary">
+        {/* <Text className="bg-lime-500 font-pretendard text-heading-xl text-success-80 dark:bg-slate-500 dark:text-dark-action-primary">
           Hello, Nativewind!
         </Text>
         <Text className="bg-black font-pretendard text-heading-xl text-warning-60">
           Welcome to Nativewind!
         </Text>
+        <Text className="bg-black font-pretendard text-heading-xl text-warning-60">
+          Welcome to Nativewind!
+        </Text> */}
+        <ScheduleRegType />
       </SafeAreaView>
     </View>
   );
