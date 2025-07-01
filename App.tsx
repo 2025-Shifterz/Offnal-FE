@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { colorScheme } from 'nativewind';
 import { useColorScheme } from 'react-native';
 import ScheduleRegType from './src/presentation/screens/ScheduleRegType';
+import ScheduleInfoInput from './src/presentation/screens/ScheduleInfoInput';
 
 export default function App() {
   const scheme = useColorScheme(); // 'light' or 'dark'
@@ -29,7 +30,8 @@ export default function App() {
         <Text className="bg-black font-pretendard text-heading-xl text-warning-60">
           Welcome to Nativewind!
         </Text> */}
-        <ScheduleRegType />
+        <ScheduleInfoInput />
+        {/* <ScheduleRegType /> */}
       </SafeAreaView>
     </View>
   );
