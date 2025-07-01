@@ -11,17 +11,18 @@ export default function App() {
 
   useEffect(() => {
     if (scheme === 'light' || scheme === 'dark') {
-      colorScheme.set('dark');
+      colorScheme.set('light');
+      // light를 dark로 바꿔보면 dark모드일 때 화면 확인할 수 있습니다.(임시 코드)
     }
   }, [scheme]);
 
   return (
-    <View className="flex-1 items-center justify-center bg-white ">
-      <SafeAreaView className="flex-1 items-center justify-center bg-white ">
-        <Text className="dark:text-dark-action-primary text-success-80 dark:bg-slate-500 text-heading-xl font-pretendard">
+    <View className="flex-1 items-center justify-center bg-white">
+      <SafeAreaView className="flex-1 items-center justify-center bg-white">
+        <Text className="bg-lime-500 font-pretendard text-heading-xl text-success-80 dark:bg-slate-500 dark:text-dark-action-primary">
           Hello, Nativewind!
         </Text>
-        <Text className="text-warning-60 text-heading-xl font-pretendard">
+        <Text className="bg-black font-pretendard text-heading-xl text-warning-60">
           Welcome to Nativewind!
         </Text>
       </SafeAreaView>
