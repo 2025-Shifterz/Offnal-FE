@@ -6,4 +6,6 @@ module.exports = {
   arrowParens: 'avoid',
   bracketSpacing: true,
   trailingComma: 'es5',
+  tailwindConfig: './tailwind.config.js',
+  plugins: ['prettier-plugin-tailwindcss'],
 };
