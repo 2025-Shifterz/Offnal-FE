@@ -5,6 +5,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {colorScheme} from 'nativewind';
 import {useColorScheme} from 'react-native';
+import HomeWorkTypeChip, { DayType } from './src/presentation/main/components/HomeWorkTypeChip';
 
 export default function App() {
   const scheme = useColorScheme(); // 'light' or 'dark'
@@ -17,14 +18,19 @@ export default function App() {
   }, [scheme]);
 
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <SafeAreaView className="flex-1 items-center justify-center bg-white">
-        <Text className="bg-lime-500 font-pretendard text-heading-xl text-success-80 dark:bg-slate-500 dark:text-dark-action-primary">
-          Hello, Nativewind!
-        </Text>
-        <Text className="bg-black font-pretendard text-heading-xl text-warning-60">
-          Welcome to Nativewind!
-        </Text>
+    <View className="flex-1 items-center justify-center">
+      <SafeAreaView className="flex-1 w-full marker:items-center justify-center">
+        <View className="flex-row w-full items-centerjustify-center pt-number-8 pb-number-8 ps-number-8 pe-number-8 space-x-number-2 bg-black">
+          <HomeWorkTypeChip dayType={DayType.PAST} workType="휴일" />
+          <HomeWorkTypeChip dayType={DayType.TODAY} workType="야간" />
+          <HomeWorkTypeChip dayType={DayType.UPCOMMING} workType="주간" />
+        </View>
+
+        <View className="flex-col items-top justify-start bg-backgraund-gray-subtle1 rounded-radius-s p-number-8 w-full">
+          <Text className="text-heading-xxs font-pretendard text-black">
+            오늘의 식사 추천
+          </Text>
+        </View>
       </SafeAreaView>
     </View>
   );
