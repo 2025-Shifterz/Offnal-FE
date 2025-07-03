@@ -20,17 +20,10 @@ export default function App() {
   }, [scheme]);
 
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <SafeAreaView className="flex-1 items-center justify-center bg-white">
-        {/* <Text className="bg-lime-500 font-pretendard text-heading-xl text-success-80 dark:bg-slate-500 dark:text-dark-action-primary">
-          Hello, Nativewind!
-        </Text>
-        <Text className="bg-black font-pretendard text-heading-xl text-warning-60">
-          Welcome to Nativewind!
-        </Text>
-        <Text className="bg-black font-pretendard text-heading-xl text-warning-60">
-          Welcome to Nativewind!
-        </Text> */}
+    <View className="flex-1 items-center justify-center bg-background-gray-subtle1">
+      {/* bg-slate-300 삭제 예정 */}
+
+      <SafeAreaView className="flex-1 items-center justify-center bg-slate-300">
         {/* <ScheduleInfoInput /> */}
         {/* <ScheduleRegType /> */}
         <CalendarType />

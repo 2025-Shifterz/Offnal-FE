@@ -41,7 +41,7 @@ LocaleConfig.defaultLocale = 'fr';
 const CalendarType = () => {
   // 나중에 mt-50px 삭제하기
   return (
-    <View className="mt-[50px] w-[328px] flex-1 bg-background-gray-subtle1 pt-[14px]">
+    <View className="w-[328px] flex-1 border pt-[14px]">
       <View className="flex flex-col gap-[12px]">
         <Text className="text-heading-m font-semibold leading-[1.4] text-text-bolder">
           달력에 근무 형태를 입력해주세요.

@@ -6,10 +6,10 @@ import BottomButton from '../components/ScheduleRegType/BottomButton';
 const ScheduleRegType = () => {
   // 나중에 mt-50px 삭제하기
   return (
-    <View className="mt-[50px] w-[328px] flex-1 bg-background-gray-subtle1 pt-[14px]">
+    <View className="w-[328px] flex-1 border pt-[14px]">
       <View className="flex flex-col gap-[12px]">
         <Text className="text-heading-m font-semibold leading-[1.4] text-text-bolder">
-          근무표 등록 방식을 {'\n'}선택해주세요.
+          근무표 등록 방식을 선택해주세요.
         </Text>
 
         <Text className="text-label-xs text-text-subtle">
