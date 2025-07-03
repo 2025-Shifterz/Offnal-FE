@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 const SelectScheduleBox = () => {
   return (
-    <TouchableOpacity className="flex h-[148px] w-[160px] items-center justify-center rounded-lg border border-border-primary bg-surface-primary-light-2 p-[5px]">
+    <TouchableOpacity className="flex h-[148px] flex-1 items-center justify-center rounded-lg border border-border-primary bg-surface-primary-light-2 p-[5px]">
       <View className="flex w-[136px] items-center gap-[10px]">
         <Text className="text-heading-xxs font-semibold text-text-basic">전체 근무표 등록</Text>
         <Text className="text-center text-label-xxs text-text-subtle">

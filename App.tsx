@@ -20,13 +20,13 @@ export default function App() {
   }, [scheme]);
 
   return (
-    <View className="flex-1 items-center justify-center bg-background-gray-subtle1">
+    <View className="flex-1 justify-center bg-background-gray-subtle1 px-[16px]">
       {/* bg-slate-300 삭제 예정 */}
 
-      <SafeAreaView className="flex-1 items-center justify-center bg-slate-300">
-        {/* <ScheduleInfoInput /> */}
+      <SafeAreaView className="flex-1">
         {/* <ScheduleRegType /> */}
-        <CalendarType />
+        <ScheduleInfoInput />
+        {/* <CalendarType /> */}
       </SafeAreaView>
     </View>
   );

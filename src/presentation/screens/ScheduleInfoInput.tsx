@@ -1,14 +1,12 @@
 import React from 'react';
 import { Button, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import SelectScheduleBox from '../components/ScheduleRegType/SelectScheduleBox';
 import BottomButton from '../components/ScheduleRegType/BottomButton';
 import TimeInput from '../components/ScheduleInfoInput/TimeInput';
 import TeamInput from '../components/ScheduleInfoInput/TeamInput';
 
 const ScheduleInfoInput = () => {
-  // 나중에 mt-50px 삭제하기
   return (
-    <View className="w-[328px] flex-1 border pt-[14px]">
+    <View className="w-full flex-1 border pt-[14px]">
       <View className="flex flex-col gap-[12px]">
         <Text className="text-heading-m font-semibold leading-[1.4] text-text-bolder">
           근무표의 기본 정보를 {'\n'}선택해주세요.
