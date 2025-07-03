@@ -1,11 +1,18 @@
 import { Text, TouchableOpacity } from 'react-native';
-// import KakaoLogo from '../../../assets/images/kakao_log.svg';
+import KakaoLogo from '../../../assets/icons/kakao_logo.svg';
 
-const KaKaoLoginBtn = () => {
+type KaKaoLoginBtnProps = {
+  onPress: () => void;
+};
+
+const KaKaoLoginBtn = ({ onPress }: KaKaoLoginBtnProps) => {
   return (
-    <TouchableOpacity className="mb-[16.25px] ml-[30px] mr-[30px] h-[45px] w-[299.9999px] items-center justify-center rounded-radius-xl bg-kakao-bg">
-      <Text className="pl-[86px] pr-[86px] font-pretendard text-heading-xxs font-bold tracking-letter-spacing-0 text-kakao-text">
-        {/* <KakaoLogo width={18} height={18} /> */}
+    <TouchableOpacity
+      onPress={onPress}
+      className="mx-number-12 mb-number-8 h-12 w-[300px] flex-row items-center justify-center rounded-radius-xl bg-kakao-bg pl-[14px] pr-[14px]"
+    >
+      <KakaoLogo />
+      <Text className="px-[86px] font-pretendard text-heading-xxs font-semibold tracking-letter-spacing-0 text-kakao-text">
         카카오 로그인
       </Text>
     </TouchableOpacity>
