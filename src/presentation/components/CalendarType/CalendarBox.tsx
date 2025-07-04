@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
+import CalendarDayColor from './CalendarDayColor';
 import TimeFrame from './TimeFrame';
 
 LocaleConfig.locales.fr = {
@@ -38,34 +39,46 @@ LocaleConfig.locales.fr = {
 };
 LocaleConfig.defaultLocale = 'fr';
 
-// 만약 실제로 점을 원한다면 dotColor를 사용하세요:
-const myMarkedDatesWithDots = {
-  '2025-07-10': { selected: true, disableTouchEvent: true, dotColor: 'blue' },
-  '2025-07-15': { marked: true, selected: true, disableTouchEvent: false, dotColor: 'red' },
-  '2025-07-20': { marked: true, dotColor: 'green' }, // 단순히 점만 표시하는 예시 (선택되지 않아도 됨)
-};
-
 const CalendarBox = () => {
   const [selected, setSelected] = useState('');
 
   return (
     <View>
       <Calendar
-        onDayPress={day => {
-          setSelected(day.dateString);
+        // onDayPress, markedDate 불필요
+        hideExtraDays={true}
+        // eslint-disable-next-line react/no-unstable-nested-components
+        dayComponent={({ date }) => {
+          if (!date) return null;
+          console.log('selected:', selected);
+          console.log('dataString: ', date.dateString);
+
+          return (
+            <TouchableOpacity
+              onPress={() => {
+                setSelected(date.dateString);
+              }}
+            >
+              <CalendarDayColor date={date} selected={selected === date.dateString} />
+            </TouchableOpacity>
+          );
         }}
-        markedDates={{
-          [selected]: {
-            selected: true,
-            disableTouchEvent: true,
-            selectedColor: 'blue',
-            dotColor: 'orange',
-          },
-          '2025-07-09': { marked: true, dotColor: 'red' },
-          '2025-07-10': { marked: true, dotColor: 'green' },
+        theme={{
+          // day title - 월, 화, 수 ..
+          textDayHeaderFontSize: 11,
+          textSectionTitleColor: '#B1B8BE',
+          // days - dayComponent의 스타일로 대체됨
+
+          // month title
+          textMonthFontSize: 17,
+          monthTextColor: '#1E2124',
+          textMonthFontWeight: 600,
+
+          // arrow
+          arrowColor: '#CDD1D5',
         }}
       />
-      {/* 근무 형태 수정 */}
+      {/* ---- 근무 형태 수정 ----------- */}
       <View className="h-[0.5px] bg-divider-gray-light" />
 
       <View className="flex-col gap-[9px] bg-surface-white p-[11px]">
