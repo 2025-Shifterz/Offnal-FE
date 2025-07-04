@@ -8,6 +8,7 @@ import { useColorScheme } from 'react-native';
 import ScheduleRegType from './src/presentation/screens/ScheduleRegType';
 import ScheduleInfoInput from './src/presentation/screens/ScheduleInfoInput';
 import CalendarType from './src/presentation/screens/CalendarType';
+import MonthEx from './src/presentation/components/CalendarType/MonthEx';
 
 export default function App() {
   const scheme = useColorScheme(); // 'light' or 'dark'
@@ -25,6 +26,7 @@ export default function App() {
         {/* <ScheduleRegType /> */}
         {/* <ScheduleInfoInput /> */}
         <CalendarType />
+        {/* <MonthEx /> */}
       </SafeAreaView>
     </View>
   );

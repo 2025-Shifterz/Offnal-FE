@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import CalendarDayColor from './CalendarDayColor';
 import TimeFrame from './TimeFrame';
+import MonthSelector from './MonthSelector';
 
 LocaleConfig.locales.fr = {
   monthNames: [
@@ -39,12 +40,24 @@ LocaleConfig.locales.fr = {
 };
 LocaleConfig.defaultLocale = 'fr';
 
+const formatDateToYYYYMMDD = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = '01'; // 항상 해당 달의 1일로
+  return `${year}-${month}-${day}`;
+};
+
 const CalendarBox = () => {
   const [selected, setSelected] = useState('');
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
     <View>
+      <MonthSelector selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
       <Calendar
+        monthFormat="yyyy년 MM월"
+        key={formatDateToYYYYMMDD(selectedDate)} // 강제 리렌더링
+        current={formatDateToYYYYMMDD(selectedDate)} // UTC 문제 해결
         // onDayPress, markedDate 불필요
         hideExtraDays={true}
         // eslint-disable-next-line react/no-unstable-nested-components
@@ -79,7 +92,7 @@ const CalendarBox = () => {
         }}
       />
       {/* ---- 근무 형태 수정 ----------- */}
-      <View className="h-[0.5px] bg-divider-gray-light" />
+      {/* <View className="h-[0.5px] bg-divider-gray-light" />
 
       <View className="flex-col gap-[9px] bg-surface-white p-[11px]">
         <Text className="text-body-xs font-medium text-text-subtle">근무 형태 수정</Text>
@@ -91,6 +104,7 @@ const CalendarBox = () => {
           <TimeFrame>휴일</TimeFrame>
         </View>
       </View>
+      */}
     </View>
   );
 };
