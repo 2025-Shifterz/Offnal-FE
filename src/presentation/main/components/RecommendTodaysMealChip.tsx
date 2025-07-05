@@ -1,13 +1,11 @@
-import { View } from 'react-native';
-import BowlIcon from '../../../assets/icons/ic_bowl_28.svg';
+import { View, Text } from 'react-native';
+
 import EggIcon from '../../../assets/icons/ic_egg_28.svg';
-import FriedEggIcon from '../../../assets/icons/ic_fried_egg_28.svg';
 import LunchBoxIcon from '../../../assets/icons/ic_lunch_box_28.svg';
 import MoonIcon from '../../../assets/icons/ic_moon_28.svg';
 import PhoIcon from '../../../assets/icons/ic_pho_28.svg';
 import RiceIcon from '../../../assets/icons/ic_rice_28.svg';
 import SweetPotatoIcon from '../../../assets/icons/ic_sweet_potato_28.svg';
-import { Text } from 'react-native';
 
 enum MealType {
   PRE_WORK_SNACK = 'PRE_WORK_SNACK',

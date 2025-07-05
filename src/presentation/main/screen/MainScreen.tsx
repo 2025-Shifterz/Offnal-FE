@@ -12,6 +12,8 @@ import HealthGuideSection from '../ui/HealthGuideSection';
 import RecommnedMealSection from '../ui/RecommendMealSection';
 
 import HealthCard from '../components/HealthCard';
+import ToDoCard from '../components/ToDoCard';
+import MemoCard from '../components/MemoCard';
 
 export default function MainScreen() {
   return (
@@ -40,6 +42,8 @@ export default function MainScreen() {
               <HealthCard.Weight />
             </View>
             <TitleSection.OnlyTitle title="기록하기" />
+            <ToDoCard.Container/>
+            <MemoCard.Container/>
           </View>
         </ScrollView>
       </SafeAreaView>

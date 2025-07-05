@@ -15,11 +15,13 @@ interface SectionWithAddableBtnProps {
 
 const WithTooltipIcon: React.FC<SectionWithTooltipIconProps> = ({ title, onPressIcon }) => {
   return (
-    <View className="w-full flex-row items-center justify-start gap-g-2">
-      <Text className="font-pretendard text-heading-xxs font-semibold text-black">{title}</Text>
-      <TouchableOpacity onPress={() => onPressIcon()}>
-        <TooltipIcon />
-      </TouchableOpacity>
+    <View className="flex-1">
+      <View className="flex-row items-center justify-start gap-g-2">
+        <Text className="font-pretendard text-heading-xxs font-semibold text-black">{title}</Text>
+        <TouchableOpacity onPress={() => onPressIcon()}>
+          <TooltipIcon />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -30,24 +32,26 @@ const WithAddableBtn: React.FC<SectionWithAddableBtnProps> = ({
   onPressIcon,
 }) => {
   return (
-    <View className="w-full flex-row items-center justify-between gap-g-2">
-      <Text className="font-pretendard text-heading-xxs font-semibold text-black">{title}</Text>
+    <View className="flex-1">
+      <View className="flex-row items-center justify-between gap-g-2">
+        <Text className="font-pretendard text-heading-xxs font-semibold text-black">{title}</Text>
 
-      <TouchableOpacity onPress={() => onPressIcon()}>
-        <View className="flex-row items-center gap-g-2">
-          <Text className="font-pretendard text-heading-xxxxs font-medium text-text-subtle-inverse">
-            {btnContent}
-          </Text>
-          <AddIcon />
-        </View>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => onPressIcon()}>
+          <View className="flex-row items-center gap-g-2">
+            <Text className="font-pretendard text-heading-xxxxs font-medium text-text-subtle-inverse">
+              {btnContent}
+            </Text>
+            <AddIcon />
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const OnlyTitle: React.FC<{ title: string }> = ({ title }) => {
   return (
-    <View className="w-full flex-row items-center justify-start gap-g-2">
+    <View className=" flex-row items-center justify-start gap-g-2">
       <Text className="font-pretendard text-heading-xxs font-semibold text-black">{title}</Text>
     </View>
   );
