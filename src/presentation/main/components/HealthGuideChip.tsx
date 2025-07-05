@@ -49,7 +49,6 @@ const HealthGuideChip: React.FC<HealthGuideChipProps> = ({healthGuideType, guide
             <Text className="text-heading-xxs text-text-basic font-pretendard font-semibold pt-number-6">
                 {guideTime}
             </Text>            
-
         </View>
     );
 }  
