@@ -5,7 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import HomeWorkTypeChip, { DayType } from '../components/HomeWorkTypeChip';
 
-
 import AlramSection from '../ui/AlramSection';
 import HealthGuideSection from '../ui/HealthGuideSection';
 import RecommnedMealSection from '../ui/RecommendMealSection';
@@ -17,7 +16,7 @@ import TopCard from '../components/TopCard';
 export default function MainScreen() {
   return (
     <View className="flex-1 bg-black">
-      <SafeAreaView className="flex-1 bg-transparent" edges={['bottom']}>
+      <SafeAreaView className="flex-1 bg-transparent" edges={['left', 'right',]}>
         <ScrollView className="flex-1">
           <TopCard/>
           <View className="w-full flex-row items-center justify-center gap-g-2 px-number-8 py-number-8">
