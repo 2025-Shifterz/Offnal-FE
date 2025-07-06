@@ -5,21 +5,21 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import HomeWorkTypeChip, { DayType } from '../components/HomeWorkTypeChip';
 
-import TitleSection from '../components/TitleSection';
 
 import AlramSection from '../ui/AlramSection';
 import HealthGuideSection from '../ui/HealthGuideSection';
 import RecommnedMealSection from '../ui/RecommendMealSection';
+import NoteSection from '../ui/NoteSection';
+import HealthCardSection from '../ui/HealthCardSection';
+import TopCard from '../components/TopCard';
 
-import HealthCard from '../components/HealthCard';
-import ToDoCard from '../components/ToDoCard';
-import MemoCard from '../components/MemoCard';
 
 export default function MainScreen() {
   return (
-    <View className="flex-1 items-center justify-center">
-      <SafeAreaView className="w-full flex-1 justify-center bg-black marker:items-center">
-        <ScrollView>
+    <View className="flex-1 bg-black">
+      <SafeAreaView className="flex-1 bg-transparent" edges={['bottom']}>
+        <ScrollView className="flex-1">
+          <TopCard/>
           <View className="w-full flex-row items-center justify-center gap-g-2 px-number-8 py-number-8">
             <HomeWorkTypeChip dayType={DayType.PAST} workType="휴일" />
             <HomeWorkTypeChip dayType={DayType.TODAY} workType="야간" />
@@ -30,20 +30,8 @@ export default function MainScreen() {
             <RecommnedMealSection />
             <HealthGuideSection />
             <AlramSection />
-
-            <TitleSection.WithAddableBtn
-              title="건강 카드"
-              btnContent="건강 카드 추가"
-              onPressIcon={() => {}}
-            />
-
-            <View className="w-full flex-row items-center gap-g-3 pb-number-8 pt-number-8">
-              <HealthCard.Walk />
-              <HealthCard.Weight />
-            </View>
-            <TitleSection.OnlyTitle title="기록하기" />
-            <ToDoCard.Container/>
-            <MemoCard.Container/>
+            <HealthCardSection/>
+            <NoteSection/>
           </View>
         </ScrollView>
       </SafeAreaView>

@@ -42,7 +42,7 @@ const RecommendTodaysMealChip: React.FC<RecommendTodaysMealProps> = ({
       case MealType.POST_WORK_LIGHT_MEAL:
         return <PhoIcon />;
       case MealType.LUNCH:
-        return <LunchBoxIcon />;
+        return <LunchBoxIcon/>;
       case MealType.DINNER:
         return <RiceIcon />;
     }

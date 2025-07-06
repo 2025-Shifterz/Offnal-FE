@@ -4,18 +4,28 @@ import React, { useEffect } from 'react';
 import { colorScheme } from 'nativewind';
 import { useColorScheme } from 'react-native';
 import MainScreen from './src/presentation/main/screen/MainScreen';
+import CalendarScreen from './src/presentation/calendar/screen/CalendarScreen';
+import MyInfoScreen from './src/presentation/myInfo/screen/MyInfoScreen';
+
+import BottomNavigationBar, { Tab } from './src/presentation/main/components/BottomNavigationBar';
+
+import { enableScreens } from 'react-native-screens';
+enableScreens();
 
 export default function App() {
-  const scheme = useColorScheme(); // 'light' or 'dark'
+  const scheme = useColorScheme();
 
   useEffect(() => {
     if (scheme === 'light' || scheme === 'dark') {
       colorScheme.set('light');
-      // light를 dark로 바꿔보면 dark모드일 때 화면 확인할 수 있습니다.(임시 코드)
     }
   }, [scheme]);
 
   return (
-    <MainScreen/>
-  )
+    <BottomNavigationBar>
+      <Tab.Screen name="Home" component={MainScreen} />
+      <Tab.Screen name="Calendar" component={CalendarScreen} />
+      <Tab.Screen name="MyInfo" component={MyInfoScreen} />
+    </BottomNavigationBar>
+  );
 }

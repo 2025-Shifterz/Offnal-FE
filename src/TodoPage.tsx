@@ -10,15 +10,15 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import {Todo} from '../../domain/entities/Todo';
+import {Todo} from '../../../domain/entities/Todo';
 
 import {
   addTodoUseCase,
   deleteTodoUseCase,
   getTodosUseCase,
   todoCompletionUseCase,
-} from '../../di/Dependencies';
-import {createTodoTable} from '../../local/tables/TodoTable';
+} from '../../../di/Dependencies';
+import {createTodoTable} from '../../../local/tables/TodoTable';
 
 const TodoPage = () => {
   const [newTodoText, setNewTodoText] = useState('');

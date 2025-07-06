@@ -1,8 +1,8 @@
-import { View, Text } from 'react-native';
+import { View, Text, LayoutChangeEvent } from 'react-native';
 import SneakersIcon from '../../../assets/icons/ic_sneakers_24.svg';
 import WeightIcon from '../../../assets/icons/ic_weight_24.svg';
-
-interface HealthCardProps {}
+import { LineChart } from 'react-native-chart-kit';
+import { useState } from 'react';
 
 const Walk = () => {
   const weeklySteps = [
@@ -40,7 +40,10 @@ const Walk = () => {
       </View>
       <View className="h-number-16 max-w-[88px] flex-row items-end justify-around">
         {weeklySteps.map((steps, index) => (
-          <View key={index} className="mx-number-3 flex-1 justify-end rounded-full bg-background-gray-subtle2">
+          <View
+            key={index}
+            className="mx-number-3 flex-1 justify-end rounded-full bg-background-gray-subtle2"
+          >
             <View
               className="w-full rounded-full bg-text-primary"
               style={{ height: `${(steps / safeMaxSteps) * 80 + 5}%` }}
@@ -53,8 +56,54 @@ const Walk = () => {
 };
 
 const Weight = () => {
+  const [chartCalculatedWidth, setChartCalculatedWidth] = useState(0);
+
+  // onLayout for the main card View to get its internal content width
+  const onCardLayout = (event: LayoutChangeEvent) => {
+    const { width } = event.nativeEvent.layout;
+    // Calculate the available width for the chart within the card.
+    // Card has `px-number-6` (24px left + 24px right = 48px padding)
+    const availableWidth = width - 10 * 2;
+    setChartCalculatedWidth(availableWidth);
+  };
+
+  const weightData = {
+    labels: ['월', '화', '수', '목', '금', '토', '일'], // 1주일 요일
+    datasets: [
+      {
+        data: [60, 59, 58, 59, 61, 60, 59.5], // 실제 몸무게 데이터 (예시)
+        color: (opacity = 1) => `rgba(67, 207, 223, ${opacity})`, // 라인 색상 (보라색 계열)
+        strokeWidth: 2, // 라인 두께
+      },
+    ],
+  };
+
+  const chartConfig = {
+    backgroundGradientFrom: '#ffffff', // 배경 그라데이션 시작 색상 (흰색)
+    backgroundGradientTo: '#ffffff', // 배경 그라데이션 끝 색상 (흰색)
+    decimalPlaces: 0,
+    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity * 0.3})`, // 그리드 라인 및 텍스트 색상
+    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity * 0.6})`, // 라벨 색상
+    style: {
+      borderRadius: 16,
+    },
+    propsForDots: {
+      r: '3',
+      strokeWidth: '1',
+      stroke: '#43cfdf',
+      fill: '#ffffff',
+    },
+    fillShadowGradient: '#FFFFFF',
+    fillShadowGradientTo: '#2ECADC',
+    fillShadowGradientOpacity: 0.1,
+    bezier: true,
+  };
+
   return (
-    <View className="flex-1 items-start justify-center rounded-lg bg-surface-white px-number-6 py-number-8">
+    <View
+      className="flex-1 items-start justify-center rounded-lg bg-surface-white px-number-6 py-number-8"
+      onLayout={onCardLayout}
+    >
       <View className="mb-number-3 flex-row items-center justify-center">
         <WeightIcon />
         <Text className="ps-number-3 font-pretendard text-heading-xxxs font-semibold text-text-subtle">
@@ -62,7 +111,27 @@ const Weight = () => {
         </Text>
       </View>
 
-      <Text>50kg</Text>
+      <Text className="mb-number-3 font-pretendard text-heading-s font-semibold text-text-bolder">
+        50kg
+      </Text>
+      <LineChart
+        data={weightData}
+        width={chartCalculatedWidth}
+        height={74} // 차트의 높이
+        chartConfig={chartConfig}
+        bezier
+        withDots={true} // 데이터 포인트에 점 표시 여부 (이미지에는 점이 없음)
+        withShadow={true} // 라인 아래 그림자 표시 여부
+        withVerticalLines={true} // 세로 그리드 라인 표시 안함
+        withHorizontalLines={true} // 가로 그리드 라인 표시
+        withHorizontalLabels={false}
+        withVerticalLabels={false}
+        renderDotContent={({ x, y, index, indexData }) => {
+          return null;
+        }}
+        style={{
+        }}
+      />
     </View>
   );
 };
