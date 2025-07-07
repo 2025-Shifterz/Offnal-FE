@@ -1,14 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { twMerge } from 'tailwind-merge';
 
-const SelectScheduleBox = () => {
+// Define the type for the props
+interface SelectBoxProps {
+  id: number;
+  title: string;
+  subTitle: string;
+  isSelected: boolean;
+  onPress: (id: number) => void; // 부모로부터 id를 인자로 받음
+}
+
+const SelectScheduleBox = ({ id, title, subTitle, isSelected, onPress }: SelectBoxProps) => {
+  // 클릭 시 자신의 id를 부모에게 전달한다.
+  const handlePress = () => {
+    // 부모 컴포넌트의 onPress 함수 호출
+    // 자신이 클릭되면, 부모로부터 받은 onPress 함수를 호출하면서 자신의 id를 전달한다.
+    onPress(id);
+  };
+
+  const selectedStyle = isSelected
+    ? 'border border-border-primary bg-surface-primary-light-2'
+    : 'bg-surface-white';
+
   return (
-    <TouchableOpacity className="flex h-[148px] flex-1 items-center justify-center rounded-lg border border-border-primary bg-surface-primary-light-2 p-[5px]">
+    <TouchableOpacity
+      onPress={handlePress}
+      className={twMerge(
+        'flex h-[148px] flex-1 items-center justify-center rounded-lg p-[5px]',
+        selectedStyle
+      )}
+    >
       <View className="flex w-[136px] items-center gap-[10px]">
-        <Text className="text-heading-xxs font-semibold text-text-basic">전체 근무표 등록</Text>
-        <Text className="text-center text-label-xxs text-text-subtle">
-          여러 조의 스케줄이 담긴 {'\n'}근무표를 등록할 수 있어요
-        </Text>
+        <Text className="text-heading-xxs font-semibold text-text-basic">{title}</Text>
+        <Text className="text-center text-label-xxs text-text-subtle">{subTitle}</Text>
       </View>
     </TouchableOpacity>
   );
