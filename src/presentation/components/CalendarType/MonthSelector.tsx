@@ -1,5 +1,3 @@
-/* eslint-disable react-native/no-color-literals */
-/* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal } from 'react-native';
 import MonthPicker from 'react-native-month-year-picker';
@@ -39,7 +37,7 @@ const MonthSelector = ({ selectedDate, setSelectedDate }: MonthSelectorProps) =>
         <Text className="text-heading-xs font-semibold text-text-basic">
           {formatMonthText(selectedDate)}
         </Text>
-        <Text>🔽</Text> {/* 대체할 예정 */}
+        <Text>🔽{/* 대체할 예정 */}</Text>
       </TouchableOpacity>
 
       {/* ▼ Month Picker */}

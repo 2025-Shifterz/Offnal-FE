@@ -17,7 +17,7 @@ module.exports = {
     'react-native/no-unused-styles': 'warn',
     'react-native/no-inline-styles': 'warn',
     'react-native/no-color-literals': 'error',
-    'react-native/no-raw-text': 'warn',
+    'react-native/no-raw-text': 'off',
   },
   settings: {
     react: {

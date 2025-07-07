@@ -4,25 +4,14 @@ import TeamItem from './TeamItem';
 
 const TeamInput = () => {
   return (
-    <View className="mt-[20px] flex gap-[9px]">
+    <View className="flex gap-[9px]">
       <Text className="text-heading-xxxs font-semibold text-text-subtle">근무조 입력</Text>
       <View className="flex gap-4 rounded-lg bg-white px-[15px] py-[11px]">
-        <View className="flex gap-[16px]">
-          <View className="flex-row gap-[8px]">
-            <TeamItem />
-            <TeamItem />
-            <TeamItem />
-            <TeamItem />
-            <TeamItem />
-          </View>
-
-          <View className="flex-row gap-[8px]">
-            <TeamItem />
-            <TeamItem />
-            <TeamItem />
-            <TeamItem />
-            <TeamItem />
-          </View>
+        <View className="flex-row gap-[8px]">
+          <TeamItem>1조</TeamItem>
+          <TeamItem>2조</TeamItem>
+          <TeamItem>3조</TeamItem>
+          <TeamItem>4조</TeamItem>
         </View>
 
         <View className="flex-row items-center justify-between">

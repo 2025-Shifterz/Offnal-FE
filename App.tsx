@@ -23,9 +23,8 @@ export default function App() {
     <View className="flex-1 bg-background-gray-subtle1 px-[16px]">
       <SafeAreaView className="flex-1">
         {/* <ScheduleRegType /> */}
-        {/* <ScheduleInfoInput /> */}
-        <CalendarType />
-        {/* <MonthEx /> */}
+        <ScheduleInfoInput />
+        {/* <CalendarType /> */}
       </SafeAreaView>
     </View>
   );
