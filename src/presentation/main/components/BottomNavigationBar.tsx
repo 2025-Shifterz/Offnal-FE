@@ -3,9 +3,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ReactNode } from 'react';
 
-import HomeIcon from '../../../assets/icons/ic_home_24_gray.svg';
-import CalendarIcon from '../../../assets/icons/ic_calendar_24_gray.svg';
-import MyInfoIcon from '../../../assets/icons/ic_myinfo_24_gray.svg';
+import HomeGrayIcon from '../../../assets/icons/ic_home_24_gray.svg';
+import CalendarGrayIcon from '../../../assets/icons/ic_calendar_24_gray.svg';
+import MyInfoGrayIcon from '../../../assets/icons/ic_myinfo_24_gray.svg';
+
+import HomeBkIcon from '../../../assets/icons/ic_home_24_bk.svg'
+import CalendarBkIcon from '../../../assets/icons/ic_calendar_24_bk.svg'
+import MyInfoBkIcon from '../../../assets/icons/ic_myinfo_24_bk.svg';
+
 
 export const Tab = createBottomTabNavigator();
 
@@ -15,26 +20,25 @@ const BottomNavigationBar = ({ children }: { children: ReactNode }) => {
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
+          tabBarIcon: ({ focused }) => {
             let IconComponent;
-            const iconTintColor = focused ? '#1e2124' : '#cdd1d5';
 
             switch (route.name) {
               case 'Home':
-                IconComponent = HomeIcon;
+                IconComponent = focused ? HomeBkIcon : HomeGrayIcon;
                 break;
               case 'Calendar':
-                IconComponent = CalendarIcon;
+                IconComponent = focused ? CalendarBkIcon : CalendarGrayIcon;
                 break;
               case 'MyInfo':
-                IconComponent = MyInfoIcon;
+                IconComponent = focused ? MyInfoBkIcon : MyInfoGrayIcon;
                 break;
               default:
-                IconComponent = HomeIcon;
+                IconComponent = focused ? HomeBkIcon : HomeGrayIcon;
                 break;
             }
 
-            return <IconComponent fill={iconTintColor} />;
+            return <IconComponent/>;
           },
           tabBarLabel: ({ focused }) => {
             let label;
