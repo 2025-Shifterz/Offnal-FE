@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
@@ -52,10 +53,11 @@ const CalendarBox = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
-    <View>
+    <View className="w-full">
       <MonthSelector selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
       <Calendar
-        monthFormat="yyyy년 MM월"
+        hideArrows={true}
+        // monthFormat="yyyy년 MM월"
         key={formatDateToYYYYMMDD(selectedDate)} // 강제 리렌더링
         current={formatDateToYYYYMMDD(selectedDate)} // UTC 문제 해결
         // onDayPress, markedDate 불필요
@@ -76,25 +78,39 @@ const CalendarBox = () => {
             </TouchableOpacity>
           );
         }}
-        theme={{
-          // day title - 월, 화, 수 ..
-          textDayHeaderFontSize: 11,
-          textSectionTitleColor: '#B1B8BE',
-          // days - dayComponent의 스타일로 대체됨
+        theme={
+          {
+            // 년도/ 월 헤더 숨기기: 헤더 마진/패딩 제거
+            'stylesheet.calendar.header': {
+              header: {
+                height: 0,
+                marginTop: 0,
+                marginBottom: 0,
+                padding: 0,
+              },
+            },
 
-          // month title
-          textMonthFontSize: 17,
-          monthTextColor: '#1E2124',
-          textMonthFontWeight: 600,
+            // day title - 월, 화, 수 ..
+            textDayHeaderFontSize: 11,
+            textSectionTitleColor: '#B1B8BE',
 
-          // arrow
-          arrowColor: '#CDD1D5',
-        }}
+            // days - dayComponent의 스타일로 대체됨
+
+            // month title
+            textMonthFontSize: 0, // 숨기기
+
+            monthTextColor: '#1E2124',
+            textMonthFontWeight: 600,
+
+            // arrow
+            arrowColor: '#CDD1D5',
+          } as any
+        }
       />
       {/* ---- 근무 형태 수정 ----------- */}
-      {/* <View className="h-[0.5px] bg-divider-gray-light" />
+      <View className="h-[0.5px] border-dashed bg-divider-gray-light" />
 
-      <View className="flex-col gap-[9px] bg-surface-white p-[11px]">
+      <View className="flex-col gap-[9px] rounded-b-radius-m2 bg-surface-white p-[11px]">
         <Text className="text-body-xs font-medium text-text-subtle">근무 형태 수정</Text>
         <View className="flex-row gap-[6px]">
           <TimeFrame>주간</TimeFrame>
@@ -104,7 +120,6 @@ const CalendarBox = () => {
           <TimeFrame>휴일</TimeFrame>
         </View>
       </View>
-      */}
     </View>
   );
 };

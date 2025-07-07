@@ -30,17 +30,16 @@ const MonthSelector = ({ selectedDate, setSelectedDate }: MonthSelectorProps) =>
   };
 
   return (
-    <View>
+    <View className="w-full overflow-hidden rounded-t-radius-m2 bg-white">
       {/* ▼ 상단 드롭다운 버튼 형태 */}
       <TouchableOpacity
-        className="w-[140px] flex-row items-center gap-2 border bg-white p-2"
+        className="w-[140px] flex-row items-center gap-2 p-2"
         onPress={() => setShowPicker(true)}
       >
-        <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#1E1E1E' }}>
+        <Text className="text-heading-xs font-semibold text-text-basic">
           {formatMonthText(selectedDate)}
         </Text>
-        {/* /<Icon name="chevron-down-outline" size={18} color="#333" style={{ marginLeft: 8 }} /> */}
-        <Text>🔽</Text>
+        <Text>🔽</Text> {/* 대체할 예정 */}
       </TouchableOpacity>
 
       {/* ▼ Month Picker */}

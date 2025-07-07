@@ -6,7 +6,7 @@ import TeamInput from '../components/ScheduleInfoInput/TeamInput';
 
 const ScheduleInfoInput = () => {
   return (
-    <View className="w-full flex-1 border pt-[14px]">
+    <View className="w-full flex-1 pt-[14px]">
       <View className="flex flex-col gap-[12px]">
         <Text className="text-heading-m font-semibold leading-[1.4] text-text-bolder">
           근무표의 기본 정보를 {'\n'}선택해주세요.
