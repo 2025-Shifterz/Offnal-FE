@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
+import EntirePerson from '../../../assets/icons/entire-p.svg';
+import OnePerson from '../../../assets/icons/one-p.svg';
 
 // Define the type for the props
 interface SelectBoxProps {
@@ -31,9 +33,12 @@ const SelectScheduleBox = ({ id, title, subTitle, isSelected, onPress }: SelectB
         selectedStyle
       )}
     >
-      <View className="flex w-[136px] items-center gap-[10px]">
-        <Text className="text-heading-xxs font-semibold text-text-basic">{title}</Text>
-        <Text className="text-center text-label-xxs text-text-subtle">{subTitle}</Text>
+      <View className="flex items-center gap-[18px]">
+        {id === 1 ? <EntirePerson /> : <OnePerson />}
+        <View className="flex items-center gap-[10px]">
+          <Text className="text-heading-xxs font-semibold text-text-basic">{title}</Text>
+          <Text className="text-center text-label-xxs text-text-subtle">{subTitle}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );

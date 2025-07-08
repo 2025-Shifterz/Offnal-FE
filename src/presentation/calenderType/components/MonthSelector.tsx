@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal } from 'react-native';
 import MonthPicker from 'react-native-month-year-picker';
+import ArrowDown from '../../../assets/icons/arrow-down.svg';
 
 interface MonthSelectorProps {
   selectedDate: Date;
@@ -31,13 +32,13 @@ const MonthSelector = ({ selectedDate, setSelectedDate }: MonthSelectorProps) =>
     <View className="w-full overflow-hidden rounded-t-radius-m2 bg-white">
       {/* ▼ 상단 드롭다운 버튼 형태 */}
       <TouchableOpacity
-        className="w-[140px] flex-row items-center gap-2 p-2"
+        className="w-[140px] flex-row items-center gap-[2px] p-4"
         onPress={() => setShowPicker(true)}
       >
         <Text className="text-heading-xs font-semibold text-text-basic">
           {formatMonthText(selectedDate)}
         </Text>
-        <Text>🔽{/* 대체할 예정 */}</Text>
+        <ArrowDown />
       </TouchableOpacity>
 
       {/* ▼ Month Picker */}
