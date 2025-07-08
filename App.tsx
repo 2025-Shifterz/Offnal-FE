@@ -1,13 +1,12 @@
 import './global.css';
 import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { colorScheme } from 'nativewind';
 import { useColorScheme } from 'react-native';
-import ScheduleRegType from './src/presentation/screens/ScheduleRegType';
-import ScheduleInfoInput from './src/presentation/screens/ScheduleInfoInput';
-import CalendarType from './src/presentation/screens/CalendarType';
+import ScheduleInfoInput from './src/presentation/scheduleInpInput/screen/ScheduleInfoInput';
+import ScheduleRegType from './src/presentation/scheduleRegType/screen/ScheduleRegType';
+import CalendarType from './src/presentation/calenderType/screen/CalendarType';
 
 export default function App() {
   const scheme = useColorScheme(); // 'light' or 'dark'
@@ -20,12 +19,10 @@ export default function App() {
   }, [scheme]);
 
   return (
-    <View className="flex-1 bg-background-gray-subtle1 px-[16px]">
-      <SafeAreaView className="flex-1">
-        {/* <ScheduleRegType /> */}
-        <ScheduleInfoInput />
-        {/* <CalendarType /> */}
-      </SafeAreaView>
+    <View className="flex-1">
+      {/* <ScheduleRegType /> */}
+      {/* <ScheduleInfoInput /> */}
+      <CalendarType />
     </View>
   );
 }
