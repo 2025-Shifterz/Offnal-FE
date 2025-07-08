@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Text, View } from 'react-native';
 
 const sharedPlaceholderStyle =
-  'rounded-radius-s border border-background-gray-subtle1 p-[8px] placeholder:text-label-xs placeholder:text-text-disabled';
+  'rounded-radius-s w-[84px] border border-background-gray-subtle1 p-[8px] placeholder:text-label-xs placeholder:text-text-disabled';
 
 const TimePicker = () => {
   const [showPicker, setShowPicker] = useState(false);
@@ -13,7 +13,7 @@ const TimePicker = () => {
   return (
     <View>
       <Text className={sharedPlaceholderStyle} onPress={() => setShowPicker(true)}>
-        {`${period} ${hour.toString().padStart(2, '0')} : ${minute.toString().padStart(2, '0')}`}
+        {`${period} ${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`}
       </Text>
 
       {showPicker && (

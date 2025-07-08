@@ -16,8 +16,8 @@ const TeamInput = () => {
 
         <View className="flex-row items-center justify-between">
           {/* 직접 입력 */}
-          <View className="rounded-radius-max border border-border-primary bg-surface-primary-light-2 px-[14px] py-[8px]">
-            <Text className="flex-1 text-label-xs text-text-primary">직접 입력</Text>
+          <View className="rounded-radius-max border-[0.5px] border-border-primary bg-surface-primary-light-2 px-[14px] py-[8px]">
+            <Text className="text-label-xs text-text-primary">직접 입력</Text>
           </View>
           {/* A조 ~~ */}
           <View className="flex-1 gap-1 px-[14px] py-[8px]">

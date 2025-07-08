@@ -7,6 +7,12 @@ import { useColorScheme } from 'react-native';
 import ScheduleInfoInput from './src/presentation/scheduleInpInput/screen/ScheduleInfoInput';
 import ScheduleRegType from './src/presentation/scheduleRegType/screen/ScheduleRegType';
 import CalendarType from './src/presentation/calenderType/screen/CalendarType';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CompleteCreate from './src/presentation/completeCreate/screen/CompleteCreate';
+import CustomBackButton from './src/presentation/common/component/CustomBackButton';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const scheme = useColorScheme(); // 'light' or 'dark'
@@ -19,10 +25,18 @@ export default function App() {
   }, [scheme]);
 
   return (
-    <View className="flex-1">
-      {/* <ScheduleRegType /> */}
-      {/* <ScheduleInfoInput /> */}
-      <CalendarType />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: { backgroundColor: '#F4F5F6' },
+          headerLeft: () => <CustomBackButton />,
+        }}
+      >
+        <Stack.Screen name="ScheduleRegType" component={ScheduleRegType} />
+        <Stack.Screen name="ScheduleInfoInput" component={ScheduleInfoInput} />
+        <Stack.Screen name="CalendarType" component={CalendarType} />
+        <Stack.Screen name="CompleteCreate" component={CompleteCreate} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

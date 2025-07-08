@@ -115,7 +115,6 @@ const CalendarBox = () => {
             textDayHeaderFontSize: 11,
             textSectionTitleColor: '#B1B8BE',
             // month title
-            textMonthFontSize: 0, // 숨기기
             monthTextColor: '#1E2124',
             textMonthFontWeight: 600,
             // arrow

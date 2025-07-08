@@ -8,12 +8,14 @@ const ScheduleNameInput = () => {
       <View className="flex-row justify-between rounded-lg bg-white px-[16px] py-[14px]">
         <TextInput
           placeholder="연세병원 근무표"
-          className="text-label-xs placeholder:text-text-disabled"
+          className="text-body-s text-label-xs placeholder:text-text-disabled"
         />
-        <Text className="text-label-xxs">
-          <Text className="text-text-primary">8</Text>
-          <Text className="text-text-disabled">/10</Text>
-        </Text>
+        <View className="justify-center">
+          <Text className="flex justify-center text-label-xxs">
+            <Text className="text-text-primary">8</Text>
+            <Text className="text-text-disabled">/10</Text>
+          </Text>
+        </View>
       </View>
     </View>
   );

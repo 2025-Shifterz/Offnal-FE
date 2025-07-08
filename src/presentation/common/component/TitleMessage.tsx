@@ -9,7 +9,7 @@ interface TitleMessageProps {
 
 const TitleMessage = ({ title, subTitle }: TitleMessageProps) => {
   return (
-    <View className="flex-col gap-[12px]">
+    <View className="mt-[5px] flex-col gap-[12px]">
       <Text className="text-heading-m font-semibold leading-[1.4] text-text-bolder">{title}</Text>
       {subTitle && <Text className="text-label-xs text-text-subtle">{subTitle}</Text>}
     </View>

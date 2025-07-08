@@ -3,8 +3,10 @@ import { Button, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react
 import SelectScheduleBox from '../component/SelectScheduleBox';
 import BottomButton from '../../common/component/BottomButton';
 import TitleMessage from '../../common/component/TitleMessage';
+import { useNavigation } from '@react-navigation/native';
 
 const ScheduleRegType = () => {
+  const navigation = useNavigation();
   const [selectedBoxId, setSelectedBoxId] = useState<number>(1);
 
   // 이 함수는 클릭된 박스의 id를 받아서 상태를 업데이트.
@@ -16,7 +18,7 @@ const ScheduleRegType = () => {
   return (
     <View className="flex-1 bg-background-gray-subtle1 px-[16px]">
       <SafeAreaView className="flex-1">
-        <View className="w-full flex-1 pt-[14px]">
+        <View className="w-full flex-1">
           <TitleMessage
             title="근무표 등록 방식을 선택해주세요."
             subTitle={`전체 근무표를 등록해 여러 조의 스케쥴을 확인하거나,\n내 근무조만 등록해 간편하게 일상을 관리할 수 있어요.`}
@@ -38,7 +40,12 @@ const ScheduleRegType = () => {
             />
           </View>
 
-          <BottomButton />
+          <BottomButton
+            text="다음"
+            onPress={() => {
+              navigation.navigate('ScheduleInfoInput');
+            }}
+          />
         </View>
       </SafeAreaView>
     </View>
