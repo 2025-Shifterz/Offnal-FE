@@ -36,7 +36,7 @@ const TimePicker = () => {
             {/* 오전 / 오후 */}
             <View className="items-center">
               {/* 이모지는 나중에 수정할 예정입니다. */}
-              <Text onPress={() => setPeriod(period === '오전' ? '오후' : '오전')}>🔄</Text>
+              {/* <Text onPress={() => setPeriod(period === '오전' ? '오후' : '오전')}>🔄</Text> */}
               <Text className={pickerTextStyle}>{period}</Text>
             </View>
 
