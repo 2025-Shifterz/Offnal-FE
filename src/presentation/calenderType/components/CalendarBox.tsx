@@ -1,45 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { Calendar, LocaleConfig } from 'react-native-calendars';
+import { TouchableOpacity, View } from 'react-native';
+import { Calendar } from 'react-native-calendars';
 import CalendarDayColor from './CalendarDayColor';
 import MonthSelector from './MonthSelector';
 import TimeFrame from './TimeFrame';
+import DashedLine from '../../../assets/icons/dashLine.svg';
+import TypeSelect from './TypeSelect';
+import { configureCalendarLocale } from '../configs/calenderLocale';
 
-LocaleConfig.locales.fr = {
-  monthNames: [
-    '01월',
-    '02월',
-    '03월',
-    '04월',
-    '05월',
-    '06월',
-    '07월',
-    '08월',
-    '09월',
-    '10월',
-    '11월',
-    '12월',
-  ],
-  monthNamesShort: [
-    '01월',
-    '02월',
-    '03월',
-    '04월',
-    '05월',
-    '06월',
-    '07월',
-    '08월',
-    '09월',
-    '10월',
-    '11월',
-    '12월',
-  ],
-  dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-  today: '오늘',
-};
-LocaleConfig.defaultLocale = 'fr';
+// 달력 한글로 설정
+configureCalendarLocale();
 
 // 날짜별 추가 텍스트를 위한 타입 정의
 interface DayTexts {
@@ -117,23 +88,15 @@ const CalendarBox = () => {
             // month title
             monthTextColor: '#1E2124',
             textMonthFontWeight: 600,
-            // arrow
-            arrowColor: '#CDD1D5',
           } as any
         }
       />
-      {/* ---- 근무 형태 수정 ----------- */}
-      <View className="h-[0.5px] border-dashed bg-divider-gray-light" />
-
-      <View className="flex-col gap-[9px] rounded-b-radius-m2 bg-surface-white p-[11px]">
-        <Text className="text-body-xs font-medium text-text-subtle">근무 형태 입력</Text>
-        <View className="flex-row gap-[6px]">
-          <TimeFrame text="주간" />
-          <TimeFrame text="오후" />
-          <TimeFrame text="야간" />
-          <TimeFrame text="휴일" />
-        </View>
+      <View className="flex-row overflow-hidden">
+        <DashedLine />
+        <DashedLine />
       </View>
+      {/* 근무 형태 입력 */}
+      <TypeSelect />
     </View>
   );
 };

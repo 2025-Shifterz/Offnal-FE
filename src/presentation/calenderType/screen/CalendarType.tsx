@@ -4,9 +4,11 @@ import BottomButton from '../../common/component/BottomButton';
 import CalendarBox from '../components/CalendarBox';
 import TitleMessage from '../../common/component/TitleMessage';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackParamList } from '../../../navigation/types';
 
 const CalendarType = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
   return (
     <View className="flex-1 bg-background-gray-subtle1 px-[16px]">
       <SafeAreaView className="flex-1">

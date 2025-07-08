@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-// 타입정의
 interface TitleMessageProps {
   title: string;
   subTitle?: string;

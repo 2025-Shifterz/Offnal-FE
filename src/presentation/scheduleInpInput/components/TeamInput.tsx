@@ -28,7 +28,6 @@ const TeamInput = () => {
               />
               <Text className="text-right text-label-xxs text-text-disabled">0/8</Text>
             </View>
-
             <View className="h-[0.5px] bg-border-gray-light" />
           </View>
         </View>

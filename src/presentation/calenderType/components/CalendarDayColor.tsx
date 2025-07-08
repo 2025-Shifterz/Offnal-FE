@@ -1,7 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react-native/no-color-literals */
 import { Text, View } from 'react-native';
-import { StyleSheet } from 'react-native';
 
 interface DateProps {
   date?: {
@@ -39,46 +36,23 @@ const CalendarDayColor = ({ date, selected }: DateProps) => {
   const isToday = date.dateString === todayDate();
   console.log(todayDate());
   console.log(isToday);
+
+  const bgColor = selected ? '#2ECADC' : isToday ? '#F4F5F6' : 'transparent';
+  const textColor = selected ? '#ffffff' : isToday ? '#131416' : dayColor;
+
   return (
     <View
-      style={[
-        styles.dayContainer,
-
-        { backgroundColor: isToday ? '#F4F5F6' : 'transparent' },
-        selected && styles.selected,
-      ]}
+      className="h-[32px] w-[32px] items-center justify-center rounded-[16px]"
+      style={{ backgroundColor: bgColor }}
     >
       <Text
-        style={[
-          styles.text,
-          { color: isToday ? '#131416' : dayColor }, // 회색 : 흰색
-          selected && styles.selectedText,
-        ]}
+        className="text-heading-xxxs font-semibold text-text-basic"
+        style={{ color: textColor }}
       >
         {date.day}
       </Text>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  dayContainer: {
-    alignItems: 'center',
-    borderRadius: 16,
-    height: 32,
-    justifyContent: 'center',
-    width: 32,
-  },
-  selected: {
-    backgroundColor: '#2ECADC', // 선택된 날짜 배경: 민트색
-  },
-  selectedText: {
-    color: '#ffffff',
-    fontWeight: '600',
-  },
-  text: {
-    fontSize: 13,
-  },
-});
 
 export default CalendarDayColor;

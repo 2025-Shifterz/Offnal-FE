@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { Button, Image, SafeAreaView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { SafeAreaView, View } from 'react-native';
 import TimeInput from '../components/TimeInput';
 import TeamInput from '../components/TeamInput';
 import BottomButton from '../../common/component/BottomButton';
 import ScheduleNameInput from '../components/ScheduleNameInput';
 import TitleMessage from '../../common/component/TitleMessage';
 import { useNavigation } from '@react-navigation/native';
+import { StackParamList } from '../../../navigation/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const ScheduleInfoInput = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
   return (
     <View className="flex-1 bg-background-gray-subtle1 px-[16px]">
       <SafeAreaView className="flex-1">
