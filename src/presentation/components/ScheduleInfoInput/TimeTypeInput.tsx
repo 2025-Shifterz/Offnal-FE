@@ -1,8 +1,6 @@
 import React from 'react';
-import { Text, TextInput, View } from 'react-native';
-
-const sharedPlaceholderStyle =
-  'rounded-radius-s border border-background-gray-subtle1 p-[8px] placeholder:text-label-xs placeholder:text-text-disabled';
+import { Text, View } from 'react-native';
+import TimePicker from './TimePicker';
 
 const TimeTypeInput = ({ children }: { children: string }) => {
   return (
@@ -11,9 +9,9 @@ const TimeTypeInput = ({ children }: { children: string }) => {
         {children}
       </Text>
       <View className="flex-row items-center gap-[6px]">
-        <TextInput className={sharedPlaceholderStyle} placeholder="오전 08:00" />
+        <TimePicker />
         <Text>-</Text>
-        <TextInput className={sharedPlaceholderStyle} placeholder="오전 08:00" />
+        <TimePicker />
       </View>
     </View>
   );

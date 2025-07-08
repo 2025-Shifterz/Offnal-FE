@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import BottomButton from '../components/ScheduleRegType/BottomButton';
 import TimeInput from '../components/ScheduleInfoInput/TimeInput';
@@ -34,6 +34,8 @@ const ScheduleInfoInput = () => {
 
         {/* 근무조 입력 */}
         <TeamInput />
+
+        {/* 근무표 유형 선택 */}
       </View>
 
       <BottomButton />
