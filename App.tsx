@@ -11,6 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CompleteCreate from './src/presentation/completeCreate/screen/CompleteCreate';
 import CustomBackButton from './src/presentation/common/component/CustomBackButton';
+import StepBar from './src/presentation/common/component/StepBar';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,14 +29,31 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
+          headerShadowVisible: false,
           headerStyle: { backgroundColor: '#F4F5F6' },
           headerLeft: () => <CustomBackButton />,
         }}
       >
-        <Stack.Screen name="ScheduleRegType" component={ScheduleRegType} />
-        <Stack.Screen name="ScheduleInfoInput" component={ScheduleInfoInput} />
-        <Stack.Screen name="CalendarType" component={CalendarType} />
-        <Stack.Screen name="CompleteCreate" component={CompleteCreate} />
+        <Stack.Screen
+          name="ScheduleRegType"
+          component={ScheduleRegType}
+          options={{ headerTitle: () => <StepBar currentStep={0} totalSteps={4} /> }}
+        />
+        <Stack.Screen
+          name="ScheduleInfoInput"
+          component={ScheduleInfoInput}
+          options={{ headerTitle: () => <StepBar currentStep={1} totalSteps={4} /> }}
+        />
+        <Stack.Screen
+          name="CalendarType"
+          component={CalendarType}
+          options={{ headerTitle: () => <StepBar currentStep={2} totalSteps={4} /> }}
+        />
+        <Stack.Screen
+          name="CompleteCreate"
+          component={CompleteCreate}
+          options={{ headerTitle: () => <StepBar currentStep={3} totalSteps={4} /> }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
