@@ -1,26 +1,42 @@
-// import {useState} from 'react';
+import { useState, useEffect } from 'react';
+import Swiper from 'react-native-swiper';
 import axios from 'axios';
 import { API_URL } from '@env';
 
-import { Text, View, ScrollView, Dimensions, Linking, Alert } from 'react-native';
+import { Text, View, Dimensions, Linking, Alert } from 'react-native';
 import KaKaoLoginBtn from '../components/Login/KakaoLoginBtn';
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const LoginScreen = () => {
-  const handleKakaoLogin = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/login/page`);
-      const { location } = response.data;
-      if (location) {
-        Linking.openURL(location); // 카카오 인증 페이지로 이동
-      } else {
-        Alert.alert('오류', '카카오 로그인 URL을 받아오지 못했습니다.');
+  const [slideTime, setSlideTime] = useState(3); // 초기 슬라이딩 시간 3초
+
+  useEffect(() => {
+    const autoTimer = setTimeout(() => setSlideTime(5), 3000); // 3초 후에 slideTime을 5초로 바꾸고
+    return () => clearTimeout(autoTimer);
+  }, []);
+
+  useEffect(() => {
+    const handleUrl = async ({ url }: { url: string }) => {
+      const parsed = new URL(url);
+      const code = parsed.searchParams.get('code');
+      if (code) {
+        try {
+          await axios.get(`${API_URL}/callback`, {
+            params: { code },
+          });
+        } catch (err) {
+          Alert.alert('콜백 에러', '인가 코드 전달 실패');
+        }
       }
-    } catch (error) {
-      Alert.alert('오류', '카카오 로그인 요청에 실패했습니다.');
-    }
-  };
+    };
+
+    const listener = Linking.addEventListener('url', handleUrl);
+
+    return () => {
+      listener.remove();
+    };
+  }, []);
 
   const onboardings = [
     {
@@ -41,21 +57,21 @@ const LoginScreen = () => {
   ];
 
   return (
-    <View className="flex-1 items-center bg-background-gray-subtle1">
-      <ScrollView
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ alignItems: 'center' }}
-        className="mb-number-19"
+    <View className="w-full flex-1 bg-background-gray-subtle1">
+      <Swiper
+        autoplay
+        showsPagination={false}
+        width={SCREEN_WIDTH}
+        height={SCREEN_HEIGHT * 0.6}
+        autoplayTimeout={slideTime}
       >
         {onboardings.map((onboarding, index) => (
           <View
             key={index}
-            className="flex-1 flex-col items-center"
+            className="flex-1 items-center justify-center"
             style={{ width: SCREEN_WIDTH }}
           >
-            <Text className="mb-number-8 h-fit w-fit gap-number-6 rounded-radius-m1 border-border-width-static-regular border-border-gray-light bg-surface-white p-p-3 text-center font-pretendard text-body-xxs font-medium leading-[1.2] text-text-subtle">
+            <Text className="mb-number-8 mt-number-18 h-fit w-fit gap-number-6 rounded-radius-m1 border-border-width-static-regular border-border-gray-light bg-surface-white p-p-3 text-center font-pretendard text-body-xxs font-medium leading-[1.2] text-text-subtle">
               {onboarding.keyword}
             </Text>
             <Text className="mb-number-4 h-fit w-fit text-center font-pretendard text-heading-s font-semibold leading-[1.2] tracking-letter-spacing-0">
@@ -72,17 +88,19 @@ const LoginScreen = () => {
             </View>
           </View>
         ))}
-      </ScrollView>
+      </Swiper>
 
-      <KaKaoLoginBtn onPress={handleKakaoLogin} />
+      <View className="flex items-center justify-center">
+        <KaKaoLoginBtn />
 
-      {/* 아래도 터치 가능하게 */}
-      <Text className="mb-number-3 font-pretendard text-label-xs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-        이용약관 확인하기
-      </Text>
-      <Text className="mb-number-10 font-pretendard text-label-xs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-        개인정보처리방침 확인하기
-      </Text>
+        {/* 아래도 터치 가능하게 */}
+        <Text className="pb-number-3 font-pretendard text-label-xs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+          이용약관 확인하기
+        </Text>
+        <Text className="pb-number-10 font-pretendard text-label-xs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+          개인정보처리방침 확인하기
+        </Text>
+      </View>
     </View>
   );
 };
