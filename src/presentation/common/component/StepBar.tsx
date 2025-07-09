@@ -8,7 +8,7 @@ interface StepHeaderProps {
 
 const StepBar = ({ currentStep, totalSteps }: StepHeaderProps) => {
   return (
-    <View className="w-[160px] flex-row items-center py-p-card-xs">
+    <View className="w-[160px] flex-row items-center justify-center py-p-card-xs">
       <View className="h-[3px] w-full flex-row gap-[1px]">
         {Array.from({ length: totalSteps }).map((_, i) => (
           <View

@@ -32,6 +32,7 @@ export default function App() {
           headerShadowVisible: false,
           headerStyle: { backgroundColor: '#F4F5F6' },
           headerLeft: () => <CustomBackButton />,
+          headerTitleAlign: 'center',
         }}
       >
         <Stack.Screen

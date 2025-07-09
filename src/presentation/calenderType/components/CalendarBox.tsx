@@ -1,13 +1,14 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import CalendarDayColor from './CalendarDayColor';
-import MonthSelector from './MonthSelector';
 import TimeFrame from './TimeFrame';
 import DashedLine from '../../../assets/icons/dashLine.svg';
 import TypeSelect from './TypeSelect';
 import { configureCalendarLocale } from '../configs/calenderLocale';
+import CustomMonthPicker from './CustomMonthPicker';
 
 // 달력 한글로 설정
 configureCalendarLocale();
@@ -45,18 +46,14 @@ const CalendarBox = () => {
 
   return (
     <View className="w-full">
-      <MonthSelector selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      <CustomMonthPicker selectedDate={selectedDate} onChange={date => setSelectedDate(date)} />
       <Calendar
         hideArrows={true}
-        // monthFormat="yyyy년 MM월"
         key={formatDateToYYYYMMDD(selectedDate)} // 강제 리렌더링
         current={formatDateToYYYYMMDD(selectedDate)} // UTC 문제 해결
-        // onDayPress, markedDate 불필요
         hideExtraDays={true}
-        // eslint-disable-next-line react/no-unstable-nested-components
         dayComponent={({ date }) => {
           if (!date) return null;
-
           const extraText = dayTexts[date.dateString]; // 해당 날짜에 대한 근무 형태 텍스트 (예: 오후)
 
           return (
