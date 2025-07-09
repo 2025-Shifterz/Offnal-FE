@@ -56,7 +56,10 @@ const KakaoLoginWebView = () => {
   // 추출한 code로 백엔드에 토큰 요청하는 함수
   const requestToken = async (code: string) => {
     try {
-      const response = await axios.get(`${API_URL}/callback`);
+      console.log('인가 코드: ', code);
+      const response = await axios.get(`${API_URL}/callback`, {
+        params: { code },
+      });
 
       if (response.data.code === 'LOGIN_SUCCESS') {
         // 응답 헤더에서 accessToken과 refreshToken 추출하기
