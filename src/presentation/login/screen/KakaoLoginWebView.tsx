@@ -66,14 +66,14 @@ const KakaoLoginWebView = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView className="flex-1">
       <WebView
         source={{ uri: loginUrl }}
         onLoadEnd={handleWebViewLoadEnd}
         onMessage={handleWebViewMessage}
         startInLoadingState
         javaScriptEnabled
-        style={{ flex: 1 }}
+        className="flex-1"
       />
     </SafeAreaView>
   );
