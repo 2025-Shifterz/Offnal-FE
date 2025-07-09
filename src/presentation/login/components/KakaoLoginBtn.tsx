@@ -15,7 +15,7 @@ const KaKaoLoginBtn = () => {
   return (
     <TouchableOpacity
       onPress={handleKakaoLogin}
-      className="mx-number-12 mb-number-8 h-12 w-[300px] flex-row items-center justify-center rounded-radius-m1 bg-kakao-bg pl-[14px] pr-[14px]"
+      className="mx-gap-5 w-fill mb-number-8 h-12 flex-row items-center justify-center rounded-radius-m1 bg-kakao-bg pl-[14px] pr-[14px]"
     >
       <KakaoLogo />
       <Text className="px-[86px] font-pretendard text-heading-xxs font-semibold tracking-letter-spacing-0 text-kakao-text">

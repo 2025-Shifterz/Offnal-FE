@@ -7,11 +7,14 @@ import { API_URL } from '@env';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../navigation/type';
+// 토큰 저장 필요함
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const REDIRECT_URI = `${API_URL}/callback`;
 
 const KakaoLoginWebView = () => {
   const [loginUrl, setLoginUrl] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false); // API 호출 로딩 상태
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   useEffect(() => {
@@ -26,38 +29,61 @@ const KakaoLoginWebView = () => {
     };
 
     fetchLoginUrl();
-  }, []);
+  }, [navigation]);
 
-  // WebView에서 페이지가 로드될 때 호출
-  const handleWebViewLoadEnd = (syntheticEvent: any) => {
-    const { nativeEvent } = syntheticEvent;
-    // 페이지의 URL이 REDIRECT_URI일 때만 처리
-    if (nativeEvent.url.startsWith(REDIRECT_URI)) {
-      // WebView에서 페이지의 내용을 가져와서 JSON 파싱 시도
-      nativeEvent.target.injectJavaScript(`
-        window.ReactNativeWebView.postMessage(document.body.innerText);
-        true;
-      `);
+  // WebView의 URL이 변경될 때마다 호출되는 함수
+  const handleNavigationStateChange = (navState: any) => {
+    const { url } = navState;
+
+    // 리다이렉트 URL로 이동했는지 확인
+    if (url.startsWith(REDIRECT_URI)) {
+      // URL에서 'code' 파라미터 추출하기
+      const queryString = url.split('?')[1];
+      if (!queryString) return;
+
+      const params = queryString.split('&');
+      const codeParam = params.find(param => param.startsWith('code='));
+
+      if (codeParam) {
+        // WebView의 로딩을 멈추고, API 호출 시작
+        const code = codeParam.split('=')[1];
+        setIsLoading(true);
+        requestToken(code);
+      }
     }
   };
 
-  // WebView에서 메시지 수신 시 호출
-  const handleWebViewMessage = (event: any) => {
+  // 추출한 code로 백엔드에 토큰 요청하는 함수
+  const requestToken = async (code: string) => {
     try {
-      const data = JSON.parse(event.nativeEvent.data);
-      if (data.code === 'LOGIN_SUCCESS') {
-        // 로그인 성공 시 다음 화면으로 이동
+      const response = await axios.get(`${API_URL}/callback`);
+
+      if (response.data.code === 'LOGIN_SUCCESS') {
+        // 응답 헤더에서 accessToken과 refreshToken 추출하기
+        const accessToken = response.headers['authorization'];
+        const refreshToken = response.headers['refresh-token'];
+
+        // 토큰 저장 코드
+        // if (accessToken) await AsyncStorage.setItem('accessToken', accessToken);
+        // if (refreshToken) await AsyncStorage.setItem('refreshToken', refreshToken);
+
+        // 로그인 성공 시 근무표 등록 방법 선택 화면으로 이동
         navigation.replace('SelectRegMethod');
       } else {
-        Alert.alert('로그인 실패', data.message || '알 수 없는 오류');
+        Alert.alert('로그인 실패', response.data.message || '알 수 없는 오류');
         navigation.goBack();
       }
-    } catch (e) {
-      // JSON 파싱 실패 시 무시
+    } catch (error) {
+      console.error('Token request failed:', error);
+      Alert.alert('로그인 에러', '토큰을 받아오는 중 오류가 발생했습니다.');
+      navigation.goBack();
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  if (!loginUrl) {
+  // 초기 로그인 URL을 받아오기 전 또는 토큰 요청 중일 때 로딩 표시
+  if (!loginUrl || isLoading) {
     return (
       <View className="flex-1 items-center justify-center">
         <ActivityIndicator size="large" />
@@ -69,8 +95,7 @@ const KakaoLoginWebView = () => {
     <SafeAreaView className="flex-1">
       <WebView
         source={{ uri: loginUrl }}
-        onLoadEnd={handleWebViewLoadEnd}
-        onMessage={handleWebViewMessage}
+        onNavigationStateChange={handleNavigationStateChange}
         startInLoadingState
         javaScriptEnabled
         className="flex-1"

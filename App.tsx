@@ -1,5 +1,6 @@
 import './global.css';
 import React, { useEffect } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppNavigator from './src/navigation/AppNavigator';
 
 import { colorScheme } from 'nativewind';
@@ -14,5 +15,9 @@ export default function App() {
     }
   }, [scheme]);
 
-  return <AppNavigator />;
+  return (
+    <SafeAreaProvider>
+      <AppNavigator />
+    </SafeAreaProvider>
+  );
 }
