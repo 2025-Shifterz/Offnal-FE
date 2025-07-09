@@ -30,7 +30,7 @@ const LoginScreen = () => {
         {onboardingList.map((onboarding, index) => (
           <View
             key={index}
-            className="flex-1 items-center justify-center"
+            className="mt-number-18 flex-1 items-center"
             style={{ width: SCREEN_WIDTH }}
           >
             <Text className="mb-number-8 mt-number-18 h-fit w-fit gap-number-6 rounded-radius-m1 border-border-width-static-regular border-border-gray-light bg-surface-white p-p-3 text-center font-pretendard text-body-xxs font-medium leading-[1.2] text-text-subtle">
