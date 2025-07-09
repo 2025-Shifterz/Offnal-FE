@@ -78,7 +78,27 @@ const KakaoLoginWebView = () => {
       }
     } catch (error) {
       console.error('Token request failed:', error);
-      Alert.alert('로그인 에러', '토큰을 받아오는 중 오류가 발생했습니다.');
+      if (axios.isAxiosError(error)) {
+        const code = error.response?.data?.code;
+        const message = error.response?.data?.message;
+
+        // 백엔드 에러 응답 기반 Alert
+        if (code === 'INVALID_KAKAO_TOKEN') {
+          Alert.alert('로그인 에러', message);
+        } else if (code === 'FORBIDDEN') {
+          Alert.alert('접근 불가', message);
+        } else if (code === 'MEMBER_NOT_FOUND') {
+          Alert.alert('회원 정보 없음', message);
+        } else if (code === 'MEMBER_SAVE_FAILED') {
+          Alert.alert('회원 등록 실패', message);
+        } else if (code === 'KAKAO_USERINFO_FETCH_FAILED') {
+          Alert.alert('카카오 오류', message);
+        } else {
+          Alert.alert('로그인 에러', message || '서버 내부 오류가 발생했습니다.');
+        }
+      } else {
+        Alert.alert('네트워크 오류', '네트워크 연결을 확인해주세요.');
+      }
       navigation.goBack();
     } finally {
       setIsLoading(false);
