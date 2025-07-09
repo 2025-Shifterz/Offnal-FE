@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import Swiper from 'react-native-swiper';
-import { Text, View, Dimensions, Linking, Alert } from 'react-native';
+import { Text, View, Dimensions } from 'react-native';
 
 import KaKaoLoginBtn from '../components/KakaoLoginBtn';
-import { onboardingList } from '../constants/onboarding';
+import { onboardingList } from '../constants/onboardingList';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
-const LoginScreen = () => {
+const Login = () => {
   const [slideTime, setSlideTime] = useState(5); // 초기 슬라이딩 시간 3초
 
   return (
@@ -57,4 +57,4 @@ const LoginScreen = () => {
     </View>
   );
 };
-export default LoginScreen;
+export default Login;
