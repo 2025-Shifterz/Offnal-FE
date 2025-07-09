@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, ActivityIndicator, Alert } from 'react-native';
 import { WebView } from 'react-native-webview';
 import axios from 'axios';
@@ -65,13 +66,16 @@ const KakaoLoginWebView = () => {
   }
 
   return (
-    <WebView
-      source={{ uri: loginUrl }}
-      onLoadEnd={handleWebViewLoadEnd}
-      onMessage={handleWebViewMessage}
-      startInLoadingState
-      javaScriptEnabled
-    />
+    <SafeAreaView style={{ flex: 1 }}>
+      <WebView
+        source={{ uri: loginUrl }}
+        onLoadEnd={handleWebViewLoadEnd}
+        onMessage={handleWebViewMessage}
+        startInLoadingState
+        javaScriptEnabled
+        style={{ flex: 1 }}
+      />
+    </SafeAreaView>
   );
 };
 
