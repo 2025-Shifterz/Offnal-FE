@@ -7,7 +7,7 @@ const onboardingScreen = () => {
       <View className="bg-red-300">
         <AppLogo />
         <Text className="text-center font-pretendard text-heading-xs font-semibold leading-[1.2] tracking-letter-spacing-0 text-white">
-          더 나은 오프날을 위한{'\n'}종합 교대근무 루틴 매니저
+          스플래시 스크린
         </Text>
       </View>
     </View>
