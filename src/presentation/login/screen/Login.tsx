@@ -8,7 +8,7 @@ import { onboardingList } from '../constants/onboardingList';
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const Login = () => {
-  const [slideTime, setSlideTime] = useState(5); // 초기 슬라이딩 시간 3초
+  const [slideTime, setSlideTime] = useState(5); // 초기 슬라이딩 시간 5초
 
   return (
     <View className="w-full flex-1 items-center bg-background-gray-subtle1">
