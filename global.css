@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.work-chip-title-style {
+  @apply text-heading-xxxxs font-pretendard font-medium text-text-subtle-inverse;
+}
+.work-chip-description-style {
+  @apply text-heading-xxxs font-pretendard font-medium text-text-subtle;
+}
+
+
 @layer base {
   * {
     @apply font-pretendard;
