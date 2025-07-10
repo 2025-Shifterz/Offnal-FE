@@ -1,11 +1,30 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { twMerge } from 'tailwind-merge';
 
-const TeamItem = ({ children }: { children: string }) => {
+interface TeamProps {
+  id: number;
+  text: string;
+  isSelected: boolean;
+  onPress: (id: number) => void;
+}
+
+const TeamItem = ({ id, onPress, isSelected, text }: TeamProps) => {
+  const handlePress = () => {
+    onPress(id);
+  };
+  const divSelectedStyle = isSelected ? ' border-border-primary  bg-surface-primary-light-2' : '';
+  const textSelectedStyle = isSelected ? 'text-text-primary' : '';
   return (
-    <View className="rounded-radius-max border border-border-gray-light px-[14px] py-[8px]">
-      <Text className="text-label-xs text-text-disabled">{children}</Text>
-    </View>
+    <TouchableOpacity
+      onPress={handlePress}
+      className={twMerge(
+        'rounded-radius-max border-[0.5px] border-border-gray-light px-[14px] py-[8px]',
+        divSelectedStyle
+      )}
+    >
+      <Text className={twMerge('text-label-xs text-text-disabled', textSelectedStyle)}>{text}</Text>
+    </TouchableOpacity>
   );
 };
 
