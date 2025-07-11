@@ -5,9 +5,6 @@ import { Button, Text, View } from 'react-native';
 import ArrowUp from '../../../assets/icons/arrow-up.svg';
 import ArrowDown from '../../../assets/icons/arrow-down.svg';
 
-const sharedPlaceholderStyle =
-  'rounded-radius-s w-[84px] border border-background-gray-subtle1 p-[8px] text-label-xs text-text-disabled';
-
 const pickerTextStyle = 'text-text-basic text-body-s font-[500px]';
 
 const TimePicker = () => {
@@ -15,6 +12,11 @@ const TimePicker = () => {
   const [hour, setHour] = useState(8);
   const [minute, setMinute] = useState(0);
   const [period, setPeriod] = useState<'오전' | '오후'>('오전'); // 오전/오후
+
+  const [isConfirmed, setIsConfirmed] = useState(false);
+
+  const confirmedStyle = isConfirmed ? 'text-text-subtle' : 'text-text-disabled';
+  const sharedPlaceholderStyle = `rounded-radius-s w-[84px] border border-background-gray-subtle1 p-[8px] text-label-xs ${confirmedStyle}`;
 
   return (
     <View>
@@ -57,7 +59,13 @@ const TimePicker = () => {
             </View>
 
             {/* 완료  */}
-            <Button title="완료" onPress={() => setShowPicker(false)} />
+            <Button
+              title="완료"
+              onPress={() => {
+                setShowPicker(false);
+                setIsConfirmed(true);
+              }}
+            />
           </>
         </View>
       )}

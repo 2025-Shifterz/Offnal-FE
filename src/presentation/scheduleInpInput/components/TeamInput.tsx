@@ -1,43 +1,68 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import TeamItem from './TeamItem';
+import { twMerge } from 'tailwind-merge';
 
-const TeamInput = () => {
-  const [teamName, setTeamName] = useState('');
+interface TeamInputProps {
+  value: string;
+  onChangeName: (text: string) => void;
+  isDirect: boolean;
+  setIsDirect: (bool: boolean) => void;
+}
+
+const TeamInput = ({ value, onChangeName, isDirect, setIsDirect }: TeamInputProps) => {
   const [selectedBoxId, setSelectedBoxId] = useState(1);
 
-  const handleId = (id: number) => {
-    setSelectedBoxId(id);
-  };
+  const directInputStyle = isDirect
+    ? 'border-border-primary bg-surface-primary-light-2'
+    : 'border-border-gray-light';
+  const directInputTextStyle = isDirect ? 'text-text-primary' : 'text-text-disabled';
 
   return (
     <View className="flex gap-[9px]">
       <Text className="text-heading-xxxs font-semibold text-text-subtle">근무조 입력</Text>
       <View className="flex h-[102px] gap-4 rounded-lg bg-white px-[15px] py-[11px]">
         <View className="flex-row gap-[8px]">
-          <TeamItem id={1} onPress={handleId} isSelected={selectedBoxId === 1} text="1조" />
-          <TeamItem id={2} onPress={handleId} isSelected={selectedBoxId === 2} text="2조" />
-          <TeamItem id={3} onPress={handleId} isSelected={selectedBoxId === 3} text="3조" />
-          <TeamItem id={4} onPress={handleId} isSelected={selectedBoxId === 4} text="4조" />
+          {[1, 2, 3, 4].map(id => (
+            <TeamItem
+              key={id}
+              id={id}
+              onPress={() => {
+                setSelectedBoxId(id);
+                setIsDirect(false);
+              }}
+              isSelected={selectedBoxId === id}
+              text={`${id}조`}
+            />
+          ))}
         </View>
 
         <View className="h-[32px] flex-row items-center justify-between">
           {/* 직접 입력 */}
-          <View className="rounded-radius-max border-[0.5px] border-border-primary bg-surface-primary-light-2 px-[14px] py-[8px]">
-            <Text className="text-label-xs text-text-primary">직접 입력</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => {
+              setIsDirect(true);
+              setSelectedBoxId(0);
+            }}
+            className={twMerge(
+              'rounded-radius-max border-[0.5px] px-[14px] py-[8px]',
+              directInputStyle
+            )}
+          >
+            <Text className={twMerge('text-label-xs', directInputTextStyle)}>직접 입력</Text>
+          </TouchableOpacity>
           {/* A조 ~~ */}
           <View className="flex-1 gap-1 px-[14px] py-[8px]">
             <View className="flex-row items-center gap-2">
               <TextInput
                 maxLength={8}
-                value={teamName}
+                value={value}
                 placeholder="A조"
-                onChangeText={newText => setTeamName(newText)}
+                onChangeText={onChangeName}
                 className="flex-1 text-label-xs placeholder:text-text-disabled"
               />
               <Text className="text-right text-label-xxs text-text-disabled">
-                <Text className="text-text-primary">{teamName.length}</Text>
+                <Text className="text-text-primary">{value.length}</Text>
                 <Text>/8</Text>
               </Text>
             </View>

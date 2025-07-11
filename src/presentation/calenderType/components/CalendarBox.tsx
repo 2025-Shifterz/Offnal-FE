@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import CalendarDayColor from './CalendarDayColor';
@@ -17,20 +17,6 @@ interface DayTexts {
   [key: string]: string; // '키 : 값' 형태
 }
 
-// 초기 날짜별 근무 형태 데이터
-const initialDayTexts: DayTexts = {
-  // 키는 날짜 문자열 (YYYY-MM-DD)
-  // 값는 근무 형태 (주간, 오후, 야간, 휴일 등)
-  '2025-07-01': '주간',
-  '2025-07-02': '야간',
-  '2025-07-03': '휴일',
-  '2025-07-07': '오후',
-  '2025-07-17': '휴일',
-  '2025-07-20': '오후',
-  '2025-07-21': '휴일',
-  '2025-07-25': '오후',
-};
-
 const formatDateToYYYYMMDD = (date: Date) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -38,10 +24,20 @@ const formatDateToYYYYMMDD = (date: Date) => {
   return `${year}-${month}-${day}`;
 };
 
-const CalendarBox = () => {
+interface CalendarBoxProps {
+  setIsDone: (bool: boolean) => void;
+}
+
+const CalendarBox = ({ setIsDone }: CalendarBoxProps) => {
   const [selected, setSelected] = useState(''); // 선택된 각각의 날짜 day // '2025-07-10'
   const [selectedDate, setSelectedDate] = useState(new Date()); // 선택된 년월 Date 객체. // 기본값은 현재 날짜: "Thu Jul 10 2025 11:47:00 ~~"
-  const [dayTexts, setDayTexts] = useState<DayTexts>(initialDayTexts); // 날짜별 근무 형태 데이터
+  const [dayTexts, setDayTexts] = useState<DayTexts>({}); // 날짜별 근무 형태 데이터
+
+  // dayText가 존재하고, 변경될 때 isDone은 true
+  useEffect(() => {
+    const isAnySelected = Object.keys(dayTexts).length > 0;
+    setIsDone(isAnySelected);
+  }, [dayTexts, setIsDone]);
 
   // 선택된 날짜에 근무 형태 입력 기능
   // --> 날짜를 선택했고 (selected) && TimeFrame를 누르면(onPress) => 객체에 저장하고 전체 객체를 보여준다.
