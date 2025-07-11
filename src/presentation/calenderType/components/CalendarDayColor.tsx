@@ -1,4 +1,5 @@
 import { Text, View } from 'react-native';
+import TimeFrame from './TimeFrame';
 
 interface DateProps {
   date?: {

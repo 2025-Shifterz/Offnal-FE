@@ -4,28 +4,27 @@ import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import CalendarDayColor from './CalendarDayColor';
-import TimeFrame from './TimeFrame';
+import TimeFrame, { TimeFrameChildren } from './TimeFrame';
 import DashedLine from '../../../assets/icons/dashLine.svg';
 import TypeSelect from './TypeSelect';
 import { configureCalendarLocale } from '../configs/calenderLocale';
 import CustomMonthPicker from './CustomMonthPicker';
 
-// 달력 한글로 설정
+// 달력 한글로 설정하기
 configureCalendarLocale();
 
-// 날짜별 추가 텍스트를 위한 타입 정의
 interface DayTexts {
   [key: string]: string; // '키 : 값' 형태
 }
 
 // 초기 날짜별 근무 형태 데이터
 const initialDayTexts: DayTexts = {
-  // 키 : 날짜 문자열 (YYYY-MM-DD)
-  // 값 : 근무 형태 (주간, 오후, 야간, 휴일 등)
+  // 키는 날짜 문자열 (YYYY-MM-DD)
+  // 값는 근무 형태 (주간, 오후, 야간, 휴일 등)
   '2025-07-01': '주간',
   '2025-07-02': '야간',
   '2025-07-03': '휴일',
-  '2025-07-07': '오후', // 오늘 날짜 (2025년 7월 7일) 데이터 포함
+  '2025-07-07': '오후',
   '2025-07-17': '휴일',
   '2025-07-20': '오후',
   '2025-07-21': '휴일',
@@ -40,9 +39,29 @@ const formatDateToYYYYMMDD = (date: Date) => {
 };
 
 const CalendarBox = () => {
-  const [selected, setSelected] = useState('');
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selected, setSelected] = useState(''); // 선택된 각각의 날짜 day // '2025-07-10'
+  const [selectedDate, setSelectedDate] = useState(new Date()); // 선택된 년월 Date 객체. // 기본값은 현재 날짜: "Thu Jul 10 2025 11:47:00 ~~"
   const [dayTexts, setDayTexts] = useState<DayTexts>(initialDayTexts); // 날짜별 근무 형태 데이터
+
+  // 선택된 날짜에 근무 형태 입력 기능
+  // --> 날짜를 선택했고 (selected) && TimeFrame를 누르면(onPress) => 객체에 저장하고 전체 객체를 보여준다.
+  const handleTypeSelect = (type: '주간' | '오후' | '야간' | '휴일') => {
+    if (!selected) return;
+
+    setDayTexts(prev => {
+      // 이미 그 날짜 칸에 있던 타입이면 클릭했을 때 삭제함.
+      const current = prev[selected];
+      if (current === type) {
+        const newDayTexts = { ...prev };
+        delete newDayTexts[selected];
+        return newDayTexts;
+      }
+      return {
+        ...prev,
+        [selected]: type,
+      };
+    });
+  };
 
   return (
     <View className="w-full">
@@ -60,11 +79,11 @@ const CalendarBox = () => {
             <TouchableOpacity
               className="h-[50px] flex-col items-center gap-[3px]"
               onPress={() => {
-                setSelected(date.dateString);
+                setSelected(date.dateString); // 선택된 날짜 문자열('2025-07-10')이 저장된다.
               }}
             >
               <CalendarDayColor date={date} selected={selected === date.dateString} />
-              {extraText && <TimeFrame text={extraText as '주간' | '오후' | '야간' | '휴일'} />}
+              {extraText && <TimeFrame text={extraText as TimeFrameChildren} />}
             </TouchableOpacity>
           );
         }}
@@ -79,6 +98,7 @@ const CalendarBox = () => {
                 padding: 0,
               },
             },
+
             // day title - 월, 화, 수 ..
             textDayHeaderFontSize: 11,
             textSectionTitleColor: '#B1B8BE',
@@ -88,12 +108,12 @@ const CalendarBox = () => {
           } as any
         }
       />
-      <View className="flex-row overflow-hidden">
+      <View className="flex-row overflow-hidden bg-white pt-3">
         <DashedLine />
         <DashedLine />
       </View>
       {/* 근무 형태 입력 */}
-      <TypeSelect />
+      <TypeSelect onPress={handleTypeSelect} />
     </View>
   );
 };

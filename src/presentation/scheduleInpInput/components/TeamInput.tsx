@@ -4,7 +4,7 @@ import TeamItem from './TeamItem';
 
 const TeamInput = () => {
   const [teamName, setTeamName] = useState('');
-  const [selectedBoxId, setSelectedBoxId] = useState(0);
+  const [selectedBoxId, setSelectedBoxId] = useState(1);
 
   const handleId = (id: number) => {
     setSelectedBoxId(id);
@@ -15,10 +15,10 @@ const TeamInput = () => {
       <Text className="text-heading-xxxs font-semibold text-text-subtle">근무조 입력</Text>
       <View className="flex h-[102px] gap-4 rounded-lg bg-white px-[15px] py-[11px]">
         <View className="flex-row gap-[8px]">
-          <TeamItem onPress={handleId} isSelected={selectedBoxId === 1} id={1} text="1조" />
-          <TeamItem onPress={handleId} isSelected={selectedBoxId === 2} id={2} text="2조" />
-          <TeamItem onPress={handleId} isSelected={selectedBoxId === 3} id={3} text="3조" />
-          <TeamItem onPress={handleId} isSelected={selectedBoxId === 4} id={4} text="4조" />
+          <TeamItem id={1} onPress={handleId} isSelected={selectedBoxId === 1} text="1조" />
+          <TeamItem id={2} onPress={handleId} isSelected={selectedBoxId === 2} text="2조" />
+          <TeamItem id={3} onPress={handleId} isSelected={selectedBoxId === 3} text="3조" />
+          <TeamItem id={4} onPress={handleId} isSelected={selectedBoxId === 4} text="4조" />
         </View>
 
         <View className="h-[32px] flex-row items-center justify-between">
