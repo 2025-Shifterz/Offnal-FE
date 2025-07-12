@@ -24,6 +24,16 @@ import StepBar from './src/presentation/common/component/StepBar';
 
 const Stack = createNativeStackNavigator();
 
+function TabNavigator() {
+  return (
+    <BottomNavigationBar>
+      <Tab.Screen name="Home" component={MainScreen} />
+      <Tab.Screen name="Calendar" component={CalendarScreen} />
+      <Tab.Screen name="MyInfo" component={MyInfoScreen} />
+    </BottomNavigationBar>
+  );
+}
+
 export default function App() {
   const scheme = useColorScheme();
 
@@ -34,43 +44,40 @@ export default function App() {
   }, [scheme]);
 
   return (
-    <>
-      <BottomNavigationBar>
-        <Tab.Screen name="Home" component={MainScreen} />
-        <Tab.Screen name="Calendar" component={CalendarScreen} />
-        <Tab.Screen name="MyInfo" component={MyInfoScreen} />
-      </BottomNavigationBar>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShadowVisible: false,
-            headerStyle: { backgroundColor: '#F4F5F6' },
-            headerLeft: () => <CustomBackButton />,
-            headerTitleAlign: 'center',
-          }}
-        >
-          <Stack.Screen
-            name="ScheduleRegType"
-            component={ScheduleRegType}
-            options={{ headerTitle: () => <StepBar currentStep={0} totalSteps={4} /> }}
-          />
-          <Stack.Screen
-            name="ScheduleInfoInput"
-            component={ScheduleInfoInput}
-            options={{ headerTitle: () => <StepBar currentStep={1} totalSteps={4} /> }}
-          />
-          <Stack.Screen
-            name="CalendarType"
-            component={CalendarType}
-            options={{ headerTitle: () => <StepBar currentStep={2} totalSteps={4} /> }}
-          />
-          <Stack.Screen
-            name="CompleteCreate"
-            component={CompleteCreate}
-            options={{ headerTitle: () => <StepBar currentStep={3} totalSteps={4} /> }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShadowVisible: false,
+          headerStyle: { backgroundColor: '#F4F5F6' },
+          headerLeft: () => <CustomBackButton />,
+          headerTitleAlign: 'center',
+        }}
+      >
+        {/* 탭 네비게이션은 루트에서 보여줍니다 */}
+        <Stack.Screen name="MainTabs" component={TabNavigator} options={{ headerShown: false }} />
+
+        {/* 스택으로 push 되는 화면들 */}
+        <Stack.Screen
+          name="ScheduleRegType"
+          component={ScheduleRegType}
+          options={{ headerTitle: () => <StepBar currentStep={0} totalSteps={4} /> }}
+        />
+        <Stack.Screen
+          name="ScheduleInfoInput"
+          component={ScheduleInfoInput}
+          options={{ headerTitle: () => <StepBar currentStep={1} totalSteps={4} /> }}
+        />
+        <Stack.Screen
+          name="CalendarType"
+          component={CalendarType}
+          options={{ headerTitle: () => <StepBar currentStep={2} totalSteps={4} /> }}
+        />
+        <Stack.Screen
+          name="CompleteCreate"
+          component={CompleteCreate}
+          options={{ headerTitle: () => <StepBar currentStep={3} totalSteps={4} /> }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
