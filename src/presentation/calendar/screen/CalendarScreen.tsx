@@ -9,11 +9,13 @@ const CalendarScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
 
   return (
-    <SafeAreaView>
-      <View className="flex items-center justify-center">
-        <Button title="일정 등록 시작" onPress={() => navigation.navigate('ScheduleRegType')} />
-      </View>
-      <CalendarViewer />
+    <SafeAreaView className="flex-1 bg-surface-white">
+      <>
+        <View className="items-center justify-center bg-surface-white">
+          <Button title="일정 등록 시작" onPress={() => navigation.navigate('ScheduleRegType')} />
+        </View>
+        <CalendarViewer />
+      </>
     </SafeAreaView>
   );
 };

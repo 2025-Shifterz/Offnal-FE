@@ -71,7 +71,7 @@ const CalendarViewer = () => {
   }, [selectedMonthYear]);
 
   return (
-    <View>
+    <View className="flex-1 bg-surface-white">
       <CustomMonthPicker selectedDate={selectedMonthYear} onChange={setSelectedMonthYear} />
       <CalendarBoxBase
         selectedMonthYear={selectedMonthYear}
