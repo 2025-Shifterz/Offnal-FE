@@ -62,6 +62,7 @@ const KakaoLoginWebView = () => {
       await EncryptedStorage.setItem('accessToken', accessToken);
       await EncryptedStorage.setItem('refreshToken', refreshToken);
 
+      // TODO: 처음 로그인 아닐 때 홈 화면으로 이동한느거 필요함
       if (!newMember) {
         Alert.alert('로그인 성공', `${nickname}님 환영합니다!`);
         navigation.replace('SelectRegMethod');
