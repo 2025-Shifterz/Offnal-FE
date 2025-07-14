@@ -1,8 +1,5 @@
 import './global.css';
-import React, { useEffect } from 'react';
 
-import { colorScheme } from 'nativewind';
-import { useColorScheme } from 'react-native';
 import MainScreen from './src/presentation/main/screen/MainScreen';
 import CalendarScreen from './src/presentation/calendar/screen/CalendarScreen';
 import MyInfoScreen from './src/presentation/myInfo/screen/MyInfoScreen';
@@ -12,6 +9,31 @@ import BottomNavigationBar, { Tab } from './src/presentation/main/components/Bot
 import { enableScreens } from 'react-native-screens';
 import RegisterScheduleScreen from './src/presentation/onboarding/screen/RegisterScheduleScreen';
 enableScreens();
+import React, { useEffect } from 'react';
+import { Text, View } from 'react-native';
+
+import { colorScheme } from 'nativewind';
+import { useColorScheme } from 'react-native';
+import ScheduleInfoInput from './src/presentation/scheduleInpInput/screen/ScheduleInfoInput';
+import ScheduleRegType from './src/presentation/scheduleRegType/screen/ScheduleRegType';
+import CalendarType from './src/presentation/calenderType/screen/CalendarType';
+import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CompleteCreate from './src/presentation/completeCreate/screen/CompleteCreate';
+import CustomBackButton from './src/presentation/common/component/CustomBackButton';
+import StepBar from './src/presentation/common/component/StepBar';
+
+// const Stack = createNativeStackNavigator();
+
+// function TabNavigator() {
+//   return (
+//     <BottomNavigationBar>
+//       <Tab.Screen name="Home" component={MainScreen} />
+//       <Tab.Screen name="Calendar" component={CalendarScreen} />
+//       <Tab.Screen name="MyInfo" component={MyInfoScreen} />
+//     </BottomNavigationBar>
+//   );
+// }
 
 export default function App() {
   const scheme = useColorScheme();
@@ -23,11 +45,43 @@ export default function App() {
   }, [scheme]);
 
   return (
+
     <RegisterScheduleScreen/>
-    // <BottomNavigationBar>
-    //   <Tab.Screen name="Home" component={MainScreen} />
-    //   <Tab.Screen name="Calendar" component={CalendarScreen} />
-    //   <Tab.Screen name="MyInfo" component={MyInfoScreen} />
-    // </BottomNavigationBar>
+    
+    // <NavigationContainer>
+    //   <Stack.Navigator
+    //     screenOptions={{
+    //       headerShadowVisible: false,
+    //       headerStyle: { backgroundColor: '#F4F5F6' },
+    //       headerLeft: () => <CustomBackButton />,
+    //       headerTitleAlign: 'center',
+    //     }}
+    //   >
+    //     {/* 탭 네비게이션은 루트에서 보여줍니다 */}
+    //     <Stack.Screen name="MainTabs" component={TabNavigator} options={{ headerShown: false }} />
+
+    //     {/* 스택으로 push 되는 화면들 */}
+    //     <Stack.Screen
+    //       name="ScheduleRegType"
+    //       component={ScheduleRegType}
+    //       options={{ headerTitle: () => <StepBar currentStep={0} totalSteps={4} /> }}
+    //     />
+    //     <Stack.Screen
+    //       name="ScheduleInfoInput"
+    //       component={ScheduleInfoInput}
+    //       options={{ headerTitle: () => <StepBar currentStep={1} totalSteps={4} /> }}
+    //     />
+    //     <Stack.Screen
+    //       name="CalendarType"
+    //       component={CalendarType}
+    //       options={{ headerTitle: () => <StepBar currentStep={2} totalSteps={4} /> }}
+    //     />
+    //     <Stack.Screen
+    //       name="CompleteCreate"
+    //       component={CompleteCreate}
+    //       options={{ headerTitle: () => <StepBar currentStep={3} totalSteps={4} /> }}
+    //     />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
 }
