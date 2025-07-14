@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
-import { Alert, SafeAreaView, Text, View } from 'react-native';
+import React, { useRef } from 'react';
+import { SafeAreaView, View } from 'react-native';
 import BottomButton from '../../common/component/BottomButton';
-import CalendarBox from '../components/CalendarBox';
 import TitleMessage from '../../common/component/TitleMessage';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../../../navigation/types';
+import CalendarEditor, { CalendarEditorRef } from '../components/CalenderEditor';
 
 const CalendarType = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
-  const [isDone, setIsDone] = useState(false); // 근무형태가 입력되었는지 여부
+  const route = useRoute(); // routes.params 접근
+  const { calendarName, workGroup, workTimes } = route.params;
 
-  // 입력이 하나라도 되어야 넘어가도록
-  const handleNext = () => {
-    if (!isDone) {
-      Alert.alert('입력하세요', '근무 형태를 입력해주세요.');
-      return;
+  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
+  const editorRef = useRef<CalendarEditorRef>(null);
+
+  const handleNext = async () => {
+    try {
+      // 자식 컴포넌트의 함수 실행
+      await editorRef.current?.postData(); // post 요청
+      navigation.navigate('CompleteCreate');
+      console.log('try 실행됨');
+    } catch (error) {
+      console.log('근무표 저장 실패', error);
     }
-    navigation.navigate('CompleteCreate');
   };
+
   return (
     <View className="flex-1 bg-background-gray-subtle1 px-[16px]">
       <SafeAreaView className="flex-1">
@@ -28,7 +34,12 @@ const CalendarType = () => {
             subTitle="각 날짜에 해당하는 근무 유형을 선택해주세요."
           />
           <View className="mt-[20px]">
-            <CalendarBox setIsDone={setIsDone} />
+            <CalendarEditor
+              ref={editorRef}
+              calendarName={calendarName}
+              workGroup={workGroup}
+              workTimes={workTimes}
+            />
           </View>
           <BottomButton text="다음" onPress={handleNext} />
         </View>

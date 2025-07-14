@@ -45,7 +45,7 @@ const ScheduleRegType = () => {
           <BottomButton
             text="다음"
             onPress={() => {
-              navigation.navigate('ScheduleInfoInput');
+              navigation.navigate('ScheduleInfoInput', { selectedBoxId });
             }}
           />
         </View>
