@@ -16,6 +16,7 @@ const KakaoLoginWebView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const webviewRef = useRef(null);
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [shouldHideWebView, setShouldHideWebView] = useState(false);
 
   useEffect(() => {
     const fetchLoginUrl = async () => {
@@ -41,12 +42,17 @@ const KakaoLoginWebView = () => {
 
   const handleMessage = async (event: any) => {
     try {
-      const data = JSON.parse(event.nativeEvent.data);
+      setShouldHideWebView(true);
 
-      const accessToken = event.nativeEvent.headers?.authorization || data.accessToken;
-      const refreshToken = event.nativeEvent.headers?.['refresh-token'] || data.refreshToken;
+      const data = JSON.parse(event.nativeEvent.data);
+      console.log(data);
+
+      const accessToken = data.data?.accessToken;
+      const refreshToken = data.data?.refreshToken;
       const nickname = data.data?.nickname;
       const newMember = data.data?.newMember;
+
+      console.log(accessToken, refreshToken, nickname, newMember);
 
       if (!accessToken || !refreshToken) {
         Alert.alert('토큰 없음', '다시 로그인해주세요.');
@@ -56,7 +62,10 @@ const KakaoLoginWebView = () => {
       await EncryptedStorage.setItem('accessToken', accessToken);
       await EncryptedStorage.setItem('refreshToken', refreshToken);
 
-      Alert.alert('로그인 성공', `${nickname}님 환영합니다!`);
+      if (!newMember) {
+        Alert.alert('로그인 성공', `${nickname}님 환영합니다!`);
+        navigation.replace('SelectRegMethod');
+      }
 
       navigation.replace('SelectRegMethod');
     } catch (err) {
@@ -75,15 +84,21 @@ const KakaoLoginWebView = () => {
 
   return (
     <SafeAreaView className="flex-1">
-      <WebView
-        ref={webviewRef}
-        source={{ uri: loginUrl }}
-        onMessage={handleMessage}
-        injectedJavaScript={injectedJS}
-        javaScriptEnabled
-        startInLoadingState
-        className="flex-1"
-      />
+      {!shouldHideWebView ? (
+        <WebView
+          ref={webviewRef}
+          source={{ uri: loginUrl }}
+          onMessage={handleMessage}
+          injectedJavaScript={injectedJS}
+          javaScriptEnabled
+          startInLoadingState
+          className="flex-1"
+        />
+      ) : (
+        <View className="flex-1 items-center justify-center">
+          <ActivityIndicator size="large" />
+        </View>
+      )}
     </SafeAreaView>
   );
 };
