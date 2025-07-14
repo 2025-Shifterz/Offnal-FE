@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const { ScheduleModule } = NativeModules;
 
 const ImportImage = () => {
-  const [imageUri, setImageUri] = useState(null);
+  const [imageUri, setImageUri] = useState<string | null | undefined>(null);
   const [scheduleJson, setScheduleJson] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -48,7 +48,8 @@ const ImportImage = () => {
       const parsedResult = JSON.parse(resultJson);
       setScheduleJson(JSON.stringify(parsedResult, null, 2));
     } catch (e) {
-      Alert.alert('Analysis Error', e.message);
+      const errorMessage = (e instanceof Error) ? e.message : String(e);
+      Alert.alert('Analysis Error', errorMessage);
       setScheduleJson('분석 중 오류가 발생했습니다.');
     } finally {
       setIsAnalyzing(false);
