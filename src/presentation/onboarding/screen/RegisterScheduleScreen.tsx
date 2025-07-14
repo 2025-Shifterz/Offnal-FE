@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const { ScheduleModule } = NativeModules;
 
-const ImportImage = () => {
+const RegisterScheduleScreen = () => {
   const [imageUri, setImageUri] = useState<string | null | undefined>(null);
   const [scheduleJson, setScheduleJson] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -117,4 +117,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ImportImage;
+export default RegisterScheduleScreen;

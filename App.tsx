@@ -10,7 +10,7 @@ import MyInfoScreen from './src/presentation/myInfo/screen/MyInfoScreen';
 import BottomNavigationBar, { Tab } from './src/presentation/main/components/BottomNavigationBar';
 
 import { enableScreens } from 'react-native-screens';
-import ImportImage from './src/presentation/onboarding/screen/RegisterWorkSheetWithOCR';
+import RegisterScheduleScreen from './src/presentation/onboarding/screen/RegisterScheduleScreen';
 enableScreens();
 
 export default function App() {
@@ -23,7 +23,7 @@ export default function App() {
   }, [scheme]);
 
   return (
-    <ImportImage/>
+    <RegisterScheduleScreen/>
     // <BottomNavigationBar>
     //   <Tab.Screen name="Home" component={MainScreen} />
     //   <Tab.Screen name="Calendar" component={CalendarScreen} />
