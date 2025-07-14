@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { Alert, TouchableOpacity, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import CalendarDayColor from './CalendarDayColor';
 import TimeFrame, { TimeFrameChildren } from './TimeFrame';
@@ -42,18 +42,7 @@ const CalendarBoxBase = ({
   setDayTexts,
   isCalendarView,
 }: CalendarBoxProps) => {
-  // const [selected, setSelected] = useState(''); // 선택된 각각의 날짜 day // '2025-07-10'
-  // const [selectedDate, setSelectedDate] = useState(new Date()); // 선택된 년월 Date 객체. // 기본값은 현재 날짜: "Thu Jul 10 2025 11:47:00 ~~"
-  // const [dayTexts, setDayTexts] = useState<DayTexts>({}); // 날짜별 근무 형태 데이터
-
-  // dayText가 존재하고, 변경될 때 isDone은 true
-  // useEffect(() => {
-  //   const isAnySelected = Object.keys(dayTexts).length > 0;
-  //   setIsDone(isAnySelected);
-  // }, [dayTexts, setIsDone]);
-
-  // 선택된 날짜에 근무 형태 입력 기능
-  // --> 날짜를 선택했고 (selected) && TimeFrame를 누르면(onPress) => 객체에 저장하고 전체 객체를 보여준다.
+  // 근무 형태 입력하는 기능
   const handleTypeSelect = (type: '주간' | '오후' | '야간' | '휴일') => {
     if (!selected) return;
 
@@ -72,6 +61,35 @@ const CalendarBoxBase = ({
     });
   };
 
+  // minDate와 maxDate 계산 - 한달 전과 한달 후까지만 이동 가능
+  const baseDate = new Date(); // 오늘 날짜 기준
+  const baseYear = baseDate.getFullYear();
+  const baseMonth = baseDate.getMonth();
+
+  // baseDate 기준으로 계산된 고정 범위 _ 한달전, 한달후
+  const minDate = new Date(baseYear, baseMonth - 1, 1).toISOString().split('T')[0];
+  const maxDate = new Date(baseYear, baseMonth + 1, 31).toISOString().split('T')[0];
+
+  // 월 이동 핸들러
+  const handleArrowPress = (direction: 'left' | 'right', updateCalendar: () => void) => {
+    let newMonthDate: Date;
+
+    if (direction === 'left') {
+      newMonthDate = new Date(selectedMonthYear.getFullYear(), selectedMonthYear.getMonth() - 1, 1);
+    } else {
+      newMonthDate = new Date(selectedMonthYear.getFullYear(), selectedMonthYear.getMonth() + 1, 1);
+    }
+
+    const newDateStr = newMonthDate.toISOString().split('T')[0];
+
+    if (newDateStr >= minDate && newDateStr <= maxDate) {
+      setSelectedMonthYear(newMonthDate);
+      updateCalendar();
+    } else {
+      Alert.alert('알림', '더 이상 이전/다음 달로 이동할 수 없습니다.');
+    }
+  };
+
   return (
     <View className="w-full">
       {/* <CustomMonthPicker selectedDate={selectedDate} onChange={date => setSelectedDate(date)} /> */}
@@ -82,6 +100,10 @@ const CalendarBoxBase = ({
         key={formatDateToYYYYMMDD(selectedMonthYear)} // 강제 리렌더링
         current={formatDateToYYYYMMDD(selectedMonthYear)} // UTC 문제 해결
         hideExtraDays={true}
+        minDate={minDate}
+        maxDate={maxDate}
+        onPressArrowLeft={subtractMonth => handleArrowPress('left', subtractMonth)}
+        onPressArrowRight={addMonth => handleArrowPress('right', addMonth)}
         dayComponent={({ date }) => {
           if (!date) return null;
           const extraText = dayTexts[date.dateString]; // 해당 날짜에 대한 근무 형태 텍스트 (예: 오후)
@@ -123,12 +145,15 @@ const CalendarBoxBase = ({
           } as any
         }
       />
-      <View className="flex-row overflow-hidden bg-white pt-3">
-        <DashedLine />
-        <DashedLine />
-      </View>
-      {/* 근무 형태 입력 */}
-      {!isCalendarView && <TypeSelect onPress={handleTypeSelect} />}
+      {!isCalendarView && (
+        <>
+          <View className="flex-row overflow-hidden bg-white pt-3">
+            <DashedLine />
+            <DashedLine />
+          </View>
+          <TypeSelect onPress={handleTypeSelect} />
+        </>
+      )}
     </View>
   );
 };
