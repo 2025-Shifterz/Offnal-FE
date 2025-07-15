@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import Swiper from 'react-native-swiper';
-import { Text, View, Dimensions } from 'react-native';
+import { Text, View, Dimensions, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../navigation/type';
 
 import KaKaoLoginBtn from '../components/KakaoLoginBtn';
 import { onboardingList } from '../constants/onboardingList';
@@ -8,7 +11,8 @@ import { onboardingList } from '../constants/onboardingList';
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const Login = () => {
-  const [slideTime, setSlideTime] = useState(5); // 초기 슬라이딩 시간 5초
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [slideTime, setSlideTime] = useState(4); // 초기 슬라이딩 시간 4초
 
   return (
     <View className="w-full flex-1 items-center bg-background-gray-subtle1">
@@ -46,13 +50,16 @@ const Login = () => {
 
       <View className="flex items-center justify-center">
         <KaKaoLoginBtn />
-        {/* 아래도 터치 가능하게 컴포넌트 따로 만들어야 함*/}
-        <Text className="mb-number-3 font-pretendard text-label-xs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-          이용약관 확인하기
-        </Text>
-        <Text className="mb-number-21 font-pretendard text-label-xs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-          개인정보처리방침 확인하기
-        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('ServiceTerm')}>
+          <Text className="mb-number-3 font-pretendard text-label-xs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+            이용약관 확인하기
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy')}>
+          <Text className="mb-number-21 font-pretendard text-label-xs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+            개인정보처리방침 확인하기
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
