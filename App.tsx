@@ -1,131 +1,83 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import './global.css';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import MainScreen from './src/presentation/main/screen/MainScreen';
+import CalendarScreen from './src/presentation/calendar/screen/CalendarScreen';
+import MyInfoScreen from './src/presentation/myInfo/screen/MyInfoScreen';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import BottomNavigationBar, { Tab } from './src/presentation/main/components/BottomNavigationBar';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+import { enableScreens } from 'react-native-screens';
+enableScreens();
+import React, { useEffect } from 'react';
+import { Text, View } from 'react-native';
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+import { colorScheme } from 'nativewind';
+import { useColorScheme } from 'react-native';
+import ScheduleInfoInput from './src/presentation/scheduleInpInput/screen/ScheduleInfoInput';
+import ScheduleRegType from './src/presentation/scheduleRegType/screen/ScheduleRegType';
+import CalendarType from './src/presentation/calenderType/screen/CalendarType';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CompleteCreate from './src/presentation/completeCreate/screen/CompleteCreate';
+import CustomBackButton from './src/presentation/common/component/CustomBackButton';
+import StepBar from './src/presentation/common/component/StepBar';
+
+const Stack = createNativeStackNavigator();
+
+function TabNavigator() {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <BottomNavigationBar>
+      <Tab.Screen name="Home" component={MainScreen} />
+      <Tab.Screen name="Calendar" component={CalendarScreen} />
+      <Tab.Screen name="MyInfo" component={MyInfoScreen} />
+    </BottomNavigationBar>
   );
 }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+export default function App() {
+  const scheme = useColorScheme();
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  /*
-   * To keep the template simple and small we're adding padding to prevent view
-   * from rendering under the System UI.
-   * For bigger apps the recommendation is to use `react-native-safe-area-context`:
-   * https://github.com/AppAndFlow/react-native-safe-area-context
-   *
-   * You can read more about it here:
-   * https://github.com/react-native-community/discussions-and-proposals/discussions/827
-   */
-  const safePadding = '5%';
+  useEffect(() => {
+    if (scheme === 'light' || scheme === 'dark') {
+      colorScheme.set('light');
+    }
+  }, [scheme]);
 
   return (
-    <View style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        style={backgroundStyle}>
-        <View style={{paddingRight: safePadding}}>
-          <Header/>
-        </View>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            paddingHorizontal: safePadding,
-            paddingBottom: safePadding,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShadowVisible: false,
+          headerStyle: { backgroundColor: '#F4F5F6' },
+          headerLeft: () => <CustomBackButton />,
+          headerTitleAlign: 'center',
+        }}
+      >
+        {/* 탭 네비게이션은 루트에서 보여줍니다 */}
+        <Stack.Screen name="MainTabs" component={TabNavigator} options={{ headerShown: false }} />
+
+        {/* 스택으로 push 되는 화면들 */}
+        <Stack.Screen
+          name="ScheduleRegType"
+          component={ScheduleRegType}
+          options={{ headerTitle: () => <StepBar currentStep={0} totalSteps={4} /> }}
+        />
+        <Stack.Screen
+          name="ScheduleInfoInput"
+          component={ScheduleInfoInput}
+          options={{ headerTitle: () => <StepBar currentStep={1} totalSteps={4} /> }}
+        />
+        <Stack.Screen
+          name="CalendarType"
+          component={CalendarType}
+          options={{ headerTitle: () => <StepBar currentStep={2} totalSteps={4} /> }}
+        />
+        <Stack.Screen
+          name="CompleteCreate"
+          component={CompleteCreate}
+          options={{ headerTitle: () => <StepBar currentStep={3} totalSteps={4} /> }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
