@@ -8,6 +8,10 @@ module.exports = {
     extend: {
       // 색상 정의
       colors: {
+        /* --- kakao login guidline --- */
+        'kakao-bg': 'var(--color-kakao-bg)',
+        'kakao-text': 'var(--color-kakao-text)',
+
         /* ------------------------------------------------------ */
         /* --- Premitive Color --- */
         /* ------------------------------------------------------ */
@@ -187,16 +191,13 @@ module.exports = {
         'button-disabled-border': 'var(--color-button-disabled-border)',
         'button-disabled-fill': 'var(--color-button-disabled-fill)',
         'button-primary-fill': 'var(--color-button-primary-fill)',
-        'button-primary-fill-pressed':
-          'var(--color-button-primary-fill-pressed)',
+        'button-primary-fill-pressed': 'var(--color-button-primary-fill-pressed)',
         'button-secondary-border': 'var(--color-button-secondary-border)',
         'button-secondary-fill': 'var(--color-button-secondary-fill)',
-        'button-secondary-fill-pressed':
-          'var(--color-button-secondary-fill-pressed)',
+        'button-secondary-fill-pressed': 'var(--color-button-secondary-fill-pressed)',
         'button-tertiary-border': 'var(--color-button-tertiary-border)',
         'button-tertiary-fill': 'var(--color-button-tertiary-fill)',
-        'button-tertiary-fill-pressed':
-          'var(--color-button-tertiary-fill-pressed)',
+        'button-tertiary-fill-pressed': 'var(--color-button-tertiary-fill-pressed)',
         'button-text-border': 'var(--color-button-text-border)',
         'button-text-fill': 'var(--color-button-text-fill)',
         'button-text-fill-pressed': 'var(--color-button-text-fill-pressed)',
@@ -289,8 +290,7 @@ module.exports = {
         'dark-border-gray-darker': 'var(--color-border-gray-darker)',
         'dark-border-gray-light': 'var(--color-border-gray-light)',
         'dark-border-information': 'var(--color-border-information)',
-        'dark-border-information-light':
-          'var(--color-border-information-light)',
+        'dark-border-information-light': 'var(--color-border-information-light)',
         'dark-border-inverse': 'var(--color-border-inverse)',
         'dark-border-primary': 'var(--color-border-primary)',
         'dark-border-primary-light': 'var(--color-border-primary-light)',
@@ -305,20 +305,16 @@ module.exports = {
         'dark-button-disabled-border': 'var(--color-button-disabled-border)',
         'dark-button-disabled-fill': 'var(--color-button-disabled-fill)',
         'dark-button-primary-fill': 'var(--color-button-primary-fill)',
-        'dark-button-primary-fill-pressed':
-          'var(--color-button-primary-fill-pressed)',
+        'dark-button-primary-fill-pressed': 'var(--color-button-primary-fill-pressed)',
         'dark-button-secondary-border': 'var(--color-button-secondary-border)',
         'dark-button-secondary-fill': 'var(--color-button-secondary-fill)',
-        'dark-button-secondary-fill-pressed':
-          'var(--color-button-secondary-fill-pressed)',
+        'dark-button-secondary-fill-pressed': 'var(--color-button-secondary-fill-pressed)',
         'dark-button-tertiary-border': 'var(--color-button-tertiary-border)',
         'dark-button-tertiary-fill': 'var(--color-button-tertiary-fill)',
-        'dark-button-tertiary-fill-pressed':
-          'var(--color-button-tertiary-fill-pressed)',
+        'dark-button-tertiary-fill-pressed': 'var(--color-button-tertiary-fill-pressed)',
         'dark-button-text-border': 'var(--color-button-text-border)',
         'dark-button-text-fill': 'var(--color-button-text-fill)',
-        'dark-button-text-fill-pressed':
-          'var(--color-button-text-fill-pressed)',
+        'dark-button-text-fill-pressed': 'var(--color-button-text-fill-pressed)',
 
         'dark-divider-gray': 'var(--color-divider-gray)',
         'dark-divider-gray-dark': 'var(--color-divider-gray-dark)',
@@ -327,12 +323,10 @@ module.exports = {
 
         'dark-surface-danger-subtle': 'var(--color-surface-danger-subtle)',
         'dark-surface-disabled': 'var(--color-surface-disabled)',
-        'dark-surface-disabled-inverse':
-          'var(--color-surface-disabled-inverse)',
+        'dark-surface-disabled-inverse': 'var(--color-surface-disabled-inverse)',
         'dark-surface-gray-subtle1': 'var(--color-surface-gray-subtle1)',
         'dark-surface-gray-subtle2': 'var(--color-surface-gray-subtle2)',
-        'dark-surface-information-subtle':
-          'var(--color-surface-information-subtle)',
+        'dark-surface-information-subtle': 'var(--color-surface-information-subtle)',
         'dark-surface-inverse': 'var(--color-surface-inverse)',
         'dark-surface-inverse-static': 'var(--color-surface-inverse-static)',
         'dark-surface-primary': 'var(--color-surface-primary)',
@@ -341,15 +335,13 @@ module.exports = {
         'dark-primary-light-3': 'var(--color-primary-light-3)',
         'dark-surface-primary-light-4': 'var(--color-surface-primary-light-4)',
         'dark-surface-primary-subtle': 'var(--color-surface-primary-subtle)',
-        'dark-surface-secondary-subtle':
-          'var(--color-surface-secondary-subtle)',
+        'dark-surface-secondary-subtle': 'var(--color-surface-secondary-subtle)',
         'dark-surface-success-subtle': 'var(--color-surface-success-subtle)',
         'dark-surface-warning-subtle': 'var(--color-surface-warning-subtle)',
         'dark-surface-white': 'var(--color-surface-white)',
         'dark-surface-white-static': 'var(--color-surface-white-static)',
         'dark-surface-white-subtle': 'var(--color-surface-white-subtle)',
-        'dark-surface-white-subtle-dark':
-          'var(--color-surface-white-subtle-dark)',
+        'dark-surface-white-subtle-dark': 'var(--color-surface-white-subtle-dark)',
 
         'dark-text-basic': 'var(--color-text-basic)',
         'dark-text-basic-inverse': 'var(--color-text-basic-inverse)',

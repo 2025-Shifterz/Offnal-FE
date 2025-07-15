@@ -1,27 +1,20 @@
 import './global.css';
+import React, { useEffect } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import AppNavigator from './src/navigation/AppNavigator';
 
-import MainScreen from './src/presentation/main/screen/MainScreen';
-import CalendarScreen from './src/presentation/calendar/screen/CalendarScreen';
-import MyInfoScreen from './src/presentation/myInfo/screen/MyInfoScreen';
+import { colorScheme } from 'nativewind';
+import { useColorScheme } from 'react-native';
 
 import BottomNavigationBar, { Tab } from './src/presentation/main/components/BottomNavigationBar';
 
 import { enableScreens } from 'react-native-screens';
 import RegisterScheduleScreen from './src/presentation/onboarding/screen/RegisterScheduleScreen';
 enableScreens();
-import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
 
-import { colorScheme } from 'nativewind';
-import { useColorScheme } from 'react-native';
-import ScheduleInfoInput from './src/presentation/scheduleInpInput/screen/ScheduleInfoInput';
-import ScheduleRegType from './src/presentation/scheduleRegType/screen/ScheduleRegType';
-import CalendarType from './src/presentation/calenderType/screen/CalendarType';
 import { NavigationContainer } from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CompleteCreate from './src/presentation/completeCreate/screen/CompleteCreate';
-import CustomBackButton from './src/presentation/common/component/CustomBackButton';
-import StepBar from './src/presentation/common/component/StepBar';
 
 // const Stack = createNativeStackNavigator();
 
@@ -45,8 +38,9 @@ export default function App() {
   }, [scheme]);
 
   return (
-
-    <RegisterScheduleScreen/>
+    <SafeAreaProvider>
+      <AppNavigator />
+    // <RegisterScheduleScreen/>
     
     // <NavigationContainer>
     //   <Stack.Navigator
@@ -83,5 +77,6 @@ export default function App() {
     //     />
     //   </Stack.Navigator>
     // </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
