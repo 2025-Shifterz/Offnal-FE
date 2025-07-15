@@ -9,18 +9,20 @@ import SelectRegMethod from '../presentation/selectRegMethod/screen/SelectRegMet
 import KakaoLoginWebView from '../presentation/login/screen/KakaoLoginWebView';
 import PrivacyPolicy from '../presentation/policy/screen/PrivacyPolicy';
 import ServiceTerm from '../presentation/policy/screen/ServiceTerm';
+import AutoAlarm from '../presentation/alarm/screen/AutoAlarm';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="AutoAlarm" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SelectRegMethod" component={SelectRegMethod} />
         <Stack.Screen name="KakaoWebView" component={KakaoLoginWebView} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
         <Stack.Screen name="ServiceTerm" component={ServiceTerm} />
+        <Stack.Screen name="AutoAlarm" component={AutoAlarm} />
       </Stack.Navigator>
     </NavigationContainer>
   );

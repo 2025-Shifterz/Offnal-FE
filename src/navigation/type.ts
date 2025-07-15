@@ -4,4 +4,5 @@ export type RootStackParamList = {
   KakaoWebView: undefined;
   PrivacyPolicy: undefined;
   ServiceTerm: undefined;
+  AutoAlarm: undefined;
 };
