@@ -1,7 +1,7 @@
 const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 const { withNativeWind } = require('nativewind/metro');
 
-// This is Default Metro configuration for React Native projects.Add commentMore actions
+// This is Default Metro configuration for React Native projects.
 const defaultConfig = getDefaultConfig(__dirname);
 
 const svgConfig = {
