@@ -13,7 +13,7 @@ const CalendarScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-surface-white px-[16px]">
       <>
-        <TCalendarEditor />
+        <CalendarViewer />
         <View className="items-center justify-center bg-surface-white">
           <Button title="일정 등록 시작" onPress={() => navigation.navigate('ScheduleRegType')} />
         </View>
