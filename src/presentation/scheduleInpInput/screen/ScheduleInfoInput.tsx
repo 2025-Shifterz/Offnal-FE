@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, SafeAreaView, View } from 'react-native';
 import TimeInput from '../components/TimeInput';
 import TeamInput from '../components/TeamInput';
@@ -14,7 +14,6 @@ type ScheduleInfoInputRouteProp = RouteProp<StackParamList, 'ScheduleInfoInput'>
 
 const ScheduleInfoInput = () => {
   const route = useRoute<ScheduleInfoInputRouteProp>();
-  const { selectedBoxId } = route.params;
 
   const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
 

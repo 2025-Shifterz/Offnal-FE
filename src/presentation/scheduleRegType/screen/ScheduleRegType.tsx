@@ -41,7 +41,6 @@ const ScheduleRegType = () => {
               subTitle={`내가 속한 조의 스케줄만\n간편하게 등록해요`}
             />
           </View>
-
           <BottomButton
             text="다음"
             onPress={() => {
