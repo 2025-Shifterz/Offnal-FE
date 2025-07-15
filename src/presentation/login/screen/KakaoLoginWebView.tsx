@@ -45,14 +45,10 @@ const KakaoLoginWebView = () => {
       setShouldHideWebView(true);
 
       const data = JSON.parse(event.nativeEvent.data);
-      console.log(data);
-
       const accessToken = data.data?.accessToken;
       const refreshToken = data.data?.refreshToken;
       const nickname = data.data?.nickname;
       const newMember = data.data?.newMember;
-
-      console.log(accessToken, refreshToken, nickname, newMember);
 
       if (!accessToken || !refreshToken) {
         Alert.alert('토큰 없음', '다시 로그인해주세요.');
@@ -61,6 +57,7 @@ const KakaoLoginWebView = () => {
 
       await EncryptedStorage.setItem('accessToken', accessToken);
       await EncryptedStorage.setItem('refreshToken', refreshToken);
+      await EncryptedStorage.setItem('nickname', nickname);
 
       // TODO: 처음 로그인 아닐 때 홈 화면으로 이동한느거 필요함
       if (!newMember) {
