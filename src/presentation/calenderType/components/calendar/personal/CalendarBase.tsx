@@ -76,7 +76,9 @@ const CalendarBase = ({
         >
           <View className="flex gap-[3px]">
             <View
-              className={`h-[30px] w-[30px] items-center justify-center rounded-radius-max ${isToday ? 'bg-surface-gray-subtle1' : ''} ${isSelected ? 'bg-border-primary' : ''}`}
+              className={`h-[30px] w-[30px] items-center justify-center rounded-radius-max ${
+                isSelected ? 'bg-border-primary' : isToday ? 'bg-surface-gray-subtle1' : ''
+              } `}
             >
               <Text
                 className={`text-heading-xxxs text-text-danger`}

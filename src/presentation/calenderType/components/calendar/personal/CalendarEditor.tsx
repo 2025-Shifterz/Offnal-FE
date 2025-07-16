@@ -74,19 +74,38 @@ const CalendarEditor: ForwardRefRenderFunction<CalendarEditorRef, CalendarEditor
         }
       };
 
-      Object.entries(calendarData).forEach(([date, type]) => {
-        const day = dayjs(date).date(); // 1 ~ 31
-        shifts[String(day)] = convertToCode(type);
+      const calendarMap: Record<
+        string,
+        { year: string; month: string; shifts: Record<string, string> }
+      > = {};
+
+      Object.entries(calendarData).forEach(([dateStr, type]) => {
+        const date = dayjs(dateStr);
+        const year = String(date.year());
+        const month = String(date.month() + 1); // 0-indexed → 1-indexed
+        const day = String(date.date());
+
+        const key = `${year}-${month}`;
+
+        if (!calendarMap[key]) {
+          calendarMap[key] = {
+            year,
+            month,
+            shifts: {},
+          };
+        }
+
+        calendarMap[key].shifts[day] = convertToCode(type);
       });
+      const calendars = Object.values(calendarMap);
 
       const rawData = {
         calendarName,
-        year: String(currentDate.year()),
-        month: String(currentDate.month() + 1),
         workGroup,
         workTimes,
-        shifts,
+        calendars,
       };
+
       console.log('rawData:', rawData);
 
       baseApi
