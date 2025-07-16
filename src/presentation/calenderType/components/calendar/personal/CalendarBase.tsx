@@ -17,9 +17,16 @@ interface CalendarBaseProps {
   onDatePress?: (date: dayjs.Dayjs) => void;
   calendarData: Record<string, TimeFrameChildren>;
   isViewer: boolean;
+  onPressTeamIcon?: () => void;
 }
 
-const CalendarBase = ({ selectedDate, onDatePress, calendarData, isViewer }: CalendarBaseProps) => {
+const CalendarBase = ({
+  selectedDate,
+  onDatePress,
+  calendarData,
+  isViewer,
+  onPressTeamIcon,
+}: CalendarBaseProps) => {
   // 현재 날짜 (기본값은 오늘 날짜)
   const [currentDate, setCurrentDate] = useState(dayjs());
   console.log(currentDate);
@@ -85,6 +92,7 @@ const CalendarBase = ({ selectedDate, onDatePress, calendarData, isViewer }: Cal
       {/* 헤더 */}
       {isViewer ? (
         <CalendarViewerHeader
+          onPressTeamIcon={onPressTeamIcon}
           selectedDate={currentDate.toDate()}
           onChange={newDate => setCurrentDate(dayjs(newDate))}
         />

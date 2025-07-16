@@ -1,34 +1,45 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import TypeSelect from '../../TypeSelect';
 import dayjs from 'dayjs';
 import { TimeFrameChildren } from '../../TimeFrame';
 import TCalendarBase from './TCalendarBase';
+import TeamTypeSelect from './TeamTypeSelect';
 
 const TCalendarEditor = () => {
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
-  const [calendarData, setCalendarData] = useState<Record<string, TimeFrameChildren>>({});
+  const [calendarData, setCalendarData] = useState<
+    Record<string, Record<string, TimeFrameChildren>>
+  >({});
 
   // 날짜 선택
   const handleDatePress = (date: dayjs.Dayjs) => {
     setSelectedDate(date);
   };
 
-  // 근무 형태 추가
-  const handleTypeSelect = (type: TimeFrameChildren) => {
+  // 해당 조!!!에 근무 형태 추가
+  const handleTypeSelect = (team: string, type: TimeFrameChildren) => {
     if (!selectedDate) return;
     const key = selectedDate.format('YYYY-MM-DD');
 
     setCalendarData(prev => {
-      // 이미 근무 형태가 있으면 또 클릭하면 삭제
-      if (prev[key] === type) {
-        const updated = { ...prev };
-        delete updated[key];
-        return updated;
+      const dayData = prev[key] ? { ...prev[key] } : {};
+
+      if (dayData[team] === type) {
+        const updatedDayData = { ...dayData };
+        delete updatedDayData[team];
+
+        return {
+          ...prev,
+          [key]: updatedDayData,
+        };
       }
+
       return {
         ...prev,
-        [key]: type, // 근무 형태 추가
+        [key]: {
+          ...dayData,
+          [team]: type,
+        },
       };
     });
   };
@@ -41,7 +52,7 @@ const TCalendarEditor = () => {
         calendarData={calendarData}
         isViewer={false}
       />
-      <TypeSelect onPress={handleTypeSelect} />
+      <TeamTypeSelect onPressSelect={handleTypeSelect} />
     </View>
   );
 };

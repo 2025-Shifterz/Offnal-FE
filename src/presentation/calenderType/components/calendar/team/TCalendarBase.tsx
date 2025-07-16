@@ -14,8 +14,9 @@ const textDanger = '#BD2C0F';
 interface CalendarBaseProps {
   selectedDate?: dayjs.Dayjs | null;
   onDatePress?: (date: dayjs.Dayjs) => void;
-  calendarData: Record<string, TimeFrameChildren>;
+  calendarData: Record<string, Record<string, TimeFrameChildren>>;
   isViewer: boolean;
+  onPressTeamIcon?: () => void;
 }
 
 const TCalendarBase = ({
@@ -23,6 +24,7 @@ const TCalendarBase = ({
   onDatePress,
   calendarData,
   isViewer,
+  onPressTeamIcon,
 }: CalendarBaseProps) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
 
@@ -85,10 +87,14 @@ const TCalendarBase = ({
                   </Text>
                 </View>
                 <View className="flex h-[110px] gap-1">
-                  {time && <TimeFrame text={time} />}
-                  {time && <TimeFrame text={time} />}
-                  {time && <TimeFrame text={time} />}
-                  {time && <TimeFrame text={time} />}
+                  {['1조', '2조', '3조', '4조'].map(team => {
+                    const teamTime = time?.[team];
+                    return teamTime ? (
+                      <TimeFrame key={team} text={teamTime} />
+                    ) : (
+                      <View key={team} style={{ height: 23 }} />
+                    );
+                  })}
                 </View>
               </View>
             </TouchableOpacity>
@@ -120,6 +126,7 @@ const TCalendarBase = ({
       {/* 헤더 */}
       {isViewer ? (
         <CalendarViewerHeader
+          onPressTeamIcon={onPressTeamIcon}
           selectedDate={currentDate.toDate()}
           onChange={newDate => setCurrentDate(dayjs(newDate))}
         />
@@ -133,7 +140,7 @@ const TCalendarBase = ({
 
       {/* 요일 라벨 */}
       <View className="mt-2 flex-row">
-        <View className="ml-[20px] h-[30px] flex-1 flex-row items-center justify-between">
+        <View className="ml-[34px] h-[30px] flex-1 flex-row items-center justify-between">
           {daysOfWeek.map((day, index) => (
             <Text
               className="text-body-xxs text-text-disabled"
@@ -163,14 +170,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: `${100 / 7}%`,
   },
+  groupText: {
+    fontSize: 9,
+    lineHeight: 12,
+  },
   weekDayText: {
     fontWeight: '600',
     textAlign: 'center',
     width: `${100 / 7}%`,
-  },
-
-  groupText: {
-    fontSize: 9, // ✅ 살짝 줄임
-    lineHeight: 12,
   },
 });

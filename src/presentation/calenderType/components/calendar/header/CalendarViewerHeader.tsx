@@ -7,17 +7,24 @@ import {
   View,
   FlatList,
 } from 'react-native';
-import ArrowDown from '../../../../../assets/icons/arrow-down.svg';
+import TeamVersion from '../../../../../assets/icons/users-profiles-01.svg';
+import CalEdit from '../../../../../assets/icons/file-edit-02.svg';
+import ArrowDown from '../../../../../assets/icons/chevron-down.svg';
 
 interface CalendarViewerHeaderProps {
   selectedDate: Date;
   onChange: (date: Date) => void;
+  onPressTeamIcon?: () => void;
 }
 
 const years = Array.from({ length: 50 }, (_, i) => new Date().getFullYear() + i);
 const months = Array.from({ length: 12 }, (_, i) => i + 1);
 
-const CalendarViewerHeader = ({ selectedDate, onChange }: CalendarViewerHeaderProps) => {
+const CalendarViewerHeader = ({
+  selectedDate,
+  onChange,
+  onPressTeamIcon,
+}: CalendarViewerHeaderProps) => {
   const [visible, setVisible] = useState(false);
   const [tempYear, setTempYear] = useState(selectedDate.getFullYear());
   const [tempMonth, setTempMonth] = useState(selectedDate.getMonth() + 1);
@@ -28,8 +35,11 @@ const CalendarViewerHeader = ({ selectedDate, onChange }: CalendarViewerHeaderPr
   };
 
   return (
-    <View className="bg-white py-[12px]">
-      <TouchableOpacity className="flex-row gap-[4px]" onPress={() => setVisible(true)}>
+    <View className="flex-row justify-between bg-white py-[12px]">
+      <TouchableOpacity
+        className="flex-row items-center gap-[4px]"
+        onPress={() => setVisible(true)}
+      >
         <Text className="text-heading-xs font-semibold text-text-basic">
           {tempYear}년 {tempMonth}월
         </Text>
@@ -84,6 +94,15 @@ const CalendarViewerHeader = ({ selectedDate, onChange }: CalendarViewerHeaderPr
           </View>
         </TouchableWithoutFeedback>
       </Modal>
+
+      <View className="flex-row gap-[10px]">
+        <TouchableOpacity onPress={onPressTeamIcon}>
+          <TeamVersion />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <CalEdit />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

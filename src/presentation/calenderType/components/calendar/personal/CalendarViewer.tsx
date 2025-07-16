@@ -11,10 +11,14 @@ const calendarData = {
   '2025-07-10': '주간',
 } as const;
 
-const CalendarViewer = () => {
+interface CalendarViewerProps {
+  onPressTeamIcon: () => void;
+}
+
+const CalendarViewer = ({ onPressTeamIcon }: CalendarViewerProps) => {
   return (
     <View>
-      <CalendarBase calendarData={calendarData} isViewer />;
+      <CalendarBase onPressTeamIcon={onPressTeamIcon} calendarData={calendarData} isViewer />
     </View>
   );
 };

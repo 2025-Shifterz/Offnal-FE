@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import CalendarBase from './../personal/CalendarBase';
-import TypeSelect from '../../TypeSelect';
+import TypeSelect from './TypeSelect';
 import dayjs from 'dayjs';
 import { TimeFrameChildren } from '../../TimeFrame';
 
