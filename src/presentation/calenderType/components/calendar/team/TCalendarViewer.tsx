@@ -28,7 +28,11 @@ const calendarData = {
   },
 } as const;
 
-const TCalendarViewer = ({ onPressTeamIcon }) => {
+interface TCalendarViewerProps {
+  onPressTeamIcon: () => void;
+}
+
+const TCalendarViewer = ({ onPressTeamIcon }: TCalendarViewerProps) => {
   return (
     <View>
       <TCalendarBase onPressTeamIcon={onPressTeamIcon} calendarData={calendarData} isViewer />

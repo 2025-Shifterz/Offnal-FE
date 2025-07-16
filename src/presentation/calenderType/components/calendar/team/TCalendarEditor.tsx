@@ -5,7 +5,18 @@ import { TimeFrameChildren } from '../../TimeFrame';
 import TCalendarBase from './TCalendarBase';
 import TeamTypeSelect from './TeamTypeSelect';
 
-const TCalendarEditor = () => {
+interface TCalendarEditorProps {
+  calendarName: string;
+  workGroup: string;
+  workTimes: {
+    [key: string]: {
+      startTime: string;
+      endTime: string;
+    };
+  };
+}
+
+const TCalendarEditor = ({ calendarName, workGroup, workTimes }: TCalendarEditorProps) => {
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
   const [calendarData, setCalendarData] = useState<
     Record<string, Record<string, TimeFrameChildren>>

@@ -18,6 +18,9 @@ interface CalendarBaseProps {
   calendarData: Record<string, TimeFrameChildren>;
   isViewer: boolean;
   onPressTeamIcon?: () => void;
+
+  currentDate: dayjs.Dayjs;
+  onChangeMonth: (newDate: dayjs.Dayjs) => void;
 }
 
 const CalendarBase = ({
@@ -26,20 +29,23 @@ const CalendarBase = ({
   calendarData,
   isViewer,
   onPressTeamIcon,
+
+  currentDate,
+  onChangeMonth,
 }: CalendarBaseProps) => {
   // 현재 날짜 (기본값은 오늘 날짜)
-  const [currentDate, setCurrentDate] = useState(dayjs());
-  console.log(currentDate);
+  // const [currentDate, setCurrentDate] = useState(dayjs());
+  // console.log(currentDate);
   const startOfMonth = currentDate.startOf('month'); // 2025-07-01
   // const endOfMonth = currentDate.endOf('month'); // 2025-07-31
   const startDay = startOfMonth.day(); // 그 달의 1일의 요일 -> 달력에서 1일은 어느 칸에 둘지
   const daysInMonth = currentDate.daysInMonth(); // 그 달이 며칠까지 있는지 계산.
 
   const handlePrevMonth = () => {
-    setCurrentDate(prev => prev.subtract(1, 'month'));
+    onChangeMonth(currentDate.subtract(1, 'month'));
   };
   const handleNextMonth = () => {
-    setCurrentDate(prev => prev.add(1, 'month'));
+    onChangeMonth(currentDate.add(1, 'month'));
   };
 
   // 날짜 박스 렌더링 함수
@@ -94,7 +100,7 @@ const CalendarBase = ({
         <CalendarViewerHeader
           onPressTeamIcon={onPressTeamIcon}
           selectedDate={currentDate.toDate()}
-          onChange={newDate => setCurrentDate(dayjs(newDate))}
+          onChange={newDate => onChangeMonth(dayjs(newDate))}
         />
       ) : (
         <CalendarEditorHeader

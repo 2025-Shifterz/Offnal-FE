@@ -2,6 +2,7 @@ export type StackParamList = {
   ScheduleRegType: undefined;
   ScheduleInfoInput: { selectedBoxId: number };
   CalendarType: {
+    selectedBoxId: number;
     calendarName: string;
     workGroup: string;
     workTimes: {

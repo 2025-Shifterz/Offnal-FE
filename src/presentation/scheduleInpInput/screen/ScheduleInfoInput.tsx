@@ -14,12 +14,13 @@ type ScheduleInfoInputRouteProp = RouteProp<StackParamList, 'ScheduleInfoInput'>
 
 const ScheduleInfoInput = () => {
   const route = useRoute<ScheduleInfoInputRouteProp>();
+  const { selectedBoxId } = route.params;
 
   const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
 
   // 필수 입력 값을 작성해야 넘어가도록
   const [calendarName, setCalendarName] = useState(''); // 근무표 이름
-  const [workGroup, setWorkGroup] = useState(''); // 직접 입력 시 팀 이름
+  const [workGroup, setWorkGroup] = useState('1조'); // 직접 입력 시 팀 이름
   const [workTimes, setWorkTimes] = useState({
     D: { startTime: '08:00', endTime: '16:00' },
     E: { startTime: '16:00', endTime: '00:00' },
@@ -30,6 +31,7 @@ const ScheduleInfoInput = () => {
 
   const handleNext = () => {
     navigation.navigate('CalendarType', {
+      selectedBoxId,
       calendarName,
       workGroup,
       workTimes,
@@ -43,7 +45,7 @@ const ScheduleInfoInput = () => {
           <TitleMessage title="근무표의 기본 정보를 입력해주세요." />
 
           <View className="flex gap-[26px]">
-            <ScheduleNameInput value={calendarName} onChangeText={setCalendarName} />
+            <ScheduleNameInput calendarName={calendarName} setCalendarName={setCalendarName} />
             <WorkTimeContext.Provider value={{ workTimes, setWorkTimes }}>
               <TimeInput />
             </WorkTimeContext.Provider>
