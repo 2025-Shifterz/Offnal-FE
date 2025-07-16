@@ -36,7 +36,7 @@ const WithAddableBtn: React.FC<SectionWithAddableBtnProps> = ({
       <View className="flex-row items-center justify-between gap-g-2">
         <Text className="font-pretendard text-heading-xxs font-semibold text-black">{title}</Text>
 
-        <TouchableOpacity onPress={() => onPressIcon()}>
+        <TouchableOpacity onPress={onPressIcon}>
           <View className="flex-row items-center gap-g-2">
             <Text className="font-pretendard text-heading-xxxxs font-medium text-text-subtle-inverse">
               {btnContent}
@@ -51,7 +51,7 @@ const WithAddableBtn: React.FC<SectionWithAddableBtnProps> = ({
 
 const OnlyTitle: React.FC<{ title: string }> = ({ title }) => {
   return (
-    <View className=" flex-row items-center justify-start gap-g-2">
+    <View className="flex-row items-center justify-start gap-g-2">
       <Text className="font-pretendard text-heading-xxs font-semibold text-black">{title}</Text>
     </View>
   );

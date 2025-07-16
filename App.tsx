@@ -21,6 +21,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CompleteCreate from './src/presentation/completeCreate/screen/CompleteCreate';
 import CustomBackButton from './src/presentation/common/component/CustomBackButton';
 import StepBar from './src/presentation/common/component/StepBar';
+import TodoScreen from './src/presentation/note/screen/TodoScreen';
+import MemoScreen from './src/presentation/note/screen/MemoScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +57,9 @@ export default function App() {
       >
         {/* 탭 네비게이션은 루트에서 보여줍니다 */}
         <Stack.Screen name="MainTabs" component={TabNavigator} options={{ headerShown: false }} />
+
+        <Stack.Screen name="Todo" options={{ title: '할 일' }} component={TodoScreen} />
+        <Stack.Screen name="Memo" options={{ title: '메모' }} component={MemoScreen} />
 
         {/* 스택으로 push 되는 화면들 */}
         <Stack.Screen
