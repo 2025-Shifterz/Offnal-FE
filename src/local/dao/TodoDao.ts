@@ -1,11 +1,12 @@
 // addTodo, getTodos, todoCompleted, deleteTodo 실제 기능 구현
 import {Todo} from '../../domain/entities/Todo';
-import {openDB} from '../tables/TodoTable';
+import { openShifterzDB } from '../ShifterzDB';
+
 
 export class TodoDao {
   // todo 추가하기
   async addTodo(todo: Omit<Todo, 'id'>): Promise<number> {
-    const db = await openDB(); // 데이터베이스 초기화 및 가져오기
+    const db = await openShifterzDB(); // 데이터베이스 초기화 및 가져오기
     try {
       const [result] = await db.executeSql(
         'INSERT INTO todos (text, completed) VALUES (?, ?)',
@@ -21,7 +22,7 @@ export class TodoDao {
 
   // 모든 todos 가져오기
   async getTodos(): Promise<Todo[]> {
-    const db = await openDB();
+    const db = await openShifterzDB();
     try {
       const [result] = await db.executeSql('SELECT * FROM todos');
       const todos = [];
@@ -38,7 +39,7 @@ export class TodoDao {
 
   // todo 완료 상태 바꾸기
   async todoCompleted(id: number, completed: boolean): Promise<void> {
-    const db = await openDB();
+    const db = await openShifterzDB();
     try {
       await db.executeSql(
         'UPDATE todos SET completed = ? WHERE id = ?',
@@ -53,7 +54,7 @@ export class TodoDao {
 
   // todo 삭제하기
   async deleteTodo(id: number): Promise<void> {
-    const db = await openDB();
+    const db = await openShifterzDB();
     try {
       await db.executeSql('DELETE FROM todos WHERE id = ?', [id]);
       console.log(`Todo with ID ${id} deleted.`);
