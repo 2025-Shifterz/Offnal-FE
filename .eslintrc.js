@@ -15,9 +15,9 @@ module.exports = {
 
     // react-native 관련 룰
     'react-native/no-unused-styles': 'warn',
-    'react-native/no-inline-styles': 'warn',
-    'react-native/no-color-literals': 'error',
-    'react-native/no-raw-text': 'off',
+    'react-native/no-inline-styles': 'off',
+    'react-native/no-color-literals': 'off',
+    'react-native/no-raw-text': 'warn',
   },
   settings: {
     react: {
