@@ -1,5 +1,5 @@
 // presentation 레이어는 사용자 인터페이스를 담당. domain 레이어의 useCases를 호출하여 비즈니스 로직을 실행하고, 결과를 화면에 표시한다.
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -10,15 +10,15 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import {Todo} from '../../../domain/entities/Todo';
+import { Todo } from '../domain/entities/Todo';
 
 import {
   addTodoUseCase,
   deleteTodoUseCase,
   getTodosUseCase,
   todoCompletionUseCase,
-} from '../../../di/Dependencies';
-import {createTodoTable} from '../../../local/tables/TodoTable';
+} from '../di/Dependencies';
+import { createTodoTable } from '../local/tables/TodoTable';
 
 const TodoPage = () => {
   const [newTodoText, setNewTodoText] = useState('');
@@ -109,10 +109,9 @@ const TodoPage = () => {
       <FlatList
         data={todos}
         keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <View style={styles.todoItem}>
-            <Text
-              style={[styles.todoText, item.completed && styles.completedText]}>
+            <Text style={[styles.todoText, item.completed && styles.completedText]}>
               {item.text}
             </Text>
             <View style={styles.flexing}>
@@ -120,11 +119,7 @@ const TodoPage = () => {
                 title={item.completed ? 'Uncomplete' : 'Complete'}
                 onPress={() => handleCompleted(item.id, item.completed)}
               />
-              <Button
-                title="Delete"
-                onPress={() => handleDeleteTodo(item.id)}
-                color="red"
-              />
+              <Button title="Delete" onPress={() => handleDeleteTodo(item.id)} color="red" />
             </View>
           </View>
         )}
@@ -155,7 +150,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 8,
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
