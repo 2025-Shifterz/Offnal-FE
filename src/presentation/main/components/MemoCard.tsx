@@ -2,13 +2,19 @@ import { View, Text } from 'react-native';
 
 import TitleSection from './TitleSection';
 import NoteIcon from '../../../assets/icons/ic_note_24.svg';
+import { useNavigation } from '@react-navigation/native';
 
 const Container = () => {
+  const navigation = useNavigation();
   return (
     <View className="my-number-8 flex-col justify-start gap-y-number-7 rounded-lg bg-background-white p-number-6">
       <View className="mb-number-3 flex-row items-center justify-start">
         <NoteIcon />
-        <TitleSection.WithAddableBtn title="메모" btnContent="메모 추가" onPressIcon={() => {}} />
+        <TitleSection.WithAddableBtn
+          title="메모"
+          btnContent="메모 추가"
+          onPressIcon={() => navigation.navigate('Memo')}
+        />
       </View>
       <Nothing />
     </View>

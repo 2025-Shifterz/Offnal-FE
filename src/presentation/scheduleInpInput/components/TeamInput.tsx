@@ -4,13 +4,13 @@ import TeamItem from './TeamItem';
 import { twMerge } from 'tailwind-merge';
 
 interface TeamInputProps {
-  value: string;
-  onChangeName: (text: string) => void;
+  workGroup: string;
+  setWorkGroup: (text: string) => void;
   isDirect: boolean;
   setIsDirect: (bool: boolean) => void;
 }
 
-const TeamInput = ({ value, onChangeName, isDirect, setIsDirect }: TeamInputProps) => {
+const TeamInput = ({ workGroup, setWorkGroup, isDirect, setIsDirect }: TeamInputProps) => {
   const [selectedBoxId, setSelectedBoxId] = useState(1);
 
   const directInputStyle = isDirect
@@ -30,6 +30,7 @@ const TeamInput = ({ value, onChangeName, isDirect, setIsDirect }: TeamInputProp
               onPress={() => {
                 setSelectedBoxId(id);
                 setIsDirect(false);
+                setWorkGroup(`${id}조`);
               }}
               isSelected={selectedBoxId === id}
               text={`${id}조`}
@@ -43,6 +44,7 @@ const TeamInput = ({ value, onChangeName, isDirect, setIsDirect }: TeamInputProp
             onPress={() => {
               setIsDirect(true);
               setSelectedBoxId(0);
+              setWorkGroup(''); // 초기화
             }}
             className={twMerge(
               'rounded-radius-max border-[0.5px] px-[14px] py-[8px]',
@@ -52,22 +54,24 @@ const TeamInput = ({ value, onChangeName, isDirect, setIsDirect }: TeamInputProp
             <Text className={twMerge('text-label-xs', directInputTextStyle)}>직접 입력</Text>
           </TouchableOpacity>
           {/* A조 ~~ */}
-          <View className="flex-1 gap-1 px-[14px] py-[8px]">
-            <View className="flex-row items-center gap-2">
-              <TextInput
-                maxLength={8}
-                value={value}
-                placeholder="A조"
-                onChangeText={onChangeName}
-                className="flex-1 text-label-xs placeholder:text-text-disabled"
-              />
-              <Text className="text-right text-label-xxs text-text-disabled">
-                <Text className="text-text-primary">{value.length}</Text>
-                <Text>/8</Text>
-              </Text>
+          {isDirect && (
+            <View className="flex-1 gap-1 px-[14px] py-[8px]">
+              <View className="flex-row items-center gap-2">
+                <TextInput
+                  maxLength={8}
+                  value={workGroup}
+                  placeholder="A조"
+                  onChangeText={setWorkGroup}
+                  className="flex-1 text-label-xs placeholder:text-text-disabled"
+                />
+                <Text className="text-right text-label-xxs text-text-disabled">
+                  <Text className="text-text-primary">{workGroup.length}</Text>
+                  <Text>/8</Text>
+                </Text>
+              </View>
+              <View className="h-[0.5px] bg-border-gray-light" />
             </View>
-            <View className="h-[0.5px] bg-border-gray-light" />
-          </View>
+          )}
         </View>
       </View>
     </View>
