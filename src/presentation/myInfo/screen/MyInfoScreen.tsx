@@ -2,17 +2,22 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TopAppBar from '../components/TopAppBar';
 import ProfileCard from '../components/ProfileCard';
-
+import { useNavigation } from '@react-navigation/native';
 
 const MyInfoScreen = () => {
-
+  const navigation = useNavigation();
 
   return (
     <View className="flex-1 bg-background-gray-subtle1">
       <SafeAreaView className="flex-1">
         <TopAppBar title="내 정보" enableNavigationBtn={true} />
         <ScrollView className="flex-1 px-number-8">
-          <ProfileCard name="김건우" onPressEditProfile={() => {}} />
+          <ProfileCard
+            name="김건우"
+            onPressEditProfile={() => {
+              navigation.navigate('UpdateMyInfoScreen');
+            }}
+          />
 
           <View className="mb-4 rounded-xl bg-white px-number-8 py-number-3 shadow-sm">
             <TouchableOpacity className="flex-row items-center justify-between py-number-6">

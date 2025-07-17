@@ -33,7 +33,7 @@ const ScheduleRegRegisterMethod = () => {
           title="근무표 새로 만들기"
           subtitle="지금 바로 직접 근무표를 만들고 시작해요"
           // TODO: 이동 화면 수정 예정
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('OnboardingSchedules')}
         />
 
         <RegMethod

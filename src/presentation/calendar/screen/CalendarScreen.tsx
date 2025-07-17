@@ -40,6 +40,7 @@ const CalendarScreen = () => {
             title="일정 등록 시작"
             onPress={() => navigation.navigate('OnboardingSchedule')}
           />
+          <Button title="로그인 시작" onPress={() => navigation.navigate('LoginScreens')} />
         </View>
       </ScrollView>
     </SafeAreaView>

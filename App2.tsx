@@ -16,6 +16,12 @@ import CompleteCreate from './src/presentation/completeCreate/screen/CompleteCre
 import StepBar from './src/presentation/common/component/StepBar';
 import BottomNavigationBar from './src/presentation/main/components/BottomNavigationBar';
 import CustomBackButton from './src/presentation/common/component/CustomBackButton';
+import UpdateMyInfoScreen from './src/presentation/myInfo/screen/UpdateMyInfoScreen';
+import Login from './src/presentation/login/screen/Login';
+import KakaoLoginWebView from './src/presentation/login/screen/KakaoLoginWebView';
+import PrivacyPolicy from './src/presentation/policy/screen/PrivacyPolicy';
+import ServiceTerm from './src/presentation/policy/screen/ServiceTerm';
+import ScheduleRegRegisterMethod from './src/presentation/selectRegMethod/screen/SelectRegMethod';
 
 const RootStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -31,7 +37,7 @@ function TabsNavigator() {
   );
 }
 
-// 1. 메인 탭에 사용되는 스택 네비게이터
+// 탭1. 메인 탭에 사용되는 스택 네비게이터
 function MainNavigator() {
   return (
     <Stack.Navigator
@@ -49,7 +55,7 @@ function MainNavigator() {
   );
 }
 
-// 2. 캘린더 탭에 사용되는 스택 네비게이터
+// 탭2. 캘린더 탭에 사용되는 스택 네비게이터
 function CalendarNavigator() {
   return (
     <Stack.Navigator>
@@ -59,17 +65,35 @@ function CalendarNavigator() {
   );
 }
 
-// 3. 내정보 탭에 사용되는 스택 네비게이터
+// 탭3. 내정보 탭에 사용되는 스택 네비게이터
 function MyInfoNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="MyInfoScreen" component={MyInfoScreen} />
+      <Stack.Screen name="MyInfoScreen" component={MyInfoScreen} options={{ headerShown: false }} />
+      <Stack.Screen
+        name="UpdateMyInfoScreen"
+        component={UpdateMyInfoScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
 
-// 온보딩 화면들
-function OnBoardingSchedule() {
+// + 로그인 화면들
+function LoginNavigator() {
+  return (
+    <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="SelectRegMethod" component={ScheduleRegRegisterMethod} />
+      <Stack.Screen name="KakaoWebView" component={KakaoLoginWebView} />
+      <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+      <Stack.Screen name="ServiceTerm" component={ServiceTerm} />
+    </Stack.Navigator>
+  );
+}
+
+// + 온보딩 화면들
+function OnBoardingScheduleNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -109,7 +133,8 @@ const App2 = () => {
       <NavigationContainer>
         <RootStack.Navigator screenOptions={{ headerShown: false }}>
           <RootStack.Screen name="Tabs" component={TabsNavigator} />
-          <RootStack.Screen name="OnboardingSchedule" component={OnBoardingSchedule} />
+          <RootStack.Screen name="OnboardingSchedules" component={OnBoardingScheduleNavigator} />
+          <RootStack.Screen name="LoginScreens" component={LoginNavigator} />
         </RootStack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
