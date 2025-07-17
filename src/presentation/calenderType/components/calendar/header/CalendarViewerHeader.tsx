@@ -15,6 +15,7 @@ interface CalendarViewerHeaderProps {
   selectedDate: Date;
   onChange: (date: Date) => void;
   onPressTeamIcon?: () => void;
+  onPressEditIcon?: () => void;
 }
 
 const years = Array.from({ length: 50 }, (_, i) => new Date().getFullYear() + i);
@@ -24,6 +25,7 @@ const CalendarViewerHeader = ({
   selectedDate,
   onChange,
   onPressTeamIcon,
+  onPressEditIcon,
 }: CalendarViewerHeaderProps) => {
   const [visible, setVisible] = useState(false);
   const [tempYear, setTempYear] = useState(selectedDate.getFullYear());
@@ -99,7 +101,7 @@ const CalendarViewerHeader = ({
         <TouchableOpacity onPress={onPressTeamIcon}>
           <TeamVersion />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPressEditIcon}>
           <CalEdit />
         </TouchableOpacity>
       </View>

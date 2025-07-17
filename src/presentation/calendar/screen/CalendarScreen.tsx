@@ -1,17 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
-import { Button, ScrollView, Touchable, TouchableOpacity, View } from 'react-native';
+import { Button, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackParamList } from '../../../navigation/types';
+import { calendarNavigation } from '../../../navigation/types';
 import CalendarViewer from '../../calenderType/components/calendar/personal/CalendarViewer';
-import CalendarBase from '../../calenderType/components/calendar/team/TCalendarBase';
-import TCalendarEditor from '../../calenderType/components/calendar/team/TCalendarEditor';
 import TCalendarViewer from '../../calenderType/components/calendar/team/TCalendarViewer';
-import TeamVersion from '../../../assets/icons/users-profiles-01.svg';
 import { useState } from 'react';
 
 const CalendarScreen = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
+  const navigation = useNavigation<calendarNavigation>();
   const [isTeamView, setIsTeamView] = useState(false);
 
   return (
@@ -23,17 +19,27 @@ const CalendarScreen = () => {
               setIsTeamView(!isTeamView);
               console.log('클릭됨');
             }}
+            onPressEditIcon={() => {
+              navigation.navigate('EditCalendar');
+            }}
           />
         ) : (
           <CalendarViewer
             onPressTeamIcon={() => {
               setIsTeamView(!isTeamView);
             }}
+            onPressEditIcon={() => {
+              navigation.navigate('EditCalendar');
+            }}
           />
         )}
 
         <View className="items-center justify-center bg-surface-white">
-          <Button title="일정 등록 시작" onPress={() => navigation.navigate('ScheduleRegType')} />
+          <Button
+            title="일정 등록 시작"
+            onPress={() => navigation.navigate('OnboardingSchedules')}
+          />
+          <Button title="로그인 시작" onPress={() => navigation.navigate('LoginScreens')} />
         </View>
       </ScrollView>
     </SafeAreaView>

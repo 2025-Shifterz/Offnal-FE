@@ -4,11 +4,10 @@ import SelectScheduleBox from '../component/SelectScheduleBox';
 import BottomButton from '../../common/component/BottomButton';
 import TitleMessage from '../../common/component/TitleMessage';
 import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackParamList } from '../../../navigation/types';
+import { onboardingNavigation } from '../../../navigation/types';
 
 const ScheduleRegType = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
+  const navigation = useNavigation<onboardingNavigation>();
   const [selectedBoxId, setSelectedBoxId] = useState<number>(1);
 
   // 이 함수는 클릭된 박스의 id를 받아서 상태를 업데이트.

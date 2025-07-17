@@ -3,12 +3,11 @@ import { SafeAreaView, ScrollView, View } from 'react-native';
 import BottomButton from '../../common/component/BottomButton';
 import TitleMessage from '../../common/component/TitleMessage';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackParamList } from '../../../navigation/types';
+import { onboardingNavigation, OnboardingStackParamList } from '../../../navigation/types';
 import CalendarEditor, { CalendarEditorRef } from '../components/calendar/personal/CalendarEditor';
 import TCalendarEditor from '../components/calendar/team/TCalendarEditor';
 
-type ScheduleTypeRouteProp = RouteProp<StackParamList, 'CalendarType'>;
+type ScheduleTypeRouteProp = RouteProp<OnboardingStackParamList, 'CalendarType'>;
 
 const CalendarType = () => {
   const route = useRoute<ScheduleTypeRouteProp>();
@@ -18,7 +17,7 @@ const CalendarType = () => {
   console.log(workGroup);
   console.log(workTimes);
 
-  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
+  const navigation = useNavigation<onboardingNavigation>();
 
   // 자식의 postData 호출
   const calendarEditorRef = useRef<CalendarEditorRef>(null);

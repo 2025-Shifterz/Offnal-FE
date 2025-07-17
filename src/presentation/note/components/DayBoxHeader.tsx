@@ -15,7 +15,7 @@ const DayBoxHeader = () => {
       </View>
       <View className="flex-row items-center gap-[5px] rounded-radius-max bg-surface-white px-[10px] py-[8px]">
         <CalendarIcon />
-        <Text className="text-heading-xxxs font-semibold text-text-subtle">오늘</Text>
+        <Text className="text-heading-xxxs font-semibold leading-5 text-text-subtle">오늘</Text>
       </View>
       <View className={arrowStyle}>
         <ArrowRight />

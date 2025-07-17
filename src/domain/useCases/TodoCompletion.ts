@@ -1,9 +1,10 @@
-import {TodoRepository} from '../repositories/TodoRepository';
+import { TodoType } from '../entities/Todo';
+import { TodoRepository } from '../repositories/TodoRepository';
 
 export class TodoCompletionUseCase {
   constructor(private todoRepository: TodoRepository) {}
 
-  async execute(id: number, completed: boolean): Promise<void> {
-    await this.todoRepository.todoCompleted(id, completed);
+  async execute(id: number, completed: boolean, type: TodoType): Promise<void> {
+    await this.todoRepository.todoCompleted(id, completed, type);
   }
 }
