@@ -34,7 +34,7 @@ const getBackgroundComponent = (timeOfDay: TimeOfDay) => {
       return BackGroundEvening;
     case 'night':
       // return BackGroundNight;
-      return BackGroundEvening; // bg_night.svg 인식 안되서 evening으로 대체
+      return BackGroundEvening; // bg_night.svg 인식 안되어서 evening으로 대체
     case 'midnight':
       return BackGroundMidnight;
     default:
@@ -46,7 +46,6 @@ const TopCard = () => {
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDay>(getTimeOfDay());
 
   useEffect(() => {
-    // 매 분마다 시간대 체크하는거 너무 비효율적인 것 같아서 다른 방법 없을까요?
     const updateTimeOfDay = () => {
       const newTimeOfDay = getTimeOfDay();
       if (newTimeOfDay !== timeOfDay) {
