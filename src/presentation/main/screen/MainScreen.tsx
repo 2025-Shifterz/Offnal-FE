@@ -11,7 +11,7 @@ import NoteSection from '../ui/NoteSection';
 import HealthCardSection from '../ui/HealthCardSection';
 import TopCard from '../components/TopCard';
 
-import { getHomeData } from '../../../data/repositories/HomeRepository';
+import { getHomeData } from '../../../data/impl/HomeRepository';
 
 export default function MainScreen() {
   const [homeData, setHomeData] = useState<any>(null);
