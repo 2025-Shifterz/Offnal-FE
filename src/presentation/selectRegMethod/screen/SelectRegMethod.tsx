@@ -4,11 +4,10 @@ import CalendarYellow from '../../../assets/icons/calendar_yellow.svg';
 import CalendarBlue from '../../../assets/icons/calendar_blue.svg';
 import RegMethod from '../components/RegMethod';
 import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../navigation/type';
+import { loginNavigation } from '../../../navigation/types';
 
 const ScheduleRegRegisterMethod = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<loginNavigation>();
 
   return (
     <View className="h-full w-full flex-1 items-center px-p-6">

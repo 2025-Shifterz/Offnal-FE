@@ -1,6 +1,4 @@
-// addTodo, getTodos, todoCompleted, deleteTodo 실제 기능 구현
 import { openShifterzDB } from '../ShifterzDB';
-
 import { Todo, TodoType } from '../../domain/entities/Todo';
 // import { openDB } from '../tables/TodoTable';
 
@@ -24,10 +22,7 @@ export class TodoDao {
   // 모든 todos 가져오기
   async getTodos(type: TodoType): Promise<Todo[]> {
     const db = await openShifterzDB();
-
     try {
-      console.log('getTodos type:', type); // 여기서 오류남.
-      console.log('getTodos type:', type, typeof type);
       const [res] = await db.executeSql('SELECT * FROM todos');
       for (let i = 0; i < res.rows.length; i++) {
         const row = res.rows.item(i);
@@ -50,7 +45,6 @@ export class TodoDao {
   }
 
   // todo 완료 상태 바꾸기
-
   async todoCompleted(id: number, completed: boolean, type: TodoType): Promise<void> {
     const db = await openShifterzDB();
     try {

@@ -4,8 +4,9 @@ import React from 'react';
 import TabsNavigator from './TabsNavigator';
 import OnBoardingScheduleNavigator from './OnboardingScheduleNavigator';
 import LoginNavigator from './LoginNavigator';
+import { RootStackParamList } from './types';
 
-const RootStack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   return (

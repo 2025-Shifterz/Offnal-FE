@@ -6,8 +6,7 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import axios from 'axios';
 import { API_URL } from '@env';
 import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../navigation/type';
+import { loginNavigation } from '../../../navigation/types';
 
 const REDIRECT_URI = `${API_URL}/callback`;
 
@@ -15,7 +14,7 @@ const KakaoLoginWebView = () => {
   const [loginUrl, setLoginUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const webviewRef = useRef(null);
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<loginNavigation>();
   const [shouldHideWebView, setShouldHideWebView] = useState(false);
 
   useEffect(() => {

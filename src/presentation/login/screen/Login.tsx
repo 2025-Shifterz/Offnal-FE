@@ -2,16 +2,14 @@ import { useState } from 'react';
 import Swiper from 'react-native-swiper';
 import { Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../navigation/type';
-
 import KaKaoLoginBtn from '../components/KakaoLoginBtn';
 import { onboardingList } from '../constants/onboardingList';
+import { loginNavigation } from '../../../navigation/types';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const Login = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<loginNavigation>();
   const [slideTime, setSlideTime] = useState(4); // 초기 슬라이딩 시간 4초
 
   return (

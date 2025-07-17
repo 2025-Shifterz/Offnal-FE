@@ -5,8 +5,9 @@ import ScheduleInfoInput from '../presentation/scheduleInpInput/screen/ScheduleI
 import CalendarType from '../presentation/calenderType/screen/CalendarType';
 import CompleteCreate from '../presentation/completeCreate/screen/CompleteCreate';
 import StepBar from '../presentation/common/component/StepBar';
+import { OnboardingStackParamList } from './types';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<OnboardingStackParamList>();
 
 // + 온보딩 화면들
 const OnBoardingScheduleNavigator = () => {
