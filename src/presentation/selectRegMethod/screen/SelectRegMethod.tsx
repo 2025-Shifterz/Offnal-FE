@@ -4,11 +4,10 @@ import CalendarYellow from '../../../assets/icons/calendar_yellow.svg';
 import CalendarBlue from '../../../assets/icons/calendar_blue.svg';
 import RegMethod from '../components/RegMethod';
 import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../navigation/type';
+import { loginNavigation } from '../../../navigation/types';
 
 const ScheduleRegRegisterMethod = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<loginNavigation>();
 
   return (
     <View className="h-full w-full flex-1 items-center px-p-6">
@@ -33,7 +32,7 @@ const ScheduleRegRegisterMethod = () => {
           title="근무표 새로 만들기"
           subtitle="지금 바로 직접 근무표를 만들고 시작해요"
           // TODO: 이동 화면 수정 예정
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('OnboardingSchedules')}
         />
 
         <RegMethod

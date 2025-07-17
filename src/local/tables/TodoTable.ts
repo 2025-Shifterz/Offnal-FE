@@ -15,9 +15,10 @@ export const createTodoTable = async (): Promise<void> => {
       `CREATE TABLE IF NOT EXISTS todos (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         text TEXT NOT NULL,
-        completed INTEGER DEFAULT 0
+        completed INTEGER DEFAULT 0,
+        type TEXT NOT NULL
       );`,
-      [],
+      []
     );
 
     console.log('Table "todos" created or already exists.');
