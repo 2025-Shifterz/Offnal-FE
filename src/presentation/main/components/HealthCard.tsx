@@ -6,13 +6,13 @@ import { useState } from 'react';
 
 const Walk = () => {
   const weeklySteps = [
-    3000, // Day 1
-    4500, // Day 2
-    2000, // Day 3
-    6000, // Day 4
-    7421, // Day 5 (Today's value could be the last one, or you can pass it separately)
-    1500, // Day 6
-    500, // Day 7
+    0, // Day 1
+    0, // Day 2
+    0, // Day 3
+    0, // Day 4
+    0, // Day 5 (Today's value could be the last one, or you can pass it separately)
+    0, // Day 6
+    0, // Day 7
   ];
 
   const maxSteps = Math.max(...weeklySteps);
@@ -27,15 +27,13 @@ const Walk = () => {
         </Text>
       </View>
 
-      <Text className="font-pretendard text-heading-s font-semibold text-text-bolder">
-        7,421 걸음
-      </Text>
+      <Text className="font-pretendard text-heading-s font-semibold text-text-bolder">0 걸음</Text>
       <View className="mb-number-8 flex-row items-center justify-center">
         <Text className="font-pretendard text-label-xxs font-normal text-text-subtle">
           어제 보다
         </Text>
         <Text className="ms-number-2 font-pretendard text-label-xxs font-normal text-text-information">
-          ▲ 7,706
+          ▲ 0
         </Text>
       </View>
       <View className="h-number-16 max-w-[88px] flex-row items-end justify-around">
@@ -71,8 +69,8 @@ const Weight = () => {
     labels: ['월', '화', '수', '목', '금', '토', '일'], // 1주일 요일
     datasets: [
       {
-        data: [60, 59, 58, 59, 61, 60, 59.5], // 실제 몸무게 데이터 (예시)
-        color: (opacity = 1) => `rgba(67, 207, 223, ${opacity})`, // 라인 색상 (보라색 계열)
+        data: [0, 0, 0, 0, 0, 0, 0], // 실제 몸무게 데이터 (예시)
+        color: (opacity = 1) => `rgba(158, 158, 158, ${opacity})`, // 라인 색상 (회색 계열)
         strokeWidth: 2, // 라인 두께
       },
     ],
@@ -112,7 +110,7 @@ const Weight = () => {
       </View>
 
       <Text className="mb-number-3 font-pretendard text-heading-s font-semibold text-text-bolder">
-        50kg
+        기록없음
       </Text>
       <LineChart
         data={weightData}
@@ -129,8 +127,7 @@ const Weight = () => {
         renderDotContent={({ x, y, index, indexData }) => {
           return null;
         }}
-        style={{
-        }}
+        style={{}}
       />
     </View>
   );

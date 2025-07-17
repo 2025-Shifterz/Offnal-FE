@@ -10,7 +10,6 @@ const HealthCardSection = () => {
         btnContent="건강 카드 추가"
         onPressIcon={() => {}}
       />
-
       <View className="w-full flex-row items-center gap-g-3 pb-number-8 pt-number-8">
         <HealthCard.Walk />
         <HealthCard.Weight />
