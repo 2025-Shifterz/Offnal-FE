@@ -30,12 +30,18 @@ const calendarData = {
 
 interface TCalendarViewerProps {
   onPressTeamIcon: () => void;
+  onPressEditIcon: () => void;
 }
 
-const TCalendarViewer = ({ onPressTeamIcon }: TCalendarViewerProps) => {
+const TCalendarViewer = ({ onPressTeamIcon, onPressEditIcon }: TCalendarViewerProps) => {
   return (
     <View>
-      <TCalendarBase onPressTeamIcon={onPressTeamIcon} calendarData={calendarData} isViewer />
+      <TCalendarBase
+        onPressEditIcon={onPressEditIcon}
+        onPressTeamIcon={onPressTeamIcon}
+        calendarData={calendarData}
+        isViewer
+      />
     </View>
   );
 };

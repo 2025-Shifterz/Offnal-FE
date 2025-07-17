@@ -12,4 +12,5 @@ export type StackParamList = {
     };
   };
   CompleteCreate: undefined;
+  EditCalendar: undefined;
 };

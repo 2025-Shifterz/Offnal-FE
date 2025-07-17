@@ -29,7 +29,6 @@ export const createTodoTable = async (): Promise<void> => {
   const db = await openDB(); // dbInstance를 통해 기존 연결을 재사용한다.
 
   await db.transaction(async tx => {
-    await tx.executeSql(`ALTER TABLE todos ADD COLUMN type TEXT;`, []);
     await tx.executeSql(
       `CREATE TABLE IF NOT EXISTS todos (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
