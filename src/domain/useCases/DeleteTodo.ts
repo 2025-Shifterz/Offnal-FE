@@ -1,9 +1,10 @@
-import {TodoRepository} from '../repositories/TodoRepository';
+import { TodoType } from '../entities/Todo';
+import { TodoRepository } from '../repositories/TodoRepository';
 
 export class DeleteTodoUseCase {
   constructor(private todoRepository: TodoRepository) {}
 
-  async execute(id: number): Promise<void> {
-    await this.todoRepository.deleteTodo(id);
+  async execute(id: number, type: TodoType): Promise<void> {
+    await this.todoRepository.deleteTodo(id, type);
   }
 }

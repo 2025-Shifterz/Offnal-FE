@@ -2,10 +2,10 @@
 // 이 구현체는 DAO (Data Access Object)를 사용하여 실제 데이터베이스 작업을 수행.
 // 데이터 저장 및 조회 로직이 이곳에서 이루어진다.
 
-import {Todo} from '../../domain/entities/Todo';
-import {TodoRepository} from '../../domain/repositories/TodoRepository';
+import { Todo, TodoType } from '../../domain/entities/Todo';
+import { TodoRepository } from '../../domain/repositories/TodoRepository';
 
-import {TodoDao} from '../../local/dao/TodoDao';
+import { TodoDao } from '../../local/dao/TodoDao';
 
 export class TodoRepositoryImpl implements TodoRepository {
   constructor(private todoDao: TodoDao) {}
@@ -14,15 +14,15 @@ export class TodoRepositoryImpl implements TodoRepository {
     return await this.todoDao.addTodo(todo);
   }
 
-  async getTodos(): Promise<Todo[]> {
-    return await this.todoDao.getTodos();
+  async getTodos(type: TodoType): Promise<Todo[]> {
+    return await this.todoDao.getTodos(type);
   }
 
-  async todoCompleted(id: number, completed: boolean): Promise<void> {
-    return await this.todoDao.todoCompleted(id, completed);
+  async todoCompleted(id: number, completed: boolean, type: TodoType): Promise<void> {
+    return await this.todoDao.todoCompleted(id, completed, type);
   }
 
-  async deleteTodo(id: number): Promise<void> {
-    return await this.todoDao.deleteTodo(id);
+  async deleteTodo(id: number, type: TodoType): Promise<void> {
+    return await this.todoDao.deleteTodo(id, type);
   }
 }

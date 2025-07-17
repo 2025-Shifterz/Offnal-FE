@@ -1,23 +1,26 @@
 import React from 'react';
-import { FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import DayBoxHeader from './DayBoxHeader';
 import EmptyMessage from './EmptyMessage';
+import CheckedIcon from '../../../assets/icons/checked.svg';
 
 // 하루의 할 일 박스
 
 interface EmptyDayBoxProps {
   text: string;
-  todos: { id: number; text: string; completed: boolean }[];
+  type: string;
+  todos: { id: number; text: string; completed: boolean; type: string }[];
   newTodoText: string;
   setNewTodoText: (text: string) => void;
-  handleAddTodo: () => void;
-  handleCompleted: (id: number, completed: boolean) => void;
-  handleDeleteTodo: (id: number) => void;
+  handleAddTodo: (type: string) => void;
+  handleCompleted: (id: number, completed: boolean, type: string) => void;
+  handleDeleteTodo: (id: number, type: string) => void;
   showInput: boolean;
 }
 
 const NoteDayBox = ({
   text,
+  type,
   todos,
   newTodoText,
   setNewTodoText,
@@ -27,51 +30,55 @@ const NoteDayBox = ({
   showInput,
 }: EmptyDayBoxProps) => {
   return (
-    <View className="overflow-hidden rounded-radius-xl">
+    <View className="w-full rounded-radius-xl">
       <DayBoxHeader />
 
-      <View className="items-center gap-[19px] bg-surface-white px-[29px] py-[27px]">
-        {showInput && (
-          <View>
-            <TextInput
-              value={newTodoText}
-              onChangeText={setNewTodoText}
-              placeholder="할 일을 입력하세요."
-            />
-            <TouchableOpacity onPress={handleAddTodo}>
-              <Text>확인</Text>
-            </TouchableOpacity>
+      <View className="w-full items-center bg-surface-white">
+        {todos.length === 0 && !showInput ? (
+          <View className="py-[27px]">
+            <EmptyMessage text={text} iconSize={48} />
           </View>
+        ) : (
+          todos.map(item => (
+            // 할 일 리스트
+            <View
+              key={item.id}
+              className="w-full flex-row items-center justify-between border-b-[0.3px] border-b-divider-gray-light px-[16px] py-p-3"
+            >
+              <TouchableOpacity onPress={() => handleCompleted(item.id, item.completed, item.type)}>
+                {item.completed ? (
+                  <CheckedIcon />
+                ) : (
+                  <View className="h-[13px] w-[13px] rounded-[2px] bg-[#cdd1d5]" />
+                )}
+              </TouchableOpacity>
+
+              <View className="ml-[10px] flex-1">
+                <Text>{item.text}</Text>
+              </View>
+
+              <TouchableOpacity onPress={() => handleDeleteTodo(item.id, item.type)}>
+                <Text className="text-sm text-red-500">삭제</Text>
+              </TouchableOpacity>
+            </View>
+          ))
         )}
 
-        {todos.length === 0 && !showInput ? (
-          <EmptyMessage text={text} iconSize={48} />
-        ) : (
-          <FlatList
-            data={todos}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({ item }) => {
-              console.log('todo item:', item);
-              return (
-                <View className="flex-row items-center justify-between py-2">
-                  <TouchableOpacity
-                    className="w-[250px]"
-                    onPress={() => handleCompleted(item.id, item.completed)}
-                  >
-                    <Text
-                      className={`border ${item.completed ? 'text-gray-400 line-through' : 'text-black'}`}
-                    >
-                      {item.text}
-                    </Text>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity onPress={() => handleDeleteTodo(item.id)}>
-                    <Text className="text-sm text-red-500">삭제</Text>
-                  </TouchableOpacity>
-                </View>
-              );
-            }}
-          />
+        {showInput && (
+          <View className="w-full gap-[5px] px-[16px] py-p-3">
+            <View className="h-[40px] flex-row items-center justify-between">
+              <TextInput
+                value={newTodoText}
+                onChangeText={setNewTodoText}
+                placeholder={`${text} 입력`}
+                className=""
+              />
+              <TouchableOpacity onPress={() => handleAddTodo(type)}>
+                <Text className="text-sm">확인</Text>
+              </TouchableOpacity>
+            </View>
+            <View className="h-[1px] bg-border-gray-light" />
+          </View>
         )}
       </View>
     </View>
