@@ -24,7 +24,6 @@ const ScheduleRegRegisterMethod = () => {
           Icon={Camera}
           title="근무표 사진 찍어서 자동 등록하기"
           subtitle="사진 찍기 또는 앨범에서 선택해 AI로 근무표를 자동 등록해요"
-          // TODO: 이동 화면 수정 예정
           onPress={() => navigation.navigate('Login')}
         />
 
@@ -32,16 +31,14 @@ const ScheduleRegRegisterMethod = () => {
           Icon={CalendarYellow}
           title="근무표 새로 만들기"
           subtitle="지금 바로 직접 근무표를 만들고 시작해요"
-          // TODO: 이동 화면 수정 예정
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('ScheduleRegType')}
         />
 
         <RegMethod
           Icon={CalendarBlue}
           title="근무표 없이 시작하기"
           subtitle="지금은 근무표 없이 시작하고, 나중에 등록할 수 있어요"
-          // TODO: 이동 화면 수정 예정
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('MainScreen')}
         />
 
         {/* TODO: "다음" 공통 컴포넌트 추가하기 */}

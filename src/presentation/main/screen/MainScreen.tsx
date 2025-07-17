@@ -12,13 +12,12 @@ import NoteSection from '../ui/NoteSection';
 import HealthCardSection from '../ui/HealthCardSection';
 import TopCard from '../components/TopCard';
 
-
 export default function MainScreen() {
   return (
     <View className="flex-1 bg-black">
-      <SafeAreaView className="flex-1 bg-transparent" edges={['left', 'right',]}>
+      <SafeAreaView className="flex-1 bg-transparent" edges={['left', 'right']}>
         <ScrollView className="flex-1">
-          <TopCard/>
+          <TopCard />
           <View className="w-full flex-row items-center justify-center gap-g-2 px-number-8 py-number-8">
             <HomeWorkTypeChip dayType={DayType.PAST} workType="휴일" />
             <HomeWorkTypeChip dayType={DayType.TODAY} workType="야간" />
@@ -29,8 +28,8 @@ export default function MainScreen() {
             <RecommnedMealSection />
             <HealthGuideSection />
             <AlramSection />
-            <HealthCardSection/>
-            <NoteSection/>
+            <HealthCardSection />
+            <NoteSection />
           </View>
         </ScrollView>
       </SafeAreaView>

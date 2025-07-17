@@ -4,4 +4,9 @@ export type RootStackParamList = {
   KakaoWebView: undefined;
   PrivacyPolicy: undefined;
   ServiceTerm: undefined;
+  MainScreen: undefined;
+  ScheduleRegType: undefined;
+  ScheduleInfoInput: undefined;
+  CalendarType: undefined;
+  CompleteCreate: undefined;
 };
