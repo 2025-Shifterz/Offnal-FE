@@ -29,6 +29,7 @@ import MyInfoScreen from './src/presentation/myInfo/screen/MyInfoScreen';
 import ScheduleRegType from './src/presentation/scheduleRegType/screen/ScheduleRegType';
 import ScheduleInfoInput from './src/presentation/scheduleInpInput/screen/ScheduleInfoInput';
 import CalendarType from './src/presentation/calenderType/screen/CalendarType';
+import CalendarEditScreen from './src/presentation/calenderEdit/screen/CalendarEditScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -70,6 +71,7 @@ export default function App() {
 
           <Stack.Screen name="Todo" options={{ title: '할 일' }} component={TodoScreen} />
           <Stack.Screen name="Memo" options={{ title: '메모' }} component={MemoScreen} />
+          <Stack.Screen name="EditCalendar" component={CalendarEditScreen} />
 
           {/* 스택으로 push 되는 화면들 */}
           <Stack.Screen
