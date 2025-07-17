@@ -6,6 +6,7 @@ import CalendarType from '../presentation/calenderType/screen/CalendarType';
 import CompleteCreate from '../presentation/completeCreate/screen/CompleteCreate';
 import StepBar from '../presentation/common/component/StepBar';
 import { OnboardingStackParamList } from './types';
+import InfoEditScreen from '../presentation/calInfoEdit/screen/InfoEditScreen';
 
 const Stack = createNativeStackNavigator<OnboardingStackParamList>();
 
@@ -39,6 +40,11 @@ const OnBoardingScheduleNavigator = () => {
         name="CompleteCreate"
         component={CompleteCreate}
         options={{ headerTitle: () => <StepBar currentStep={3} totalSteps={4} /> }}
+      />
+      <Stack.Screen
+        name="InfoEdit"
+        options={{ title: '근무표 정보 수정' }}
+        component={InfoEditScreen}
       />
     </Stack.Navigator>
   );
