@@ -11,6 +11,9 @@ export type StackParamList = {
       N: { startTime: string; endTime: string };
     };
   };
+  SelectInputScheduleWithOCRType: undefined;
+  SelectMonthWithOCR: undefined;
+  CompleteCreateScheduleOCR: undefined;
   CompleteCreate: undefined;
   EditCalendar: undefined;
 };

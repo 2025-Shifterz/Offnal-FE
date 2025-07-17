@@ -2,7 +2,7 @@ import { Text, View } from 'react-native';
 import Camera from '../../../assets/icons/camera.svg';
 import CalendarYellow from '../../../assets/icons/calendar_yellow.svg';
 import CalendarBlue from '../../../assets/icons/calendar_blue.svg';
-import RegMethod from '../components/RegMethod';
+import RegMethod from '../component/RegMethod';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../navigation/type';

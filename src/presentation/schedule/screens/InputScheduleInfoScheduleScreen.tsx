@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, SafeAreaView, View } from 'react-native';
-import TimeInput from '../components/TimeInput';
-import TeamInput from '../components/TeamInput';
+import TimeInput from '../component/TimeInput';
+import TeamInput from '../component/TeamInput';
 import BottomButton from '../../common/component/BottomButton';
-import ScheduleNameInput from '../components/ScheduleNameInput';
+import ScheduleNameInput from '../component/ScheduleNameInput';
 import TitleMessage from '../../common/component/TitleMessage';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackParamList } from '../../../navigation/types';
