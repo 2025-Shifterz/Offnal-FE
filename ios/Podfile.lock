@@ -1384,8 +1384,6 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-month-year-picker (1.9.0):
-    - React
   - react-native-safe-area-context (5.5.2):
     - DoubleConversion
     - glog
@@ -2104,7 +2102,6 @@ DEPENDENCIES:
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
   - react-native-encrypted-storage (from `../node_modules/react-native-encrypted-storage`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
-  - react-native-month-year-picker (from `../node_modules/react-native-month-year-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-sqlite-storage (from `../node_modules/react-native-sqlite-storage`)
   - react-native-webview (from `../node_modules/react-native-webview`)
@@ -2234,8 +2231,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-encrypted-storage"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
-  react-native-month-year-picker:
-    :path: "../node_modules/react-native-month-year-picker"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-sqlite-storage:
@@ -2358,7 +2353,6 @@ SPEC CHECKSUMS:
   React-microtasksnativemodule: 20454ffccff553f0ee73fd20873aa8555a5867fb
   react-native-encrypted-storage: 569d114e329b1c2c2d9f8c84bcdbe4478dda2258
   react-native-image-picker: db0b3e3c7ae57680876318d4f42e7dbedd72244a
-  react-native-month-year-picker: 8b72e984757e47e08fece220fa09fcdf1816203d
   react-native-safe-area-context: 7e926a200d4bc9c56562275743705c6b56176455
   react-native-sqlite-storage: 0c84826214baaa498796c7e46a5ccc9a82e114ed
   react-native-webview: 85c8fc8ca09f4e67b68afbc86207a1442af5dc80
