@@ -113,23 +113,20 @@ class ImageProcessor(context: Context) {
             Imgcodecs.imwrite("/sdcard/debug_cell_${r}_${c}.png", tightImg)
         }
 
-        // 1. white_ratio로 먼저 빈칸 필터링 (Python의 WHITE_THRESH 사용)
         if (whiteRatio > Constants.WHITE_THRESH) {
             if (debug) println("Blank cell detected by white_ratio: ${"%.3f".format(whiteRatio)}")
             tightImg.release()
             return "-"
         }
 
-
-        // TFLite 모델 입력 준비
         val inputBuffer = ByteBuffer.allocateDirect(1 * tfLiteInputShape[1] * tfLiteInputShape[2] * tfLiteInputShape[3] * 4).order(ByteOrder.nativeOrder())
         val floatMat = Mat()
-        tightImg.convertTo(floatMat, CvType.CV_32F, 1.0 / 255.0) // 픽셀 값을 0-255에서 0-1로 정규화
-        tightImg.release() // 사용 후 해제
+        tightImg.convertTo(floatMat, CvType.CV_32F, 1.0 / 255.0)
+        tightImg.release()
 
         val floatArray = FloatArray(tfLiteInputShape[1] * tfLiteInputShape[2])
         floatMat.get(0, 0, floatArray)
-        floatMat.release() // 사용 후 해제
+        floatMat.release()
 
         floatArray.forEach { inputBuffer.putFloat(it) }
 
@@ -138,7 +135,7 @@ class ImageProcessor(context: Context) {
         tfLiteInterpreter.run(inputBuffer, outputArray)
 
         val probabilities = outputArray[0]
-        val maxProb = probabilities.maxOrNull() ?: 0f // 최대 확률
+        val maxProb = probabilities.maxOrNull() ?: 0f
         val maxIndex = probabilities.indices.maxByOrNull { probabilities[it] } ?: -1
 
         if (debug) {
@@ -171,20 +168,20 @@ class ImageProcessor(context: Context) {
         var currentGroup = mutableListOf(indices[0])
 
         for (i in 1 until indices.size) {
-            if (indices[i] > indices[i - 1] + 1) { // 픽셀이 연속되지 않으면 새 그룹 시작
+            if (indices[i] > indices[i - 1] + 1) {
                 groups.add(currentGroup)
                 currentGroup = mutableListOf()
             }
             currentGroup.add(indices[i])
         }
-        groups.add(currentGroup) // 마지막 그룹 추가
+        groups.add(currentGroup)
 
-        return groups.map { it.sorted()[it.size / 2] } // 각 그룹의 중앙값 반환
+        return groups.map { it.sorted()[it.size / 2] }
     }
 
     private fun getTableCellsAndWarp(origImgBitmap: Bitmap): Triple<Mat, List<Pair<Int, Int>>, List<Pair<Int, Int>>> {
         val origImg = Mat()
-        Utils.bitmapToMat(origImgBitmap, origImg) // RGBA Mat
+        Utils.bitmapToMat(origImgBitmap, origImg)
 
         val maxWidthLimit = 1000
         if (origImg.cols() > maxWidthLimit) {
@@ -193,7 +190,7 @@ class ImageProcessor(context: Context) {
         }
 
         val gray = Mat()
-        Imgproc.cvtColor(origImg, gray, Imgproc.COLOR_RGBA2GRAY) // Bitmap은 보통 RGBA
+        Imgproc.cvtColor(origImg, gray, Imgproc.COLOR_RGBA2GRAY)
 
         val blur = Mat()
         Imgproc.GaussianBlur(gray, blur, Size(5.0, 5.0), 0.0)
@@ -214,7 +211,7 @@ class ImageProcessor(context: Context) {
             val peri = Imgproc.arcLength(MatOfPoint2f(*cnt.toArray()), true)
             val approx = MatOfPoint2f()
             Imgproc.approxPolyDP(MatOfPoint2f(*cnt.toArray()), approx, 0.02 * peri, true)
-            if (approx.rows() == 4) { // 4개의 꼭지점을 가진 사각형 컨투어
+            if (approx.rows() == 4) {
                 tableContour = approx
                 break
             }
@@ -246,7 +243,7 @@ class ImageProcessor(context: Context) {
             warpedImg = Mat()
             Imgproc.warpPerspective(origImg, warpedImg, M, Size(maxWidth.toDouble(), maxHeight.toDouble()))
             finalGray = Mat()
-            Imgproc.cvtColor(warpedImg, finalGray, Imgproc.COLOR_RGBA2GRAY) // RGB->GRAY 대신 RGBA->GRAY 사용
+            Imgproc.cvtColor(warpedImg, finalGray, Imgproc.COLOR_RGBA2GRAY)
 
             tableContour.release()
             dstPts.release()
@@ -257,7 +254,7 @@ class ImageProcessor(context: Context) {
             finalGray = Mat()
             Imgproc.cvtColor(warpedImg, finalGray, Imgproc.COLOR_RGBA2GRAY)
         }
-        origImg.release() // 원본 Mat 해제
+        origImg.release()
 
         val cellBinary = Mat()
         Imgproc.threshold(finalGray, cellBinary, 0.0, 255.0, Imgproc.THRESH_BINARY_INV + Imgproc.THRESH_OTSU)
@@ -292,7 +289,7 @@ class ImageProcessor(context: Context) {
         val (processedGrayImage, dataRows, dataCols) = getTableCellsAndWarp(imageBitmap)
 
         if (dataRows.isEmpty() || dataCols.isEmpty()) {
-            processedGrayImage.release() // 사용 후 해제
+            processedGrayImage.release() 
             throw ImageProcessingException("❌ 테이블 셀을 찾지 못했습니다. 데이터 행 또는 열이 비어 있습니다.")
         }
 
