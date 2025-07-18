@@ -1,17 +1,17 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CustomBackButton from '../presentation/common/component/CustomBackButton';
-import ScheduleRegType from '../presentation/schedule/screens/RegTypeByScheduleScreen';
-import ScheduleInfoInput from '../presentation/schedule/screens/InputScheduleInfoScheduleScreen';
 
 import CompleteCreateScheduleScreen from '../presentation/schedule/screens/CreateCompleteScheduleScreen';
 import StepBar from '../presentation/common/component/StepBar';
 
-
 import SelectMonthWithOCRScreen from '../presentation/schedule/screens/ocr/SelectMonthWithOCRScreen';
 import SelectInputScheduleWithOCRTypeScreen from '../presentation/schedule/screens/ocr/SelectInputScheduleWithOCRTypeScreen';
-import CompleteCreateScheduleOCRScreen from '../presentation/schedule/screens/ocr/CompleteScheduleOCRScreen';
+import EditCompleteCreateScheduleOCRScreen from '../presentation/schedule/screens/ocr/CompleteScheduleOCRScreen';
+import ScheduleRegType from '../presentation/schedule/screens/RegTypeByScheduleScreen';
+import ScheduleInfoInput from '../presentation/schedule/screens/InputScheduleInfoScheduleScreen';
+import { OnboardingStackParamList } from './types';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<OnboardingStackParamList>();
 
 // + 온보딩 화면들
 const OnBoardingScheduleWithOCRNavigator = () => {
@@ -24,7 +24,16 @@ const OnBoardingScheduleWithOCRNavigator = () => {
         headerTitleAlign: 'center',
       }}
     >
-
+      <Stack.Screen
+        name="ScheduleRegType"
+        component={ScheduleRegType}
+        options={{ headerTitle: () => <StepBar currentStep={0} totalSteps={6} /> }}
+      />
+      <Stack.Screen
+        name="ScheduleInfoInput"
+        component={ScheduleInfoInput}
+        options={{ headerTitle: () => <StepBar currentStep={1} totalSteps={6} /> }}
+      />
       <Stack.Screen
         name="SelectMonthWithOCR"
         component={SelectMonthWithOCRScreen}
@@ -37,11 +46,10 @@ const OnBoardingScheduleWithOCRNavigator = () => {
         options={{ headerTitle: () => <StepBar currentStep={3} totalSteps={6} /> }}
       />
 
-
       <Stack.Screen
-        name="CompleteCreateScheduleOCR"
-        component={CompleteCreateScheduleOCRScreen}
-        options={{ headerTitle: () => <StepBar currentStep={3} totalSteps={6} /> }}
+        name="EditCompleteCreateScheduleOCR"
+        component={EditCompleteCreateScheduleOCRScreen}
+        options={{ headerTitle: () => <StepBar currentStep={4} totalSteps={6} /> }}
       />
 
       <Stack.Screen

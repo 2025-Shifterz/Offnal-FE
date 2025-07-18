@@ -4,7 +4,7 @@ import ScheduleRegRegisterMethod from '../presentation/schedule/screens/SelectRe
 import KakaoLoginWebView from '../presentation/login/screen/KakaoLoginWebView';
 import PrivacyPolicy from '../presentation/policy/screen/PrivacyPolicy';
 import ServiceTerm from '../presentation/policy/screen/ServiceTerm';
-import { LoginStackParamList } from './type';
+import { LoginStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<LoginStackParamList>();
 
