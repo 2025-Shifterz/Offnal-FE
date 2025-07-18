@@ -11,10 +11,6 @@ import NoteSection from '../ui/NoteSection';
 import HealthCardSection from '../ui/HealthCardSection';
 import TopCard from '../components/TopCard';
 
-import Bed from '../../../assets/images/bed.svg';
-import Clock from '../../../assets/images/clock.svg';
-import HourGlass from '../../../assets/images/hourglass.svg';
-
 import { getHomeData } from '../../../data/impl/HomeRepository';
 
 export default function MainScreen() {
@@ -65,15 +61,25 @@ export default function MainScreen() {
           <View className="w-full flex-row items-center justify-center gap-g-2 px-number-8 py-number-8">
             <HomeWorkTypeChip
               dayType={DayType.PAST}
-              workType={homeData && homeData.yesterdayType ? translateWorkType(homeData.yesterdayType) : '미등록'}
+              workType={
+                homeData && homeData.yesterdayType
+                  ? translateWorkType(homeData.yesterdayType)
+                  : '미등록'
+              }
             />
             <HomeWorkTypeChip
               dayType={DayType.TODAY}
-              workType={homeData && homeData.todayType ? translateWorkType(homeData.todayType) : '미등록'}
+              workType={
+                homeData && homeData.todayType ? translateWorkType(homeData.todayType) : '미등록'
+              }
             />
             <HomeWorkTypeChip
               dayType={DayType.UPCOMMING}
-              workType={homeData && homeData.tomorrowType ? translateWorkType(homeData.tomorrowType) : '미등록'}
+              workType={
+                homeData && homeData.tomorrowType
+                  ? translateWorkType(homeData.tomorrowType)
+                  : '미등록'
+              }
             />
           </View>
 
