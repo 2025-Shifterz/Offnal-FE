@@ -1,9 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CustomBackButton from '../presentation/common/component/CustomBackButton';
-import ScheduleRegType from '../presentation/scheduleRegType/screen/ScheduleRegType';
-import ScheduleInfoInput from '../presentation/scheduleInpInput/screen/ScheduleInfoInput';
+import ScheduleRegType from '../presentation/schedule/screens/RegTypeByScheduleScreen';
+import ScheduleInfoInput from '../presentation/schedule/screens/InputScheduleInfoScheduleScreen';
 import CalendarType from '../presentation/calenderType/screen/CalendarType';
-import CompleteCreate from '../presentation/completeCreate/screen/CompleteCreate';
+import CompleteCreateScheduleScreen from '../presentation/schedule/screens/CreateCompleteScheduleScreen';
 import StepBar from '../presentation/common/component/StepBar';
 import { OnboardingStackParamList } from './types';
 import InfoEditScreen from '../presentation/calInfoEdit/screen/InfoEditScreen';
@@ -38,7 +38,7 @@ const OnBoardingScheduleNavigator = () => {
       />
       <Stack.Screen
         name="CompleteCreate"
-        component={CompleteCreate}
+        component={CompleteCreateScheduleScreen}
         options={{ headerTitle: () => <StepBar currentStep={3} totalSteps={4} /> }}
       />
       <Stack.Screen

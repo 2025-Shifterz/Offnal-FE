@@ -4,6 +4,7 @@ import React from 'react';
 import TabsNavigator from './TabsNavigator';
 import OnBoardingScheduleNavigator from './OnboardingScheduleNavigator';
 import LoginNavigator from './LoginNavigator';
+import OnBoardingScheduleWithOCRNavigator from './OnbordingScheduleWithOCRNavigator';
 import { RootStackParamList } from './types';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -14,6 +15,7 @@ const RootNavigator = () => {
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
         <RootStack.Screen name="Tabs" component={TabsNavigator} />
         <RootStack.Screen name="OnboardingSchedules" component={OnBoardingScheduleNavigator} />
+        <RootStack.Screen name="OnboardingSchedulesWithOCR" component={OnBoardingScheduleWithOCRNavigator} />
         <RootStack.Screen name="LoginScreens" component={LoginNavigator} />
       </RootStack.Navigator>
     </NavigationContainer>

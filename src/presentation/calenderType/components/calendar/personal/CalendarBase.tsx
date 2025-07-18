@@ -20,7 +20,6 @@ interface CalendarBaseProps {
   isEditScreen?: boolean;
   onPressTeamIcon?: () => void;
   onPressEditIcon?: () => void;
-
   currentDate: dayjs.Dayjs;
   onChangeMonth: (newDate: dayjs.Dayjs) => void;
 }
@@ -33,7 +32,6 @@ const CalendarBase = ({
   isEditScreen,
   onPressTeamIcon,
   onPressEditIcon,
-
   currentDate,
   onChangeMonth,
 }: CalendarBaseProps) => {

@@ -5,7 +5,9 @@ import TitleMessage from '../../common/component/TitleMessage';
 import { useNavigation } from '@react-navigation/native';
 import { onboardingNavigation } from '../../../navigation/types';
 
-const CompleteCreate = () => {
+const CompleteCreateScheduleScreen = () => {
+  // const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
+
   const navigation = useNavigation<onboardingNavigation>();
   return (
     <View className="flex-1 bg-background-gray-subtle1 px-[16px]">
@@ -23,4 +25,4 @@ const CompleteCreate = () => {
   );
 };
 
-export default CompleteCreate;
+export default CompleteCreateScheduleScreen;

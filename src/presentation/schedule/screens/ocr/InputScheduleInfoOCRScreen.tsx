@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { SafeAreaView, View } from 'react-native';
-import TimeInput from '../components/TimeInput';
-import TeamInput from '../components/TeamInput';
-import BottomButton from '../../common/component/BottomButton';
-import ScheduleNameInput from '../components/ScheduleNameInput';
-import TitleMessage from '../../common/component/TitleMessage';
+import React, { useEffect, useState } from 'react';
+import { Alert, SafeAreaView, View } from 'react-native';
+import TimeInput from '../../component/TimeInput';
+import TeamInput from '../../component/TeamInput';
+import BottomButton from '../../../common/component/BottomButton';
+import ScheduleNameInput from '../../component/ScheduleNameInput';
+import TitleMessage from '../../../common/component/TitleMessage';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { onboardingNavigation, OnboardingStackParamList } from '../../../navigation/types';
-import { WorkTimeContext } from '../../../context/WorkTimeContext';
+import { onboardingNavigation, OnboardingStackParamList } from '../../../../navigation/types';
+import { WorkTimeContext } from '../../../../context/WorkTimeContext';
 
 type ScheduleInfoInputRouteProp = RouteProp<OnboardingStackParamList, 'ScheduleInfoInput'>;
 
-const ScheduleInfoInput = () => {
+const ScheduleInfoInputOCR = () => {
   const route = useRoute<ScheduleInfoInputRouteProp>();
   const { selectedBoxId } = route.params;
 
@@ -29,7 +29,7 @@ const ScheduleInfoInput = () => {
   const [isDirect, setIsDirect] = useState(false); // 직접 입력인지 여부
 
   const handleNext = () => {
-    navigation.navigate('CalendarType', {
+    navigation.navigate('SelectMonthWithOCR', {
       selectedBoxId,
       calendarName,
       workGroup,
@@ -63,4 +63,4 @@ const ScheduleInfoInput = () => {
   );
 };
 
-export default ScheduleInfoInput;
+export default ScheduleInfoInputOCR;

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import BottomButton from '../../common/component/BottomButton';
-import ScheduleNameInput from '../../scheduleInpInput/components/ScheduleNameInput';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { WorkTimeContext } from '../../../context/WorkTimeContext';
 import { View } from 'react-native';
 import TeamInput from '../components/TeamInput';
-import TimeInput from '../../scheduleInpInput/components/TimeInput';
+import TimeInput from '../../schedule/component/TimeInput';
+import ScheduleNameInput from '../../schedule/component/ScheduleNameInput';
 
 const InfoEditScreen = () => {
   const [calendarName, setCalendarName] = useState(''); // 근무표 이름
