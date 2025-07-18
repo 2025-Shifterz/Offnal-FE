@@ -35,7 +35,8 @@ export default function MainScreen() {
     fetchHome();
   }, []);
 
-  const translateWorkType = (type: string): string => {
+  const translateWorkType = (type?: string): string => {
+    if (!type) return '미등록';
     switch (type) {
       case 'DAY':
         return '주간';
@@ -44,7 +45,7 @@ export default function MainScreen() {
       case 'OFF':
         return '휴일';
       default:
-        return '기타';
+        return '미등록';
     }
   };
 
@@ -64,15 +65,15 @@ export default function MainScreen() {
           <View className="w-full flex-row items-center justify-center gap-g-2 px-number-8 py-number-8">
             <HomeWorkTypeChip
               dayType={DayType.PAST}
-              workType={homeData ? translateWorkType(homeData.yesterdayType) : '휴일'}
+              workType={homeData && homeData.yesterdayType ? translateWorkType(homeData.yesterdayType) : '미등록'}
             />
             <HomeWorkTypeChip
               dayType={DayType.TODAY}
-              workType={homeData ? translateWorkType(homeData.todayType) : '야간'}
+              workType={homeData && homeData.todayType ? translateWorkType(homeData.todayType) : '미등록'}
             />
             <HomeWorkTypeChip
               dayType={DayType.UPCOMMING}
-              workType={homeData ? translateWorkType(homeData.tomorrowType) : '주간'}
+              workType={homeData && homeData.tomorrowType ? translateWorkType(homeData.tomorrowType) : '미등록'}
             />
           </View>
 
