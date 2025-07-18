@@ -50,16 +50,12 @@ const CalendarEditor: ForwardRefRenderFunction<CalendarEditorRef, CalendarEditor
         updated.set(key, type);
         console.log(`Set shift ${type} for ${key}`);
       }
-      console.log('Updated calendarData:', updated);
       console.log('Updated calendarData (Map):', updated);
       console.log('Updated calendarData entries:', Array.from(updated.entries()));
       console.log('CalendarEditor render calendarData:', Array.from(calendarData.entries()));
 
       return updated;
     });
-
-    console.log('selectedDate:', selectedDate);
-    console.log('calendarData:', calendarData);
   };
 
   // 부모에서 호출할 수 있게 내보낸다.
