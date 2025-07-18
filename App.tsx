@@ -1,7 +1,7 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RootNavigator from './src/navigation/RootNavigator';
 
-const App2 = () => {
+const App = () => {
   return (
     <SafeAreaProvider>
       <RootNavigator />
@@ -9,4 +9,4 @@ const App2 = () => {
   );
 };
 
-export default App2;
+export default App;

@@ -1,0 +1,111 @@
+import React, { useCallback, useRef, useState } from 'react';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import dayjs from 'dayjs';
+import { TimeFrameChildren } from '../../calenderType/components/TimeFrame';
+import EditScreenHeader from '../components/EditScreenMonthHeader';
+import EditBottomSheet from '../components/EditBottomSheet';
+import CalendarInteractive from '../components/CalendarInteractive';
+import SuccessIcon from '../../../assets/icons/g-success.svg';
+import BottomSheet from '@gorhom/bottom-sheet';
+import baseApi from '../../../remote/api/baseApi';
+
+const CalendarEditScreen = () => {
+  const [currentDate, setCurrentDate] = useState(dayjs());
+  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
+  const [calendarData, setCalendarData] = useState<Record<string, TimeFrameChildren>>({});
+  // 근무 형태를 눌렀지만 '취소'를 누르면 원래 상태로 되돌아감.
+  const [backupType, setBackupType] = useState<TimeFrameChildren | null>(null);
+
+  // 이 ref가 .expend()를 호출할 수 있어야한다. // EditBottomSheet에게 ref 전달
+  const sheetRef = useRef<BottomSheet>(null);
+
+  // 근무 형태 캘린더에 넣기
+  const handleTypeSelect = (type: TimeFrameChildren) => {
+    if (!selectedDate) return;
+    const key = selectedDate.format('YYYY-MM-DD');
+    setCalendarData(prev => ({ ...prev, [key]: type }));
+  };
+
+  // 날짜 클릭 시 바텀시트 열기, 바텀시트 열기 전에 근무 형태를 백업
+  const openBottomSheet = (date: dayjs.Dayjs) => {
+    const key = date.format('YYYY-MM-DD');
+    setSelectedDate(date);
+    setBackupType(calendarData[key] ?? null); // 먼저 백업
+    sheetRef.current?.expand(); // 바텀 시트 열기
+  };
+  // 취소 시 롤백
+  const handleCancel = () => {
+    if (selectedDate) {
+      const key = selectedDate.format('YYYY-MM-DD');
+      setCalendarData(prev => {
+        const updated = { ...prev };
+        if (backupType) {
+          updated[key] = backupType; // 원래 타입으로 돌려놓기
+        } else {
+          delete updated[key]; // 원래 없던 거면 삭제
+        }
+
+        return updated;
+      });
+    }
+    sheetRef.current?.close();
+  };
+
+  // '체크' 버튼을 누르면 post 요청 - 근무표 저장.
+  const handlePostData = () => {
+    try {
+      const response = baseApi.post('/works/calendar', {});
+      console.log('근무표 수정 성공:', response.data);
+    } catch (error) {
+      console.log('근무표 수정 실패:', error);
+    }
+  };
+
+  return (
+    <>
+      <SafeAreaView className="flex-1">
+        {/* 헤더 */}
+        <View className="w-full gap-[5px] bg-surface-information-subtle px-p-6 py-[14px]">
+          <View className="flex-row justify-between">
+            <Text className="text-heading-xs font-semibold text-text-information">
+              근무표 수정 모드
+            </Text>
+            <EditScreenHeader currentDate={currentDate} setCurrentDate={setCurrentDate} />
+          </View>
+          <Text className="text-body-xs font-medium text-text-subtle">
+            날짜를 탭하여 근무 형태를 변경하세요.
+          </Text>
+        </View>
+        {/* 캘린더 */}
+        <View className="mx-[16px] mt-[10px] overflow-hidden rounded-radius-xl border-[3px] border-surface-information-subtle">
+          <CalendarInteractive
+            calendarData={calendarData}
+            selectedDate={selectedDate}
+            setSelectedDate={openBottomSheet}
+            setCurrentDate={setCurrentDate}
+            setCalendarData={setCalendarData}
+            isEditScreen={true}
+            currentDate={currentDate}
+          />
+        </View>
+        {/* 모든 저장 버튼 -> 근무표에 저장되어야함. post 요청!! */}
+        <TouchableOpacity
+          onPress={handlePostData}
+          className="absolute bottom-[13px] right-[13px] h-[40px] w-[40px] items-center justify-center rounded-radius-max bg-success-40"
+        >
+          <SuccessIcon />
+        </TouchableOpacity>
+      </SafeAreaView>
+
+      {/* 근무표 수정 바텀시트 */}
+      <EditBottomSheet
+        handleTypeSelect={handleTypeSelect}
+        handleCancel={handleCancel}
+        ref={sheetRef}
+        selectedDate={selectedDate}
+      />
+    </>
+  );
+};
+
+export default CalendarEditScreen;

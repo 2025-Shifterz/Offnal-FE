@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CalendarScreen from '../presentation/calendar/screen/CalendarScreen';
-import CalendarEditScreen from '../presentation/calenderEdit/screen/CalendarEditScreen';
+import CalendarEditScreen from '../presentation/calenderEditMode/screen/CalendarEditScreen';
 import { CalendarScreenStackParamList } from './types';
 import CustomBackButton from '../presentation/common/component/CustomBackButton';
 
