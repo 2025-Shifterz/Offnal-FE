@@ -1,12 +1,11 @@
-/* eslint-disable react-native/no-color-literals */
-/* eslint-disable react-native/no-inline-styles */
 // 캘린더 기본 UI
-import React, { useState } from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import TimeFrame, { TimeFrameChildren } from '../../TimeFrame';
+import TimeFrame from '../../TimeFrame';
 import CalendarEditorHeader from '../header/CalendarEditorHeader';
 import CalendarViewerHeader from '../header/CalendarViewerHeader';
+import { ShiftType } from '../../../../../data/model/Calendar';
 
 const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 const textInformation = '#096AB3';
@@ -15,7 +14,7 @@ const textDanger = '#BD2C0F';
 interface CalendarBaseProps {
   selectedDate?: dayjs.Dayjs | null;
   onDatePress?: (date: dayjs.Dayjs) => void;
-  calendarData: Record<string, TimeFrameChildren>;
+  calendarData: Map<string, ShiftType>;
   isViewer: boolean;
   isEditScreen?: boolean;
   onPressTeamIcon?: () => void;
@@ -35,9 +34,6 @@ const CalendarBase = ({
   currentDate,
   onChangeMonth,
 }: CalendarBaseProps) => {
-  // 현재 날짜 (기본값은 오늘 날짜)
-  // const [currentDate, setCurrentDate] = useState(dayjs());
-  // console.log(currentDate);
   const startOfMonth = currentDate.startOf('month'); // 2025-07-01
   // const endOfMonth = currentDate.endOf('month'); // 2025-07-31
   const startDay = startOfMonth.day(); // 그 달의 1일의 요일 -> 달력에서 1일은 어느 칸에 둘지
@@ -49,6 +45,9 @@ const CalendarBase = ({
   const handleNextMonth = () => {
     onChangeMonth(currentDate.add(1, 'month'));
   };
+
+  console.log('부모가 넘기는 calendarData:', calendarData);
+  console.log('Map 여부:', calendarData instanceof Map);
 
   // 날짜 박스 렌더링 함수
   const renderDays = () => {
@@ -68,7 +67,9 @@ const CalendarBase = ({
       if (weekDay === 0) textColor = textDanger;
       else if (weekDay === 6) textColor = textInformation;
 
-      const time = calendarData?.[date.format('YYYY-MM-DD')];
+      const key = date.format('YYYY-MM-DD'); // string 형식
+      const time = calendarData?.get(key); // string 전달
+
       days.push(
         <TouchableOpacity
           activeOpacity={1}

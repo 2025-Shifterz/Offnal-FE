@@ -3,8 +3,9 @@ import { View } from 'react-native';
 import CalendarBase from './../personal/CalendarBase';
 import TypeSelect from './TypeSelect';
 import dayjs from 'dayjs';
-import { TimeFrameChildren } from '../../TimeFrame';
 import baseApi from '../../../../../remote/api/baseApi';
+import { ShiftType } from '../../../../../data/model/Calendar';
+import { workCalendarRepository } from '../../../../../di/Dependencies';
 
 interface CalendarEditorProps {
   calendarName: string;
@@ -26,7 +27,7 @@ const CalendarEditor: ForwardRefRenderFunction<CalendarEditorRef, CalendarEditor
   ref
 ) => {
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
-  const [calendarData, setCalendarData] = useState<Record<string, TimeFrameChildren>>({});
+  const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(new Map());
   const [currentDate, setCurrentDate] = useState(dayjs());
 
   // 날짜 선택
@@ -35,87 +36,107 @@ const CalendarEditor: ForwardRefRenderFunction<CalendarEditorRef, CalendarEditor
   };
 
   // 근무 형태 추가
-  const handleTypeSelect = (type: TimeFrameChildren) => {
+  const handleTypeSelect = (type: ShiftType) => {
     if (!selectedDate) return;
     const key = selectedDate.format('YYYY-MM-DD');
 
     setCalendarData(prev => {
       // 이미 근무 형태가 있으면 또 클릭하면 삭제
-      if (prev[key] === type) {
-        const updated = { ...prev };
-        delete updated[key];
-        return updated;
+      const updated = new Map(prev);
+      if (updated.get(key) === type) {
+        updated.delete(key);
+        console.log(`Deleted shift for ${key}`);
+      } else {
+        updated.set(key, type);
+        console.log(`Set shift ${type} for ${key}`);
       }
-      return {
-        ...prev,
-        [key]: type, // 근무 형태 추가
-      };
+      console.log('Updated calendarData:', updated);
+      console.log('Updated calendarData (Map):', updated);
+      console.log('Updated calendarData entries:', Array.from(updated.entries()));
+      console.log('CalendarEditor render calendarData:', Array.from(calendarData.entries()));
+
+      return updated;
     });
+
+    console.log('selectedDate:', selectedDate);
+    console.log('calendarData:', calendarData);
   };
 
   // 부모에서 호출할 수 있게 내보낸다.
   useImperativeHandle(ref, () => ({
-    postData: () => {
-      const shifts: Record<string, string> = {};
+    postData: async () => {
+      try {
+        const calendarMap: Record<
+          string,
+          { year: number; month: number; shifts: Record<string, string> }
+        > = {};
 
-      // TimeFrameChildren -> 문자열 코드로 변환.
-      const convertToCode = (type: TimeFrameChildren): string => {
-        switch (type) {
-          case '주간':
-            return 'D';
-          case '오후':
-            return 'E';
-          case '야간':
-            return 'N';
-          case '휴일':
-            return '-';
-          default:
-            return '';
-        }
-      };
+        const convertToCode = (type: ShiftType): string => {
+          switch (type) {
+            case ShiftType.DAY:
+              return 'D';
+            case ShiftType.EVENING:
+              return 'E';
+            case ShiftType.NIGHT:
+              return 'N';
+            case ShiftType.OFF:
+              return '-';
+            default:
+              return '';
+          }
+        };
 
-      const calendarMap: Record<
-        string,
-        { year: string; month: string; shifts: Record<string, string> }
-      > = {};
+        Object.entries(calendarData).forEach(([dateStr, type]) => {
+          const date = dayjs(dateStr);
+          const year = date.year();
+          const month = date.month() + 1;
+          const day = date.date(); // 숫자 그대로
 
-      Object.entries(calendarData).forEach(([dateStr, type]) => {
-        const date = dayjs(dateStr);
-        const year = String(date.year());
-        const month = String(date.month() + 1); // 0-indexed → 1-indexed
-        const day = String(date.date());
+          const key = `${year}-${month}`;
+          if (!calendarMap[key]) {
+            calendarMap[key] = {
+              year,
+              month,
+              shifts: {},
+            };
+          }
 
-        const key = `${year}-${month}`;
-
-        if (!calendarMap[key]) {
-          calendarMap[key] = {
-            year,
-            month,
-            shifts: {},
-          };
-        }
-
-        calendarMap[key].shifts[day] = convertToCode(type);
-      });
-      const calendars = Object.values(calendarMap);
-
-      const rawData = {
-        calendarName,
-        workGroup,
-        workTimes,
-        calendars,
-      };
-
-      console.log('rawData:', rawData);
-
-      baseApi
-        .post('/works/calendar', rawData)
-        .then(res => {
-          console.log('근무표 저장 성공:', res.data);
-        })
-        .catch(error => {
-          console.log('근무표 저장 실패:', error);
+          calendarMap[key].shifts[String(day)] = convertToCode(type);
         });
+
+        const convertFromCode = (code: string): ShiftType => {
+          switch (code) {
+            case 'D':
+              return ShiftType.DAY;
+            case 'E':
+              return ShiftType.EVENING;
+            case 'N':
+              return ShiftType.NIGHT;
+            case '-':
+              return ShiftType.OFF;
+            default:
+              return ShiftType.UNKNOWN;
+          }
+        };
+
+        for (const { year, month, shifts } of Object.values(calendarMap)) {
+          const map = new Map<number, ShiftType>();
+
+          Object.entries(shifts).forEach(([dayStr, code]) => {
+            const day = Number(dayStr);
+            const shiftType = convertFromCode(code);
+            map.set(day, shiftType);
+          });
+
+          // ✅ 최종적으로 Map<number, ShiftType> 전달
+          await workCalendarRepository.updateWorkCalendar(year, month, map);
+        }
+
+        console.log('근무표 저장 성공');
+      } catch (error) {
+        console.error('근무표 저장 실패:', error);
+        throw error;
+      }
     },
   }));
 

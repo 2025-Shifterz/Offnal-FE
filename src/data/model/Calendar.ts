@@ -1,9 +1,9 @@
 /** 근무 형태를 나타내는 Enum (Type-Safe) */
 export enum ShiftType {
-  DAY = '오전',
+  DAY = '주간',
   EVENING = '오후',
   NIGHT = '야간',
-  OFF = '휴무',
+  OFF = '휴일',
   UNKNOWN = '기타',
 }
 

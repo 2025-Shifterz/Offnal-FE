@@ -2,36 +2,50 @@
 
 import { Text, Touchable, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
-
-export type TimeFrameChildren = '주간' | '오후' | '야간' | '휴일';
+import { ShiftType } from '../../../data/model/Calendar';
 
 interface TimeFrameProps {
-  text: TimeFrameChildren;
+  text: ShiftType;
   onPress?: () => void;
 }
 
-const TimeFrame: React.FC<TimeFrameProps> = ({ text, onPress }: TimeFrameProps) => {
-  // 근무 형태에 따라 배경색과 텍스트 색상을 결정하는 객체
-  const stylesMap = {
-    주간: {
-      backgroundColor: 'bg-surface-secondary-subtle',
-      textColor: 'text-text-success',
-    },
-    오후: {
-      backgroundColor: 'bg-surface-success-subtle',
-      textColor: 'text-text-subtle',
-    },
-    야간: {
-      backgroundColor: 'bg-surface-information-subtle',
-      textColor: 'text-text-information',
-    },
-    휴일: {
-      backgroundColor: '',
-      textColor: 'text-text-danger',
-    },
-  };
+const stylesMap = {
+  주간: {
+    backgroundColor: 'bg-surface-secondary-subtle',
+    textColor: 'text-text-success',
+  },
+  오후: {
+    backgroundColor: 'bg-surface-success-subtle',
+    textColor: 'text-text-subtle',
+  },
+  야간: {
+    backgroundColor: 'bg-surface-information-subtle',
+    textColor: 'text-text-information',
+  },
+  휴일: {
+    backgroundColor: '',
+    textColor: 'text-text-danger',
+  },
+} as const;
 
-  const currentStyle = stylesMap[text];
+const mapShiftTypeToKey = (shift: ShiftType): keyof typeof stylesMap => {
+  switch (shift) {
+    case ShiftType.DAY:
+      return '주간';
+    case ShiftType.EVENING:
+      return '오후';
+    case ShiftType.NIGHT:
+      return '야간';
+    case ShiftType.OFF:
+      return '휴일';
+    default:
+      return '휴일';
+  }
+};
+
+const TimeFrame: React.FC<TimeFrameProps> = ({ text, onPress }: TimeFrameProps) => {
+  const styleKey = mapShiftTypeToKey(text);
+  const currentStyle = stylesMap[styleKey];
 
   // onPress를 호출하는 것은, 위에서 받은 handleTypeSelect('주간')을 그대로 실행하는 것이다.
   return (
