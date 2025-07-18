@@ -44,12 +44,12 @@ class ImageProcessor(context: Context) {
         val points = pts.toArray()
 
         val sums = points.map { it.x + it.y }
-        rect[0] = points[sums.indexOf(sums.minOrNull())] // top-left
-        rect[2] = points[sums.indexOf(sums.maxOrNull())] // bottom-right
+        rect[0] = points[sums.indexOf(sums.minOrNull())]
+        rect[2] = points[sums.indexOf(sums.maxOrNull())]
 
         val diffs = points.map { it.x - it.y }
-        rect[1] = points[diffs.indexOf(diffs.minOrNull())] // top-right
-        rect[3] = points[diffs.indexOf(diffs.maxOrNull())] // bottom-left
+        rect[1] = points[diffs.indexOf(diffs.minOrNull())]
+        rect[3] = points[diffs.indexOf(diffs.maxOrNull())]
 
         return rect.filterNotNull().toTypedArray()
     }
@@ -57,26 +57,25 @@ class ImageProcessor(context: Context) {
 
     private fun tightCropAndResize(cellImg: Mat, outSize: Size = Size(Constants.CELL_IMG_SIZE.toDouble(), Constants.CELL_IMG_SIZE.toDouble()), extraCrop: Int = 3): Mat {
         if (cellImg.empty()) {
-            return Mat(outSize, CvType.CV_8UC1, Scalar(255.0)) // 빈 셀인 경우 흰색으로 채움
+            return Mat(outSize, CvType.CV_8UC1, Scalar(255.0))
         }
 
         val threshed = Mat()
-        Imgproc.threshold(cellImg, threshed, 200.0, 255.0, Imgproc.THRESH_BINARY) // 텍스트 영역 이진화
+        Imgproc.threshold(cellImg, threshed, 200.0, 255.0, Imgproc.THRESH_BINARY)
 
         val inv = Mat()
-        Core.subtract(threshed, Scalar(255.0), inv) // 이진화된 이미지 반전 (글자가 흰색이 되도록)
-        threshed.release() // 사용 후 해제
+        Core.subtract(threshed, Scalar(255.0), inv)
+        threshed.release()
 
         val nonZeroCoords = Mat()
-        Core.findNonZero(inv, nonZeroCoords) // 0이 아닌 픽셀 (글자)의 좌표를 찾음
-        inv.release() // 사용 후 해제
+        Core.findNonZero(inv, nonZeroCoords)
+        inv.release()
 
         var cropped: Mat
         if (!nonZeroCoords.empty()) {
-            val boundingRect = Imgproc.boundingRect(nonZeroCoords) // 글자를 감싸는 최소 사각형
-            nonZeroCoords.release() // 사용 후 해제
+            val boundingRect = Imgproc.boundingRect(nonZeroCoords)
+            nonZeroCoords.release()
 
-            // Python의 extra_crop 로직 적용
             val x1 = max(boundingRect.x + extraCrop, 0)
             val y1 = max(boundingRect.y + extraCrop, 0)
             val x2 = min(boundingRect.x + boundingRect.width - extraCrop, cellImg.cols())
@@ -85,35 +84,22 @@ class ImageProcessor(context: Context) {
             if (x2 > x1 && y2 > y1) {
                 cropped = cellImg.submat(Rect(x1, y1, x2 - x1, y2 - y1))
             } else {
-                // 잘못 잘라지면 원본 경계로 대체
                 cropped = cellImg.submat(boundingRect)
             }
         } else {
-            // 글자가 없는 경우 (빈 셀), 원본 셀 이미지를 그대로 사용
             cropped = cellImg.clone()
         }
 
         val resized = Mat()
-        Imgproc.resize(cropped, resized, outSize) // 지정된 크기로 리사이즈
-        cropped.release() // 사용 후 해제
+        Imgproc.resize(cropped, resized, outSize)
+        cropped.release()
 
         return resized
     }
 
-    /**
-     * Python의 `classify_dne` 함수에 해당합니다.
-     * TFLite 모델을 사용하여 단일 셀 이미지를 분류합니다.
-     * @param cellImg 분류할 셀 이미지 Mat (그레이스케일)
-     * @param debug 디버그 메시지를 출력할지 여부
-     * @param r 행 인덱스 (디버깅용)
-     * @param c 열 인덱스 (디버깅용)
-     * @return 분류 결과 라벨 (D, N, E 또는 '-')
-     */
+
     private fun classifyCell(cellImg: Mat, debug: Boolean = false, r: Int = 0, c: Int = 0): String {
         val tightImg = tightCropAndResize(cellImg)
-
-        // Python 코드의 white_ratio 계산 (np.mean(tight_img > 180))
-        // 180보다 큰 픽셀을 찾고 그 비율을 계산합니다.
         val highValPixels = Mat()
         Imgproc.threshold(tightImg, highValPixels, 180.0, 255.0, Imgproc.THRESH_BINARY)
         val whiteRatio = Core.countNonZero(highValPixels).toDouble() / (tightImg.rows() * tightImg.cols())
@@ -147,10 +133,8 @@ class ImageProcessor(context: Context) {
 
         floatArray.forEach { inputBuffer.putFloat(it) }
 
-        // TFLite 모델 출력 버퍼 준비
         val outputArray = Array(1) { FloatArray(Constants.CLASS_LABELS.size) }
 
-        // TFLite 추론 실행
         tfLiteInterpreter.run(inputBuffer, outputArray)
 
         val probabilities = outputArray[0]
@@ -161,24 +145,14 @@ class ImageProcessor(context: Context) {
             println("Probabilities: D=${"%.3f".format(probabilities[0])}, N=${"%.3f".format(probabilities[1])}, E=${"%.3f".format(probabilities[2])} (max=${"%.3f".format(maxProb)})")
         }
 
-        // 3. max 확률 0.7 미만이면 빈칸으로 처리 (Python 코드의 새로운 조건)
         if (maxProb < 0.7f) {
             if (debug) println("Blank cell detected by prob: ${"%.3f".format(maxProb)}")
             return "-"
         }
 
-        // 4. 확률이 충분히 높으면 클래스 리턴
         return if (maxIndex != -1) Constants.CLASS_LABELS[maxIndex] else "-"
     }
 
-    /**
-     * 이미지에서 수평 또는 수직 구분선(라인)을 찾습니다.
-     * Python의 `find_seps` 함수에 해당합니다.
-     * @param mask 라인 추출을 위한 이진 마스크 이미지
-     * @param axis "x" (수직선) 또는 "y" (수평선)
-     * @param ratio 투영된 합계의 최대값 대비 임계값 비율
-     * @return 감지된 구분선들의 중앙 위치 목록 (픽셀 좌표)
-     */
     private fun findSeparators(mask: Mat, axis: String, ratio: Double = 0.5): List<Int> {
         val proj = Mat()
         Core.reduce(mask, proj, if (axis == "x") 0 else 1, Core.REDUCE_SUM, CvType.CV_32S)
@@ -208,46 +182,31 @@ class ImageProcessor(context: Context) {
         return groups.map { it.sorted()[it.size / 2] } // 각 그룹의 중앙값 반환
     }
 
-    /**
-     * Python 코드의 `get_table_cells` 함수에 해당합니다.
-     * 이미지에서 스케줄 테이블을 감지하고, 원근 보정 및 셀 분할을 수행합니다.
-     *
-     * @param img 원본 이미지 Mat (Bitmap으로부터 변환된 초기 이미지)
-     * @return 원근 보정된 회색 이미지 Mat, 데이터 행 범위 목록, 데이터 열 범위 목록
-     * @throws ImageProcessingException 테이블을 찾지 못하거나 셀 분할에 실패할 경우
-     */
     private fun getTableCellsAndWarp(origImgBitmap: Bitmap): Triple<Mat, List<Pair<Int, Int>>, List<Pair<Int, Int>>> {
-        // Python: orig_img = cv2.imread(img_path)
         val origImg = Mat()
         Utils.bitmapToMat(origImgBitmap, origImg) // RGBA Mat
 
-        // Python: max_width = 1000, if orig_img.shape[1] > max_width: orig_img = cv2.resize(...)
         val maxWidthLimit = 1000
         if (origImg.cols() > maxWidthLimit) {
             val scale = maxWidthLimit / origImg.cols().toDouble()
             Imgproc.resize(origImg, origImg, Size(maxWidthLimit.toDouble(), (origImg.rows() * scale).toDouble()))
         }
 
-        // Python: gray = cv2.cvtColor(orig_img, cv2.COLOR_BGR2GRAY)
         val gray = Mat()
         Imgproc.cvtColor(origImg, gray, Imgproc.COLOR_RGBA2GRAY) // Bitmap은 보통 RGBA
 
-        // Python: blur = cv2.GaussianBlur(gray, (5, 5), 0)
         val blur = Mat()
         Imgproc.GaussianBlur(gray, blur, Size(5.0, 5.0), 0.0)
 
-        // Python: binary = cv2.adaptiveThreshold(...)
         val binary = Mat()
         Imgproc.adaptiveThreshold(blur, binary, 255.0, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY_INV, 15, 8.0)
         blur.release() // 사용 후 해제
 
-        // Python: contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         val contours: List<MatOfPoint> = ArrayList()
         val hierarchy = Mat()
         Imgproc.findContours(binary, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE)
         hierarchy.release() // 사용 후 해제
 
-        // Python: contours = sorted(contours, key=cv2.contourArea, reverse=True)
         val sortedContours = contours.sortedByDescending { Imgproc.contourArea(it) }
 
         var tableContour: MatOfPoint2f? = null
@@ -266,7 +225,6 @@ class ImageProcessor(context: Context) {
         val finalGray: Mat
 
         if (tableContour != null) {
-            // Python: rect = sort_points(table_contour)
             val rectPoints = sortPoints(tableContour)
 
             val tl = rectPoints[0]; val tr = rectPoints[1]; val br = rectPoints[2]; val bl = rectPoints[3]
@@ -278,7 +236,6 @@ class ImageProcessor(context: Context) {
             val heightB = hypot(tl.x - bl.x, tl.y - bl.y)
             val maxHeight = max(heightA, heightB).toInt()
 
-            // Python: dst = np.array(...)
             val dstPts = MatOfPoint2f(
                 Point(0.0, 0.0), Point(maxWidth - 1.0, 0.0),
                 Point(maxWidth - 1.0, maxHeight - 1.0), Point(0.0, maxHeight - 1.0)
@@ -331,13 +288,6 @@ class ImageProcessor(context: Context) {
         return Triple(finalGray, dataRows, dataCols)
     }
 
-    /**
-     * Python 코드의 메인 실행 함수와 `get_table_cells` 역할을 결합하여 수행합니다.
-     * 이미지에서 스케줄 테이블을 감지하고, 셀을 분할하여 TFLite 모델로 분류한 후 JSON 결과를 반환합니다.
-     * @param imageBitmap 처리할 원본 이미지 Bitmap
-     * @return 셀 분류 결과가 담긴 JSON 문자열
-     * @throws ImageProcessingException 이미지 처리 중 오류 발생 시
-     */
     fun processImage(imageBitmap: Bitmap): String {
         val (processedGrayImage, dataRows, dataCols) = getTableCellsAndWarp(imageBitmap)
 
@@ -361,13 +311,13 @@ class ImageProcessor(context: Context) {
                 rowDict.put((c + 1).toString(), classificationResult)
 
                 if (debug) debugCount++
-                cellImg.release() // 셀 이미지 Mat 해제
+                cellImg.release()
             }
             resultJson.put((r + 1).toString(), rowDict)
         }
 
-        processedGrayImage.release() // 최종 사용된 이미지 Mat 해제
+        processedGrayImage.release()
 
-        return resultJson.toString(2) // 보기 좋게 2칸 들여쓰기로 포맷팅
+        return resultJson.toString(2)
     }
 }
