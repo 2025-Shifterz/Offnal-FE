@@ -1,10 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../presentation/login/screen/Login';
-import ScheduleRegRegisterMethod from '../presentation/selectRegMethod/screen/SelectRegMethod';
+import ScheduleRegRegisterMethod from '../presentation/schedule/screens/SelectRegTypeScreen';
 import KakaoLoginWebView from '../presentation/login/screen/KakaoLoginWebView';
 import PrivacyPolicy from '../presentation/policy/screen/PrivacyPolicy';
 import ServiceTerm from '../presentation/policy/screen/ServiceTerm';
-import { LoginStackParamList } from './type';
+import { LoginStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<LoginStackParamList>();
 
