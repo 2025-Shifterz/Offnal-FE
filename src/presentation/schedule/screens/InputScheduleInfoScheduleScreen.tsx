@@ -6,17 +6,16 @@ import BottomButton from '../../common/component/BottomButton';
 import ScheduleNameInput from '../component/ScheduleNameInput';
 import TitleMessage from '../../common/component/TitleMessage';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { StackParamList } from '../../../navigation/types';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { onboardingNavigation, OnboardingStackParamList } from '../../../navigation/types';
 import { WorkTimeContext } from '../../../context/WorkTimeContext';
 
-type ScheduleInfoInputRouteProp = RouteProp<StackParamList, 'ScheduleInfoInput'>;
+type ScheduleInfoInputRouteProp = RouteProp<OnboardingStackParamList, 'ScheduleInfoInput'>;
 
 const ScheduleInfoInput = () => {
   const route = useRoute<ScheduleInfoInputRouteProp>();
   const { selectedBoxId } = route.params;
 
-  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
+  const navigation = useNavigation<onboardingNavigation>();
 
   // 필수 입력 값을 작성해야 넘어가도록
   const [calendarName, setCalendarName] = useState(''); // 근무표 이름

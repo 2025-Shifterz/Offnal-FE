@@ -3,11 +3,12 @@ import { SafeAreaView, View } from 'react-native';
 import BottomButton from '../../common/component/BottomButton';
 import TitleMessage from '../../common/component/TitleMessage';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackParamList } from '../../../navigation/types';
+import { onboardingNavigation } from '../../../navigation/types';
 
 const CompleteCreateScheduleScreen = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
+  // const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
+
+  const navigation = useNavigation<onboardingNavigation>();
   return (
     <View className="flex-1 bg-background-gray-subtle1 px-[16px]">
       <SafeAreaView className="flex-1">

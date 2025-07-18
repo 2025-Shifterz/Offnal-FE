@@ -1,15 +1,14 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import ArrowBack from '../../../assets/icons/arrow_left.svg';
 import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../navigation/type';
+import { loginNavigation } from '../../../navigation/types';
 
 type PolicyHeaderProps = {
   headerText: string;
 };
 
 const PolicyHeader = ({ headerText }: PolicyHeaderProps) => {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<loginNavigation>();
 
   return (
     <View className="relative h-[50px] w-full items-center justify-center">

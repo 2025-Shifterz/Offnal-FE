@@ -4,8 +4,9 @@ import ScheduleRegRegisterMethod from '../presentation/schedule/screens/SelectRe
 import KakaoLoginWebView from '../presentation/login/screen/KakaoLoginWebView';
 import PrivacyPolicy from '../presentation/policy/screen/PrivacyPolicy';
 import ServiceTerm from '../presentation/policy/screen/ServiceTerm';
+import { LoginStackParamList } from './type';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<LoginStackParamList>();
 
 // + 로그인 화면들
 

@@ -1,14 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
-import { Button, ScrollView, Touchable, TouchableOpacity, View } from 'react-native';
+import { Button, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackParamList } from '../../../navigation/types';
+import { calendarNavigation } from '../../../navigation/types';
 import CalendarViewer from '../../calenderType/components/calendar/personal/CalendarViewer';
 import TCalendarViewer from '../../calenderType/components/calendar/team/TCalendarViewer';
 import { useState } from 'react';
 
 const CalendarScreen = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
+  const navigation = useNavigation<calendarNavigation>();
   const [isTeamView, setIsTeamView] = useState(false);
 
   return (
