@@ -1,5 +1,5 @@
 import { Text, View } from 'react-native';
-import PolicyHeader from '../components/PolicyHeader';
+import PolicyHeader from '../components/CommonHeader';
 import ServiceTermText from '../components/ServiceTermText';
 
 const ServiceTerm = () => {
