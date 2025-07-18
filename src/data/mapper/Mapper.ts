@@ -98,3 +98,39 @@ export function toCreateCalendarRequest(newCalendar: NewCalendar): CreateCalenda
     calendars,
   };
 }
+
+
+
+// DATA REPO 사용을 위한 변경함수
+
+export type ShiftDataType = 'D' | 'E' | 'N' | 'OFF';
+export type ShiftsDataMap = Map<number, ShiftDataType>;
+
+// 문자열을 ShiftType으로 변환하는 헬퍼 함수
+function toDataShiftType(value: string): ShiftDataType | null {
+  switch (value) {
+    case 'D': return 'D';
+    case 'E': return 'E';
+    case 'N': return 'N';
+    case '_': case '-': case '': return 'OFF';
+    default: return 'OFF';
+  }
+}
+
+// 변환 함수
+export function createMonthlyShiftsMap(ocrResult: [string, Record<string, string>][]): ShiftsDataMap {
+  const monthlyMap: ShiftsDataMap = new Map();
+  for (const weekData of ocrResult) {
+    const weeklyScheduleObject = weekData[1];
+    if (typeof weeklyScheduleObject !== 'object' || weeklyScheduleObject === null) continue;
+    for (const [dayString, shiftValue] of Object.entries(weeklyScheduleObject)) {
+      const day = parseInt(dayString, 10);
+      if (isNaN(day)) continue;
+      const shiftDataType = toDataShiftType(shiftValue);
+      if (shiftDataType) {
+        monthlyMap.set(day, shiftDataType);
+      }
+    }
+  }
+  return monthlyMap;
+}

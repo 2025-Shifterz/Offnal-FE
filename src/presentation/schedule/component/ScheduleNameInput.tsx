@@ -16,7 +16,7 @@ const ScheduleNameInput = ({ calendarName, setCalendarName }: NameInputProps) =>
           onChangeText={setCalendarName}
           placeholder="연세병원 근무표"
           maxLength={10}
-          className="text-body-s placeholder:text-text-disabled"
+          className="text-body-s placeholder:text-text-disabld"
         />
         <View className="justify-center">
           <Text className="flex justify-center text-label-xxs">

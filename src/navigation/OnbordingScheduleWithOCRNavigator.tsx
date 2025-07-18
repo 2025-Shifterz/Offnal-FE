@@ -7,9 +7,9 @@ import StepBar from '../presentation/common/component/StepBar';
 import SelectMonthWithOCRScreen from '../presentation/schedule/screens/ocr/SelectMonthWithOCRScreen';
 import SelectInputScheduleWithOCRTypeScreen from '../presentation/schedule/screens/ocr/SelectInputScheduleWithOCRTypeScreen';
 import EditCompleteCreateScheduleOCRScreen from '../presentation/schedule/screens/ocr/CompleteScheduleOCRScreen';
-import ScheduleRegType from '../presentation/schedule/screens/RegTypeByScheduleScreen';
-import ScheduleInfoInput from '../presentation/schedule/screens/InputScheduleInfoScheduleScreen';
 import { OnboardingStackParamList } from './types';
+import ScheduleRegTypeOCR from '../presentation/schedule/screens/ocr/RegTypeByScheduleOCRScreen';
+import ScheduleInfoInputOCR from '../presentation/schedule/screens/ocr/InputScheduleInfoOCRScreen';
 
 const Stack = createNativeStackNavigator<OnboardingStackParamList>();
 
@@ -26,12 +26,12 @@ const OnBoardingScheduleWithOCRNavigator = () => {
     >
       <Stack.Screen
         name="ScheduleRegType"
-        component={ScheduleRegType}
+        component={ScheduleRegTypeOCR}
         options={{ headerTitle: () => <StepBar currentStep={0} totalSteps={6} /> }}
       />
       <Stack.Screen
         name="ScheduleInfoInput"
-        component={ScheduleInfoInput}
+        component={ScheduleInfoInputOCR}
         options={{ headerTitle: () => <StepBar currentStep={1} totalSteps={6} /> }}
       />
       <Stack.Screen

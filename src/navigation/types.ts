@@ -38,8 +38,6 @@ export type OnboardingStackParamList = {
       E: { startTime: string; endTime: string };
       N: { startTime: string; endTime: string };
     };
-    year: number;
-    month: number;
   };
   SelectInputScheduleWithOCRType: {
     selectedBoxId: number;

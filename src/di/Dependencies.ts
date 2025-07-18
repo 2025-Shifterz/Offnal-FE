@@ -17,7 +17,7 @@ const calendarService = new CalendarService();
 // 2. 구체적인 리포지토리 구현체 인스턴스 생성 (TodoDao 주입)
 const todoRepository = new TodoRepositoryImpl(todoDao);
 const userRepostiory = new UserRepositoryImpl;
-const workCalendarRepository = new WorkCalendarRepositoryImpl(calendarService);
+export const workCalendarRepository = new WorkCalendarRepositoryImpl(calendarService);
 
 
 // 3. Use Case 인스턴스 생성 (repository 주입)

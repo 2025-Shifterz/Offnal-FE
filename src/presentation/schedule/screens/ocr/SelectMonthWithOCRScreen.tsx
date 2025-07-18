@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MonthPicker } from '../../component/MonthPicker';
@@ -18,9 +18,9 @@ const SelectMonthWithOCRScreen = () => {
     month: null,
   });
 
-  const handleDateChange = (year: number, month: number | null) => {
+  const handleDateChange = useCallback((year: number, month: number | null) => {
     setDate({ year, month });
-  };
+  }, []);
 
   const handleNext = () => {
     if (date.month) {
@@ -30,7 +30,7 @@ const SelectMonthWithOCRScreen = () => {
         selectedBoxId,
         calendarName,
         workGroup,
-        workTimes
+        workTimes,
       });
     } else {
       Alert.alert(

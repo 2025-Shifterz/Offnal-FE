@@ -58,6 +58,8 @@ const SelectInputScheduleWithOCRTypeScreen = () => {
     try {
       const resultJson = await ScheduleModule.parseFromBase64(asset.base64);
       const parsedResult = JSON.parse(resultJson);
+      console.log('Parsed OCR Result:', parsedResult);
+
       const entries = Object.entries(parsedResult);
 
       navigation.navigate('EditCompleteCreateScheduleOCR', {
