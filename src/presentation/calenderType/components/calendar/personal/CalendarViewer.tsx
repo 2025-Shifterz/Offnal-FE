@@ -40,8 +40,9 @@ const mockCalendarData = {
 } as const;
 
 interface CalendarViewerProps {
-  onPressTeamIcon: () => void;
-  onPressEditIcon: () => void;
+  onPressTeamIcon?: () => void;
+  onPressEditIcon?: () => void;
+  isEditScreen?: boolean;
 }
 
 // rawData를 formatted 된 예시 데이터 형식으로.
@@ -65,7 +66,11 @@ const formatGetData = (
   return result;
 };
 
-const CalendarViewer = ({ onPressTeamIcon, onPressEditIcon }: CalendarViewerProps) => {
+const CalendarViewer = ({
+  onPressTeamIcon,
+  onPressEditIcon,
+  isEditScreen,
+}: CalendarViewerProps) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [calendarData, setCalendarData] = useState<Record<string, TimeFrameChildren>>({});
 
@@ -95,6 +100,7 @@ const CalendarViewer = ({ onPressTeamIcon, onPressEditIcon }: CalendarViewerProp
         onPressTeamIcon={onPressTeamIcon}
         onPressEditIcon={onPressEditIcon}
         isViewer
+        isEditScreen={isEditScreen}
       />
     </View>
   );

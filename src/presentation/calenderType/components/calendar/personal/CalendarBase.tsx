@@ -17,6 +17,7 @@ interface CalendarBaseProps {
   onDatePress?: (date: dayjs.Dayjs) => void;
   calendarData: Record<string, TimeFrameChildren>;
   isViewer: boolean;
+  isEditScreen?: boolean;
   onPressTeamIcon?: () => void;
   onPressEditIcon?: () => void;
 
@@ -29,6 +30,7 @@ const CalendarBase = ({
   onDatePress,
   calendarData,
   isViewer,
+  isEditScreen,
   onPressTeamIcon,
   onPressEditIcon,
 
@@ -100,20 +102,21 @@ const CalendarBase = ({
   return (
     <View className="rounded-t-radius-m2 bg-surface-white">
       {/* 헤더 */}
-      {isViewer ? (
-        <CalendarViewerHeader
-          onPressEditIcon={onPressEditIcon}
-          onPressTeamIcon={onPressTeamIcon}
-          selectedDate={currentDate.toDate()}
-          onChange={newDate => onChangeMonth(dayjs(newDate))}
-        />
-      ) : (
-        <CalendarEditorHeader
-          currentDate={currentDate}
-          onPrevMonth={handlePrevMonth}
-          onNextMonth={handleNextMonth}
-        />
-      )}
+      {!isEditScreen &&
+        (isViewer ? (
+          <CalendarViewerHeader
+            onPressEditIcon={onPressEditIcon}
+            onPressTeamIcon={onPressTeamIcon}
+            selectedDate={currentDate.toDate()}
+            onChange={newDate => onChangeMonth(dayjs(newDate))}
+          />
+        ) : (
+          <CalendarEditorHeader
+            currentDate={currentDate}
+            onPrevMonth={handlePrevMonth}
+            onNextMonth={handleNextMonth}
+          />
+        ))}
 
       {/* 일 월 화 수 .. */}
       <View className="mt-2 h-[30px] flex-row items-center justify-between">

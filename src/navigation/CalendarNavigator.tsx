@@ -22,7 +22,11 @@ const CalendarNavigator = () => {
         component={CalendarScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="EditCalendar" component={CalendarEditScreen} />
+      <Stack.Screen
+        name="EditCalendar"
+        options={{ headerShown: false }}
+        component={CalendarEditScreen}
+      />
     </Stack.Navigator>
   );
 };

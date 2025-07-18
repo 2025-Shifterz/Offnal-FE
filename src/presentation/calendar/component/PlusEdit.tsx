@@ -18,7 +18,7 @@ const TextButton = ({ text, onNavPress }: TextButtonProps) => {
       onPress={onNavPress}
       className="rounded-radius-max bg-surface-white px-[9px] py-[6px]"
     >
-      <Text className="text-heading-xxxxs font-[500]">{text}</Text>
+      <Text className="text-heading-xxxxs font-medium">{text}</Text>
     </TouchableOpacity>
   );
 };

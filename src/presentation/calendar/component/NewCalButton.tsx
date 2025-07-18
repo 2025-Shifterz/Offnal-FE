@@ -13,7 +13,7 @@ const NewCalButton = ({ onCreateSchedule }: NewCalButtonProps) => {
       className="h-[40px] flex-row items-center justify-center gap-[5px] rounded-radius-m1 bg-surface-primary px-[10px] py-[8px]"
     >
       <PlusIcon />
-      <Text className="items-cente text-body-m font-[500] leading-h-3 text-text-inverse-static">
+      <Text className="items-cente text-body-m font-medium leading-h-3 text-text-inverse-static">
         {'근무표 생성하기'}
       </Text>
     </TouchableOpacity>
