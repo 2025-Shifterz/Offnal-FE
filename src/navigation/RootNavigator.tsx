@@ -20,7 +20,6 @@ const RootNavigator = () => {
           name="OnboardingSchedulesWithOCR"
           component={OnBoardingScheduleWithOCRNavigator}
         />
-        <RootStack.Screen name="LoginScreens" component={LoginNavigator} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

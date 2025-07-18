@@ -11,7 +11,6 @@ import NoteSection from '../ui/NoteSection';
 import HealthCardSection from '../ui/HealthCardSection';
 import TopCard from '../components/TopCard';
 
-import TableWare from '../../../assets/images/tableware.svg';
 import Bed from '../../../assets/images/bed.svg';
 import Clock from '../../../assets/images/clock.svg';
 import HourGlass from '../../../assets/images/hourglass.svg';

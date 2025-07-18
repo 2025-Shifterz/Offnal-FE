@@ -1,4 +1,4 @@
-import { Dimensions, View } from 'react-native';
+import { Dimensions, View, Text } from 'react-native';
 import { useState, useEffect } from 'react';
 import BackGroundDawn from '../../../assets/cards/bg_dawn.svg';
 import BackGroundMorning from '../../../assets/cards/bg_morning.svg';
@@ -6,6 +6,8 @@ import BackGroundAfternoon from '../../../assets/cards/bg_afternoon.svg';
 import BackGroundEvening from '../../../assets/cards/bg_evening.svg';
 // import BackGroundNight from '../../../assets/cards/bg_night.svg';
 import BackGroundMidnight from '../../../assets/cards/bg_midnight.svg';
+import AppCharacter from '../../../assets/icons/ic_app_character.svg';
+import SpeechBubble from '../../../assets/icons/ic_speech_bubble.svg';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -66,8 +68,57 @@ const TopCard = () => {
   const BackgroundComponent = getBackgroundComponent(timeOfDay);
 
   return (
-    <View className="w-screen items-center overflow-hidden">
+    <View
+      className="w-screen items-center overflow-hidden"
+      style={{ position: 'relative', height: 253 }}
+    >
       <BackgroundComponent width={screenWidth} height={253} preserveAspectRatio="xMidYMid slice" />
+
+      <View
+        style={{
+          position: 'absolute',
+          top: 55,
+          left: '50%',
+          width: 320,
+          height: 80,
+          justifyContent: 'center',
+          alignItems: 'center',
+          transform: [{ translateX: -160 }],
+        }}
+      >
+        <SpeechBubble width={320} height={70} />
+        <View
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: 320,
+            height: 70,
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingHorizontal: 24,
+          }}
+        >
+          <Text className="font-pretendard text-label-xxs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-disabled-on">
+            지금은 집중력이 떨어질 수 있어요.{'\n'}
+            가벼운 스트레칭이나 물 한 잔 추천드려요.
+          </Text>
+        </View>
+      </View>
+
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: '50%',
+          width: 250,
+          alignItems: 'center',
+          justifyContent: 'center',
+          transform: [{ translateX: -125 }], // 250/2 = 125
+        }}
+      >
+        <AppCharacter width={250} height={120} />
+      </View>
     </View>
   );
 };

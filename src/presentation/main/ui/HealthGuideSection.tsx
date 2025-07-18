@@ -1,8 +1,10 @@
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import TitleSection from '../components/TitleSection';
 import HealthGuideChip, { HealthGuideType } from '../components/HealthGuideChip';
 import { useState } from 'react';
 import TooltipBubble from '../components/Tooltip';
+import Bed from '../../../assets/icons/ic_bed.svg';
+import HourGlass from '../../../assets/icons/ic_hourglass.svg';
 
 interface HealthGuide {
   sleepGuide?: { content?: string; time?: string };
@@ -20,6 +22,8 @@ const HealthGuideSection = ({ health }: HealthGuideSectionProps) => {
     setShowTooltip(!showTooltip);
   };
 
+  const isEmpty = !health || (!health.sleepGuide?.content && !health.fastingGuide?.content);
+
   return (
     <View className="flex-col justify-start gap-y-number-7">
       <TitleSection.WithTooltipIcon title="오늘의 건강 가이드" onPressIcon={toggleTooltip} />
@@ -36,17 +40,36 @@ const HealthGuideSection = ({ health }: HealthGuideSectionProps) => {
         </TooltipBubble>
       )}
 
-      <View className="w-full flex-row items-center gap-g-3">
-        <HealthGuideChip
-          healthGuideType={HealthGuideType.SLEEP}
-          guideContent={health?.sleepGuide?.content ?? ''}
-          guideTime={health?.sleepGuide?.time ?? ''}
-        />
-        <HealthGuideChip
-          healthGuideType={HealthGuideType.FASTING_TIME}
-          guideContent={health?.fastingGuide?.content ?? ''}
-          guideTime={health?.fastingGuide?.time ?? ''}
-        />
+      <View className="w-full flex-row items-center gap-g-3 pb-number-8">
+        {isEmpty ? (
+          <>
+            <View className="h-[102px] w-full flex-1 items-center justify-center rounded-radius-m1 bg-surface-white p-number-6">
+              <HourGlass width={26} height={36.9258} className="pb-[1.75px] pt-[1.31px]" />
+              <Text className="pt-number-6 font-pretendard text-body-xxs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-disabled">
+                아직 근무표가 등록되지 않아{'\n'}공복 시간 추천이 불가해요.
+              </Text>
+            </View>
+            <View className="h-[102px] w-full flex-1 items-center justify-center rounded-radius-m1 bg-surface-white p-number-6">
+              <Bed width={35.0006} height={36.5409} className="pb-[1.75px] pt-[1.31px]" />
+              <Text className="pt-number-6 font-pretendard text-body-xxs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-disabled">
+                아직 근무표가 등록되지 않아{'\n'}수면 시간 추천이 불가해요.
+              </Text>
+            </View>
+          </>
+        ) : (
+          <>
+            <HealthGuideChip
+              healthGuideType={HealthGuideType.SLEEP}
+              guideContent={health?.sleepGuide?.content ?? ''}
+              guideTime={health?.sleepGuide?.time ?? ''}
+            />
+            <HealthGuideChip
+              healthGuideType={HealthGuideType.FASTING_TIME}
+              guideContent={health?.fastingGuide?.content ?? ''}
+              guideTime={health?.fastingGuide?.time ?? ''}
+            />
+          </>
+        )}
       </View>
     </View>
   );

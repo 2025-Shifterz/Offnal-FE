@@ -5,7 +5,7 @@ import MemoCard from '../components/MemoCard';
 
 const NoteSection = () => {
   return (
-    <View className="flex-col justify-start gap-y-number-7">
+    <View className="flex-col justify-start gap-y-number-7 pt-number-8">
       <TitleSection.OnlyTitle title="기록하기" />
       <ToDoCard.Container />
       <MemoCard.Container />

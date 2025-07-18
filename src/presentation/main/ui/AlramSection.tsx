@@ -14,7 +14,7 @@ interface AlramSectionProps {
 
 const AlramSection = ({ alarms }: AlramSectionProps) => {
   return (
-    <View className="my-number-8 flex-col justify-start gap-y-number-7">
+    <View className="flex-col justify-start gap-y-number-7 py-number-8">
       <TitleSection.WithAddableBtn title="자동알람" btnContent="알람 추가" onPressIcon={() => {}} />
       {alarms && alarms.length > 0 ? (
         alarms.map((alarm: Alarm, idx: number) => (
