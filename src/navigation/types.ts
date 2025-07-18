@@ -12,6 +12,7 @@ export type LoginStackParamList = {
   PrivacyPolicy: undefined;
   ServiceTerm: undefined;
   OnboardingSchedules: undefined;
+  OnboardingSchedulesWithOCR: undefined;
 };
 
 // 온보딩 캘린더
@@ -28,6 +29,42 @@ export type OnboardingStackParamList = {
       N: { startTime: string; endTime: string };
     };
   };
+  SelectMonthWithOCR: {
+    selectedBoxId: number;
+    calendarName: string;
+    workGroup: string;
+    workTimes: {
+      D: { startTime: string; endTime: string };
+      E: { startTime: string; endTime: string };
+      N: { startTime: string; endTime: string };
+    };
+  };
+  SelectInputScheduleWithOCRType: {
+    selectedBoxId: number;
+    calendarName: string;
+    workGroup: string;
+    workTimes: {
+      D: { startTime: string; endTime: string };
+      E: { startTime: string; endTime: string };
+      N: { startTime: string; endTime: string };
+    };
+    year: number;
+    month: number;
+    ocrResult?: any;
+  };
+  EditCompleteCreateScheduleOCR: {
+    selectedBoxId: number;
+    calendarName: string;
+    workGroup: string;
+    workTimes: {
+      D: { startTime: string; endTime: string };
+      E: { startTime: string; endTime: string };
+      N: { startTime: string; endTime: string };
+    };
+    year: number;
+    month: number;
+    ocrResult?: any;
+  };
   CompleteCreate: undefined;
 };
 
@@ -43,5 +80,6 @@ export type CalendarScreenStackParamList = {
 export type RootStackParamList = {
   Tabs: undefined;
   LoginScreens: undefined;
-  OnboardingSchedules: undefined; // or NavigatorScreenParams<OnboardingStackParamList>
+  OnboardingSchedules: undefined; 
+  OnboardingSchedulesWithOCR: undefined;
 };

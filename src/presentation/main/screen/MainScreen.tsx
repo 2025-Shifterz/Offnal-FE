@@ -16,7 +16,7 @@ import TopCard from '../components/TopCard';
 export default function MainScreen() {
   return (
     <View className="flex-1 bg-black">
-      <SafeAreaView className="flex-1 bg-transparent" edges={['left', 'right',]}>
+      <SafeAreaView className="flex-1 bg-transparent" edges={['left', 'right']}>
         <ScrollView className="flex-1">
           <TopCard/>
           <View className="w-full flex-row items-center justify-center gap-g-2 px-number-8 py-number-8">

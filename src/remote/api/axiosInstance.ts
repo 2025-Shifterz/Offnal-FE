@@ -2,7 +2,7 @@ import axios from 'axios';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { API_URL } from '@env';
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: API_URL,
   timeout: 10000,
 });
