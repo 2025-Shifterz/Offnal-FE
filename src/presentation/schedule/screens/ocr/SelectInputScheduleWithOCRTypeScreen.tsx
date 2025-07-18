@@ -14,7 +14,10 @@ import { onboardingNavigation, OnboardingStackParamList } from '../../../../navi
 
 const { ScheduleModule } = NativeModules;
 
-type ScheduleInfoInputRouteProp = RouteProp<OnboardingStackParamList, 'SelectInputScheduleWithOCRType'>;
+type ScheduleInfoInputRouteProp = RouteProp<
+  OnboardingStackParamList,
+  'SelectInputScheduleWithOCRType'
+>;
 
 const SelectInputScheduleWithOCRTypeScreen = () => {
   const route = useRoute<ScheduleInfoInputRouteProp>();
@@ -81,8 +84,8 @@ const SelectInputScheduleWithOCRTypeScreen = () => {
 
   return (
     <View className="flex-1 bg-background-gray-subtle1">
-      <SafeAreaView className="flex-1 px-number-8">
-        <Text className="mb-4 text-start text-heading-m font-semibold">
+      <View className="flex-1 px-number-8">
+        <Text className="mb-4 mt-[9px] text-start text-heading-m font-semibold">
           인식할 근무표를 등록해주세요.
         </Text>
 
@@ -108,7 +111,7 @@ const SelectInputScheduleWithOCRTypeScreen = () => {
           subtitle="이미 저장된 근무표 이미지를 불러올 수 있어요."
           onPress={analyzeScheduleImage}
         />
-      </SafeAreaView>
+      </View>
     </View>
   );
 };
