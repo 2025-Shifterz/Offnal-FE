@@ -23,8 +23,8 @@ const RecommnedMealSection = ({ meals }: RecommendMealSectionProps) => {
       <TitleSection.OnlyTitle title="오늘의 식사 추천" />
       {isEmpty ? (
         <View className="mt-number-7 h-[84px] w-full flex-1 flex-col items-center justify-center rounded-radius-m1 bg-surface-white p-number-6">
-          <TableWare width={36.87} height={27.94} className="pb-[6.44px] pt-[5.61px]" />
-          <Text className="items-center font-pretendard text-body-xxs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-disabled">
+          <TableWare width={36.87} height={27.94} />
+          <Text className="items-center pt-[6.45px] font-pretendard text-body-xxs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-disabled">
             아직 근무표가 등록되지 않아{'\n'}식사를 추천해드릴 수 없어요.
           </Text>
         </View>
