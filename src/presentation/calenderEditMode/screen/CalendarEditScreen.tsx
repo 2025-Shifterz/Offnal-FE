@@ -7,8 +7,8 @@ import EditBottomSheet from '../components/EditBottomSheet';
 import CalendarInteractive from '../components/CalendarInteractive';
 import SuccessIcon from '../../../assets/icons/g-success.svg';
 import BottomSheet from '@gorhom/bottom-sheet';
-import baseApi from '../../../remote/api/baseApi';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import api from '../../../remote/api/axiosInstance';
 
 const CalendarEditScreen = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());
@@ -52,10 +52,13 @@ const CalendarEditScreen = () => {
     sheetRef.current?.close();
   };
 
-  // '체크' 버튼을 누르면 post 요청 - 근무표 저장.
-  const handlePostData = () => {
+  // '체크' 버튼을 누르면 patch 요청 - 근무표 수정사항 저장.
+  const handlePatchData = () => {
+    const year = currentDate.year();
+    const month = currentDate.month() + 1;
+
     try {
-      const response = baseApi.post('/works/calendar', {});
+      const response = api.patch('/works/calendar', { year, month, works: calendarData });
       console.log('근무표 수정 성공:', response);
     } catch (error) {
       console.log('근무표 수정 실패:', error);
@@ -97,7 +100,7 @@ const CalendarEditScreen = () => {
         </View>
         {/* 모든 저장 버튼 -> 근무표에 저장되어야함. post 요청!! */}
         <TouchableOpacity
-          onPress={handlePostData}
+          onPress={handlePatchData}
           className="absolute bottom-[13px] right-[13px] h-[40px] w-[40px] items-center justify-center rounded-radius-max bg-success-40"
         >
           <SuccessIcon />
