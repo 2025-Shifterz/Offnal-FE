@@ -126,23 +126,3 @@ function toDataShiftType(value: string): ShiftDataType | null {
       return 'OFF';
   }
 }
-
-// 변환 함수
-export function createMonthlyShiftsMap(
-  ocrResult: [string, Record<string, string>][]
-): ShiftsDataMap {
-  const monthlyMap: ShiftsDataMap = new Map();
-  for (const weekData of ocrResult) {
-    const weeklyScheduleObject = weekData[1];
-    if (typeof weeklyScheduleObject !== 'object' || weeklyScheduleObject === null) continue;
-    for (const [dayString, shiftValue] of Object.entries(weeklyScheduleObject)) {
-      const day = parseInt(dayString, 10);
-      if (isNaN(day)) continue;
-      const shiftDataType = toDataShiftType(shiftValue);
-      if (shiftDataType) {
-        monthlyMap.set(day, shiftDataType);
-      }
-    }
-  }
-  return monthlyMap;
-}

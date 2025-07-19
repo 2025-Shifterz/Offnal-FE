@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, Alert, Platform } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { ImagePickerResponse, launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { NativeModules } from 'react-native';
 import { openSettings, Permission, PERMISSIONS, request, RESULTS } from 'react-native-permissions';
@@ -9,12 +8,12 @@ import RegMethod from '../../../schedule/component/RegMethod';
 
 import TakePicture from '../../../../assets/icons/ic_camera_32.svg';
 import OpenGallery from '../../../../assets/icons/ic_gallery_32.svg';
+import ProgressModal from '../../../common/component/ProgressModal';
+
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { onboardingNavigation, OnboardingStackParamList } from '../../../../navigation/types';
-import axios from 'axios';
+import { OnboardingStackParamList } from '../../../../navigation/types';
 import { fastAPIService } from '../../../../di/Dependencies';
-import { ShiftType } from '../../../../data/model/Calendar';
 
 const { ScheduleModule } = NativeModules;
 const { ImageProcessorModule } = NativeModules;
@@ -87,7 +86,7 @@ const SelectInputScheduleWithOCRTypeScreen = () => {
       {
         mediaType: 'photo',
         includeBase64: false,
-        quality: 1
+        quality: 1,
       },
       hadleOCRResponse
     );
@@ -201,6 +200,7 @@ const SelectInputScheduleWithOCRTypeScreen = () => {
           onPress={analyzeScheduleImage}
         />
       </View>
+      <ProgressModal isVisible={isAnalyzing} />
     </View>
   );
 };
