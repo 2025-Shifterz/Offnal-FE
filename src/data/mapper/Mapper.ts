@@ -5,6 +5,21 @@ import { GetWorkCalendarResponseData } from '../../remote/response/GetWorkCalend
 import { UpdateShiftsRequest } from '../../remote/request/PatchWorkCalendarReqeust';
 import { CreateCalendarRequest } from '../../remote/request/CreateWorkCalendarRequest';
 
+export function fromCodetoShiftType(code: string): ShiftType {
+  switch (code) {
+    case '주간':
+      return '주간';
+    case '오후':
+      return '오후';
+    case '야간':
+      return '야간';
+    case '휴일':
+      return '휴일';
+    default:
+      return '휴일';
+  }
+}
+
 export function toShiftType(code: string): ShiftType {
   switch (code) {
     case 'D':
@@ -32,7 +47,7 @@ export function toWorkDayModels(apiData: GetWorkCalendarResponseData[]): WorkDay
 
   return apiData.map(item => ({
     day: parseInt(item.day, 10), // 문자열을 10진수 숫자로 변환
-    shift: toShiftType(item.workTypeName), // 문자열을 Enum으로 변환
+    shift: fromCodetoShiftType(item.workTypeName), // 문자열을 Enum으로 변환
   }));
 }
 
