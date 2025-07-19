@@ -78,8 +78,9 @@ export type CalendarScreenStackParamList = {
 
 // 루트
 export type RootStackParamList = {
+  SplashScreen: undefined;
   Tabs: undefined;
   LoginScreens: undefined;
-  OnboardingSchedules: undefined; 
+  OnboardingSchedules: undefined;
   OnboardingSchedulesWithOCR: undefined;
 };

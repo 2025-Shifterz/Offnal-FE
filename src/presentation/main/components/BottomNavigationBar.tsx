@@ -14,6 +14,7 @@ import MyInfoBkIcon from '../../../assets/icons/ic_myinfo_24_bk.svg';
 export const Tab = createBottomTabNavigator();
 
 const BottomNavigationBar = ({ children }: { children: ReactNode }) => {
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -67,7 +68,9 @@ const BottomNavigationBar = ({ children }: { children: ReactNode }) => {
           backgroundColor: '#FFFFFF',
           borderTopWidth: 1,
           borderTopColor: '#e0e0e0',
-          maxHeight: 65,
+          height: 65,
+          paddingBottom: 5,
+          paddingTop: 5,
         },
         headerShown: false,
       })}

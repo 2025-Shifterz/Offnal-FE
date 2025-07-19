@@ -4,10 +4,12 @@ import CalendarYellow from '../../../assets/icons/calendar_yellow.svg';
 import CalendarBlue from '../../../assets/icons/calendar_blue.svg';
 import RegMethod from '../component/RegMethod';
 import { useNavigation } from '@react-navigation/native';
-import { loginNavigation } from '../../../navigation/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../navigation/types';
 
 const ScheduleRegRegisterMethod = () => {
-  const navigation = useNavigation<loginNavigation>();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  
 
   return (
     <View className="h-full w-full flex-1 items-center bg-background-gray-subtle1 px-p-6">
@@ -37,7 +39,7 @@ const ScheduleRegRegisterMethod = () => {
           Icon={CalendarBlue}
           title="근무표 없이 시작하기"
           subtitle="지금은 근무표 없이 시작하고, 나중에 등록할 수 있어요"
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('Tabs')}
         />
       </View>
     </View>
