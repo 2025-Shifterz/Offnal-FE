@@ -1,4 +1,11 @@
-
+/** 근무 형태를 나타내는 Enum (Type-Safe) */
+// export enum ShiftType {
+//   DAY = '주간',
+//   EVENING = '오후',
+//   NIGHT = '야간',
+//   OFF = '휴일',
+//   UNKNOWN = '기타',
+// }
 export type ShiftType = '주간' | '야간' | '오후' | '휴일';
 
 /** 앱의 Domain 또는 UI Layer에서 사용할 근무일 모델 */

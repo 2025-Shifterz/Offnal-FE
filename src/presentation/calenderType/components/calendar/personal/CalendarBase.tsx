@@ -70,8 +70,6 @@ const CalendarBase = ({
       const key = date.format('YYYY-MM-DD'); // string 형식
       const time = calendarData?.get(key); // string 전달
 
-      console.log('time', time)
-
       days.push(
         <TouchableOpacity
           activeOpacity={1}
