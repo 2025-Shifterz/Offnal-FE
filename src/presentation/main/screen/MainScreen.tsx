@@ -11,17 +11,18 @@ import NoteSection from '../ui/NoteSection';
 import HealthCardSection from '../ui/HealthCardSection';
 import TopCard from '../components/TopCard';
 
-import { getHomeData } from '../../../data/impl/HomeRepository';
+import { homeRepository } from '../../../di/Dependencies';
+import { HomeResponse } from '../../../remote/response/homeResponse';
 
 export default function MainScreen() {
-  const [homeData, setHomeData] = useState<any>(null);
+  const [homeData, setHomeData] = useState<HomeResponse['data'] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchHome = async () => {
       try {
-        const data = await getHomeData();
-        setHomeData(data.data);
+        const data = await homeRepository.getHome();
+        setHomeData(data);
       } catch (error) {
         console.error('홈 데이터 불러오기 실패:', error);
       } finally {
@@ -84,9 +85,9 @@ export default function MainScreen() {
           </View>
 
           <View className="items-top flex-1 justify-start bg-background-gray-subtle1 p-number-8">
-            <RecommnedMealSection meals={homeData?.todayRoutine?.meals ?? []} />
-            <HealthGuideSection health={homeData?.todayRoutine?.health ?? null} />
-            <AlramSection alarms={homeData?.alarms ?? []} />
+            <RecommnedMealSection meals={homeData?.todayRoutine?.meals as any ?? []} />
+            <HealthGuideSection health={homeData?.todayRoutine?.health as any ?? null} />
+            <AlramSection alarms={[]} />
             <HealthCardSection />
             <NoteSection />
           </View>

@@ -5,7 +5,7 @@ import AlramCard from '../components/AlramCard';
 
 interface Alarm {
   // 실제 alarm 데이터 구조에 맞게 필드 추가 필요
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface AlramSectionProps {

@@ -3,12 +3,13 @@ import { SafeAreaView, View } from 'react-native';
 import BottomButton from '../../common/component/BottomButton';
 import TitleMessage from '../../common/component/TitleMessage';
 import { useNavigation } from '@react-navigation/native';
-import { onboardingNavigation } from '../../../navigation/types';
+import { RootStackParamList } from '../../../navigation/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const CompleteCreateScheduleScreen = () => {
   // const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
 
-  const navigation = useNavigation<onboardingNavigation>();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
     <View className="flex-1 bg-background-gray-subtle1 px-[16px]">
       <SafeAreaView className="flex-1">
@@ -18,7 +19,7 @@ const CompleteCreateScheduleScreen = () => {
             subTitle="근무표가 반영된 건강 정보를 홈 화면에서 확인할 수 있어요."
           />
           {/* 추후에 '완료'시 네비게이션 수정할 예정입니다. */}
-          <BottomButton text="완료" onPress={() => navigation.navigate('ScheduleRegType')} />
+          <BottomButton text="완료" onPress={() => navigation.navigate('Tabs')} />
         </View>
       </SafeAreaView>
     </View>
