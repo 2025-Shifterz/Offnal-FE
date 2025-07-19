@@ -8,10 +8,12 @@ import {TodoDao} from '../local/dao/TodoDao';
 import { UserRepositoryImpl } from '../data/impl/UserRepositoryImpl';
 import { CalendarService } from '../remote/api/CalendarService';
 import { WorkCalendarRepositoryImpl } from '../data/impl/CalendarRepositoryImpl';
+import { FastAPIService } from '../remote/api/FastAPIService';
 
 // 1. 구체적인 데이터 소스 인스턴스 생성
 const todoDao = new TodoDao();
 const calendarService = new CalendarService(); 
+export const fastAPIService = new FastAPIService();
 
 
 // 2. 구체적인 리포지토리 구현체 인스턴스 생성 (TodoDao 주입)

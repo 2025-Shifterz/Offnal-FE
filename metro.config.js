@@ -1,10 +1,25 @@
-const { getDefaultConfig } = require('@react-native/metro-config');
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 const { withNativeWind } = require('nativewind/metro');
+const { wrapWithReanimatedMetroConfig } = require('react-native-reanimated/metro-config');
 
 const defaultConfig = getDefaultConfig(__dirname);
 
-defaultConfig.transformer.babelTransformerPath = require.resolve('react-native-svg-transformer');
-defaultConfig.resolver.assetExts = defaultConfig.resolver.assetExts.filter(ext => ext !== 'svg');
-defaultConfig.resolver.sourceExts = [...defaultConfig.resolver.sourceExts, 'svg'];
+const svgConfig = {
+  transformer: {
+    babelTransformerPath: require.resolve('react-native-svg-transformer'),
+  },
+  resolver: {
+    assetExts: defaultConfig.resolver.assetExts.filter(ext => ext !== 'svg'),
+    sourceExts: [...defaultConfig.resolver.sourceExts, 'svg'],
+  },
+};
 
-module.exports = withNativeWind(defaultConfig, { input: './global.css' });
+let config = mergeConfig(defaultConfig, svgConfig);
+
+// Nativewind 적용
+config = withNativeWind(config, { input: './global.css' });
+
+// Reanimated 적용 (가장 마지막에!)
+config = wrapWithReanimatedMetroConfig(config);
+
+module.exports = config;
