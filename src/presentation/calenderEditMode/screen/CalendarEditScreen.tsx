@@ -74,8 +74,12 @@ const CalendarEditScreen = () => {
   };
 
   return (
-    <>
-      <SafeAreaView className="flex-1">
+    <View className="flex-1">
+      <SafeAreaView
+        edges={['top']}
+        style={{ flex: 1, backgroundColor: '#E7F4FE' }}
+        className="flex-1"
+      >
         {/* 헤더 */}
         <View className="w-full gap-[5px] bg-surface-information-subtle px-p-6 py-[14px]">
           <View className="flex-row justify-between">
@@ -89,16 +93,18 @@ const CalendarEditScreen = () => {
           </Text>
         </View>
         {/* 캘린더 */}
-        <View className="mx-[16px] mt-[10px] overflow-hidden rounded-radius-xl border-[3px] border-surface-information-subtle">
-          <CalendarInteractive
-            calendarData={calendarData}
-            selectedDate={selectedDate}
-            setSelectedDate={openBottomSheet}
-            setCurrentDate={setCurrentDate}
-            setCalendarData={setCalendarData}
-            isEditScreen={true}
-            currentDate={currentDate}
-          />
+        <View className="flex-1 bg-surface-gray-subtle1 px-[16px] pt-[10px]">
+          <View className="overflow-hidden rounded-radius-xl border-[3px] border-surface-information-subtle">
+            <CalendarInteractive
+              calendarData={calendarData}
+              selectedDate={selectedDate}
+              setSelectedDate={openBottomSheet}
+              setCurrentDate={setCurrentDate}
+              setCalendarData={setCalendarData}
+              isEditScreen={true}
+              currentDate={currentDate}
+            />
+          </View>
         </View>
         {/* 모든 저장 버튼 -> 근무표에 저장되어야함. post 요청!! */}
         <TouchableOpacity
@@ -110,13 +116,15 @@ const CalendarEditScreen = () => {
       </SafeAreaView>
 
       {/* 근무표 수정 바텀시트 */}
-      <EditBottomSheet
-        handleTypeSelect={handleTypeSelect}
-        handleCancel={handleCancel}
-        ref={sheetRef}
-        selectedDate={selectedDate}
-      />
-    </>
+      <>
+        <EditBottomSheet
+          handleTypeSelect={handleTypeSelect}
+          handleCancel={handleCancel}
+          ref={sheetRef}
+          selectedDate={selectedDate}
+        />
+      </>
+    </View>
   );
 };
 

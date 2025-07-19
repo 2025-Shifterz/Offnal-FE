@@ -3,6 +3,7 @@ import CustomBackButton from '../presentation/common/component/CustomBackButton'
 import MainScreen from '../presentation/main/screen/MainScreen';
 import TodoScreen from '../presentation/note/screen/TodoScreen';
 import MemoScreen from '../presentation/note/screen/MemoScreen';
+import AutoAlarm from '../presentation/alarm/screen/AutoAlarm';
 
 // 탭1. 메인 탭에 사용되는 스택 네비게이터
 const Stack = createNativeStackNavigator();
@@ -18,6 +19,7 @@ const MainNavigator = () => {
       }}
     >
       <Stack.Screen name="MainScreen" component={MainScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="AutoAlarm" options={{ title: '자동 알람' }} component={AutoAlarm} />
       <Stack.Screen name="Todo" options={{ title: '할 일' }} component={TodoScreen} />
       <Stack.Screen name="Memo" options={{ title: '메모' }} component={MemoScreen} />
     </Stack.Navigator>

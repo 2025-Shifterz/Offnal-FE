@@ -1,7 +1,7 @@
 // 주간, 오후, 야간, 휴일 - 박스들
 
 import { Text, Touchable, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import { ShiftType } from '../../../data/model/Calendar';
 
 interface TimeFrameProps {
