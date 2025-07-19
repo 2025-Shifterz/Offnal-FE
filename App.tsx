@@ -1,19 +1,15 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SelectMonthWithOCRScreen from './src/presentation/schedule/screens/ocr/SelectMonthWithOCRScreen';
-import AppNavigator from './src/navigation/AppNavigator';
 import RootNavigator from './src/navigation/RootNavigator';
-import OnBoardingScheduleWithOCRNavigator from './src/navigation/OnbordingScheduleWithOCRNavigator';
-import { NavigationContainer } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-const RootStack = createNativeStackNavigator();
-
-const App2 = () => {
+const App = () => {
   return (
-    <SafeAreaProvider>
-      <RootNavigator />
-    </SafeAreaProvider>
+    <GestureHandlerRootView>
+      <SafeAreaProvider>
+        <RootNavigator />
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 };
 
-export default App2;
+export default App;
