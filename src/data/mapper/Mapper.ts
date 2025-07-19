@@ -1,23 +1,22 @@
 // /src/data/mappers/CalendarMapper.ts
 
 import { NewCalendar, ShiftsMap, ShiftType, WorkDay } from '../model/Calendar'; // Domain 모델
-import { GetWorkCalendarResponseData } from '../../remote/response/GetWorkCalendarResponse'
+import { GetWorkCalendarResponseData } from '../../remote/response/GetWorkCalendarResponse';
 import { UpdateShiftsRequest } from '../../remote/request/PatchWorkCalendarReqeust';
 import { CreateCalendarRequest } from '../../remote/request/CreateWorkCalendarRequest';
 
-
-function toShiftType(workTypeName: string): ShiftType {
-  switch (workTypeName) {
-    case '오전':
-      return ShiftType.DAY;
-    case '오후':
-      return ShiftType.EVENING;
-    case '야간':
-      return ShiftType.NIGHT;
-    case '휴무':
-      return ShiftType.OFF;
+export function toShiftType(code: string): ShiftType {
+  switch (code) {
+    case 'D':
+      return '주간';
+    case 'E':
+      return '오후';
+    case 'N':
+      return '야간';
+    case '-':
+      return '휴일';
     default:
-      return ShiftType.UNKNOWN; // 정의되지 않은 값에 대한 처리
+      return '휴일';
   }
 }
 
@@ -37,15 +36,22 @@ export function toWorkDayModels(apiData: GetWorkCalendarResponseData[]): WorkDay
   }));
 }
 
-
-
 /**
  * ShiftType(enum)을 API가 요구하는 문자열('오전', '휴무' 등)로 변환하는 헬퍼 함수
  */
-function fromShiftType(shift: ShiftType): string {
-  // Enum의 값 자체가 변환하려는 문자열이므로 그대로 반환합니다.
-  // 만약 API가 'DAY', 'OFF' 같은 코드를 요구한다면 switch 문으로 변환해야 합니다.
-  return shift;
+export function fromShiftType(shift: ShiftType): string {
+  switch (shift) {
+    case '주간':
+      return 'D';
+    case '오후':
+      return 'E';
+    case '야간':
+      return 'N';
+    case '휴일':
+      return '-';
+    default:
+      return '휴일';
+  }
 }
 
 /**
@@ -63,7 +69,6 @@ export function toUpdateShiftsRequest(shiftsMap: ShiftsMap): UpdateShiftsRequest
 
   return { shifts };
 }
-
 
 /**
  * NewCalendar(data 모델)를 CreateCalendarRequest(Request)로 변환합니다.
@@ -99,8 +104,6 @@ export function toCreateCalendarRequest(newCalendar: NewCalendar): CreateCalenda
   };
 }
 
-
-
 // DATA REPO 사용을 위한 변경함수
 
 export type ShiftDataType = 'D' | 'E' | 'N' | 'OFF';
@@ -109,16 +112,25 @@ export type ShiftsDataMap = Map<number, ShiftDataType>;
 // 문자열을 ShiftType으로 변환하는 헬퍼 함수
 function toDataShiftType(value: string): ShiftDataType | null {
   switch (value) {
-    case 'D': return 'D';
-    case 'E': return 'E';
-    case 'N': return 'N';
-    case '_': case '-': case '': return 'OFF';
-    default: return 'OFF';
+    case 'D':
+      return 'D';
+    case 'E':
+      return 'E';
+    case 'N':
+      return 'N';
+    case '_':
+    case '-':
+    case '':
+      return 'OFF';
+    default:
+      return 'OFF';
   }
 }
 
 // 변환 함수
-export function createMonthlyShiftsMap(ocrResult: [string, Record<string, string>][]): ShiftsDataMap {
+export function createMonthlyShiftsMap(
+  ocrResult: [string, Record<string, string>][]
+): ShiftsDataMap {
   const monthlyMap: ShiftsDataMap = new Map();
   for (const weekData of ocrResult) {
     const weeklyScheduleObject = weekData[1];
