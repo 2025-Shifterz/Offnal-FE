@@ -9,7 +9,7 @@ interface TimeFrameProps {
   onPress?: () => void;
 }
 
-const stylesMap = {
+const stylesMap: Record<ShiftType, { backgroundColor: string; textColor: string }> = {
   주간: {
     backgroundColor: 'bg-surface-secondary-subtle',
     textColor: 'text-text-success',
@@ -26,26 +26,14 @@ const stylesMap = {
     backgroundColor: '',
     textColor: 'text-text-danger',
   },
+  기타: {
+    backgroundColor: '',
+    textColor: '',
+  },
 } as const;
 
-const mapShiftTypeToKey = (shift: ShiftType): keyof typeof stylesMap => {
-  switch (shift) {
-    case ShiftType.DAY:
-      return '주간';
-    case ShiftType.EVENING:
-      return '오후';
-    case ShiftType.NIGHT:
-      return '야간';
-    case ShiftType.OFF:
-      return '휴일';
-    default:
-      return '휴일';
-  }
-};
-
 const TimeFrame: React.FC<TimeFrameProps> = ({ text, onPress }: TimeFrameProps) => {
-  const styleKey = mapShiftTypeToKey(text);
-  const currentStyle = stylesMap[styleKey];
+  const currentStyle = stylesMap[text];
 
   // onPress를 호출하는 것은, 위에서 받은 handleTypeSelect('주간')을 그대로 실행하는 것이다.
   return (

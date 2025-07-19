@@ -37,7 +37,7 @@ const ScheduleRegRegisterMethod = () => {
           Icon={CalendarBlue}
           title="근무표 없이 시작하기"
           subtitle="지금은 근무표 없이 시작하고, 나중에 등록할 수 있어요"
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('Tabs')}
         />
       </View>
     </View>
