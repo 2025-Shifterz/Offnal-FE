@@ -14,6 +14,7 @@ export type LoginStackParamList = {
   ServiceTerm: undefined;
   OnboardingSchedules: undefined;
   OnboardingSchedulesWithOCR: undefined;
+  Tabs: undefined;
 };
 
 // 온보딩 캘린더

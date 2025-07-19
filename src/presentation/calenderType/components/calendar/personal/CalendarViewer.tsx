@@ -1,70 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import CalendarBase from './../personal/CalendarBase';
 import { View } from 'react-native';
-import baseApi from '../../../../../remote/api/baseApi';
 import dayjs from 'dayjs';
 
-import { TimeFrameChildren } from '../../TimeFrame';
-import { formatGetData } from '../../../../common/utils/calendar/formatGetData';
-
-// 서버에서 반환된 예시 raw 데이터
-const rawData2 = {
-  code: 'WORK_DAY_FETCHED',
-  message: '근무일 조회에 성공했습니다.',
-  data: [
-    {
-      day: '1',
-      workTypeName: '오후',
-    },
-    {
-      day: '2',
-      workTypeName: '오후',
-    },
-    {
-      day: '3',
-      workTypeName: '야간',
-    },
-    {
-      day: '4',
-      workTypeName: '휴일',
-    },
-  ],
-};
-
-// formatted 된 예시 데이터
-const mockCalendarData = {
-  '2025-07-01': '주간',
-  '2025-07-02': '오후',
-  '2025-07-05': '야간',
-  '2025-07-06': '휴일',
-  '2025-07-10': '주간',
-} as const;
+import { workDaysToMap } from '../../../../common/utils/calendar/workDaysToMap';
+import { workCalendarRepository } from '../../../../../di/Dependencies';
+import { ShiftType } from '../../../../../data/model/Calendar';
 
 interface CalendarViewerProps {
   onPressTeamIcon?: () => void;
   onPressEditIcon?: () => void;
 }
 
+const convertRecordToMap = (record: Record<string, ShiftType>): Map<number, ShiftType> => {
+  const entries: [number, ShiftType][] = Object.entries(record).map(([dateStr, shift]) => {
+    // 날짜 문자열 'YYYY-MM-DD' → 숫자 20250718 변환
+    const numericKey = Number(dateStr.replace(/-/g, ''));
+    return [numericKey, shift];
+  });
+  return new Map(entries);
+};
+
 const CalendarViewer = ({ onPressTeamIcon, onPressEditIcon }: CalendarViewerProps) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
-  const [calendarData, setCalendarData] = useState<Record<string, TimeFrameChildren>>({});
+  const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(new Map());
 
   const year = currentDate.year();
   const month = currentDate.month() + 1;
 
+  // 근무표 조회 API
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await baseApi.get(`/works/calendar?year=${year}&month=${month}`);
-        const formatted = formatGetData(rawData2.data, year, month);
+        const response = await workCalendarRepository.getWorkCalendar(year, month);
+        const formatted = workDaysToMap(response, year, month);
         setCalendarData(formatted);
-        // console.log('근무표 조회 성공:', response);
+        console.log('근무표 조회 성공:', response);
       } catch (error) {
         console.log('근무표 조회 실패:', error);
       }
     };
     fetchData();
   }, [year, month]);
+
+  console.log('calendarData instanceof Map', calendarData instanceof Map);
 
   return (
     <View>
