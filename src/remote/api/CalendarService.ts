@@ -41,7 +41,7 @@ export class CalendarService {
 
   deleteWorkCalendar = async (year: number, month: number) => {
     try {
-      await api.delete(`/work/calendar`, {
+      await api.delete(`/works/calendar`, {
         params: {
           year,
           month,
@@ -59,7 +59,7 @@ export class CalendarService {
 
   updateWorkCalendar = async (year: number, month: number, calendarData: UpdateShiftsRequest) => {
     try {
-      await api.patch<UpdateShiftsRequest>(`/work/calendar`, calendarData, {
+      await api.patch<UpdateShiftsRequest>(`/works/calendar`, calendarData, {
         params: {
           year,
           month,
