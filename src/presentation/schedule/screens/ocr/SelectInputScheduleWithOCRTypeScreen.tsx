@@ -12,6 +12,9 @@ import OpenGallery from '../../../../assets/icons/ic_gallery_32.svg';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { onboardingNavigation, OnboardingStackParamList } from '../../../../navigation/types';
+import axios from 'axios';
+import { fastAPIService } from '../../../../di/Dependencies';
+import { ShiftType } from '../../../../data/model/Calendar';
 
 const { ScheduleModule } = NativeModules;
 const { ImageProcessorModule } = NativeModules;
@@ -80,7 +83,16 @@ const SelectInputScheduleWithOCRTypeScreen = () => {
   };
 
   const analyzeScheduleImage = async () => {
-    launchImageLibrary({ mediaType: 'photo', includeBase64: true }, hadleOCRResponse);
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        includeBase64: false,
+        maxHeight: 0,
+        maxWidth: 0,
+        quality: 1
+      },
+      hadleOCRResponse
+    );
   };
 
   const openCameraImage = async () => {
@@ -91,10 +103,11 @@ const SelectInputScheduleWithOCRTypeScreen = () => {
       {
         mediaType: 'photo',
         cameraType: 'back',
+        maxHeight: 0,
+        maxWidth: 0,
         quality: 1,
         saveToPhotos: true,
-        includeBase64: true,
-        
+        includeBase64: false,
       },
       hadleOCRResponse
     );
@@ -114,11 +127,46 @@ const SelectInputScheduleWithOCRTypeScreen = () => {
     setIsAnalyzing(true);
 
     try {
-      const resultJson = await ImageProcessorModule.processImageFromBase64(asset.base64);
-      const parsedResult = JSON.parse(resultJson);
-      console.log('Parsed OCR Result:', parsedResult);
+      const ocrResult = await fastAPIService.getOcrResult(asset);
 
-      const entries = Object.entries(parsedResult);
+      console.log(ocrResult);
+
+      ocrResult?.forEach(([group, ShiftDay]) => {
+        console.log(`근무조: ${group}`);
+
+        for (const day in ShiftDay) {
+          if (Object.prototype.hasOwnProperty.call(ShiftDay, day)) {
+            const shiftType = ShiftDay[day];
+            console.log(` ${day}일: ${shiftType}`);
+          }
+        }
+      });
+
+      // 첫 번째 근무조 (인덱스 0)의 데이터 추출
+      if (ocrResult && ocrResult.length > 0) {
+        const [firstWorkGroupNumber, firstShiftsByDay] = ocrResult[0];
+
+        console.log(`첫 번째 근무조 번호: ${firstWorkGroupNumber}`); // 예: "1"
+        console.log('첫 번째 근무조의 근무표:', firstShiftsByDay);
+      }
+
+      // 만약 '2'번 근무조의 데이터만 명시적으로 찾고 싶다면
+      const group2Data = ocrResult && ocrResult.find(([groupNum]) => groupNum === '2');
+      if (group2Data) {
+        const [group2Number, group2Shifts] = group2Data;
+        console.log(`2번 근무조: ${group2Number}, Shifts:`, group2Shifts);
+      }
+
+      // 예시: 첫 번째 근무조의 1일자 근무 타입 추출
+      if (ocrResult && ocrResult.length > 0) {
+        const [, firstShiftsByDay] = ocrResult[0]; // 첫 번째 요소의 shiftsByDay만 추출
+
+        const day1Shift = firstShiftsByDay['1'];
+        console.log(`첫 번째 근무조의 1일자 근무: ${day1Shift}`); // 예: "D"
+
+        const day15Shift = firstShiftsByDay['15'];
+        console.log(`첫 번째 근무조의 15일자 근무: ${day15Shift}`); // 예: "N"
+      }
 
       navigation.navigate('EditCompleteCreateScheduleOCR', {
         selectedBoxId,
@@ -127,7 +175,7 @@ const SelectInputScheduleWithOCRTypeScreen = () => {
         workTimes,
         year,
         month,
-        ocrResult: entries,
+        ocrResult,
       });
     } catch (e) {
       const errorMessage = e instanceof Error ? e.message : String(e);
