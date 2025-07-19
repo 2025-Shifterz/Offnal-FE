@@ -14,6 +14,7 @@ export type LoginStackParamList = {
   ServiceTerm: undefined;
   OnboardingSchedules: undefined;
   OnboardingSchedulesWithOCR: undefined;
+  Tabs: undefined;
 };
 
 // 온보딩 캘린더
@@ -80,6 +81,7 @@ export type CalendarScreenStackParamList = {
 
 // 루트
 export type RootStackParamList = {
+  SplashScreen: undefined;
   Tabs: undefined;
   LoginScreens: undefined;
   OnboardingSchedules: undefined;

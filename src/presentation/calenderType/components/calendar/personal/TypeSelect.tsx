@@ -4,7 +4,7 @@ import CustomDashedLine from '../../DashedLine';
 import TimeFrame from '../../TimeFrame';
 import { ShiftType } from '../../../../../data/model/Calendar';
 
-const types: ShiftType[] = [ShiftType.DAY, ShiftType.EVENING, ShiftType.NIGHT, ShiftType.OFF];
+const shiftTypes: ShiftType[] = ['주간', '야간', '오후', '휴일'];
 
 interface TypeSelectProps {
   onPress: (type: ShiftType) => void;
@@ -18,7 +18,7 @@ const TypeSelect = ({ onPress }: TypeSelectProps) => {
       <TouchableOpacity className="flex-col gap-[9px] rounded-b-radius-m2 bg-surface-white p-[11px]">
         <Text className="text-body-xs font-semibold text-text-subtle">근무 형태 입력</Text>
         <View className="flex-row gap-[6px]">
-          {types.map(type => (
+          {shiftTypes.map(type => (
             <TimeFrame key={type} text={type} onPress={() => onPress(type)} />
           ))}
         </View>

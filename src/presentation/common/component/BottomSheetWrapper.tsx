@@ -10,16 +10,20 @@ type BottomSheetWrapperProps = {
 };
 
 const BottomSheetWrapper = forwardRef<BottomSheet, BottomSheetWrapperProps>(
-  ({ children, snapPoints = ['25%', 467], onChange }, ref) => {
+  ({ children, snapPoints = ['25%', '70%'], onChange }, ref) => {
     const memoSnapPoints = useMemo(() => snapPoints, [snapPoints]);
 
     return (
       <View className="absolute inset-0">
-        <GestureHandlerRootView className="flex-1">
-          <BottomSheet ref={ref} index={-1} snapPoints={memoSnapPoints} onChange={onChange}>
-            <BottomSheetView className="h-full">{children}</BottomSheetView>
-          </BottomSheet>
-        </GestureHandlerRootView>
+        <BottomSheet
+          enableContentPanningGesture={false} //  제스처가 캘린더 터치 방해하지 않게
+          ref={ref}
+          index={-1}
+          snapPoints={memoSnapPoints}
+          onChange={onChange}
+        >
+          <BottomSheetView className="h-full">{children}</BottomSheetView>
+        </BottomSheet>
       </View>
     );
   }
