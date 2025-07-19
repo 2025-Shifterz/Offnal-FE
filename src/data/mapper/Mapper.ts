@@ -20,6 +20,21 @@ export function toShiftType(code: string): ShiftType {
   }
 }
 
+export function toUiShiftType(code: string): ShiftType {
+  switch (code) {
+    case '주간':
+      return '주간';
+    case '오후':
+      return '오후';
+    case '야간':
+      return '야간';
+    case '휴일':
+      return '휴일';
+    default:
+      return '휴일';
+  }
+}
+
 /**
  * API 응답 데이터 배열을 Domain 모델(WorkDay) 배열로 변환하는 메인 매퍼 함수
  * @param apiData GetWorkCalendarResponseData[] 형태의 API 원본 데이터 배열
@@ -32,7 +47,7 @@ export function toWorkDayModels(apiData: GetWorkCalendarResponseData[]): WorkDay
 
   return apiData.map(item => ({
     day: parseInt(item.day, 10), // 문자열을 10진수 숫자로 변환
-    shift: toShiftType(item.workTypeName), // 문자열을 Enum으로 변환
+    shift: toUiShiftType(item.workTypeName), // 문자열을 Enum으로 변환
   }));
 }
 
