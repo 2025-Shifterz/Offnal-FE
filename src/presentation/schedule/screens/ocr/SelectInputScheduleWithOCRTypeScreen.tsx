@@ -87,8 +87,6 @@ const SelectInputScheduleWithOCRTypeScreen = () => {
       {
         mediaType: 'photo',
         includeBase64: false,
-        maxHeight: 0,
-        maxWidth: 0,
         quality: 1
       },
       hadleOCRResponse
@@ -103,8 +101,6 @@ const SelectInputScheduleWithOCRTypeScreen = () => {
       {
         mediaType: 'photo',
         cameraType: 'back',
-        maxHeight: 0,
-        maxWidth: 0,
         quality: 1,
         saveToPhotos: true,
         includeBase64: false,
