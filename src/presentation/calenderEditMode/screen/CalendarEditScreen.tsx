@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import dayjs from 'dayjs';
 import EditScreenHeader from '../components/EditScreenMonthHeader';
 import EditBottomSheet from '../components/EditBottomSheet';
@@ -8,6 +8,7 @@ import SuccessIcon from '../../../assets/icons/g-success.svg';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { workCalendarRepository } from '../../../di/Dependencies';
 import { ShiftType } from '../../../data/model/Calendar';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const CalendarEditScreen = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());

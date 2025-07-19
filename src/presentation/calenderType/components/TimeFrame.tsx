@@ -26,10 +26,6 @@ const stylesMap: Record<ShiftType, { backgroundColor: string; textColor: string 
     backgroundColor: '',
     textColor: 'text-text-danger',
   },
-  기타: {
-    backgroundColor: '',
-    textColor: '',
-  },
 } as const;
 
 const TimeFrame: React.FC<TimeFrameProps> = ({ text, onPress }: TimeFrameProps) => {
