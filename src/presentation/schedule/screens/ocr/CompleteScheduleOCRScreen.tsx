@@ -103,7 +103,10 @@ const EditCompleteCreateScheduleOCRScreen = () => {
           )}
         </View>
       </ScrollView>
-      <BottomButton text="다음" onPress={handleNext} />
+
+      <View>
+        <BottomButton text="다음" onPress={handleNext} />
+      </View>
     </View>
   );
 };

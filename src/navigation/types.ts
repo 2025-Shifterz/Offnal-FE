@@ -1,3 +1,4 @@
+import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type onboardingNavigation = NativeStackNavigationProp<OnboardingStackParamList>;
@@ -18,7 +19,7 @@ export type LoginStackParamList = {
 // 온보딩 캘린더
 export type OnboardingStackParamList = {
   ScheduleRegType: undefined;
-  ScheduleInfoInput: { selectedBoxId: number };
+  ScheduleInfoInput: { selectedBoxId: number } | undefined;
   CalendarType: {
     selectedBoxId: number;
     calendarName: string;
@@ -66,20 +67,22 @@ export type OnboardingStackParamList = {
     ocrResult?: any;
   };
   CompleteCreate: undefined;
+  InfoEdit: undefined; // 온보딩은 아님
 };
 
 // 캘린더 탭의 스크린
 export type CalendarScreenStackParamList = {
   CalendarScreen: undefined;
   EditCalendar: undefined;
-  OnboardingSchedules: undefined; // 삭제할거.
-  LoginScreens: undefined; // 삭제할거.
+  OnboardingSchedules: NavigatorScreenParams<OnboardingStackParamList> | undefined; // 삭제할거.
+  LoginScreens: NavigatorScreenParams<LoginStackParamList> | undefined; // 로그인 스택네비게이터 내부의 스크린 접근 가능
 };
 
 // 루트
 export type RootStackParamList = {
+  SplashScreen: undefined;
   Tabs: undefined;
   LoginScreens: undefined;
-  OnboardingSchedules: undefined; 
+  OnboardingSchedules: undefined;
   OnboardingSchedulesWithOCR: undefined;
 };

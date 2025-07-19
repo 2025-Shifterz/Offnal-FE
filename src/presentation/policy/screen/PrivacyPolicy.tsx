@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import PolicyHeader from '../components/PolicyHeader';
+import PolicyHeader from '../components/CommonHeader';
 import PrivacyPolicyText from '../components/PrivacyPolicyText';
 
 const PrivacyPolicy = () => {

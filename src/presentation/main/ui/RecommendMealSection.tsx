@@ -1,43 +1,49 @@
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import TitleSection from '../components/TitleSection';
 import RecommendTodaysMealChip, { MealType } from '../components/RecommendTodaysMealChip';
+import TableWare from '../../../assets/icons/ic_tableware.svg';
 
-const RecommnedMealSection = () => {
+interface Meal {
+  mealType: string;
+  slot: string;
+  time: string;
+  mealContent: string;
+  description: string;
+}
+
+interface RecommendMealSectionProps {
+  meals: Meal[];
+}
+
+const RecommnedMealSection = ({ meals }: RecommendMealSectionProps) => {
+  const isEmpty = !meals || meals.length === 0;
+
   return (
-    <View className="mb-number-11 flex-col items-start">
+    <View className="mb-number-11 flex-1 flex-col items-start">
       <TitleSection.OnlyTitle title="오늘의 식사 추천" />
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-      <View className="mt-number-7 flex-row items-center gap-g-3">
-        <RecommendTodaysMealChip
-          mealType={MealType.LUNCH}
-          slot="점심"
-          time="12:30 경"
-          mealContent="현미밥, 생선, 나물"
-          description="근무 집중력 유지"
-        />
-        <RecommendTodaysMealChip
-          mealType={MealType.LUNCH}
-          slot="점심"
-          time="12:30 경"
-          mealContent="현미밥, 생선, 나물"
-          description="근무 집중력 유지"
-        />
-        <RecommendTodaysMealChip
-          mealType={MealType.LUNCH}
-          slot="점심"
-          time="12:30 경"
-          mealContent="현미밥, 생선, 나물"
-          description="근무 집중력 유지"
-        />
-        <RecommendTodaysMealChip
-          mealType={MealType.LUNCH}
-          slot="점심"
-          time="12:30 경"
-          mealContent="현미밥, 생선, 나물"
-          description="근무 집중력 유지"
-        />
-      </View>
-      </ScrollView>
+      {isEmpty ? (
+        <View className="mt-number-7 h-[84px] w-full flex-1 flex-col items-center justify-center rounded-radius-m1 bg-surface-white p-number-6">
+          <TableWare width={36.87} height={27.94} />
+          <Text className="items-center pt-[6.45px] font-pretendard text-body-xxs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-disabled">
+            아직 근무표가 등록되지 않아{'\n'}식사를 추천해드릴 수 없어요.
+          </Text>
+        </View>
+      ) : (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <View className="mt-number-7 flex-1 flex-row items-center gap-g-3">
+            {meals.map((meal: Meal, idx: number) => (
+              <RecommendTodaysMealChip
+                key={idx}
+                mealType={meal.mealType as MealType}
+                slot={meal.slot}
+                time={meal.time}
+                mealContent={meal.mealContent}
+                description={meal.description}
+              />
+            ))}
+          </View>
+        </ScrollView>
+      )}
     </View>
   );
 };

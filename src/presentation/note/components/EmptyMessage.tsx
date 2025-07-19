@@ -17,11 +17,11 @@ const EmptyMessage = ({ text, divStyle, textStyle, iconSize }: EmptyTodoContentP
       <View>
         <Text
           style={{ color: '#B1B8BE' }}
-          className={twMerge('text-center text-body-s font-[500]', textStyle)}
+          className={twMerge('text-center text-body-s font-medium', textStyle)}
         >{`아직 등록된  ${text}${text === '할 일' ? '이' : '가'} 없어요.`}</Text>
         <Text
           style={{ color: '#B1B8BE' }}
-          className={twMerge('text-center text-body-s font-[500]', textStyle)}
+          className={twMerge('text-center text-body-s font-medium', textStyle)}
         >
           {text === '할 일'
             ? '근무일정에 따른 할 일 리스트를 만들어보세요.'
