@@ -16,7 +16,7 @@ export function toShiftType(code: string): ShiftType {
     case '-':
       return '휴일';
     default:
-      return '기타';
+      return '휴일';
   }
 }
 
@@ -50,7 +50,7 @@ export function fromShiftType(shift: ShiftType): string {
     case '휴일':
       return '-';
     default:
-      return '기타';
+      return '휴일';
   }
 }
 
