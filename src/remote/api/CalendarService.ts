@@ -7,7 +7,7 @@ import { GetWorkCalendarResponse } from '../response/GetWorkCalendarResponse';
 export class CalendarService {
   getWorkCalendar = async (year: number, month: number) => {
     try {
-      const response = await api.get<GetWorkCalendarResponse>('/work/calendar', {
+      const response = await api.get<GetWorkCalendarResponse>('/works/calendar', {
         params: {
           year,
           month,
