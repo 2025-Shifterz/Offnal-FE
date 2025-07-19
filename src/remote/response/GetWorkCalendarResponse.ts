@@ -5,6 +5,6 @@ export interface GetWorkCalendarResponse {
 }
 
 export interface GetWorkCalendarResponseData {
-    day: string;
-    workTypeName: '오전' | '오후' | '야간' | '휴무' | string;
+  day: string;
+  workTypeName: '주간' | '오후' | '야간' | '휴일' | string;
 }

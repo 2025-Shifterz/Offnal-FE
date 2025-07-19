@@ -12,15 +12,6 @@ interface CalendarViewerProps {
   onPressEditIcon?: () => void;
 }
 
-const convertRecordToMap = (record: Record<string, ShiftType>): Map<number, ShiftType> => {
-  const entries: [number, ShiftType][] = Object.entries(record).map(([dateStr, shift]) => {
-    // 날짜 문자열 'YYYY-MM-DD' → 숫자 20250718 변환
-    const numericKey = Number(dateStr.replace(/-/g, ''));
-    return [numericKey, shift];
-  });
-  return new Map(entries);
-};
-
 const CalendarViewer = ({ onPressTeamIcon, onPressEditIcon }: CalendarViewerProps) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(new Map());
@@ -33,8 +24,8 @@ const CalendarViewer = ({ onPressTeamIcon, onPressEditIcon }: CalendarViewerProp
     const fetchData = async () => {
       try {
         const response = await workCalendarRepository.getWorkCalendar(year, month);
-        const formatted = workDaysToMap(response, year, month);
-        setCalendarData(formatted);
+        const mapData = workDaysToMap(response, year, month);
+        setCalendarData(mapData);
         console.log('근무표 조회 성공:', response);
       } catch (error) {
         console.log('근무표 조회 실패:', error);
