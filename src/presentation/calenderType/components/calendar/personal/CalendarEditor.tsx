@@ -16,6 +16,9 @@ interface CalendarEditorProps {
       endTime: string;
     };
   };
+  year?: number;
+  month?: number;
+  scheduleData?: Map<string, ShiftType>
 }
 
 export interface CalendarEditorRef {
@@ -23,12 +26,20 @@ export interface CalendarEditorRef {
 }
 
 const CalendarEditor: ForwardRefRenderFunction<CalendarEditorRef, CalendarEditorProps> = (
-  { calendarName, workGroup, workTimes },
+  { calendarName, workGroup, workTimes, year, month, scheduleData },
   ref
 ) => {
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
-  const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(new Map());
-  const [currentDate, setCurrentDate] = useState(dayjs());
+  const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(() => {
+    console.log(scheduleData);
+    return scheduleData ?? new Map<string, ShiftType>();
+  });
+  const [currentDate, setCurrentDate] = useState(() => {
+    if (year !== undefined && month !== undefined) {
+      return dayjs().year(year).month(month-1);
+    } 
+    return dayjs()
+  });
 
   // 날짜 선택
   const handleDatePress = (date: dayjs.Dayjs) => {
