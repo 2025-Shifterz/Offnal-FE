@@ -3,9 +3,9 @@ import { View } from 'react-native';
 import CalendarBase from './../personal/CalendarBase';
 import TypeSelect from './TypeSelect';
 import dayjs from 'dayjs';
-import baseApi from '../../../../../remote/api/baseApi';
-import { ShiftType } from '../../../../../data/model/Calendar';
+import { MonthlySchedule, NewCalendar, ShiftType } from '../../../../../data/model/Calendar';
 import { workCalendarRepository } from '../../../../../di/Dependencies';
+import { toShiftType } from '../../../../../data/mapper/Mapper';
 
 interface CalendarEditorProps {
   calendarName: string;
@@ -62,76 +62,58 @@ const CalendarEditor: ForwardRefRenderFunction<CalendarEditorRef, CalendarEditor
   useImperativeHandle(ref, () => ({
     postData: async () => {
       try {
-        const calendarMap: Record<
-          string,
-          { year: number; month: number; shifts: Record<string, string> }
-        > = {};
+        const calendarMap: Record<string, Map<number, ShiftType>> = {};
+        console.log('📅 최종 calendarData 내용:', Array.from(calendarData.entries()));
 
-        const convertToCode = (type: ShiftType): string => {
-          switch (type) {
-            case ShiftType.DAY:
-              return 'D';
-            case ShiftType.EVENING:
-              return 'E';
-            case ShiftType.NIGHT:
-              return 'N';
-            case ShiftType.OFF:
-              return '-';
-            default:
-              return '';
-          }
-        };
-
-        Object.entries(calendarData).forEach(([dateStr, type]) => {
+        calendarData.forEach((type, dateStr) => {
           const date = dayjs(dateStr);
           const year = date.year();
           const month = date.month() + 1;
-          const day = date.date(); // 숫자 그대로
+          const day = date.date();
 
           const key = `${year}-${month}`;
           if (!calendarMap[key]) {
-            calendarMap[key] = {
-              year,
-              month,
-              shifts: {},
-            };
+            calendarMap[key] = new Map();
           }
-
-          calendarMap[key].shifts[String(day)] = convertToCode(type);
+          calendarMap[key].set(day, type as ShiftType);
         });
 
-        const convertFromCode = (code: string): ShiftType => {
-          switch (code) {
-            case 'D':
-              return ShiftType.DAY;
-            case 'E':
-              return ShiftType.EVENING;
-            case 'N':
-              return ShiftType.NIGHT;
-            case '-':
-              return ShiftType.OFF;
-            default:
-              return ShiftType.UNKNOWN;
+        // MonthlySchedule 리스트 생성
+        const schedules: MonthlySchedule[] = Object.entries(calendarMap).map(([key, shiftsMap]) => {
+          const [year, month] = key.split('-').map(Number);
+          console.log('shifts: ', shiftsMap);
+          return {
+            year,
+            month,
+            shifts: shiftsMap,
+          };
+        });
+        // props.workTimes를 Map<ShiftType, { startTime, endTime }> 형태로 바꿔주는 코드가 필요
+
+        const shiftTimesMap = new Map<ShiftType, { startTime: string; endTime: string }>();
+
+        Object.entries(workTimes).forEach(([type, time]) => {
+          // 만약 type이 "D", "E", "N"처럼 영어 코드면 아래처럼 매핑 필요
+          const shiftType = toShiftType(type); // 예: "D" => "주간"
+          if (shiftType) {
+            shiftTimesMap.set(shiftType, time);
           }
+        });
+
+        const newCalendar: NewCalendar = {
+          name: calendarName,
+          group: workGroup,
+          shiftTimes: shiftTimesMap,
+          schedules,
         };
+        console.log('요청하는 데이터:', newCalendar);
 
-        for (const { year, month, shifts } of Object.values(calendarMap)) {
-          const map = new Map<number, ShiftType>();
-
-          Object.entries(shifts).forEach(([dayStr, code]) => {
-            const day = Number(dayStr);
-            const shiftType = convertFromCode(code);
-            map.set(day, shiftType);
-          });
-
-          // ✅ 최종적으로 Map<number, ShiftType> 전달
-          await workCalendarRepository.updateWorkCalendar(year, month, map);
-        }
-
-        console.log('근무표 저장 성공');
+        // API 호출
+        const res = await workCalendarRepository.createWorkCalendar(newCalendar);
+        console.log('근무표 저장 성공', res);
       } catch (error) {
         console.error('근무표 저장 실패:', error);
-        throw error;
+        //throw error;
       }
     },
   }));
