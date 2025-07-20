@@ -11,6 +11,8 @@ import {
   todoCompletionUseCase,
 } from '../../../di/Dependencies';
 import NoteDayBox from '../components/NoteDayBox';
+import { useNavigation } from '@react-navigation/native';
+import { mainNavigation } from '../../../navigation/types';
 
 interface NoteScreenProps {
   type: TodoType;
@@ -18,16 +20,13 @@ interface NoteScreenProps {
 }
 
 const NoteScreen = ({ type, text }: NoteScreenProps) => {
-  // note가 비어있는지 여부
-  const [isEmpty, setIsEmpty] = useState(true);
-  const handleAdd = () => {
-    setIsEmpty(false);
-  };
-
   // Todo 상태
   const [newTodoText, setNewTodoText] = useState('');
   const [todos, setTodos] = useState<Todo[]>([]);
   const [showInput, setShowInput] = useState(false);
+
+  const isEmptyTodo = false;
+  const navigation = useNavigation<mainNavigation>();
 
   // 데이터베이스 초기화
   useEffect(() => {
@@ -84,10 +83,24 @@ const NoteScreen = ({ type, text }: NoteScreenProps) => {
     }
   };
 
+  const handleAdd = () => {
+    navigation.navigate('DayBoxScreen',{
+       text: text,
+  type:type,
+  todos:todos,
+  newTodoText:newTodoText,
+  setNewTodoText: setNewTodoText,
+  handleAddTodo: handleAddTodo,
+  handleCompleted: handleCompleted,
+  handleDeleteTodo: handleDeleteTodo,
+  showInput: showInput,
+    })
+  }
+
   return (
     <View className="w-full flex-1 bg-background-gray-subtle1 px-[16px]">
-      {isEmpty && <EmptyPage text={text} handleAdd={handleAdd} />}
-      {!isEmpty && (
+      <EmptyPage text={text} onAddButtonPress={() => setShowInput(true)} onPress={()=>}/>
+      {/* {!isEmptyTodo && (
         <View>
           <NoteDayBox
             text={text}
@@ -102,7 +115,7 @@ const NoteScreen = ({ type, text }: NoteScreenProps) => {
           />
           <OneAddButton addOneTodo={() => setShowInput(true)} text={text} />
         </View>
-      )}
+      )} */}
     </View>
   );
 };

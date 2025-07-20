@@ -4,6 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 export type onboardingNavigation = NativeStackNavigationProp<OnboardingStackParamList>;
 export type loginNavigation = NativeStackNavigationProp<LoginStackParamList>;
 export type calendarNavigation = NativeStackNavigationProp<CalendarScreenStackParamList>;
+export type mainNavigation = NativeStackNavigationProp<MainStackParamList>;
 
 // 로그인
 export type LoginStackParamList = {
@@ -86,4 +87,12 @@ export type RootStackParamList = {
   LoginScreens: undefined;
   OnboardingSchedules: undefined;
   OnboardingSchedulesWithOCR: undefined;
+};
+
+export type MainStackParamList = {
+  MainScreen: undefined;
+  AutoAlarm: undefined;
+  Todo: undefined;
+  Memo: undefined;
+  DayBoxScreen: undefined;
 };

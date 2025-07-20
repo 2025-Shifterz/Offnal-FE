@@ -4,9 +4,11 @@ import MainScreen from '../presentation/main/screen/MainScreen';
 import TodoScreen from '../presentation/note/screen/TodoScreen';
 import MemoScreen from '../presentation/note/screen/MemoScreen';
 import AutoAlarm from '../presentation/alarm/screen/AutoAlarm';
+import DayBoxScreen from '../presentation/note/screen/DayBoxScreen';
+import { MainStackParamList } from './types';
 
 // 탭1. 메인 탭에 사용되는 스택 네비게이터
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<MainStackParamList>();
 
 const MainNavigator = () => {
   return (
@@ -22,6 +24,7 @@ const MainNavigator = () => {
       <Stack.Screen name="AutoAlarm" options={{ title: '자동 알람' }} component={AutoAlarm} />
       <Stack.Screen name="Todo" options={{ title: '할 일' }} component={TodoScreen} />
       <Stack.Screen name="Memo" options={{ title: '메모' }} component={MemoScreen} />
+      <Stack.Screen name="DayBoxScreen" options={{ title: '할 일' }} component={DayBoxScreen} />
     </Stack.Navigator>
   );
 };

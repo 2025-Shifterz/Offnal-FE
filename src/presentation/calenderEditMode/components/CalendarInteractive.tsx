@@ -5,7 +5,6 @@ import { View } from 'react-native';
 import CalendarBase from '../../calenderType/components/calendar/personal/CalendarBase';
 import dayjs from 'dayjs';
 import baseApi from '../../../remote/api/baseApi';
-import { formatGetData } from '../../common/utils/calendar/workDaysToMap';
 import { workCalendarRepository } from '../../../di/Dependencies';
 import { ShiftType } from '../../../data/model/Calendar';
 
@@ -39,22 +38,6 @@ const CalendarInteractive = ({
     return new Map(entries);
   };
 
-  // 근무표 조회 API
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await workCalendarRepository.getWorkCalendar(year, month);
-        const formatted = formatGetData(response, year, month);
-        const mapData = convertRecordToMap(formatted);
-        setCalendarData(new Map(mapData));
-        console.log('근무표 조회 성공:', response);
-      } catch (error) {
-        console.log('근무표 조회 실패:', error);
-      }
-    };
-    fetchData();
-  }, [year, month]);
-
   return (
     <View>
       <CalendarBase
@@ -62,7 +45,7 @@ const CalendarInteractive = ({
         onChangeMonth={setCurrentDate}
         selectedDate={selectedDate}
         onDatePress={setSelectedDate}
-        calendarData={calendarData}
+        // calendarData={calendarData}
         isViewer={false}
         isEditScreen={isEditScreen}
       />
