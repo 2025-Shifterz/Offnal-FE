@@ -14,19 +14,19 @@ export class MemoRepositoryImpl implements MemoRepository {
     return await this.memoDao.getMemosByDate(targetDate);
   }
 
-  async addMemo(memo: Omit<Todo, 'id'>): Promise<number> {
-    return await this.addMemo(memo)
+  async addMemo(memo: Omit<Todo, 'id'>, targetDate?: Dayjs): Promise<Todo> {
+    return await this.memoDao.createMemo(memo.text, targetDate);
   }
 
-  async updateMemoComplete(id: number, completed: boolean): Promise<void> {
-    return await this.updateMemoComplete(id, completed);
+  async updateMemoComplete(id: number, completed: boolean): Promise<boolean> {
+    return await this.memoDao.updateMemo(id, { completed: completed });
   }
 
-  async deleteMemo(id: number): Promise<void> {
-    return await this.deleteMemo(id);
+  async deleteMemo(id: number): Promise<boolean> {
+    return await this.memoDao.deleteMemo(id);
   }
 
   async deleteMemoAll(): Promise<void> {
-    return await this.deleteMemoAll();
+    return await this.memoDao.deleteAllMemos();
   }
 }
