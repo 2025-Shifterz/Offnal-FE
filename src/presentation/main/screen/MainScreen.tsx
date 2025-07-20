@@ -37,6 +37,8 @@ export default function MainScreen() {
     switch (type) {
       case 'DAY':
         return '주간';
+      case 'EVENING':
+        return '오후';
       case 'NIGHT':
         return '야간';
       case 'OFF':

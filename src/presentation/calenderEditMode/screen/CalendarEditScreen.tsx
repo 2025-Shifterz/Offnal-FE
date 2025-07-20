@@ -9,7 +9,7 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import { workCalendarRepository } from '../../../di/Dependencies';
 import { ShiftType } from '../../../data/model/Calendar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import api from '../../../remote/api/axiosInstance';
+
 
 const CalendarEditScreen = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());
@@ -64,13 +64,13 @@ const CalendarEditScreen = () => {
   };
 
   // '체크' 버튼을 누르면 patch 요청 - 근무표 수정사항 저장.
-  const handlePatchData = () => {
+  const handlePatchData = async () => {
     const year = currentDate.year();
     const month = currentDate.month() + 1;
 
     try {
-      const response = api.patch('/works/calendar', { year, month, works: calendarData });
-      console.log('근무표 수정 성공:', response);
+      await workCalendarRepository.updateWorkCalendar(year, month, calendarData);
+      console.log('근무표 수정 성공');
     } catch (error) {
       console.log('근무표 수정 실패:', error);
     }

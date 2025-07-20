@@ -6,10 +6,11 @@ import { TimeFrameChildren } from '../../calenderType/components/TimeFrame';
 import SelectShiftBox from './SelectShiftBox';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import { ShiftType } from '../../../data/model/Calendar';
 dayjs.locale('ko'); // 한글 locale 적용
 
 // 근무형태 선택 박스 map 데이터
-const shiftTypes: { id: number; text: TimeFrameChildren }[] = [
+const shiftTypes: { id: number; text: ShiftType }[] = [
   { id: 1, text: '주간' },
   { id: 2, text: '오후' },
   { id: 3, text: '야간' },
@@ -18,7 +19,7 @@ const shiftTypes: { id: number; text: TimeFrameChildren }[] = [
 
 interface EditBottomSheetProps {
   selectedDate: dayjs.Dayjs | null;
-  handleTypeSelect: (type: TimeFrameChildren) => void;
+  handleTypeSelect: (type: ShiftType) => void;
   handleCancel: () => void;
 }
 
