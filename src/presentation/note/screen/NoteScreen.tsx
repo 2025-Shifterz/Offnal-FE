@@ -84,22 +84,22 @@ const NoteScreen = ({ type, text }: NoteScreenProps) => {
   };
 
   const handleAdd = () => {
-    navigation.navigate('DayBoxScreen',{
-       text: text,
-  type:type,
-  todos:todos,
-  newTodoText:newTodoText,
-  setNewTodoText: setNewTodoText,
-  handleAddTodo: handleAddTodo,
-  handleCompleted: handleCompleted,
-  handleDeleteTodo: handleDeleteTodo,
-  showInput: showInput,
-    })
-  }
+    navigation.navigate('DayBoxScreen', {
+      text: text,
+      type: type,
+      todos: todos,
+      newTodoText: newTodoText,
+      setNewTodoText: setNewTodoText,
+      handleAddTodo: handleAddTodo,
+      handleCompleted: handleCompleted,
+      handleDeleteTodo: handleDeleteTodo,
+      showInput: showInput,
+    });
+  };
 
   return (
     <View className="w-full flex-1 bg-background-gray-subtle1 px-[16px]">
-      <EmptyPage text={text} onAddButtonPress={() => setShowInput(true)} onPress={()=>}/>
+      <EmptyPage handleAdd={handleAdd} text={text} />
       {/* {!isEmptyTodo && (
         <View>
           <NoteDayBox

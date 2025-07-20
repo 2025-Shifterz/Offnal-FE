@@ -6,29 +6,19 @@ import DayBoxHeader from '../components/DayBoxHeader';
 
 // 하루의 할 일 박스
 
-interface DayBoxScreenProps {
-  text: string;
-  type: string;
-  todos: { id: number; text: string; completed: boolean; type: string }[];
-  newTodoText: string;
-  setNewTodoText: (text: string) => void;
-  handleAddTodo: (type: string) => void;
-  handleCompleted: (id: number, completed: boolean, type: string) => void;
-  handleDeleteTodo: (id: number, type: string) => void;
-  showInput: boolean;
-}
+// interface DayBoxScreenProps {
+//   text: string;
+//   type: string;
+//   todos: { id: number; text: string; completed: boolean; type: string }[];
+//   newTodoText: string;
+//   setNewTodoText: (text: string) => void;
+//   handleAddTodo: (type: string) => void;
+//   handleCompleted: (id: number, completed: boolean, type: string) => void;
+//   handleDeleteTodo: (id: number, type: string) => void;
+//   showInput: boolean;
+// }
 
-const DayBoxScreen = ({
-  text,
-  type,
-  todos,
-  newTodoText,
-  setNewTodoText,
-  handleAddTodo,
-  handleCompleted,
-  handleDeleteTodo,
-  showInput,
-}: DayBoxScreenProps) => {
+const DayBoxScreen = () => {
   return (
     <View className="w-full rounded-radius-xl">
       <DayBoxHeader />
