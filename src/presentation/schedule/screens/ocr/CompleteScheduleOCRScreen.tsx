@@ -5,12 +5,13 @@ import CalendarEditor, {
 import { useRef } from 'react';
 import { onboardingNavigation, OnboardingStackParamList } from '../../../../navigation/types';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { createMonthlyShiftsMap, toShiftType } from '../../../../data/mapper/Mapper';
+import { toShiftType } from '../../../../data/mapper/Mapper';
 import BottomButton from '../../../common/component/BottomButton';
 
 import { workCalendarRepository } from '../../../../di/Dependencies';
 import { MonthlySchedule, NewCalendar, ShiftType } from '../../../../data/model/Calendar';
 import TCalendarEditor from '../../../calenderType/components/calendar/team/TCalendarEditor';
+import { convertOCRResultToPersonalSchduleData } from '../../mapper/calendarDataMapper';
 
 type ScheduleTypeRouteProp = RouteProp<OnboardingStackParamList, 'EditCompleteCreateScheduleOCR'>;
 
@@ -20,16 +21,13 @@ const EditCompleteCreateScheduleOCRScreen = () => {
   const { selectedBoxId, calendarName, workGroup, workTimes, ocrResult, year, month } =
     route.params;
 
-  const map = createMonthlyShiftsMap(ocrResult);
-
-  // 만약 내 근무표만 인 경우
   const myWorkSheet = (() => {
     if (selectedBoxId === 2 && ocrResult && Array.isArray(ocrResult)) {
       const foundSheet = ocrResult.find(([workGroupNumber]) => {
         const cleanWorkGroup = workGroup.replace('조', '');
         return workGroupNumber === cleanWorkGroup;
       });
-      return foundSheet; // 찾은 시트 또는 undefined 반환
+      return foundSheet;
     }
     return undefined;
   })();
@@ -39,7 +37,7 @@ const EditCompleteCreateScheduleOCRScreen = () => {
       const shiftTimesMap = new Map<ShiftType, { startTime: string; endTime: string }>();
 
       Object.entries(workTimes).forEach(([type, time]) => {
-        const shiftType = toShiftType(type); 
+        const shiftType = toShiftType(type);
         if (shiftType) {
           shiftTimesMap.set(shiftType, time);
         }
@@ -61,14 +59,11 @@ const EditCompleteCreateScheduleOCRScreen = () => {
               }
             });
 
-            console.log(`내 근무표 (${workGroup}) 스케줄 생성:`, shiftsMap);
-
             monthlySchedules.push({
               year,
               month,
               shifts: shiftsMap,
             });
-            console.log(`내 근무표 (${workGroup}) 스케줄 생성:`, monthlySchedules);
           } else {
             Alert.alert(
               '오류',
@@ -78,8 +73,6 @@ const EditCompleteCreateScheduleOCRScreen = () => {
           }
         }
       }
-
-       console.log(`내 근무표 (${workGroup}) 스케줄:`, monthlySchedules);
 
       const newCalendar: NewCalendar = {
         name: calendarName,
@@ -97,6 +90,7 @@ const EditCompleteCreateScheduleOCRScreen = () => {
   };
 
   const calendarEditorRef = useRef<CalendarEditorRef>(null);
+  const scheduleData = convertOCRResultToPersonalSchduleData(year, month, workGroup, ocrResult);
 
   return (
     <View className="flex-1 bg-background-gray-subtle1 px-number-8">
@@ -120,6 +114,9 @@ const EditCompleteCreateScheduleOCRScreen = () => {
               calendarName={calendarName}
               workGroup={workGroup}
               workTimes={workTimes}
+              year={year}
+              month={month}
+              scheduleData={scheduleData}
             />
           )}
         </View>

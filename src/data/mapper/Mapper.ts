@@ -20,16 +20,7 @@ export function fromCodetoShiftType(code: string): ShiftType {
   }
 }
 
-export function toShiftType(code: string): ShiftType {
-  switch (code) {
-    case 'D':
-      return '주간';
-    case 'E':
-      return '오후';
-    case 'N':
-      return '야간';
-    case '-':
-      return '휴일';
+
 export function toShiftType(code: string): ShiftType {
   switch (code) {
     case 'D':
@@ -150,24 +141,4 @@ function toDataShiftType(value: string): ShiftDataType | null {
     default:
       return 'OFF';
   }
-}
-
-// 변환 함수
-export function createMonthlyShiftsMap(
-  ocrResult: [string, Record<string, string>][]
-): ShiftsDataMap {
-  const monthlyMap: ShiftsDataMap = new Map();
-  for (const weekData of ocrResult) {
-    const weeklyScheduleObject = weekData[1];
-    if (typeof weeklyScheduleObject !== 'object' || weeklyScheduleObject === null) continue;
-    for (const [dayString, shiftValue] of Object.entries(weeklyScheduleObject)) {
-      const day = parseInt(dayString, 10);
-      if (isNaN(day)) continue;
-      const shiftDataType = toDataShiftType(shiftValue);
-      if (shiftDataType) {
-        monthlyMap.set(day, shiftDataType);
-      }
-    }
-  }
-  return monthlyMap;
 }
