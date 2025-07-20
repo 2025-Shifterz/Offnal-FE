@@ -8,4 +8,4 @@ export class HomeRepositoryImpl {
     const data = await this.homeService.getHome();
     return data;
   }
-} 
+}

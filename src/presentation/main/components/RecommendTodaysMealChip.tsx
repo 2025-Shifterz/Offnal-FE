@@ -7,67 +7,75 @@ import PhoIcon from '../../../assets/icons/ic_pho_28.svg';
 import RiceIcon from '../../../assets/icons/ic_rice_28.svg';
 import SweetPotatoIcon from '../../../assets/icons/ic_sweet_potato_28.svg';
 
-enum MealType {
-  PRE_WORK_SNACK = 'PRE_WORK_SNACK',
-  IN_WORK_SNACK = 'IN_WORK_SNACK',
-  POST_WORK_LIGHT_MEAL = 'POST',
-  BREAKFAST = 'BREAKFAST',
-  LUNCH = 'LUNCH',
-  DINNER = 'DINNER',
-}
-
 interface RecommendTodaysMealProps {
-  mealType: MealType;
-  slot: string;
+  label: string;
   time: string;
-  mealContent: string;
   description: string;
+  items: string[];
 }
 
 const RecommendTodaysMealChip: React.FC<RecommendTodaysMealProps> = ({
-  mealType,
-  slot,
+  label,
   time,
-  mealContent,
   description,
+  items,
 }) => {
   const MealIconComponent = () => {
-    switch (mealType) {
-      case MealType.BREAKFAST:
-        return <EggIcon />;
-      case MealType.PRE_WORK_SNACK:
-        return <SweetPotatoIcon />;
-      case MealType.IN_WORK_SNACK:
-        return <MoonIcon />;
-      case MealType.POST_WORK_LIGHT_MEAL:
-        return <PhoIcon />;
-      case MealType.LUNCH:
-        return <LunchBoxIcon/>;
-      case MealType.DINNER:
-        return <RiceIcon />;
+    switch (label) {
+      case '아침':
+      case '조식':
+        return <EggIcon className="h-4 w-4" />;
+      case '점심':
+      case '중식':
+        return <LunchBoxIcon className="h-4 w-4" />;
+      case '저녁':
+      case '석식':
+        return <MoonIcon className="h-4 w-4" />;
+      case '간식':
+        return <SweetPotatoIcon className="h-4 w-4" />;
+      default:
+        return <LunchBoxIcon className="h-4 w-4" />;
     }
   };
 
   return (
     <View className="flex-col items-start justify-center rounded-radius-s bg-surface-white px-number-6 py-number-5 shadow-shadow-blur-3">
-      <View className="mb-number-6 flex-row items-center justify-center gap-g-3">
-        <MealIconComponent />
-        <View className="flex-col items-start justify-center">
-          <Text className="font-pretendard text-body-xxs font-semibold text-text-subtle">{slot}</Text>
-          <Text className="font-pretendard text-body-xxs font-medium text-text-subtle">
-            {time}
+      <View className="flex-row items-center justify-start gap-g-3 pb-number-5">
+        {/* 아이콘 자리 */}
+        <View className="h-7 w-7 justify-center rounded-full bg-gray-200">
+          <MealIconComponent />
+        </View>
+        <View className="flex-col items-start justify-center pl-number-5">
+          {label ? (
+            <Text className="font-pretendard text-body-xxs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+              {label}
+            </Text>
+          ) : (
+            <Text className="font-pretendard text-body-xxs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+              식사 시간
+            </Text>
+          )}
+          <Text className="font-pretendard text-[8px] font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+            {time} 경
           </Text>
         </View>
       </View>
-      <Text className="font-pretendard text-body-xxs font-medium text-text-subtle">
-        {description}
-      </Text>
-      <Text className="pt-number-2 font-pretendard text-heading-xxxs font-semibold text-text-basic">
-        {mealContent}
-      </Text>
+      <View className="flex-col items-start justify-center">
+        {description ? (
+          <Text className="font-pretendard text-[8px] font-medium leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+            {description}
+          </Text>
+        ) : (
+          <Text className="font-pretendard text-[8px] font-medium leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+            설명
+          </Text>
+        )}
+        <Text className="pt-[2px] font-pretendard text-heading-xxxs font-semibold leading-[1.2] tracking-letter-spacing-0 text-text-basic">
+          {Array.isArray(items) && items.length > 0 ? items.join(', ') : '추천 식단 없음'}
+        </Text>
+      </View>
     </View>
   );
 };
 
-export { MealType };
 export default RecommendTodaysMealChip;

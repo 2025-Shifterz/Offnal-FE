@@ -6,13 +6,15 @@ import TooltipBubble from '../components/Tooltip';
 import Bed from '../../../assets/icons/ic_bed.svg';
 import HourGlass from '../../../assets/icons/ic_hourglass.svg';
 
-interface HealthGuide {
-  sleepGuide?: { content?: string; time?: string };
-  fastingGuide?: { content?: string; time?: string };
+interface Health {
+  fastingComment: string;
+  fastingSchedule: string;
+  sleepGuide: string[];
+  sleepSchedule: string;
 }
 
 interface HealthGuideSectionProps {
-  health?: HealthGuide | null;
+  health?: Health | null;
 }
 
 const HealthGuideSection = ({ health }: HealthGuideSectionProps) => {
@@ -22,7 +24,7 @@ const HealthGuideSection = ({ health }: HealthGuideSectionProps) => {
     setShowTooltip(!showTooltip);
   };
 
-  const isEmpty = !health || (!health.sleepGuide?.content && !health.fastingGuide?.content);
+  const isEmpty = !health || (!health.sleepGuide?.length && !health.fastingComment);
 
   return (
     <View className="flex-col justify-start gap-y-number-7">
@@ -60,13 +62,13 @@ const HealthGuideSection = ({ health }: HealthGuideSectionProps) => {
           <>
             <HealthGuideChip
               healthGuideType={HealthGuideType.SLEEP}
-              guideContent={health?.sleepGuide?.content ?? ''}
-              guideTime={health?.sleepGuide?.time ?? ''}
+              guideContent={health?.sleepGuide?.join(' ') ?? ''}
+              guideTime={health?.sleepSchedule ?? ''}
             />
             <HealthGuideChip
               healthGuideType={HealthGuideType.FASTING_TIME}
-              guideContent={health?.fastingGuide?.content ?? ''}
-              guideTime={health?.fastingGuide?.time ?? ''}
+              guideContent={health?.fastingComment ?? ''}
+              guideTime={health?.fastingSchedule ?? ''}
             />
           </>
         )}
