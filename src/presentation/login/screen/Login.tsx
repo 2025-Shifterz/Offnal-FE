@@ -21,29 +21,32 @@ const Login = () => {
         height={SCREEN_HEIGHT * 0.6}
         autoplayTimeout={slideTime}
       >
-        {onboardingList.map((onboarding, index) => (
-          <View
-            key={index}
-            className="mt-number-18 flex-1 items-center"
-            style={{ width: SCREEN_WIDTH }}
-          >
-            <Text className="mb-number-8 mt-number-18 h-fit w-fit gap-number-6 rounded-radius-m1 border-border-width-static-regular border-border-gray-light bg-surface-white p-p-3 text-center font-pretendard text-body-xxs font-medium leading-[1.2] text-text-subtle">
-              {onboarding.keyword}
-            </Text>
-            <Text className="mb-number-4 h-fit w-fit text-center font-pretendard text-heading-s font-semibold leading-[1.2] tracking-letter-spacing-0">
-              {onboarding.title}
-            </Text>
-            <Text className="mb-number-16 h-fit w-fit text-center font-pretendard text-body-xs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-              {onboarding.subtitle}
-            </Text>
+        {onboardingList.map((onboarding, index) => {
+          const Icon = onboarding.image;
 
-            {/* 임시 코드(Lottie 들어갈 자리) */}
-            <View className="h-[180px] w-[180px] rounded-radius-l bg-surface-white">
-              <Text className="font-pretendard">LOTTIE</Text>
-              {/* LottieView로 넣을 예정(따로 만들어서 컴포넌트 하나로 넣을 예정) */}
+          return (
+            <View
+              key={index}
+              className="mt-number-18 flex-1 items-center"
+              style={{ width: SCREEN_WIDTH }}
+            >
+              <Text className="mb-number-8 mt-number-18 h-fit w-fit gap-number-6 rounded-radius-m1 border-border-width-static-regular border-border-gray-light bg-surface-white p-p-3 text-center font-pretendard text-body-xxs font-medium leading-[1.2] text-text-subtle">
+                {onboarding.keyword}
+              </Text>
+              <Text className="mb-number-4 h-fit w-fit text-center font-pretendard text-heading-s font-semibold leading-[1.2] tracking-letter-spacing-0">
+                {onboarding.title}
+              </Text>
+              <Text className="mb-number-16 h-fit w-fit text-center font-pretendard text-body-xs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+                {onboarding.subtitle}
+              </Text>
+
+              {/* ✅ 실제 SVG 렌더링 */}
+              <View className="items-center justify-center rounded-radius-l">
+                <Icon width={170} height={170} />
+              </View>
             </View>
-          </View>
-        ))}
+          );
+        })}
       </Swiper>
 
       <View className="flex items-center justify-center">

@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../../../navigation/types';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient';
 import LottieView from 'lottie-react-native';
 
 const SplashScreen = () => {
@@ -37,11 +37,11 @@ const SplashScreen = () => {
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1 items-center justify-center bg-[#5cc0cd]">
-        <LinearGradient
+        {/* <LinearGradient
           colors={gradientColors}
           locations={gradientLocations}
           style={styles.gradient}
-        />
+        /> */}
         <LottieView
           source={require('../../../assets/lottie/SplashScreen.json')}
           autoPlay
@@ -59,11 +59,11 @@ const SplashScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  // StyleSheet.absoluteFill을 사용하면 부모 View를 가득 채우는 스타일이 적용됩니다.
-  gradient: {
-    ...StyleSheet.absoluteFillObject,
-  },
-});
+// const styles = StyleSheet.create({
+//   // StyleSheet.absoluteFill을 사용하면 부모 View를 가득 채우는 스타일이 적용됩니다.
+//   gradient: {
+//     ...StyleSheet.absoluteFillObject,
+//   },
+// });
 
 export default SplashScreen;
