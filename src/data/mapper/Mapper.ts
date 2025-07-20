@@ -21,6 +21,7 @@ export function fromCodetoShiftType(code: string): ShiftType {
 }
 
 
+
 export function toShiftType(code: string): ShiftType {
   switch (code) {
     case 'D':

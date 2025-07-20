@@ -85,8 +85,8 @@ export default function MainScreen() {
           </View>
 
           <View className="items-top flex-1 justify-start bg-background-gray-subtle1 p-number-8">
-            <RecommnedMealSection meals={homeData?.todayRoutine?.meals as any ?? []} />
-            <HealthGuideSection health={homeData?.todayRoutine?.health as any ?? null} />
+            <RecommnedMealSection meals={(homeData?.todayRoutine?.meals as any) ?? []} />
+            <HealthGuideSection health={(homeData?.todayRoutine?.health as any) ?? null} />
             <AlramSection alarms={[]} />
             <HealthCardSection />
             <NoteSection />

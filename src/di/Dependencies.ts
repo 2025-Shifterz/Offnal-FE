@@ -17,6 +17,7 @@ import { FastAPIService } from '../remote/api/FastAPIService';
 const todoDao = new TodoDao();
 const calendarService = new CalendarService(); 
 const homeService = new HomeService();
+
 export const fastAPIService = new FastAPIService();
 
 // 2. 구체적인 리포지토리 구현체 인스턴스 생성 (TodoDao 주입)

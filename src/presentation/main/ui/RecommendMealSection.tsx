@@ -1,14 +1,13 @@
 import { ScrollView, View, Text } from 'react-native';
 import TitleSection from '../components/TitleSection';
-import RecommendTodaysMealChip, { MealType } from '../components/RecommendTodaysMealChip';
+import RecommendTodaysMealChip from '../components/RecommendTodaysMealChip';
 import TableWare from '../../../assets/icons/ic_tableware.svg';
 
 interface Meal {
-  mealType: string;
-  slot: string;
+  label: string;
   time: string;
-  mealContent: string;
   description: string;
+  items: string[];
 }
 
 interface RecommendMealSectionProps {
@@ -34,11 +33,10 @@ const RecommnedMealSection = ({ meals }: RecommendMealSectionProps) => {
             {meals.map((meal: Meal, idx: number) => (
               <RecommendTodaysMealChip
                 key={idx}
-                mealType={meal.mealType as MealType}
-                slot={meal.slot}
+                label={meal.label}
                 time={meal.time}
-                mealContent={meal.mealContent}
                 description={meal.description}
+                items={meal.items}
               />
             ))}
           </View>
