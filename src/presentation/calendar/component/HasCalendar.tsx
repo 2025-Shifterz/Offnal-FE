@@ -13,6 +13,7 @@ import ToDoCard from '../../main/components/ToDoCard';
 import MemoCard from '../../main/components/MemoCard';
 import { Todo } from '../../../domain/entities/Todo';
 import { memoRepository, todoRepository } from '../../../di/Dependencies';
+import { ShiftType } from '../../../data/model/Calendar';
 
 interface HasCalendarProps {
   setShowPlus: (value: boolean) => void;
@@ -21,6 +22,8 @@ interface HasCalendarProps {
 const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
   const navigation = useNavigation<calendarNavigation>();
   const [isTeamView, setIsTeamView] = useState(false);
+  const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(new Map());
+  // console.log('calendarData', calendarData);
 
   // 노트
   const [memos, setMemo] = useState<Todo[]>();
@@ -52,6 +55,10 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
     sheetRef.current?.expand(); // 바텀 시트 열기
   };
 
+  // 근무형태가 있을 때만 렌더링
+  const shiftTypeForSelectedDate =
+    selectedDate && calendarData.get(selectedDate.format('YYYY-MM-DD'));
+
   return (
     <View className="h-full flex-1 px-[16px]">
       <ScrollView className="h-full flex-1">
@@ -68,6 +75,8 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
           />
         ) : (
           <CalendarViewer
+            calendarData={calendarData}
+            setCalendarData={setCalendarData}
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
             onDateSelected={openBottomSheet} // ✅ 날짜 선택 시 바텀시트 열기
@@ -104,8 +113,7 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
             <Text className="w-[42px] text-heading-xxs font-semibold text-text-bolder">
               {formattedDate}
             </Text>
-            <Text className="text-[10px] font-medium text-text-subtle-inverse">음력 05.03</Text>
-            <TimeFrame text="주간" />
+            {shiftTypeForSelectedDate && <TimeFrame text={shiftTypeForSelectedDate} />}
           </View>
           <ToDoCard.Container todos={todos ?? []} />
           <View className="mt-[-30px]">

@@ -40,7 +40,7 @@ const TimeFrame: React.FC<TimeFrameProps> = ({ text, onPress }: TimeFrameProps) 
       onPress={onPress}
       className={`flex h-[23px] w-[30px] items-center justify-center ${currentStyle.backgroundColor}`}
     >
-      <Text className={`text-heading-xxxs font-semibold ${currentStyle.textColor}`}>{text}</Text>
+      <Text className={`text-heading-xxxxs font-semibold ${currentStyle.textColor}`}>{text}</Text>
     </TouchableOpacity>
   );
 };

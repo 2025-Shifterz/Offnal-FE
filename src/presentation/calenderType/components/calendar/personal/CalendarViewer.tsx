@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import CalendarBase from './../personal/CalendarBase';
 import { Text, View } from 'react-native';
@@ -13,9 +14,14 @@ interface CalendarViewerProps {
   selectedDate: dayjs.Dayjs | null;
   setSelectedDate: (date: dayjs.Dayjs | null) => void;
   onDateSelected?: (date: dayjs.Dayjs) => void; // ✅ 콜백 추가
+
+  calendarData: Map<string, ShiftType>;
+  setCalendarData: (map: Map<string, ShiftType>) => void;
 }
 
 const CalendarViewer = ({
+  calendarData,
+  setCalendarData,
   onPressTeamIcon,
   onPressEditIcon,
   selectedDate,
@@ -23,7 +29,7 @@ const CalendarViewer = ({
   onDateSelected,
 }: CalendarViewerProps) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
-  const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(new Map());
+  // const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(new Map());
 
   // const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
 
