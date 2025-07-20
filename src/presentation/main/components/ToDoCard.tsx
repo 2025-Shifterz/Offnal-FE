@@ -2,10 +2,25 @@ import { View, Text } from 'react-native';
 
 import TitleSection from './TitleSection';
 import CheckListIcon from '../../../assets/icons/ic_checklist_24.svg';
+import CheckIcon from '../../../assets/icons/checked.svg';
 import { useNavigation } from '@react-navigation/native';
+import { Todo } from '../../../domain/entities/Todo';
+import React from 'react';
 
-const Container = () => {
+interface TodoCardProps {
+  todos: Todo[];
+}
+
+interface TodoItemProps {
+  todo: Todo;
+  isFirst: boolean;
+  isLast: boolean;
+}
+
+const Container = ({ todos }: TodoCardProps) => {
   const navigation = useNavigation();
+  const hasTodos = todos && todos.length > 0;
+
   return (
     <View className="my-number-8 flex-col justify-start gap-y-number-7 rounded-lg bg-background-white p-number-6">
       <View className="mb-number-3 flex-row items-center justify-start">
@@ -16,7 +31,22 @@ const Container = () => {
           onPressIcon={() => navigation.navigate('Todo')}
         />
       </View>
-      <Nothing />
+      {hasTodos ? (
+        <View className="flex-col">
+          {' '}
+          {/* 메모 아이템들을 담을 View */}
+          {todos.map((todo, index) => (
+            <Item
+              key={todo.id} // 고유한 key prop 사용
+              todo={todo}
+              isFirst={index === 0} // 첫 번째 아이템인지 확인
+              isLast={index === todos.length - 1} // 마지막 아이템인지 확인
+            />
+          ))}
+        </View>
+      ) : (
+        <Nothing />
+      )}
     </View>
   );
 };
@@ -29,6 +59,29 @@ const Nothing = () => {
       </Text>
       <Text className="font-pretendard text-body-xxs font-medium text-text-disabled">
         근무일정에 따른 할 일 리스트를 만들어보세요.
+      </Text>
+    </View>
+  );
+};
+
+const Item = ({ todo, isFirst, isLast }: TodoItemProps) => {
+  const itemBorderClass = [isFirst ? 'rounded-t-lg' : '', isLast ? 'rounded-b-lg' : '']
+    .filter(Boolean)
+    .join(' ');
+
+  return (
+    <View
+      className={`flex-row items-center bg-background-gray-subtle1 px-number-6 py-number-4 ${itemBorderClass} ${!isLast ? 'mb-number-1' : ''}`}
+    >
+      {todo.completed ? (
+        <View className="mr-[5px]">
+          <CheckIcon />
+        </View>
+      ) : (
+        <View className="mr-[5px] h-[13px] w-[13px] rounded-[2px] bg-[#cdd1d5]" />
+      )}
+      <Text className="font-pretendard text-body-xxs font-normal text-text-subtle">
+        {todo.text}
       </Text>
     </View>
   );

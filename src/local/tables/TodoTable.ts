@@ -16,7 +16,8 @@ export const createTodoTable = async (): Promise<void> => {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         text TEXT NOT NULL,
         completed INTEGER DEFAULT 0,
-        type TEXT NOT NULL
+        type TEXT NOT NULL,
+        createdAt TEXT DEFAULT CURRENT_TIMESTAMP
       );`,
       []
     );
