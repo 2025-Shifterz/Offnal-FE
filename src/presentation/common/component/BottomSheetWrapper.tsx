@@ -17,6 +17,7 @@ const BottomSheetWrapper = forwardRef<BottomSheet, BottomSheetWrapperProps>(
       <View className="absolute inset-0">
         <BottomSheet
           handleStyle={handleStyle}
+          enablePanDownToClose={true}
           enableContentPanningGesture={false} //  제스처가 캘린더 터치 방해하지 않게
           ref={ref}
           index={-1}

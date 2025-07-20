@@ -106,7 +106,7 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
       >
         <PlusIcon />
       </TouchableOpacity>
-      <Text>여기에 바텀시트</Text>
+      {/* 노트 바텀시트 */}
       <BottomSheetWrapper ref={sheetRef} handleStyle={{ backgroundColor: '#F4F5F6' }}>
         <View className="flex-1 gap-[11px] bg-surface-gray-subtle1 px-[16px] pt-[12px]">
           <View className="flex-row items-center gap-[8px]">
@@ -115,10 +115,12 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
             </Text>
             {shiftTypeForSelectedDate && <TimeFrame text={shiftTypeForSelectedDate} />}
           </View>
-          <ToDoCard.Container todos={todos ?? []} />
-          <View className="mt-[-30px]">
-            <MemoCard.Container memos={memos ?? []} />
-          </View>
+          <ScrollView>
+            <ToDoCard.Container todos={todos ?? []} />
+            <View className="mt-[-20px]">
+              <MemoCard.Container memos={memos ?? []} />
+            </View>
+          </ScrollView>
         </View>
       </BottomSheetWrapper>
     </View>
