@@ -1,7 +1,7 @@
 // /src/data/mappers/CalendarMapper.ts
 
 import { NewCalendar, ShiftsMap, ShiftType, WorkDay } from '../model/Calendar'; // Domain 모델
-import { GetWorkCalendarResponseData } from '../../remote/response/GetWorkCalendarResponse';
+import { GetWorkCalendarResponseData } from '../../remote/response/GetWorkCalendarResponse';;
 import { UpdateShiftsRequest } from '../../remote/request/PatchWorkCalendarReqeust';
 import { CreateCalendarRequest } from '../../remote/request/CreateWorkCalendarRequest';
 
@@ -20,6 +20,16 @@ export function fromCodetoShiftType(code: string): ShiftType {
   }
 }
 
+export function toShiftType(code: string): ShiftType {
+  switch (code) {
+    case 'D':
+      return '주간';
+    case 'E':
+      return '오후';
+    case 'N':
+      return '야간';
+    case '-':
+      return '휴일';
 export function toShiftType(code: string): ShiftType {
   switch (code) {
     case 'D':
