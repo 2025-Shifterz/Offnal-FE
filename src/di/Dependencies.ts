@@ -11,11 +11,14 @@ import { WorkCalendarRepositoryImpl } from '../data/impl/CalendarRepositoryImpl'
 import { HomeService } from '../remote/api/HomeService';
 import { HomeRepositoryImpl } from '../data/impl/HomeRepositoryImpl';
 import { GetHomeDataUseCase } from '../domain/useCases/GetHomeData';
+import { FastAPIService } from '../remote/api/FastAPIService';
 
 // 1. 구체적인 데이터 소스 인스턴스 생성
 const todoDao = new TodoDao();
 const calendarService = new CalendarService(); 
 const homeService = new HomeService();
+
+export const fastAPIService = new FastAPIService();
 
 // 2. 구체적인 리포지토리 구현체 인스턴스 생성 (TodoDao 주입)
 const todoRepository = new TodoRepositoryImpl(todoDao);
