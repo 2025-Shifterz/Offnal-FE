@@ -1,52 +1,63 @@
 import React, { useRef, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import dayjs from 'dayjs';
-import { TimeFrameChildren } from '../../calenderType/components/TimeFrame';
 import EditScreenHeader from '../components/EditScreenMonthHeader';
 import EditBottomSheet from '../components/EditBottomSheet';
 import CalendarInteractive from '../components/CalendarInteractive';
 import SuccessIcon from '../../../assets/icons/g-success.svg';
 import BottomSheet from '@gorhom/bottom-sheet';
+import { workCalendarRepository } from '../../../di/Dependencies';
+import { ShiftType } from '../../../data/model/Calendar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import api from '../../../remote/api/axiosInstance';
 
 const CalendarEditScreen = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
-  const [calendarData, setCalendarData] = useState<Record<string, TimeFrameChildren>>({});
+  const [calendarData, setCalendarData] = useState<Map<number, ShiftType>>(new Map());
   // 근무 형태를 눌렀지만 '취소'를 누르면 원래 상태로 되돌아감.
-  const [backupType, setBackupType] = useState<TimeFrameChildren | null>(null);
+  const [backupType, setBackupType] = useState<ShiftType | null>(null);
 
   // 이 ref가 .expend()를 호출할 수 있어야한다. // EditBottomSheet에게 ref 전달
   const sheetRef = useRef<BottomSheet>(null);
 
+  // YYYY-MM-DD 문자열을 숫자(예: YYYYMMDD 정수)로 변환
+  const dateKeyToNumber = (dateKey: string) => Number(dateKey.replace(/-/g, ''));
+
   // 근무 형태 캘린더에 넣기
-  const handleTypeSelect = (type: TimeFrameChildren) => {
+  const handleTypeSelect = (type: ShiftType) => {
     if (!selectedDate) return;
-    const key = selectedDate.format('YYYY-MM-DD');
-    setCalendarData(prev => ({ ...prev, [key]: type }));
+    const keyStr = selectedDate.format('YYYY-MM-DD');
+    const key = dateKeyToNumber(keyStr);
+
+    setCalendarData(prev => {
+      const newMap = new Map(prev);
+      newMap.set(key, type);
+      return newMap;
+    });
   };
 
   // 날짜 클릭 시 바텀시트 열기, 바텀시트 열기 전에 근무 형태를 백업
   const openBottomSheet = (date: dayjs.Dayjs) => {
-    const key = date.format('YYYY-MM-DD');
+    const keyStr = date.format('YYYY-MM-DD');
+    const key = dateKeyToNumber(keyStr);
     setSelectedDate(date);
-    setBackupType(calendarData[key] ?? null); // 먼저 백업
+    setBackupType(calendarData.get(key) ?? null); // 먼저 백업
     sheetRef.current?.expand(); // 바텀 시트 열기
   };
   // 취소 시 롤백
   const handleCancel = () => {
     if (selectedDate) {
-      const key = selectedDate.format('YYYY-MM-DD');
-      setCalendarData(prev => {
-        const updated = { ...prev };
-        if (backupType) {
-          updated[key] = backupType; // 원래 타입으로 돌려놓기
-        } else {
-          delete updated[key]; // 원래 없던 거면 삭제
-        }
+      const key = dateKeyToNumber(selectedDate.format('YYYY-MM-DD'));
 
-        return updated;
+      setCalendarData(prev => {
+        const newMap = new Map(prev);
+        if (backupType !== null) {
+          newMap.set(key, backupType);
+        } else {
+          newMap.delete(key);
+        }
+        return newMap;
       });
     }
     sheetRef.current?.close();

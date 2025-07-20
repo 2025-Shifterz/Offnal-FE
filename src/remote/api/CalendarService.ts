@@ -4,11 +4,10 @@ import api from './axiosInstance';
 import axios from 'axios';
 import { GetWorkCalendarResponse } from '../response/GetWorkCalendarResponse';
 
-
 export class CalendarService {
   getWorkCalendar = async (year: number, month: number) => {
     try {
-      const response = await api.get<GetWorkCalendarResponse>('/work/calendar', {
+      const response = await api.get<GetWorkCalendarResponse>('/works/calendar', {
         params: {
           year,
           month,
@@ -28,7 +27,7 @@ export class CalendarService {
 
   createWorkCalendar = async (calendarData: CreateCalendarRequest) => {
     try {
-      await api.post<CreateCalendarRequest>('/work/calendar', calendarData);
+      await api.post<CreateCalendarRequest>('/works/calendar', calendarData);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error('API 요청 실패:', error.response?.data || error.message);
@@ -42,7 +41,7 @@ export class CalendarService {
 
   deleteWorkCalendar = async (year: number, month: number) => {
     try {
-      await api.delete(`/work/calendar`, {
+      await api.delete(`/works/calendar`, {
         params: {
           year,
           month,
@@ -60,7 +59,7 @@ export class CalendarService {
 
   updateWorkCalendar = async (year: number, month: number, calendarData: UpdateShiftsRequest) => {
     try {
-      await api.patch<UpdateShiftsRequest>(`/work/calendar`, calendarData, {
+      await api.patch<UpdateShiftsRequest>(`/works/calendar`, calendarData, {
         params: {
           year,
           month,
