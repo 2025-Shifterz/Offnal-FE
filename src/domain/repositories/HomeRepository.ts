@@ -13,4 +13,4 @@ export interface HomeRepository {
    * @returns UI용 홈 데이터
    */
   getHomeDataForUI(): Promise<HomeData>;
-}
+} 

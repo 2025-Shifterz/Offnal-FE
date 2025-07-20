@@ -12,4 +12,4 @@ export class GetHomeDataUseCase {
   async executeForUI(): Promise<HomeData> {
     return await this.homeRepository.getHomeDataForUI();
   }
-}
+} 
