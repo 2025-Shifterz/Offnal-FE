@@ -59,12 +59,13 @@ export class CalendarService {
 
   updateWorkCalendar = async (year: number, month: number, calendarData: UpdateShiftsRequest) => {
     try {
-      await api.patch<UpdateShiftsRequest>('/works/calendar', calendarData, {
+      const response = await api.patch<UpdateShiftsRequest>('/works/calendar', calendarData, {
         params: {
           year: String(year),
           month: String(month),
         },
       });
+      return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error('API 요청 실패:', error.response?.data || error.message);

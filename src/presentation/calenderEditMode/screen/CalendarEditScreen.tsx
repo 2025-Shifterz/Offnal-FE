@@ -10,7 +10,6 @@ import { workCalendarRepository } from '../../../di/Dependencies';
 import { ShiftType } from '../../../data/model/Calendar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-
 const CalendarEditScreen = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
@@ -69,8 +68,8 @@ const CalendarEditScreen = () => {
     const month = currentDate.month() + 1;
 
     try {
-      await workCalendarRepository.updateWorkCalendar(year, month, calendarData);
-      console.log('근무표 수정 성공');
+      const result = await workCalendarRepository.updateWorkCalendar(year, month, calendarData);
+      console.log('근무표 수정 성공, 서버 응답:', result);
     } catch (error) {
       console.log('근무표 수정 실패:', error);
     }

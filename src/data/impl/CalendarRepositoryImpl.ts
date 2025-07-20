@@ -36,14 +36,11 @@ export class WorkCalendarRepositoryImpl implements WorkCalendarRepository {
       throw error;
     }
   }
-  async updateWorkCalendar(year: number, month: number, calendarData: ShiftsMap): Promise<void> {
+  async updateWorkCalendar(year: number, month: number, calendarData: ShiftsMap): Promise<any> {
     try {
       const requestDto = toUpdateShiftsRequest(calendarData);
 
-      console.log('PATCH /works/calendar params:', { year, month });
-      console.log('PATCH /works/calendar body:', JSON.stringify(requestDto, null, 2));
-
-      await this.calendarService.updateWorkCalendar(year, month, requestDto);
+      return await this.calendarService.updateWorkCalendar(year, month, requestDto);
     } catch (error) {
       console.error('Error updating work calendar:', error);
       throw error;
