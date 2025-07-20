@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../../../navigation/types';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient';
 import SplashLogo from '../../../assets/icons/ic_splash_logo.svg';
 
 // import AppLogo from '../../assets/icons/app_logo.svg'; // 사용 예정(아마 사용 안할듯)
@@ -44,11 +44,11 @@ const SplashScreen = () => {
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1 items-center justify-center bg-[#5cc0cd]">
-        <LinearGradient
+        {/* <LinearGradient
           colors={gradientColors}
           locations={gradientLocations}
           style={styles.gradient}
-        />
+        /> */}
         <SplashLogo />
 
         <Text className="mt-[18px] text-center text-heading-xs text-white">
