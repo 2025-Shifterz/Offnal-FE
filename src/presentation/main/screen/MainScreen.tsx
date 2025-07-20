@@ -1,5 +1,5 @@
 import '../../../../global.css';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -10,27 +10,46 @@ import RecommnedMealSection from '../ui/RecommendMealSection';
 import NoteSection from '../ui/NoteSection';
 import HealthCardSection from '../ui/HealthCardSection';
 import TopCard from '../components/TopCard';
+import dayjs from 'dayjs';
 
-import { homeRepository } from '../../../di/Dependencies';
+import { homeRepository, todoRepository } from '../../../di/Dependencies';
 import { HomeResponse } from '../../../remote/response/homeResponse';
 
+import { memoRepository } from '../../../di/Dependencies';
+import { Todo } from '../../../domain/entities/Todo';
+import { useFocusEffect } from '@react-navigation/native';
+
 export default function MainScreen() {
-  const [homeData, setHomeData] = useState<HomeResponse['data'] | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchHome = async () => {
-      try {
-        const data = await homeRepository.getHome();
-        setHomeData(data);
-      } catch (error) {
-        console.error('홈 데이터 불러오기 실패:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchHome();
-  }, []);
+  const [homeData, setHomeData] = useState<HomeResponse['data'] | null>(null);
+  const [memos, setMemo] = useState<Todo[]>();
+  const [todos, setTodo] = useState<Todo[]>();
+
+  const fetchHome = async () => {
+    try {
+      const data = await homeRepository.getHome();
+      const memos = await memoRepository.getMemosByDate(dayjs());
+      const todos = await todoRepository.getToDosByDate(dayjs());    
+
+      setHomeData(data);
+      setMemo(memos);
+      setTodo(todos);
+    } catch (error) {
+      console.error('홈 데이터 불러오기 실패:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchHome();
+
+      return () => {};
+    }, [])
+  )
 
   const translateWorkType = (type?: string): string => {
     if (!type) return '미등록';
@@ -91,7 +110,7 @@ export default function MainScreen() {
             <HealthGuideSection health={(homeData?.todayRoutine?.health as any) ?? null} />
             <AlramSection alarms={[]} />
             <HealthCardSection />
-            <NoteSection />
+            <NoteSection todos={todos} memos={memos} />
           </View>
         </ScrollView>
       </SafeAreaView>

@@ -1,6 +1,9 @@
 import { openShifterzDB } from '../ShifterzDB';
 import { Todo, TodoType } from '../../domain/entities/Todo';
-// import { openDB } from '../tables/TodoTable';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc); 
 
 export class TodoDao {
   // todo 추가하기
@@ -16,6 +19,39 @@ export class TodoDao {
     } catch (error) {
       console.error('Error adding todo:', error);
       throw error;
+    }
+  }
+
+  /**
+   * 특정 날짜에 생성된 'todo' 타입의 Todo 항목을 가져옵니다 (Read by Date).
+   * @param targetDate 조회할 날짜 (dayjs 객체)
+   * @returns 해당 날짜에 생성된 'memo' 항목 배열
+   */
+  async getTodosByDate(targetDate: dayjs.Dayjs): Promise<Todo[]> {
+    const db = await openShifterzDB();
+    try {
+      const startOfDayLocal = targetDate.startOf('day');
+      const endOfDayLocal = targetDate.endOf('day');
+
+      const startOfDayUTC = startOfDayLocal.utc().format('YYYY-MM-DD HH:mm:ss');
+      const endOfDayUTC = endOfDayLocal.utc().format('YYYY-MM-DD HH:mm:ss');
+
+      let query = 'SELECT * FROM todos WHERE type = ? AND createdAt BETWEEN ? AND ?';
+      const params: any[] = ['todo', startOfDayUTC, endOfDayUTC];
+
+      const [result] = await db.executeSql(query, params);
+      const memos: Todo[] = [];
+      for (let i = 0; i < result.rows.length; i++) {
+        const item = result.rows.item(i);
+        // DB의 0/1을 boolean으로 변환
+        item.completed = item.completed === 1;
+        memos.push(item);
+      }
+      console.log(`Memos for date '${targetDate.format('YYYY-MM-DD')}':`, memos);
+      return memos;
+    } catch (error) {
+      console.error(`Error getting memos by date '${targetDate.format('YYYY-MM-DD')}':`, error);
+      return [];
     }
   }
 
