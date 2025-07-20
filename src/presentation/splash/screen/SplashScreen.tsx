@@ -36,7 +36,7 @@ const SplashScreen = () => {
         <LottieView
           source={require('../../../assets/lottie/SplashScreen.json')}
           autoPlay
-          loop={false}
+          loop
           resizeMode="contain"
           style={{ width: 250, height: 250 }}
           onAnimationFinish={handleAnimationFinish}
