@@ -40,6 +40,9 @@ export class WorkCalendarRepositoryImpl implements WorkCalendarRepository {
     try {
       const requestDto = toUpdateShiftsRequest(calendarData);
 
+      console.log('PATCH /works/calendar params:', { year, month });
+      console.log('PATCH /works/calendar body:', JSON.stringify(requestDto, null, 2));
+
       await this.calendarService.updateWorkCalendar(year, month, requestDto);
     } catch (error) {
       console.error('Error updating work calendar:', error);

@@ -59,10 +59,10 @@ export class CalendarService {
 
   updateWorkCalendar = async (year: number, month: number, calendarData: UpdateShiftsRequest) => {
     try {
-      await api.patch<UpdateShiftsRequest>(`/works/calendar`, calendarData, {
+      await api.patch<UpdateShiftsRequest>('/works/calendar', calendarData, {
         params: {
-          year,
-          month,
+          year: String(year),
+          month: String(month),
         },
       });
     } catch (error) {
