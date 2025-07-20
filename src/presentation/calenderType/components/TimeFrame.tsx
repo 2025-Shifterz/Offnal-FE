@@ -4,6 +4,9 @@ import { Text, Touchable, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { ShiftType } from '../../../data/model/Calendar';
 
+// TimeFrameChildren을 ShiftType과 동일하게 정의
+export type TimeFrameChildren = ShiftType;
+
 interface TimeFrameProps {
   text: ShiftType;
   onPress?: () => void;
@@ -37,7 +40,7 @@ const TimeFrame: React.FC<TimeFrameProps> = ({ text, onPress }: TimeFrameProps) 
       onPress={onPress}
       className={`flex h-[23px] w-[30px] items-center justify-center ${currentStyle.backgroundColor}`}
     >
-      <Text className={`text-heading-xxxxs font-semibold ${currentStyle.textColor}`}>{text}</Text>
+      <Text className={`text-heading-xxxs font-semibold ${currentStyle.textColor}`}>{text}</Text>
     </TouchableOpacity>
   );
 };

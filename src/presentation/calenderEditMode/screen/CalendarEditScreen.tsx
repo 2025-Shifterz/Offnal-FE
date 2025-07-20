@@ -62,13 +62,14 @@ const CalendarEditScreen = () => {
     sheetRef.current?.close();
   };
 
-  // '체크' 버튼을 누르면 post 요청 - 근무표 저장(수정).
-  const handlePostData = async () => {
+  // '체크' 버튼을 누르면 patch 요청 - 근무표 수정사항 저장.
+  const handlePatchData = async () => {
+    const year = currentDate.year();
+    const month = currentDate.month() + 1;
+
     try {
-      const year = currentDate.year();
-      const month = currentDate.month() + 1;
-      const response = await workCalendarRepository.updateWorkCalendar(year, month, calendarData);
-      console.log('근무표 수정 성공:', response);
+      const result = await workCalendarRepository.updateWorkCalendar(year, month, calendarData);
+      console.log('근무표 수정 성공, 서버 응답:', result);
     } catch (error) {
       console.log('근무표 수정 실패:', error);
     }
@@ -109,7 +110,7 @@ const CalendarEditScreen = () => {
         </View>
         {/* 모든 저장 버튼 -> 근무표에 저장되어야함. post 요청!! */}
         <TouchableOpacity
-          onPress={handlePostData}
+          onPress={handlePatchData}
           className="absolute bottom-[13px] right-[13px] h-[40px] w-[40px] items-center justify-center rounded-radius-max bg-success-40"
         >
           <SuccessIcon />

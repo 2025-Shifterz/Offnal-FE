@@ -81,7 +81,11 @@ export function toUpdateShiftsRequest(shiftsMap: ShiftsMap): UpdateShiftsRequest
 
   // Map을 순회하며 { "1": "오후", "2": "야간" } 형태의 객체로 변환
   shiftsMap.forEach((shift, day) => {
-    shifts[day.toString()] = fromShiftType(shift);
+    // day가 20250720처럼 연월일이면, 마지막 2자리(혹은 1~2자리)를 추출
+    const dayStr = day.toString();
+    // "20250720" → "20", "20250721" → "21"
+    const onlyDay = dayStr.length > 2 ? dayStr.slice(-2) : dayStr;
+    shifts[onlyDay] = fromShiftType(shift);
   });
 
   return { shifts };
