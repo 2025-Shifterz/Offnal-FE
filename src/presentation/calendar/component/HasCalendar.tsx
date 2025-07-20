@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import { Button, ScrollView, TouchableOpacity, View } from 'react-native';
+import { Button, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { calendarNavigation } from '../../../navigation/types';
 import CalendarViewer from '../../calenderType/components/calendar/personal/CalendarViewer';
 import TCalendarViewer from '../../calenderType/components/calendar/team/TCalendarViewer';
 import { useState } from 'react';
 import PlusIcon from '../../../assets/icons/w-plus.svg';
+import BottomSheetWrapper from '../../common/component/BottomSheetWrapper';
 
 interface HasCalendarProps {
   setShowPlus: (value: boolean) => void;
@@ -56,6 +57,12 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
       >
         <PlusIcon />
       </TouchableOpacity>
+      <Text>여기에 바텀시트</Text>
+      <BottomSheetWrapper>
+        <View>
+          <Text>fff</Text>
+        </View>
+      </BottomSheetWrapper>
     </View>
   );
 };

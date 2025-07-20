@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CalendarBase from './../personal/CalendarBase';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import dayjs from 'dayjs';
 
 import { workDaysToMap } from '../../../../common/utils/calendar/workDaysToMap';
@@ -15,6 +15,8 @@ interface CalendarViewerProps {
 const CalendarViewer = ({ onPressTeamIcon, onPressEditIcon }: CalendarViewerProps) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(new Map());
+
+  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
 
   const year = currentDate.year();
   const month = currentDate.month() + 1;
@@ -36,9 +38,19 @@ const CalendarViewer = ({ onPressTeamIcon, onPressEditIcon }: CalendarViewerProp
 
   console.log('calendarData instanceof Map', calendarData instanceof Map);
 
+  // ----------
+
+  // 날짜 선택
+  const handleDatePress = (date: dayjs.Dayjs) => {
+    setSelectedDate(date);
+    console.log('selectedDate:', selectedDate);
+  };
+
   return (
     <View>
       <CalendarBase
+        selectedDate={selectedDate}
+        onDatePress={handleDatePress}
         currentDate={currentDate}
         onChangeMonth={setCurrentDate}
         calendarData={calendarData}
