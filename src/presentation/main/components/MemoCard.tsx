@@ -3,9 +3,22 @@ import { View, Text } from 'react-native';
 import TitleSection from './TitleSection';
 import NoteIcon from '../../../assets/icons/ic_note_24.svg';
 import { useNavigation } from '@react-navigation/native';
+import { Todo } from '../../../domain/entities/Todo';
 
-const Container = () => {
+interface MemoCardProps {
+  memos: Todo[];
+}
+
+interface MemoItemProps {
+  memo: Todo;
+  isFirst: boolean;
+  isLast: boolean;
+}
+
+const Container = ({ memos }: MemoCardProps) => {
   const navigation = useNavigation();
+  const hasMemos = memos && memos.length > 0;
+
   return (
     <View className="my-number-8 flex-col justify-start gap-y-number-7 rounded-lg bg-background-white p-number-6">
       <View className="mb-number-3 flex-row items-center justify-start">
@@ -16,7 +29,20 @@ const Container = () => {
           onPressIcon={() => navigation.navigate('Memo')}
         />
       </View>
-      <Nothing />
+      {hasMemos ? (
+        <View className="flex-col"> {/* 메모 아이템들을 담을 View */}
+          {memos.map((memo, index) => (
+            <Item
+              key={memo.id} // 고유한 key prop 사용
+              memo={memo}
+              isFirst={index === 0} // 첫 번째 아이템인지 확인
+              isLast={index === memos.length - 1} // 마지막 아이템인지 확인
+            />
+          ))}
+        </View>
+      ) : (
+        <Nothing />
+      )}
     </View>
   );
 };
@@ -33,5 +59,23 @@ const Nothing = () => {
     </View>
   );
 };
+
+const Item = ({ memo, isFirst, isLast }: MemoItemProps) => {
+  const itemBorderClass = [
+    isFirst ? 'rounded-t-lg' : '',
+    isLast ? 'rounded-b-lg' : ''
+  ].filter(Boolean).join(' ')
+
+  return (
+    <View className={`px-number-6 py-number-4 bg-background-gray-subtle1 ${itemBorderClass} ${!isLast ? 'mb-number-1' : ''}`}>
+      <Text className="font-pretendard text-body-xxs font-normal text-text-subtle">
+        {memo.text}
+      </Text>
+    </View>
+  );
+}
+
+
+
 
 export default { Nothing, Container };
