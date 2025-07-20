@@ -20,6 +20,7 @@
     "android": "^0.0.8",
     "axios": "^1.10.0",
     "clsx": "^2.1.1",
+    "dayjs-plugin-utc": "^0.1.2",
     "lottie-react-native": "^7.2.2",
     "nativewind": "^4.1.23",
     "react": "19.0.0",

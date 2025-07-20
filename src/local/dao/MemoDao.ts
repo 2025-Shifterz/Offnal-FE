@@ -1,6 +1,9 @@
 import { openShifterzDB } from '../ShifterzDB';
 import { Todo } from '../../domain/entities/Todo';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc); 
 
 export class MemoDao {
   /**
@@ -81,9 +84,14 @@ export class MemoDao {
   async getMemosByDate(targetDate: dayjs.Dayjs): Promise<Todo[]> {
     const db = await openShifterzDB();
     try {
-      const formattedDate = targetDate.format('YYYY-MM-DD');
-      let query = 'SELECT * FROM todos WHERE type = ? AND createdAt LIKE ?';
-      const params: any[] = ['memo', `${formattedDate}%`];
+      const startOfDayLocal = targetDate.startOf('day');
+      const endOfDayLocal = targetDate.endOf('day');
+
+      const startOfDayUTC = startOfDayLocal.utc().format('YYYY-MM-DD HH:mm:ss');
+      const endOfDayUTC = endOfDayLocal.utc().format('YYYY-MM-DD HH:mm:ss');
+
+      let query = 'SELECT * FROM todos WHERE type = ? AND createdAt BETWEEN ? AND ?';
+      const params: any[] = ['memo', startOfDayUTC, endOfDayUTC];
 
       const [result] = await db.executeSql(query, params);
       const memos: Todo[] = [];
@@ -93,7 +101,7 @@ export class MemoDao {
         item.completed = item.completed === 1;
         memos.push(item);
       }
-      console.log(`Memos for date '${formattedDate}':`, memos);
+      console.log(`Memos for date '${targetDate.format('YYYY-MM-DD')}':`, memos);
       return memos;
     } catch (error) {
       console.error(`Error getting memos by date '${targetDate.format('YYYY-MM-DD')}':`, error);
@@ -150,7 +158,10 @@ export class MemoDao {
   async deleteMemo(id: number): Promise<boolean> {
     const db = await openShifterzDB();
     try {
-      const [result] = await db.executeSql('DELETE FROM todos WHERE id = ? AND type = ?;', [id, 'memo']);
+      const [result] = await db.executeSql('DELETE FROM todos WHERE id = ? AND type = ?;', [
+        id,
+        'memo',
+      ]);
 
       const success = (result?.rowsAffected || 0) > 0;
       console.log(`Memo with ID ${id} deleted:`, success);

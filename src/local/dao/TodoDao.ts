@@ -1,6 +1,9 @@
 import { openShifterzDB } from '../ShifterzDB';
 import { Todo, TodoType } from '../../domain/entities/Todo';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc); 
 
 export class TodoDao {
   // todo 추가하기
@@ -27,9 +30,14 @@ export class TodoDao {
   async getTodosByDate(targetDate: dayjs.Dayjs): Promise<Todo[]> {
     const db = await openShifterzDB();
     try {
-      const formattedDate = targetDate.format('YYYY-MM-DD');
-      let query = 'SELECT * FROM todos WHERE type = ? AND createdAt LIKE ?';
-      const params: any[] = ['todo', `${formattedDate}%`];
+      const startOfDayLocal = targetDate.startOf('day');
+      const endOfDayLocal = targetDate.endOf('day');
+
+      const startOfDayUTC = startOfDayLocal.utc().format('YYYY-MM-DD HH:mm:ss');
+      const endOfDayUTC = endOfDayLocal.utc().format('YYYY-MM-DD HH:mm:ss');
+
+      let query = 'SELECT * FROM todos WHERE type = ? AND createdAt BETWEEN ? AND ?';
+      const params: any[] = ['todo', startOfDayUTC, endOfDayUTC];
 
       const [result] = await db.executeSql(query, params);
       const memos: Todo[] = [];
@@ -39,11 +47,11 @@ export class TodoDao {
         item.completed = item.completed === 1;
         memos.push(item);
       }
-      console.log(`Memos for date '${formattedDate}':`, memos);
+      console.log(`Memos for date '${targetDate.format('YYYY-MM-DD')}':`, memos);
       return memos;
     } catch (error) {
       console.error(`Error getting memos by date '${targetDate.format('YYYY-MM-DD')}':`, error);
-      throw error;
+      return [];
     }
   }
 
