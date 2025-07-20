@@ -39,6 +39,7 @@ export class WorkCalendarRepositoryImpl implements WorkCalendarRepository {
   async updateWorkCalendar(year: number, month: number, calendarData: ShiftsMap): Promise<any> {
     try {
       const requestDto = toUpdateShiftsRequest(calendarData);
+      console.log('Updating work calendar with request:', requestDto);
 
       return await this.calendarService.updateWorkCalendar(year, month, requestDto);
     } catch (error) {
