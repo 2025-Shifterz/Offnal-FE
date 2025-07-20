@@ -40,9 +40,8 @@ const Login = () => {
                 {onboarding.subtitle}
               </Text>
 
-              {/* ✅ 실제 SVG 렌더링 */}
               <View className="items-center justify-center rounded-radius-l">
-                <Icon width={170} height={170} />
+                <Icon width={150} height={150} />
               </View>
             </View>
           );
