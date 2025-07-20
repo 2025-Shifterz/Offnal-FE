@@ -45,13 +45,17 @@ const NoteDayBox = ({
               key={item.id}
               className="w-full flex-row items-center justify-between border-b-[0.3px] border-b-divider-gray-light px-[16px] py-p-3"
             >
-              <TouchableOpacity onPress={() => handleCompleted(item.id, item.completed, item.type)}>
-                {item.completed ? (
-                  <CheckedIcon />
-                ) : (
-                  <View className="h-[13px] w-[13px] rounded-[2px] bg-[#cdd1d5]" />
-                )}
-              </TouchableOpacity>
+              {type === 'todo' && (
+                <TouchableOpacity
+                  onPress={() => handleCompleted(item.id, item.completed, item.type)}
+                >
+                  {item.completed ? (
+                    <CheckedIcon />
+                  ) : (
+                    <View className="h-[13px] w-[13px] rounded-[2px] bg-[#cdd1d5]" />
+                  )}
+                </TouchableOpacity>
+              )}
 
               <View className="ml-[10px] flex-1">
                 <Text>{item.text}</Text>

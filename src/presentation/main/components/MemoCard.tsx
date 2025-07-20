@@ -4,6 +4,8 @@ import TitleSection from './TitleSection';
 import NoteIcon from '../../../assets/icons/ic_note_24.svg';
 import { useNavigation } from '@react-navigation/native';
 import { Todo } from '../../../domain/entities/Todo';
+import { mainNavigation, RootStackParamList } from '../../../navigation/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface MemoCardProps {
   memos: Todo[];
@@ -16,7 +18,7 @@ interface MemoItemProps {
 }
 
 const Container = ({ memos }: MemoCardProps) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const hasMemos = memos && memos.length > 0;
 
   return (
@@ -26,11 +28,19 @@ const Container = ({ memos }: MemoCardProps) => {
         <TitleSection.WithAddableBtn
           title="메모"
           btnContent="메모 추가"
-          onPressIcon={() => navigation.navigate('Memo')}
+          onPressIcon={() =>
+            navigation.navigate('Tabs', {
+              screen: 'Home',
+              params: {
+                screen: 'Memo',
+              },
+            })
+          }
         />
       </View>
       {hasMemos ? (
-        <View className="flex-col"> {/* 메모 아이템들을 담을 View */}
+        <View className="flex-col">
+          {/* 메모 아이템들을 담을 View */}
           {memos.map((memo, index) => (
             <Item
               key={memo.id} // 고유한 key prop 사용
@@ -61,21 +71,19 @@ const Nothing = () => {
 };
 
 const Item = ({ memo, isFirst, isLast }: MemoItemProps) => {
-  const itemBorderClass = [
-    isFirst ? 'rounded-t-lg' : '',
-    isLast ? 'rounded-b-lg' : ''
-  ].filter(Boolean).join(' ')
+  const itemBorderClass = [isFirst ? 'rounded-t-lg' : '', isLast ? 'rounded-b-lg' : '']
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <View className={`px-number-6 py-number-4 bg-background-gray-subtle1 ${itemBorderClass} ${!isLast ? 'mb-number-1' : ''}`}>
+    <View
+      className={`bg-background-gray-subtle1 px-number-6 py-number-4 ${itemBorderClass} ${!isLast ? 'mb-number-1' : ''}`}
+    >
       <Text className="font-pretendard text-body-xxs font-normal text-text-subtle">
         {memo.text}
       </Text>
     </View>
   );
-}
-
-
-
+};
 
 export default { Nothing, Container };

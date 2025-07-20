@@ -15,11 +15,11 @@ interface TimeFrameProps {
 const stylesMap: Record<ShiftType, { backgroundColor: string; textColor: string }> = {
   주간: {
     backgroundColor: 'bg-surface-secondary-subtle',
-    textColor: 'text-text-success',
+    textColor: 'text-text-subtle',
   },
   오후: {
     backgroundColor: 'bg-surface-success-subtle',
-    textColor: 'text-text-subtle',
+    textColor: 'text-text-success',
   },
   야간: {
     backgroundColor: 'bg-surface-information-subtle',

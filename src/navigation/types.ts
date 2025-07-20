@@ -4,6 +4,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 export type onboardingNavigation = NativeStackNavigationProp<OnboardingStackParamList>;
 export type loginNavigation = NativeStackNavigationProp<LoginStackParamList>;
 export type calendarNavigation = NativeStackNavigationProp<CalendarScreenStackParamList>;
+export type mainNavigation = NativeStackNavigationProp<MainStackParamList>;
+export type tabNavigation = NativeStackNavigationProp<TabParamList>;
 
 // 로그인
 export type LoginStackParamList = {
@@ -77,13 +79,29 @@ export type CalendarScreenStackParamList = {
   EditCalendar: undefined;
   OnboardingSchedules: NavigatorScreenParams<OnboardingStackParamList> | undefined; // 삭제할거.
   LoginScreens: NavigatorScreenParams<LoginStackParamList> | undefined; // 로그인 스택네비게이터 내부의 스크린 접근 가능
+  Tabs: undefined;
 };
 
 // 루트
 export type RootStackParamList = {
   SplashScreen: undefined;
-  Tabs: undefined;
+  Tabs: NavigatorScreenParams<TabParamList>;
   LoginScreens: undefined;
   OnboardingSchedules: undefined;
   OnboardingSchedulesWithOCR: undefined;
+};
+
+// Tabs 네비게이터
+export type TabParamList = {
+  Home: NavigatorScreenParams<MainStackParamList>;
+  Calendar: NavigatorScreenParams<CalendarScreenStackParamList>;
+  MyInfo: undefined;
+};
+
+// main 네비게이터 - "Home"
+export type MainStackParamList = {
+  MainScreen: undefined;
+  AutoAlarm: undefined;
+  Todo: undefined;
+  Memo: undefined;
 };

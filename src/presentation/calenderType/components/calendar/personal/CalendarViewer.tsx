@@ -10,13 +10,22 @@ import { ShiftType } from '../../../../../data/model/Calendar';
 interface CalendarViewerProps {
   onPressTeamIcon?: () => void;
   onPressEditIcon?: () => void;
+  selectedDate: dayjs.Dayjs | null;
+  setSelectedDate: (date: dayjs.Dayjs | null) => void;
+  onDateSelected?: (date: dayjs.Dayjs) => void; // ✅ 콜백 추가
 }
 
-const CalendarViewer = ({ onPressTeamIcon, onPressEditIcon }: CalendarViewerProps) => {
+const CalendarViewer = ({
+  onPressTeamIcon,
+  onPressEditIcon,
+  selectedDate,
+  setSelectedDate,
+  onDateSelected,
+}: CalendarViewerProps) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(new Map());
 
-  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
+  // const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
 
   const year = currentDate.year();
   const month = currentDate.month() + 1;
@@ -44,6 +53,7 @@ const CalendarViewer = ({ onPressTeamIcon, onPressEditIcon }: CalendarViewerProp
   const handleDatePress = (date: dayjs.Dayjs) => {
     setSelectedDate(date);
     console.log('selectedDate:', selectedDate);
+    onDateSelected?.(date); // ✅ 날짜 선택 시 콜백 실행
   };
 
   return (

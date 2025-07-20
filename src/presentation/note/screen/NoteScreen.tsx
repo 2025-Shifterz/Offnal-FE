@@ -84,6 +84,11 @@ const NoteScreen = ({ type, text }: NoteScreenProps) => {
     }
   };
 
+  // todos가 하나라도 있으면 <EmptyPage>는 무시한다.
+  useEffect(() => {
+    setIsEmpty(todos.length === 0);
+  }, [todos]);
+
   return (
     <View className="w-full flex-1 bg-background-gray-subtle1 px-[16px]">
       {isEmpty && <EmptyPage text={text} handleAdd={handleAdd} />}

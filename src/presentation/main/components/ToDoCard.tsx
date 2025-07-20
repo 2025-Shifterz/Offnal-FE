@@ -6,6 +6,8 @@ import CheckIcon from '../../../assets/icons/checked.svg';
 import { useNavigation } from '@react-navigation/native';
 import { Todo } from '../../../domain/entities/Todo';
 import React from 'react';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../navigation/types';
 
 interface TodoCardProps {
   todos: Todo[];
@@ -18,7 +20,7 @@ interface TodoItemProps {
 }
 
 const Container = ({ todos }: TodoCardProps) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const hasTodos = todos && todos.length > 0;
 
   return (
@@ -28,12 +30,18 @@ const Container = ({ todos }: TodoCardProps) => {
         <TitleSection.WithAddableBtn
           title="할 일"
           btnContent="할 일 추가"
-          onPressIcon={() => navigation.navigate('Todo')}
+          onPressIcon={() =>
+            navigation.navigate('Tabs', {
+              screen: 'Home',
+              params: {
+                screen: 'Todo',
+              },
+            })
+          }
         />
       </View>
       {hasTodos ? (
         <View className="flex-col">
-          {' '}
           {/* 메모 아이템들을 담을 View */}
           {todos.map((todo, index) => (
             <Item
