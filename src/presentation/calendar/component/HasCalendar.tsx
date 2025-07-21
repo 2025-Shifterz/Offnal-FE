@@ -26,6 +26,7 @@ const HasCalendar = ({ setShowPlus, setNoCalendar }: HasCalendarProps) => {
   const [isTeamView, setIsTeamView] = useState(false);
   const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(new Map());
   // console.log('calendarData', calendarData);
+  const [currentMonth, setCurrentMonth] = useState<string>(dayjs().format('YYYY-MM')); // 초기값은 현재 월
 
   // 노트
   const [memos, setMemo] = useState<Todo[]>();
@@ -70,14 +71,15 @@ const HasCalendar = ({ setShowPlus, setNoCalendar }: HasCalendarProps) => {
     // console.log('calendarData.size', calendarData.size);
   }, [selectedDate]);
 
-  // NoCalendar가 보이는지 여부
   useEffect(() => {
-    if (calendarData.size === 0) {
-      setNoCalendar(true);
-    } else {
-      setNoCalendar(false);
-    }
-  }, [calendarData]);
+    // 현재 달에 해당하는 calendarData가 비어 있는지 확인
+    // calendarData 안에 현재 달(currentMonth)에 해당하는 데이터가 하나라도 있는지 확인
+    const hasCurrentMonthData = Array.from(calendarData.keys()).some(key =>
+      key.startsWith(currentMonth)
+    );
+
+    setNoCalendar(!hasCurrentMonthData);
+  }, [calendarData, currentMonth]);
 
   return (
     <View className="h-full flex-1 px-[16px]">
@@ -105,6 +107,9 @@ const HasCalendar = ({ setShowPlus, setNoCalendar }: HasCalendarProps) => {
             }}
             onPressEditIcon={() => {
               navigation.navigate('OnboardingSchedules', { screen: 'InfoEdit' });
+            }}
+            onMonthChange={month => {
+              setCurrentMonth(month); // ← 달 바뀔 때마다 감지
             }}
           />
         )}

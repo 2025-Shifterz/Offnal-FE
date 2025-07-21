@@ -17,6 +17,7 @@ interface CalendarViewerProps {
 
   calendarData: Map<string, ShiftType>;
   setCalendarData: (map: Map<string, ShiftType>) => void;
+  onMonthChange: (month: string) => void;
 }
 
 const CalendarViewer = ({
@@ -27,12 +28,19 @@ const CalendarViewer = ({
   selectedDate,
   setSelectedDate,
   onDateSelected,
+  onMonthChange,
 }: CalendarViewerProps) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
   const isFocused = useIsFocused(); // 화면 포커스 여부 확인
 
   const year = currentDate.year();
   const month = currentDate.month() + 1;
+
+  // 현재 보이는 월 확인
+  useEffect(() => {
+    const visibleMonth = currentDate.format('YYYY-MM');
+    onMonthChange?.(visibleMonth);
+  }, [currentDate]);
 
   // 근무표 조회 API (화면이 포커스될 때마다 다시 호출)
   useEffect(() => {
