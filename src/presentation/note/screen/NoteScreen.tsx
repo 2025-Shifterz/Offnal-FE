@@ -11,6 +11,7 @@ import {
   todoCompletionUseCase,
 } from '../../../di/Dependencies';
 import NoteDayBox from '../components/NoteDayBox';
+import { Dayjs } from 'dayjs';
 
 interface NoteScreenProps {
   type: TodoType;
@@ -29,17 +30,16 @@ const NoteScreen = ({ type, text }: NoteScreenProps) => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [showInput, setShowInput] = useState(false);
 
-  // 데이터베이스 초기화
   useEffect(() => {
     console.log('NoteScreen type prop:', type);
 
     const initializeTodos = async () => {
       try {
-        await createTodoTable(); // 데이터베이스 초기화
+        // await createTodoTable(); // 데이터베이스 초기화는 App.tsx에서.
         const loadedTodos = await getTodosUseCase.execute(type); // UseCase 호출
         setTodos(loadedTodos);
       } catch (error) {
-        console.error('Failed to initialize DB or load todos:', error);
+        console.error('Failed to load todos:', error);
       }
     };
 
@@ -47,13 +47,15 @@ const NoteScreen = ({ type, text }: NoteScreenProps) => {
   }, [type]);
 
   // Todo를 추가하는 함수
-  const handleAddTodo = async () => {
+  const handleAddTodo = async (date: Dayjs) => {
     if (!newTodoText.trim()) {
       Alert.alert('알림', '할 일 내용을 압력해주세요');
       return;
     }
     try {
-      await addTodoUseCase.execute(newTodoText, type);
+      const isoDate = date.toISOString(); // 혹은 `format('YYYY-MM-DD')`도 가능
+
+      await addTodoUseCase.execute(newTodoText, type, isoDate);
       setNewTodoText(''); // 초기화
       const updatedTodos = await getTodosUseCase.execute(type);
       setTodos(updatedTodos);
@@ -84,6 +86,11 @@ const NoteScreen = ({ type, text }: NoteScreenProps) => {
     }
   };
 
+  // todos가 하나라도 있으면 <EmptyPage>는 무시한다.
+  useEffect(() => {
+    setIsEmpty(todos.length === 0);
+  }, [todos]);
+
   return (
     <View className="w-full flex-1 bg-background-gray-subtle1 px-[16px]">
       {isEmpty && <EmptyPage text={text} handleAdd={handleAdd} />}
@@ -94,7 +101,7 @@ const NoteScreen = ({ type, text }: NoteScreenProps) => {
             type={type}
             todos={todos}
             newTodoText={newTodoText}
-            setNewTodoText={setNewTodoText}
+            setNewTodoText={setNewTodoText} // get todos
             handleAddTodo={handleAddTodo}
             handleCompleted={handleCompleted}
             handleDeleteTodo={handleDeleteTodo}

@@ -1,8 +1,13 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import PlusIcon from '../../../assets/icons/w-plus.svg';
 
-const NewAddButton = ({ handleAdd, text }) => {
+interface NewAddButtonProps {
+  handleAdd: () => void;
+  text: string;
+}
+
+const NewAddButton = ({ handleAdd, text }: NewAddButtonProps) => {
   return (
     <TouchableOpacity
       onPress={handleAdd}

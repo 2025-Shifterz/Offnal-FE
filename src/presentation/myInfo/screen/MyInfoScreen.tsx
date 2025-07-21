@@ -10,7 +10,7 @@ const MyInfoScreen = () => {
   return (
     <View className="flex-1 bg-background-gray-subtle1">
       <SafeAreaView className="flex-1">
-        <TopAppBar title="내 정보" enableNavigationBtn={true} />
+        <TopAppBar title="내 정보" enableNavigationBtn={false} />
         <ScrollView className="flex-1 px-number-8">
           <ProfileCard
             name="김건우"

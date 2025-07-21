@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import NoTodoIcon from '../../../assets/icons/NoTodo.svg';
+import { View } from 'react-native';
 import NewAddButton from './NewAddButton';
 import EmptyMessage from './EmptyMessage';
 

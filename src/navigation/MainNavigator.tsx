@@ -4,9 +4,10 @@ import MainScreen from '../presentation/main/screen/MainScreen';
 import TodoScreen from '../presentation/note/screen/TodoScreen';
 import MemoScreen from '../presentation/note/screen/MemoScreen';
 import AutoAlarm from '../presentation/alarm/screen/AutoAlarm';
+import { MainStackParamList } from './types';
 
 // 탭1. 메인 탭에 사용되는 스택 네비게이터
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<MainStackParamList>();
 
 const MainNavigator = () => {
   return (

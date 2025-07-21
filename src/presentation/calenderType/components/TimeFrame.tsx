@@ -15,11 +15,11 @@ interface TimeFrameProps {
 const stylesMap: Record<ShiftType, { backgroundColor: string; textColor: string }> = {
   주간: {
     backgroundColor: 'bg-surface-secondary-subtle',
-    textColor: 'text-text-success',
+    textColor: 'text-text-subtle',
   },
   오후: {
     backgroundColor: 'bg-surface-success-subtle',
-    textColor: 'text-text-subtle',
+    textColor: 'text-text-success',
   },
   야간: {
     backgroundColor: 'bg-surface-information-subtle',
@@ -40,7 +40,7 @@ const TimeFrame: React.FC<TimeFrameProps> = ({ text, onPress }: TimeFrameProps) 
       onPress={onPress}
       className={`flex h-[23px] w-[30px] items-center justify-center ${currentStyle.backgroundColor}`}
     >
-      <Text className={`text-heading-xxxs font-semibold ${currentStyle.textColor}`}>{text}</Text>
+      <Text className={`text-heading-xxxxs font-semibold ${currentStyle.textColor}`}>{text}</Text>
     </TouchableOpacity>
   );
 };

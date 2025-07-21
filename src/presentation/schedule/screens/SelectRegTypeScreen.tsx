@@ -9,7 +9,6 @@ import { RootStackParamList } from '../../../navigation/types';
 
 const ScheduleRegRegisterMethod = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  
 
   return (
     <View className="h-full w-full flex-1 items-center bg-background-gray-subtle1 px-p-6">
