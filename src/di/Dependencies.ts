@@ -15,6 +15,7 @@ import { FastAPIService } from '../remote/api/FastAPIService';
 import { MemoDao } from '../local/dao/MemoDao';
 import { MemoRepositoryImpl } from '../data/impl/MemoRepositoryImpl';
 import { GetTodosByDateUseCase } from '../domain/useCases/GetToDosByDate';
+import { GetMemosByDateUseCase } from '../domain/useCases/GetMemosByDate';
 
 // 1. 구체적인 데이터 소스 인스턴스 생성
 const todoDao = new TodoDao();
@@ -39,3 +40,4 @@ export const todoCompletionUseCase = new TodoCompletionUseCase(todoRepository);
 export const deleteTodoUseCase = new DeleteTodoUseCase(todoRepository);
 export const getHomeDataUseCase = new GetHomeDataUseCase(homeRepository);
 export const getToDosByDate = new GetTodosByDateUseCase(todoRepository);
+export const getMemosByDate = new GetMemosByDateUseCase(memoRepository);

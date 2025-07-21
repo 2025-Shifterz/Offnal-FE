@@ -13,7 +13,12 @@ import TimeFrame from '../../calenderType/components/TimeFrame';
 import ToDoCard from '../../main/components/ToDoCard';
 import MemoCard from '../../main/components/MemoCard';
 import { Todo } from '../../../domain/entities/Todo';
-import { getToDosByDate, memoRepository, todoRepository } from '../../../di/Dependencies';
+import {
+  getMemosByDate,
+  getToDosByDate,
+  memoRepository,
+  todoRepository,
+} from '../../../di/Dependencies';
 import { ShiftType } from '../../../data/model/Calendar';
 
 interface HasCalendarProps {
@@ -29,19 +34,19 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
   // 노트
   const [memos, setMemo] = useState<Todo[]>();
   const [todos, setTodo] = useState<Todo[]>();
-  useEffect(() => {
-    const fetchHome = async () => {
-      try {
-        const memos = await memoRepository.getMemosByDate(dayjs());
-        const todos = await todoRepository.getToDosByDate(dayjs());
-        setMemo(memos);
-        setTodo(todos);
-      } catch (error) {
-        console.error('노트 데이터 불러오기 실패:', error);
-      }
-    };
-    fetchHome();
-  }, []);
+  // useEffect(() => {
+  //   const fetchHome = async () => {
+  //     try {
+  //       const memos = await memoRepository.getMemosByDate(dayjs());
+  //       const todos = await todoRepository.getToDosByDate(dayjs());
+  //       setMemo(memos);
+  //       setTodo(todos);
+  //     } catch (error) {
+  //       console.error('노트 데이터 불러오기 실패:', error);
+  //     }
+  //   };
+  //   fetchHome();
+  // }, []);
 
   // 선택된 날짜. // 상위에서 받기..
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
@@ -65,16 +70,21 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
   useEffect(() => {
     const initializeTodosbyDate = async () => {
       try {
-        const date = selectedDate ?? dayjs();
-        const updatedTodos = await getToDosByDate.execute(date);
-        setTodo(updatedTodos);
+        if (!selectedDate) return;
+
+        const [todosOnly, memosOnly] = await Promise.all([
+          getToDosByDate.execute(selectedDate), // todo만 조회
+          getMemosByDate.execute(selectedDate), // memo는 MemoDao에서!
+        ]);
+        setTodo(todosOnly);
+        setMemo(memosOnly);
       } catch (error) {
-        console.error('Error getTodobyDate todo:', error);
+        console.error('Error initializing todos and memos', error);
       }
     };
 
     initializeTodosbyDate();
-  }, [type, selectedDate]);
+  }, [selectedDate]);
 
   return (
     <View className="h-full flex-1 px-[16px]">
