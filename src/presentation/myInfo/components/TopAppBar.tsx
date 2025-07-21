@@ -11,13 +11,13 @@ type TopBarProps = {
 };
 
 const TopAppBar = ({ title, enableNavigationBtn }: TopBarProps) => {
-//   const navigator = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation();
 
   return (
     <View className="h-[50px] w-full items-center justify-center">
       {enableNavigationBtn && (
         <TouchableOpacity
-          onPress= { () => {} }
+          onPress={() => navigation.goBack()}
           className="absolute left-number-8 h-6 w-6 items-center justify-center"
         >
           <ArrowBack width={24} height={24} />
