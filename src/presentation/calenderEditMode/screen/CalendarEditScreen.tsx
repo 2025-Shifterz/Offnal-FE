@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useRef, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import dayjs from 'dayjs';
@@ -7,47 +8,59 @@ import CalendarInteractive from '../components/CalendarInteractive';
 import SuccessIcon from '../../../assets/icons/g-success.svg';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { workCalendarRepository } from '../../../di/Dependencies';
-import { ShiftType } from '../../../data/model/Calendar';
+import { ShiftType, ShiftsMap } from '../../../data/model/Calendar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const CalendarEditScreen = () => {
+  const navigation = useNavigation();
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
-  const [calendarData, setCalendarData] = useState<Map<number, ShiftType>>(new Map());
+  const [calendarData, setCalendarData] = useState<ShiftsMap>(new Map()); // ShiftsMap 타입 사용
   // 근무 형태를 눌렀지만 '취소'를 누르면 원래 상태로 되돌아감.
   const [backupType, setBackupType] = useState<ShiftType | null>(null);
+  const [selectedBoxId, setSelectedBoxId] = useState(1); // 선택된 박스 ID 상태 추가
 
   // 이 ref가 .expend()를 호출할 수 있어야한다. // EditBottomSheet에게 ref 전달
   const sheetRef = useRef<BottomSheet>(null);
 
-  // YYYY-MM-DD 문자열을 숫자(예: YYYYMMDD 정수)로 변환
-  const dateKeyToNumber = (dateKey: string) => Number(dateKey.replace(/-/g, ''));
+  const shiftTypeToId = (type: ShiftType | null): number => {
+    switch (type) {
+      case '주간': return 1;
+      case '오후': return 2;
+      case '야간': return 3;
+      case '휴일': return 4;
+      default: return 1; // 기본값 '주간'
+    }
+  };
 
   // 근무 형태 캘린더에 넣기
   const handleTypeSelect = (type: ShiftType) => {
     if (!selectedDate) return;
-    const keyStr = selectedDate.format('YYYY-MM-DD');
-    const key = dateKeyToNumber(keyStr);
+    const key = selectedDate.format('YYYY-MM-DD');
 
     setCalendarData(prev => {
       const newMap = new Map(prev);
       newMap.set(key, type);
       return newMap;
     });
+
+    // sheetRef.current?.close(); // 이 줄을 주석 처리하거나 삭제합니다.
   };
 
   // 날짜 클릭 시 바텀시트 열기, 바텀시트 열기 전에 근무 형태를 백업
   const openBottomSheet = (date: dayjs.Dayjs) => {
-    const keyStr = date.format('YYYY-MM-DD');
-    const key = dateKeyToNumber(keyStr);
+    const key = date.format('YYYY-MM-DD');
+    const currentShift = calendarData.get(key) ?? null;
+    
     setSelectedDate(date);
-    setBackupType(calendarData.get(key) ?? null); // 먼저 백업
+    setBackupType(currentShift);
+    setSelectedBoxId(shiftTypeToId(currentShift)); // ID 설정
     sheetRef.current?.expand(); // 바텀 시트 열기
   };
   // 취소 시 롤백
   const handleCancel = () => {
     if (selectedDate) {
-      const key = dateKeyToNumber(selectedDate.format('YYYY-MM-DD'));
+      const key = selectedDate.format('YYYY-MM-DD');
 
       setCalendarData(prev => {
         const newMap = new Map(prev);
@@ -62,14 +75,19 @@ const CalendarEditScreen = () => {
     sheetRef.current?.close();
   };
 
+  const handleConfirmSelection = () => {
+    sheetRef.current?.close(); // 바텀시트만 닫기
+  };
+
   // '체크' 버튼을 누르면 patch 요청 - 근무표 수정사항 저장.
   const handlePatchData = async () => {
     const year = currentDate.year();
     const month = currentDate.month() + 1;
 
     try {
-      const result = await workCalendarRepository.updateWorkCalendar(year, month, calendarData);
-      console.log('근무표 수정 성공, 서버 응답:', result);
+      await workCalendarRepository.updateWorkCalendar(year, month, calendarData);
+      console.log('근무표 수정 성공');
+      navigation.goBack(); // 저장 성공 후 이전 화면으로 이동
     } catch (error) {
       console.log('근무표 수정 실패:', error);
     }
@@ -122,8 +140,11 @@ const CalendarEditScreen = () => {
         <EditBottomSheet
           handleTypeSelect={handleTypeSelect}
           handleCancel={handleCancel}
+          handleSave={handleConfirmSelection} // 바텀시트 저장 버튼에는 이 함수 연결
           ref={sheetRef}
           selectedDate={selectedDate}
+          selectedBoxId={selectedBoxId} // prop으로 전달
+          setSelectedBoxId={setSelectedBoxId} // prop으로 전달
         />
       </>
     </View>

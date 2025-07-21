@@ -1,13 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // 근무표 조회 & 저장 동시에 되는 캘린더
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import CalendarBase from '../../calenderType/components/calendar/personal/CalendarBase';
 import dayjs from 'dayjs';
-import baseApi from '../../../remote/api/baseApi';
-import { formatGetData } from '../../common/utils/calendar/workDaysToMap';
 import { workCalendarRepository } from '../../../di/Dependencies';
 import { ShiftType } from '../../../data/model/Calendar';
+import { workDaysToMap } from '../../common/utils/calendar/workDaysToMap';
 
 interface CalendarInteractiveProps {
   isEditScreen: boolean;
@@ -15,8 +14,8 @@ interface CalendarInteractiveProps {
   setCurrentDate: (date: dayjs.Dayjs) => void;
   selectedDate: dayjs.Dayjs | null;
   setSelectedDate: (date: dayjs.Dayjs) => void;
-  calendarData: Map<number, ShiftType>;
-  setCalendarData: (data: Map<number, ShiftType>) => void;
+  calendarData: Map<string, ShiftType>; // 키를 string으로 변경
+  setCalendarData: (data: Map<string, ShiftType>) => void; // 키를 string으로 변경
 }
 
 const CalendarInteractive = ({
@@ -31,22 +30,14 @@ const CalendarInteractive = ({
   const year = currentDate.year();
   const month = currentDate.month() + 1;
 
-  const convertRecordToMap = (record: Record<string, ShiftType>): Map<number, ShiftType> => {
-    const entries: [number, ShiftType][] = Object.entries(record).map(([key, value]) => {
-      const numericKey = Number(key.replace(/-/g, '')); // '2025-07-01' -> 20250701
-      return [numericKey, value];
-    });
-    return new Map(entries);
-  };
-
   // 근무표 조회 API
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await workCalendarRepository.getWorkCalendar(year, month);
-        const formatted = formatGetData(response, year, month);
-        const mapData = convertRecordToMap(formatted);
-        setCalendarData(new Map(mapData));
+        // workDaysToMap 유틸리티를 사용하여 'YYYY-MM-DD'를 키로 하는 Map을 생성
+        const formattedMap = workDaysToMap(response, year, month);
+        setCalendarData(formattedMap);
         console.log('근무표 조회 성공:', response);
       } catch (error) {
         console.log('근무표 조회 실패:', error);
