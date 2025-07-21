@@ -40,7 +40,7 @@ const Login = () => {
                 {onboarding.subtitle}
               </Text>
 
-              <View className="flex-1 items-center justify-center rounded-radius-l">
+              <View className="h-[300px] items-center justify-center rounded-radius-l">
                 <Icon width={150} height={150} />
               </View>
             </View>
