@@ -59,15 +59,13 @@ const PlusEdit = ({ setShowPlus }: PlusEditProps) => {
           <CameraIcon />
         </TouchableOpacity>
 
-        <View className="flex-row items-center gap-[10px]">
-          <TextButton
-            onNavPress={() => {
-              navigation.navigate('EditCalendar', { workTimes: workTimes });
-            }}
-            text="근무표 추가 입력 및 수정"
-          />
+        <TouchableOpacity
+          onPress={() => navigation.navigate('EditCalendar', { workTimes: workTimes })}
+          className="flex-row items-center gap-[10px]"
+        >
+          <TextButton text="근무표 추가 입력 및 수정" />
           <PencilIcon />
-        </View>
+        </TouchableOpacity>
 
         <View className="w-full items-end">
           <TouchableOpacity
