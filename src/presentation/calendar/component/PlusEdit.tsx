@@ -13,9 +13,9 @@ type TextButtonProps = {
 };
 const TextButton = ({ text }: TextButtonProps) => {
   return (
-    <TouchableOpacity className="rounded-radius-max bg-surface-white px-[9px] py-[6px]">
+    <View className="rounded-radius-max bg-surface-white px-[9px] py-[6px]">
       <Text className="text-heading-xxxxs font-medium">{text}</Text>
-    </TouchableOpacity>
+    </View>
   );
 };
 
