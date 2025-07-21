@@ -21,8 +21,8 @@ import { GetMemosByDateUseCase } from '../domain/useCases/GetMemosByDate';
 const todoDao = new TodoDao();
 const memoDao = new MemoDao();
 
-const calendarService = new CalendarService();
 const calendarService = new CalendarService(); 
+export const homeService = new HomeService();
 export const fastAPIService = new FastAPIService();
 
 // 2. 구체적인 리포지토리 구현체 인스턴스 생성 (TodoDao 주입)
