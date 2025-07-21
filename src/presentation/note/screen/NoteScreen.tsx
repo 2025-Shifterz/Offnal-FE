@@ -7,10 +7,12 @@ import { createTodoTable } from '../../../local/tables/TodoTable';
 import {
   addTodoUseCase,
   deleteTodoUseCase,
+  getToDosByDate,
   getTodosUseCase,
   todoCompletionUseCase,
 } from '../../../di/Dependencies';
 import NoteDayBox from '../components/NoteDayBox';
+import dayjs from 'dayjs';
 
 interface NoteScreenProps {
   type: TodoType;
@@ -99,7 +101,7 @@ const NoteScreen = ({ type, text }: NoteScreenProps) => {
             type={type}
             todos={todos}
             newTodoText={newTodoText}
-            setNewTodoText={setNewTodoText}
+            setNewTodoText={setNewTodoText} // get todos
             handleAddTodo={handleAddTodo}
             handleCompleted={handleCompleted}
             handleDeleteTodo={handleDeleteTodo}

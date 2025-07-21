@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigation } from '@react-navigation/native';
 import { Button, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { calendarNavigation } from '../../../navigation/types';
@@ -12,7 +13,7 @@ import TimeFrame from '../../calenderType/components/TimeFrame';
 import ToDoCard from '../../main/components/ToDoCard';
 import MemoCard from '../../main/components/MemoCard';
 import { Todo } from '../../../domain/entities/Todo';
-import { memoRepository, todoRepository } from '../../../di/Dependencies';
+import { getToDosByDate, memoRepository, todoRepository } from '../../../di/Dependencies';
 import { ShiftType } from '../../../data/model/Calendar';
 
 interface HasCalendarProps {
@@ -58,6 +59,22 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
   // 근무형태가 있을 때만 렌더링
   const shiftTypeForSelectedDate =
     selectedDate && calendarData.get(selectedDate.format('YYYY-MM-DD'));
+
+  // 선택된 날짜 가져오기
+  // getToDosByDates
+  useEffect(() => {
+    const initializeTodosbyDate = async () => {
+      try {
+        const date = selectedDate ?? dayjs();
+        const updatedTodos = await getToDosByDate.execute(date);
+        setTodo(updatedTodos);
+      } catch (error) {
+        console.error('Error getTodobyDate todo:', error);
+      }
+    };
+
+    initializeTodosbyDate();
+  }, [type, selectedDate]);
 
   return (
     <View className="h-full flex-1 px-[16px]">
