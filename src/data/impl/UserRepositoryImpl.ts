@@ -4,7 +4,7 @@ import { UserProfile } from '../model/UserProfile';
 import { homeService } from '../../di/Dependencies';
 
 export class UserRepositoryImpl implements UserRepository {
-  async isUserRegistered(): Promise<boolean> {
+  async isUserScheduleRegistered(): Promise<boolean> {
     const result = await homeService.getHome().then(
       (data) => {
         if (data != null) {
