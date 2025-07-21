@@ -1,8 +1,26 @@
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { UserRepository } from '../../domain/repositories/UserRepository';
 import { UserProfile } from '../model/UserProfile';
+import { homeService } from '../../di/Dependencies';
 
 export class UserRepositoryImpl implements UserRepository {
+  async isUserRegistered(): Promise<boolean> {
+    const result = await homeService.getHome().then(
+      (data) => {
+        if (data != null) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      (error) => {
+        return false;
+      }
+    );
+
+    return result;
+  }
+
   async initUserData(accessToken: string, refreshToken: string, name: string): Promise<void> {
     try {
       await EncryptedStorage.setItem('accessToken', accessToken);
@@ -106,8 +124,8 @@ export class UserRepositoryImpl implements UserRepository {
 
       if (storedProfile !== undefined && storedProfile !== null) {
         const userProfile = JSON.parse(storedProfile);
-        userProfile.profileImageUrl = profileUrl; 
-        
+        userProfile.profileImageUrl = profileUrl;
+
         await EncryptedStorage.setItem('user_profile', JSON.stringify(userProfile));
       }
     } catch (error) {
