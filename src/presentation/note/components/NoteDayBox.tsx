@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import DayBoxHeader from './DayBoxHeader';
 import EmptyMessage from './EmptyMessage';
 import CheckedIcon from '../../../assets/icons/checked.svg';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import { Todo } from '../../../domain/entities/Todo';
+import utc from 'dayjs/plugin/utc';
+dayjs.extend(utc);
 
 // 하루의 할 일 박스
 
 interface EmptyDayBoxProps {
   text: string;
   type: string;
-  todos: { id: number; text: string; completed: boolean; type: string }[];
+  todos: Todo[];
   newTodoText: string;
   setNewTodoText: (text: string) => void;
   handleAddTodo: (type: string) => void;
@@ -30,17 +33,27 @@ const NoteDayBox = ({
   handleDeleteTodo,
   showInput,
 }: EmptyDayBoxProps) => {
+  const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs());
+
+  // 날짜 일치 여부 체크 - utc를 해석해서 로컬로 변환.
+  const isSameDate = (createdAt: string | undefined, current: Dayjs) => {
+    return createdAt && dayjs.utc(createdAt).local().isSame(current, 'day');
+  };
+
+  // 오늘 날짜에 해당하는 todo만 필터링
+  const filteredTodos = todos.filter(todo => isSameDate(todo.createdAt, currentDate));
+
   return (
     <View className="w-full rounded-radius-xl">
-      <DayBoxHeader />
+      <DayBoxHeader currentDate={currentDate} setCurrentDate={setCurrentDate} />
 
       <View className="w-full items-center bg-surface-white">
-        {todos.length === 0 && !showInput ? (
+        {filteredTodos.length === 0 && !showInput ? (
           <View className="py-[27px]">
             <EmptyMessage text={text} iconSize={48} />
           </View>
         ) : (
-          todos.map(item => (
+          filteredTodos.map(item => (
             // 할 일 리스트
             <View
               key={item.id}
