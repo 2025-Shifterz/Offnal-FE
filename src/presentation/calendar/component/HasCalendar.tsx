@@ -18,9 +18,10 @@ import { ShiftType } from '../../../data/model/Calendar';
 
 interface HasCalendarProps {
   setShowPlus: (value: boolean) => void;
+  setNoCalendar: (value: boolean) => void;
 }
 
-const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
+const HasCalendar = ({ setShowPlus, setNoCalendar }: HasCalendarProps) => {
   const navigation = useNavigation<calendarNavigation>();
   const [isTeamView, setIsTeamView] = useState(false);
   const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(new Map());
@@ -66,6 +67,9 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
     };
 
     initializeTodosbyDate();
+    if (!calendarData) {
+      setNoCalendar(true); // 없음
+    }
   }, [selectedDate]);
 
   return (

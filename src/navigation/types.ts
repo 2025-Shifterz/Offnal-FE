@@ -75,7 +75,7 @@ export type OnboardingStackParamList = {
 
 // 캘린더 탭의 스크린
 export type CalendarScreenStackParamList = {
-  CalendarScreen: { noCalendar?: boolean };
+  CalendarScreen: undefined;
   EditCalendar: undefined;
   OnboardingSchedules: NavigatorScreenParams<OnboardingStackParamList> | undefined; // 삭제할거.
   OnboardingSchedulesWithOCR: undefined;
@@ -86,7 +86,7 @@ export type CalendarScreenStackParamList = {
 // 루트
 export type RootStackParamList = {
   SplashScreen: undefined;
-  Tabs: NavigatorScreenParams<TabParamList>;
+  Tabs: NavigatorScreenParams<TabParamList> | undefined;
   LoginScreens: undefined;
   OnboardingSchedules: undefined;
   OnboardingSchedulesWithOCR: undefined;
