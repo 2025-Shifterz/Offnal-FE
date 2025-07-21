@@ -10,10 +10,6 @@ export class TodoDao {
   async addTodo(todo: Omit<Todo, 'id'>): Promise<number> {
     const db = await openShifterzDB(); // 데이터베이스 초기화 및 가져오기
     try {
-      // const createdAtStr =
-      //   typeof todo.createdAt === 'string'
-      //     ? todo.createdAt
-      //     : dayjs(todo.createdAt).utc().format('YYYY-MM-DD HH:mm:ss');
       const createdAtStr = dayjs(todo.createdAt).utc().format('YYYY-MM-DD HH:mm:ss');
 
       const [result] = await db.executeSql(

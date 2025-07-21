@@ -7,12 +7,11 @@ import { createTodoTable } from '../../../local/tables/TodoTable';
 import {
   addTodoUseCase,
   deleteTodoUseCase,
-  getToDosByDate,
   getTodosUseCase,
   todoCompletionUseCase,
 } from '../../../di/Dependencies';
 import NoteDayBox from '../components/NoteDayBox';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 interface NoteScreenProps {
   type: TodoType;

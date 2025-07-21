@@ -5,7 +5,7 @@ import { TodoRepository } from '../repositories/TodoRepository';
 export class AddTodoUseCase {
   constructor(private todoRepository: TodoRepository) {}
 
-  async execute(text: string, type: TodoType, createdAt): Promise<number> {
+  async execute(text: string, type: TodoType, createdAt: string): Promise<number> {
     const newTodo: Todo = { id: 0, text, completed: false, type, createdAt }; // ID는 저장 시 DB에서 할당
     return await this.todoRepository.addTodo(newTodo);
   }
