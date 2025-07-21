@@ -109,13 +109,13 @@ const HasCalendar = ({ setShowPlus, setNoCalendar }: HasCalendarProps) => {
           />
         )}
 
-        <View className="items-center justify-center bg-surface-white">
+        {/* <View className="items-center justify-center bg-surface-white">
           <Button
             title="일정 등록 시작"
             onPress={() => navigation.navigate('OnboardingSchedules')}
           />
           <Button title="로그인 시작" onPress={() => navigation.navigate('LoginScreens')} />
-        </View>
+        </View> */}
       </ScrollView>
       {/* { + } 버튼 동작 화면 */}
       <TouchableOpacity
