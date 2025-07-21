@@ -3,16 +3,18 @@ import { Todo, TodoType } from '../../domain/entities/Todo';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
-dayjs.extend(utc); 
+dayjs.extend(utc);
 
 export class TodoDao {
   // todo 추가하기
   async addTodo(todo: Omit<Todo, 'id'>): Promise<number> {
     const db = await openShifterzDB(); // 데이터베이스 초기화 및 가져오기
     try {
+      const createdAtStr = dayjs(todo.createdAt).utc().format('YYYY-MM-DD HH:mm:ss');
+
       const [result] = await db.executeSql(
-        'INSERT INTO todos (text, completed, type) VALUES (?, ?, ?)',
-        [todo.text, todo.completed, todo.type] // 새로운 할 일은 기본적으로 미완료 상태 (0)
+        'INSERT INTO todos (text, completed, type, createdAt) VALUES (?, ?, ?, ?)',
+        [todo.text, todo.completed, todo.type, createdAtStr] // 새로운 할 일은 기본적으로 미완료 상태 (0)
       );
       console.log(`Todo "${todo.text}" added with ID: ${result.insertId}`);
       return result.insertId;

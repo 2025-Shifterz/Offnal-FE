@@ -18,7 +18,7 @@ const Login = () => {
         autoplay
         showsPagination={false}
         width={SCREEN_WIDTH}
-        height={SCREEN_HEIGHT * 0.6}
+        height={SCREEN_HEIGHT * 0.65}
         autoplayTimeout={slideTime}
       >
         {onboardingList.map((onboarding, index) => {
@@ -40,7 +40,7 @@ const Login = () => {
                 {onboarding.subtitle}
               </Text>
 
-              <View className="items-center justify-center rounded-radius-l">
+              <View className="flex-1 items-center justify-center rounded-radius-l">
                 <Icon width={150} height={150} />
               </View>
             </View>
