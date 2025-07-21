@@ -12,7 +12,7 @@ import {
   todoCompletionUseCase,
 } from '../../../di/Dependencies';
 import NoteDayBox from '../components/NoteDayBox';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface NoteScreenProps {
   type: TodoType;
@@ -49,13 +49,15 @@ const NoteScreen = ({ type, text }: NoteScreenProps) => {
   }, [type]);
 
   // Todo를 추가하는 함수
-  const handleAddTodo = async () => {
+  const handleAddTodo = async (date: Dayjs) => {
     if (!newTodoText.trim()) {
       Alert.alert('알림', '할 일 내용을 압력해주세요');
       return;
     }
     try {
-      await addTodoUseCase.execute(newTodoText, type);
+      const isoDate = date.toISOString(); // 혹은 `format('YYYY-MM-DD')`도 가능
+
+      await addTodoUseCase.execute(newTodoText, type, isoDate);
       setNewTodoText(''); // 초기화
       const updatedTodos = await getTodosUseCase.execute(type);
       setTodos(updatedTodos);

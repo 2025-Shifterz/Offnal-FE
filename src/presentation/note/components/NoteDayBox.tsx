@@ -16,7 +16,7 @@ interface EmptyDayBoxProps {
   todos: Todo[];
   newTodoText: string;
   setNewTodoText: (text: string) => void;
-  handleAddTodo: (type: string) => void;
+  handleAddTodo: (date: dayjs.Dayjs) => void;
   handleCompleted: (id: number, completed: boolean, type: string) => void;
   handleDeleteTodo: (id: number, type: string) => void;
   showInput: boolean;
@@ -91,7 +91,7 @@ const NoteDayBox = ({
                 placeholder={`${text} 입력`}
                 className=""
               />
-              <TouchableOpacity onPress={() => handleAddTodo(type)}>
+              <TouchableOpacity onPress={() => handleAddTodo(currentDate)}>
                 <Text className="text-sm">확인</Text>
               </TouchableOpacity>
             </View>
