@@ -30,17 +30,16 @@ const NoteScreen = ({ type, text }: NoteScreenProps) => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [showInput, setShowInput] = useState(false);
 
-  // 데이터베이스 초기화
   useEffect(() => {
     console.log('NoteScreen type prop:', type);
 
     const initializeTodos = async () => {
       try {
-        await createTodoTable(); // 데이터베이스 초기화
+        // await createTodoTable(); // 데이터베이스 초기화는 App.tsx에서.
         const loadedTodos = await getTodosUseCase.execute(type); // UseCase 호출
         setTodos(loadedTodos);
       } catch (error) {
-        console.error('Failed to initialize DB or load todos:', error);
+        console.error('Failed to load todos:', error);
       }
     };
 
