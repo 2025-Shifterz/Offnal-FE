@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import React, { useRef, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import dayjs from 'dayjs';
@@ -10,9 +10,14 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import { workCalendarRepository } from '../../../di/Dependencies';
 import { ShiftType, ShiftsMap } from '../../../data/model/Calendar';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { calendarStackParamList } from '../../../navigation/types';
+
+type CalendarEditScreenRouteProp = RouteProp<calendarStackParamList, 'EditCalendar'>;
 
 const CalendarEditScreen = () => {
   const navigation = useNavigation();
+  const route = useRoute<CalendarEditScreenRouteProp>();
+  const { workTimes } = route.params; // route.params에서 workTimes 받기
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
   const [calendarData, setCalendarData] = useState<ShiftsMap>(new Map()); // ShiftsMap 타입 사용
@@ -145,6 +150,7 @@ const CalendarEditScreen = () => {
           selectedDate={selectedDate}
           selectedBoxId={selectedBoxId} // prop으로 전달
           setSelectedBoxId={setSelectedBoxId} // prop으로 전달
+          workTimes={workTimes} // EditBottomSheet에 전달
         />
       </>
     </View>

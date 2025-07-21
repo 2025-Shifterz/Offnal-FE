@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { SafeAreaView, ScrollView, View } from 'react-native';
 import BottomButton from '../../common/component/BottomButton';
 import TitleMessage from '../../common/component/TitleMessage';
@@ -6,6 +6,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { onboardingNavigation, OnboardingStackParamList } from '../../../navigation/types';
 import CalendarEditor, { CalendarEditorRef } from '../components/calendar/personal/CalendarEditor';
 import TCalendarEditor from '../components/calendar/team/TCalendarEditor';
+import { useWorkTime } from '../../../context/WorkTimeContext';
 
 type ScheduleTypeRouteProp = RouteProp<OnboardingStackParamList, 'CalendarType'>;
 
@@ -16,6 +17,14 @@ const CalendarType = () => {
   console.log(calendarName);
   console.log(workGroup);
   console.log(workTimes);
+
+  const { setWorkTimes } = useWorkTime();
+
+  useEffect(() => {
+    if (workTimes) {
+      setWorkTimes(workTimes);
+    }
+  }, [workTimes, setWorkTimes]);
 
   const navigation = useNavigation<onboardingNavigation>();
 

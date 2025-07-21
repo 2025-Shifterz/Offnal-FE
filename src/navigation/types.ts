@@ -52,7 +52,7 @@ export type OnboardingStackParamList = {
     };
     year: number;
     month: number;
-    ocrResult?: any;
+    ocrResult?: unknown;
   };
   EditCompleteCreateScheduleOCR: {
     selectedBoxId: number;
@@ -65,7 +65,7 @@ export type OnboardingStackParamList = {
     };
     year: number;
     month: number;
-    ocrResult?: any;
+    ocrResult?: unknown;
   };
   CompleteCreate: undefined;
   InfoEdit: undefined; // 온보딩은 아님
@@ -74,7 +74,13 @@ export type OnboardingStackParamList = {
 // 캘린더 탭의 스크린
 export type CalendarScreenStackParamList = {
   CalendarScreen: undefined;
-  EditCalendar: undefined;
+  EditCalendar: {
+    workTimes: {
+      D: { startTime: string; endTime: string };
+      E: { startTime: string; endTime: string };
+      N: { startTime: string; endTime: string };
+    };
+  };
   OnboardingSchedules: NavigatorScreenParams<OnboardingStackParamList> | undefined; // 삭제할거.
   LoginScreens: NavigatorScreenParams<LoginStackParamList> | undefined; // 로그인 스택네비게이터 내부의 스크린 접근 가능
 };
@@ -86,4 +92,12 @@ export type RootStackParamList = {
   LoginScreens: undefined;
   OnboardingSchedules: undefined;
   OnboardingSchedulesWithOCR: undefined;
+};
+
+export type calendarStackParamList = {
+  Calendar: undefined;
+  EditCalendar: {
+    workTimes: { [key: string]: { startTime: string; endTime: string } };
+  };
+  PlusEdit: undefined;
 };
