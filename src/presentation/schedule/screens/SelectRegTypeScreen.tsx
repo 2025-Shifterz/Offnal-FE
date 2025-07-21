@@ -9,7 +9,6 @@ import { RootStackParamList } from '../../../navigation/types';
 
 const ScheduleRegRegisterMethod = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  
 
   return (
     <View className="h-full w-full flex-1 items-center bg-background-gray-subtle1 px-p-6">
@@ -39,7 +38,17 @@ const ScheduleRegRegisterMethod = () => {
           Icon={CalendarBlue}
           title="근무표 없이 시작하기"
           subtitle="지금은 근무표 없이 시작하고, 나중에 등록할 수 있어요"
-          onPress={() => navigation.navigate('Tabs')}
+          onPress={() =>
+            navigation.navigate('Tabs', {
+              screen: 'Calendar',
+              params: {
+                screen: 'CalendarScreen', // CalendarNavigator 안의 스크린 이름
+                params: {
+                  noCalendar: true,
+                },
+              },
+            })
+          }
         />
       </View>
     </View>

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import CancelIcon from '../../../assets/icons/w-cancel.svg';
 import CameraIcon from '../../../assets/icons/pr-cam.svg';
 import PencilIcon from '../../../assets/icons/pr-pencil.svg';
@@ -10,14 +10,10 @@ import { Animated } from 'react-native';
 // 컴포넌트
 type TextButtonProps = {
   text: string;
-  onNavPress: () => void;
 };
-const TextButton = ({ text, onNavPress }: TextButtonProps) => {
+const TextButton = ({ text }: TextButtonProps) => {
   return (
-    <TouchableOpacity
-      onPress={onNavPress}
-      className="rounded-radius-max bg-surface-white px-[9px] py-[6px]"
-    >
+    <TouchableOpacity className="rounded-radius-max bg-surface-white px-[9px] py-[6px]">
       <Text className="text-heading-xxxxs font-medium">{text}</Text>
     </TouchableOpacity>
   );
@@ -46,20 +42,29 @@ const PlusEdit = ({ setShowPlus }: PlusEditProps) => {
       style={{ opacity: fadeAnim }}
       className="absolute z-10 h-full w-full flex-1 bg-background-dim"
     >
+      {/* 배경 클릭 시 닫히도록 설정 */}
+      <TouchableWithoutFeedback onPress={() => setShowPlus(false)}>
+        <View className="absolute h-full w-full" />
+      </TouchableWithoutFeedback>
       <View className="absolute bottom-[13px] right-[13px] w-[189px] flex-col items-end gap-[13px]">
-        <View className="flex-row items-center gap-[10px]">
-          <TextButton onNavPress={() => {}} text="사진찍어 AI로 근무표 등록" />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('OnboardingSchedulesWithOCR');
+          }}
+          className="flex-row items-center gap-[10px]"
+        >
+          <TextButton text="사진찍어 AI로 근무표 등록" />
           <CameraIcon />
-        </View>
+        </TouchableOpacity>
 
-        <View className="flex-row items-center gap-[10px]">
-          <TouchableOpacity>
-            <TextButton
-              onNavPress={() => navigation.navigate('EditCalendar')}
-              text="근무표 추가 입력 및 수정"
-            />
+        <View className="">
+          <TouchableOpacity
+            className="flex-row items-center gap-[10px]"
+            onPress={() => navigation.navigate('EditCalendar')}
+          >
+            <TextButton text="근무표 추가 입력 및 수정" />
+            <PencilIcon />
           </TouchableOpacity>
-          <PencilIcon />
         </View>
 
         <View className="w-full items-end">

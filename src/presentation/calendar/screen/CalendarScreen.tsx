@@ -1,12 +1,16 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NoCalendar from '../component/NoCalendar';
 import HasCalendar from '../component/HasCalendar';
 import { View } from 'react-native';
 import PlusEdit from '../component/PlusEdit';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { CalendarScreenStackParamList } from '../../../navigation/types';
 
 const CalendarScreen = () => {
-  const [noCalendar, setNoCalendar] = useState(false);
+  const route = useRoute<RouteProp<CalendarScreenStackParamList, 'CalendarScreen'>>();
+
+  const noCalendar = route.params?.noCalendar ?? false;
   const [showPlus, setShowPlus] = useState(false);
 
   return (
