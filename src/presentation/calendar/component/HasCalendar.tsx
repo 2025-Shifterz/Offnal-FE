@@ -13,12 +13,7 @@ import TimeFrame from '../../calenderType/components/TimeFrame';
 import ToDoCard from '../../main/components/ToDoCard';
 import MemoCard from '../../main/components/MemoCard';
 import { Todo } from '../../../domain/entities/Todo';
-import {
-  getMemosByDate,
-  getToDosByDate,
-  memoRepository,
-  todoRepository,
-} from '../../../di/Dependencies';
+import { getMemosByDate, getToDosByDate } from '../../../di/Dependencies';
 import { ShiftType } from '../../../data/model/Calendar';
 
 interface HasCalendarProps {
@@ -34,21 +29,8 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
   // 노트
   const [memos, setMemo] = useState<Todo[]>();
   const [todos, setTodo] = useState<Todo[]>();
-  // useEffect(() => {
-  //   const fetchHome = async () => {
-  //     try {
-  //       const memos = await memoRepository.getMemosByDate(dayjs());
-  //       const todos = await todoRepository.getToDosByDate(dayjs());
-  //       setMemo(memos);
-  //       setTodo(todos);
-  //     } catch (error) {
-  //       console.error('노트 데이터 불러오기 실패:', error);
-  //     }
-  //   };
-  //   fetchHome();
-  // }, []);
 
-  // 선택된 날짜. // 상위에서 받기..
+  // 선택된 날짜.
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
   const formattedDate = selectedDate ? selectedDate.format('DD. dd') : '날짜 없음';
 
