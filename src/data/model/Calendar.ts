@@ -29,5 +29,5 @@ export interface NewCalendar {
   schedules: MonthlySchedule[];
 }
 
-/** 근무 수정을 위한 Domain 모델. Key: 날짜(number), Value: 근무형태(ShiftType) */
-export type ShiftsMap = Map<number, ShiftType>;
+/** 근무 수정을 위한 Domain 모델. Key: 날짜(string, 'YYYY-MM-DD'), Value: 근무형태(ShiftType) */
+export type ShiftsMap = Map<string, ShiftType>;

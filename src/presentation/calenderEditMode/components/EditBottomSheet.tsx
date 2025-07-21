@@ -21,10 +21,13 @@ interface EditBottomSheetProps {
   selectedDate: dayjs.Dayjs | null;
   handleTypeSelect: (type: ShiftType) => void;
   handleCancel: () => void;
+  handleSave: () => void; // handleSave prop 추가
+  selectedBoxId: number;
+  setSelectedBoxId: (id: number) => void;
 }
 
 const EditBottomSheet = forwardRef<BottomSheet, EditBottomSheetProps>(
-  ({ selectedDate, handleTypeSelect, handleCancel }, ref) => {
+  ({ selectedDate, handleTypeSelect, handleCancel, handleSave, selectedBoxId, setSelectedBoxId }, ref) => {
     // 부모에서 받은 ref를 useImperativeHandle()로 가공해서, 내부의 BottomSheet를 대리로 조작하게 한다.
     // 이 ref를 BottomSheetWrapper에게 전달.
     const internalRef = useRef<BottomSheet>(null);
@@ -35,8 +38,6 @@ const EditBottomSheet = forwardRef<BottomSheet, EditBottomSheetProps>(
       close: () => internalRef.current?.close(),
     }));
 
-    // 선택된 박스 스타일 id
-    const [selectedBoxId, setSelectedBoxId] = useState(1);
     const formattedDate = selectedDate ? selectedDate.format('YYYY년 M월 D일 (dd)') : '날짜 없음';
 
     return (
@@ -75,7 +76,7 @@ const EditBottomSheet = forwardRef<BottomSheet, EditBottomSheetProps>(
                 <Text className="text-body-m font-medium text-text-basic">취소</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => internalRef.current?.close()}
+                onPress={handleSave} // 저장 버튼에 handleSave 연결
                 className="h-full flex-[7] items-center justify-center rounded-radius-m2 bg-surface-inverse"
               >
                 <Text className="text-body-m font-medium text-text-bolder-inverse">저장</Text>
