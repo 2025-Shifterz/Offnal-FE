@@ -18,7 +18,7 @@ const Login = () => {
         autoplay
         showsPagination={false}
         width={SCREEN_WIDTH}
-        height={SCREEN_HEIGHT * 0.7}
+        height={SCREEN_HEIGHT * 0.65}
         autoplayTimeout={slideTime}
       >
         {onboardingList.map((onboarding, index) => {
