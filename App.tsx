@@ -1,10 +1,11 @@
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React, { useEffect } from 'react';
 import RootNavigator from './src/navigation/RootNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useEffect } from 'react';
 import { createTodoTable } from './src/local/tables/TodoTable';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { WorkTimeProvider } from './src/context/WorkTimeContext';
 
-const App = () => {
+function App(): React.JSX.Element {
   // Todo 테이블 생성
   useEffect(() => {
     const initializeDB = async () => {
@@ -20,12 +21,14 @@ const App = () => {
   }, []);
 
   return (
-    <GestureHandlerRootView>
-      <SafeAreaProvider>
-        <RootNavigator />
-      </SafeAreaProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <BottomSheetModalProvider>
+        <WorkTimeProvider>
+          <RootNavigator />
+        </WorkTimeProvider>
+      </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );
-};
+}
 
 export default App;

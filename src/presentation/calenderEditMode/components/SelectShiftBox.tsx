@@ -9,6 +9,8 @@ interface SelectShiftBoxProps {
   isSelected: boolean;
   onSelect: () => void;
   handleTypeSelect: () => void;
+  startTime?: string;
+  endTime?: string;
 }
 
 const SelectShiftBox = ({
@@ -16,6 +18,8 @@ const SelectShiftBox = ({
   isSelected,
   onSelect,
   handleTypeSelect,
+  startTime,
+  endTime,
 }: SelectShiftBoxProps) => {
   const selectedDivStyle = isSelected ? 'border-border-primary bg-surface-primary-light' : '';
   const selectedTextStyle = isSelected ? 'text-text-primary' : '';
@@ -38,7 +42,7 @@ const SelectShiftBox = ({
           {typeText}
         </Text>
         <Text className={twMerge('text-label-xs text-text-disabled', selectedTextStyle)}>
-          08:00~17:00
+          {startTime ?? '--:--'}~{endTime ?? '--:--'}
         </Text>
       </View>
       <TimeFrame text={typeText} />

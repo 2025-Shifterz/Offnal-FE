@@ -24,10 +24,11 @@ interface EditBottomSheetProps {
   handleSave: () => void; // handleSave prop 추가
   selectedBoxId: number;
   setSelectedBoxId: (id: number) => void;
+  workTimes: { [key: string]: { startTime: string; endTime: string } };
 }
 
 const EditBottomSheet = forwardRef<BottomSheet, EditBottomSheetProps>(
-  ({ selectedDate, handleTypeSelect, handleCancel, handleSave, selectedBoxId, setSelectedBoxId }, ref) => {
+  ({ selectedDate, handleTypeSelect, handleCancel, handleSave, selectedBoxId, setSelectedBoxId, workTimes }, ref) => {
     // 부모에서 받은 ref를 useImperativeHandle()로 가공해서, 내부의 BottomSheet를 대리로 조작하게 한다.
     // 이 ref를 BottomSheetWrapper에게 전달.
     const internalRef = useRef<BottomSheet>(null);
@@ -39,6 +40,15 @@ const EditBottomSheet = forwardRef<BottomSheet, EditBottomSheetProps>(
     }));
 
     const formattedDate = selectedDate ? selectedDate.format('YYYY년 M월 D일 (dd)') : '날짜 없음';
+
+    const shiftTypeToKey = (type: ShiftType): 'D' | 'E' | 'N' => {
+      switch (type) {
+        case '주간': return 'D';
+        case '오후': return 'E';
+        case '야간': return 'N';
+        default: return 'D';
+      }
+    };
 
     return (
       <>
@@ -56,16 +66,22 @@ const EditBottomSheet = forwardRef<BottomSheet, EditBottomSheetProps>(
             <View className="gap-[11px]">
               <Text className="text-heading-xxs font-semibold text-text-subtle">간격</Text>
               <View className="gap-[7px]">
-                {shiftTypes.map(({ id, text }) => (
-                  <SelectShiftBox
-                    handleTypeSelect={() => handleTypeSelect(text)}
-                    key={id}
-                    typeText={text}
-                    boxId={id}
-                    isSelected={selectedBoxId === id}
-                    onSelect={() => setSelectedBoxId(id)}
-                  />
-                ))}
+                {shiftTypes.map(({ id, text }) => {
+                  const key = shiftTypeToKey(text);
+                  const time = workTimes[key];
+                  return (
+                    <SelectShiftBox
+                      handleTypeSelect={() => handleTypeSelect(text)}
+                      key={id}
+                      typeText={text}
+                      boxId={id}
+                      isSelected={selectedBoxId === id}
+                      onSelect={() => setSelectedBoxId(id)}
+                      startTime={time?.startTime}
+                      endTime={time?.endTime}
+                    />
+                  );
+                })}
               </View>
             </View>
             <View className="h-[46px] w-full flex-row items-center gap-[10px]">

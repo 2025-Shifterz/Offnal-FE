@@ -6,6 +6,7 @@ import PencilIcon from '../../../assets/icons/pr-pencil.svg';
 import { useNavigation } from '@react-navigation/native';
 import { calendarNavigation } from '../../../navigation/types';
 import { Animated } from 'react-native';
+import { useWorkTime } from '../../../context/WorkTimeContext';
 
 // 컴포넌트
 type TextButtonProps = {
@@ -27,6 +28,7 @@ type PlusEditProps = {
 const PlusEdit = ({ setShowPlus }: PlusEditProps) => {
   const navigation = useNavigation<calendarNavigation>();
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  const { workTimes } = useWorkTime();
 
   // 페이드 인 애니메이션
   useEffect(() => {
@@ -57,14 +59,14 @@ const PlusEdit = ({ setShowPlus }: PlusEditProps) => {
           <CameraIcon />
         </TouchableOpacity>
 
-        <View className="">
-          <TouchableOpacity
-            className="flex-row items-center gap-[10px]"
-            onPress={() => navigation.navigate('EditCalendar')}
-          >
-            <TextButton text="근무표 추가 입력 및 수정" />
-            <PencilIcon />
-          </TouchableOpacity>
+        <View className="flex-row items-center gap-[10px]">
+          <TextButton
+            onNavPress={() => {
+              navigation.navigate('EditCalendar', { workTimes: workTimes });
+            }}
+            text="근무표 추가 입력 및 수정"
+          />
+          <PencilIcon />
         </View>
 
         <View className="w-full items-end">
