@@ -21,16 +21,16 @@ import { GetMemosByDateUseCase } from '../domain/useCases/GetMemosByDate';
 const todoDao = new TodoDao();
 const memoDao = new MemoDao();
 
-const calendarService = new CalendarService(); 
+const calendarService = new CalendarService();
 export const homeService = new HomeService();
 export const fastAPIService = new FastAPIService();
 
 // 2. 구체적인 리포지토리 구현체 인스턴스 생성 (TodoDao 주입)
-const userRepostiory = new UserRepositoryImpl();
 export const todoRepository = new TodoRepositoryImpl(todoDao);
 export const memoRepository = new MemoRepositoryImpl(memoDao);
 export const workCalendarRepository = new WorkCalendarRepositoryImpl(calendarService);
 export const homeRepository = new HomeRepositoryImpl(homeService);
+export const userRepository = new UserRepositoryImpl();
 
 // 3. Use Case 인스턴스 생성 (repository 주입)
 // --> 이제 addTodoUseCase 사용가능!

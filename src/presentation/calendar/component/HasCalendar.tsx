@@ -70,15 +70,6 @@ const HasCalendar = ({ setShowPlus, setNoCalendar }: HasCalendarProps) => {
     // console.log('calendarData.size', calendarData.size);
   }, [selectedDate]);
 
-  // NoCalendar가 보이는지 여부
-  useEffect(() => {
-    if (calendarData.size === 0) {
-      setNoCalendar(true);
-    } else {
-      setNoCalendar(false);
-    }
-  }, [calendarData]);
-
   return (
     <View className="h-full flex-1 px-[16px]">
       <ScrollView className="h-full flex-1">
