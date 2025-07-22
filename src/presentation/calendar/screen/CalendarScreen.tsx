@@ -31,7 +31,7 @@ const CalendarScreen = () => {
       {noCalendar && <NoCalendar />}
       <SafeAreaView edges={['top']} className="relative h-full flex-1 bg-surface-white">
         {/* 등록된 캘린더가 있고, 팀 캘린더인지 */}
-        <HasCalendar setShowPlus={setShowPlus} setNoCalendar={setNoCalendar} />
+        <HasCalendar setShowPlus={setShowPlus} />
       </SafeAreaView>
       {showPlus && <PlusEdit setShowPlus={setShowPlus} />}
     </View>

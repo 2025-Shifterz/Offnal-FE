@@ -18,10 +18,9 @@ import { ShiftType } from '../../../data/model/Calendar';
 
 interface HasCalendarProps {
   setShowPlus: (value: boolean) => void;
-  setNoCalendar: (value: boolean) => void;
 }
 
-const HasCalendar = ({ setShowPlus, setNoCalendar }: HasCalendarProps) => {
+const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
   const navigation = useNavigation<calendarNavigation>();
   const [isTeamView, setIsTeamView] = useState(false);
   const [calendarData, setCalendarData] = useState<Map<string, ShiftType>>(new Map());
