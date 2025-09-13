@@ -371,10 +371,31 @@ module.exports = {
 
       // 그림자 정의
       boxShadow: {
-        'shadow-blur-3': 'var(--box-shadow-blur-3)',
+        'shadow-y-1': 'var(--box-shadow-y-1)',
+        'shadow-blur-1': 'var(--box-shadow-blur-1)',
+
+        'shadow-y-2': 'var(--box-shadow-y-2)',
+        'shadow-blur-2': 'var(--box-shadow-blur-2)',
+
         'shadow-y-3': 'var(--box-shadow-y-3)',
-        'shadow-blur-4': 'var(--box-shadow-blur-4)',
+        'shadow-blur-3': 'var(--box-shadow-blur-3)',
+
         'shadow-y-4': 'var(--box-shadow-y-4)',
+        'shadow-blur-4': 'var(--box-shadow-blur-4)',
+
+        'shadow-y--5': 'var(--box-shadow-y--5)',
+
+        // 유틸리티
+        'shadow-1': `0 var(--box-shadow-y-1) var(--box-shadow-blur-1) 0 var(--color-alpha-shadow1, rgba(0, 0, 0, 0.05)),
+                 0 0 var(--box-shadow-blur-1) 0 var(--color-alpha-shadow1, rgba(0, 0, 0, 0.05))`,
+
+        'shadow-2': `0 0 var(--box-shadow-blur-1) 0 var(--color-alpha-shadow2, rgba(0, 0, 0, 0.08)),
+                 0 var(--box-shadow-y-2) var(--box-shadow-blur-2) 0 var(--color-alpha-shadow2, rgba(0, 0, 0, 0.08))`,
+
+        'shadow-3': `0 0 var(--box-shadow-blur-1) 0 var(--color-alpha-shadow3, rgba(0, 0, 0, 0.12)) ,
+                 0 var(--box-shadow-y-3) var(--box-shadow-blur-3) 0 var(--color-alpha-shadow3, rgba(0, 0, 0, 0.12))`,
+        'shadow-4': `0 var(--box-shadow-y--5) var(--box-shadow-blur-1) 0 var(--color-alpha-shadow2, rgba(0, 0, 0, 0.08)),
+                 0 var(--box-shadow-y-4) var(--box-shadow-blur-4) 0 var(--color-alpha-shadow3, rgba(0, 0, 0, 0.12))`,
       },
 
       // 간격 정의
@@ -448,17 +469,30 @@ module.exports = {
 
       // 줄 높이 정의
       lineHeight: {
-        'h-1': 'var(--line-height-h-1)',
-        'h-2': 'var(--line-height-h-2)',
-        'h-3': 'var(--line-height-h-3)',
-        'h-4': 'var(--line-height-h-4)',
-        'h-5': 'var(--line-height-h-5)',
-        'h-6': 'var(--line-height-h-6)',
-        'h-7': 'var(--line-height-h-7)',
-        'h-8': 'var(--line-height-h-8)',
-        'h-9': 'var(--line-height-h-9)',
-        'h-10': 'var(--line-height-h-10)',
-        'h-11': 'var(--line-height-h-11)',
+        // 'h-1': 'var(--line-height-h-1)',
+        // 'h-2': 'var(--line-height-h-2)',
+        // 'h-3': 'var(--line-height-h-3)',
+        // 'h-4': 'var(--line-height-h-4)',
+        // 'h-5': 'var(--line-height-h-5)',
+        // 'h-6': 'var(--line-height-h-6)',
+        // 'h-7': 'var(--line-height-h-7)',
+        // 'h-8': 'var(--line-height-h-8)',
+        // 'h-9': 'var(--line-height-h-9)',
+        // 'h-10': 'var(--line-height-h-10)',
+        // 'h-11': 'var(--line-height-h-11)',
+
+        'h-display': 'var(--line-height-h-display)',
+        'h-label': 'var(--line-height-h-label)',
+        'h-body': 'var(--line-height-h-body)',
+
+        'h-heading-xl': 'var(--line-height-h-heading-xl)',
+        'h-heading-l': 'var(--line-height-h-heading-l)',
+        'h-heading-m': 'var(--line-height-h-heading-m)',
+        'h-heading-s': 'var(--line-height-h-heading-s)',
+        'h-heading-xs': 'var(--line-height-h-heading-xs)',
+        'h-heading-xxs': 'var(--line-height-h-heading-xxs)',
+        'h-heading-xxxs': 'var(--line-height-h-heading-xxxs)',
+        'h-heading-xxxxs': 'var(--line-height-h-heading-xxxxs)',
       },
 
       // 테두리 반경 정의
@@ -517,5 +551,158 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities, theme }) {
+      addUtilities({
+        // 텍스트 스타일 유틸리티 클래스
+        // display
+        '.display-xs': {
+          fontSize: theme('fontSize.display-xs'),
+          lineHeight: theme('lineHeight.h-display'),
+          fontWeight: theme('fontWeight.bold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-1'),
+        },
+        '.display-s': {
+          fontSize: theme('fontSize.display-s'),
+          lineHeight: theme('lineHeight.h-display'),
+          fontWeight: theme('fontWeight.bold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-1'),
+        },
+        '.display-m': {
+          fontSize: theme('fontSize.display-m'),
+          lineHeight: theme('lineHeight.h-display'),
+          fontWeight: theme('fontWeight.bold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+
+        // heading
+        '.heading-xxxxs': {
+          fontSize: theme('fontSize.heading-xxxxs'),
+          lineHeight: theme('lineHeight.h-heading-xxxxs'),
+          fontWeight: theme('fontWeight.bold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.heading-xxxs': {
+          fontSize: theme('fontSize.heading-xxxs'),
+          lineHeight: theme('lineHeight.h-heading-xxxs'),
+          fontWeight: theme('fontWeight.bold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.heading-xxs': {
+          fontSize: theme('fontSize.heading-xxs'),
+          lineHeight: theme('lineHeight.h-heading-xxs'),
+          fontWeight: theme('fontWeight.bold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.heading-xs': {
+          fontSize: theme('fontSize.heading-xs'),
+          lineHeight: theme('lineHeight.h-heading-xs'),
+          fontWeight: theme('fontWeight.bold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.heading-s': {
+          fontSize: theme('fontSize.heading-s'),
+          lineHeight: theme('lineHeight.h-heading-s'),
+          fontWeight: theme('fontWeight.bold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.heading-m': {
+          fontSize: theme('fontSize.heading-m'),
+          lineHeight: theme('lineHeight.h-heading-m'),
+          fontWeight: theme('fontWeight.bold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.heading-l': {
+          fontSize: theme('fontSize.heading-l'),
+          lineHeight: theme('lineHeight.h-heading-l'),
+          fontWeight: theme('fontWeight.bold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-1'),
+        },
+        '.heading-xl': {
+          fontSize: theme('fontSize.heading-xl'),
+          lineHeight: theme('lineHeight.h-heading-xl'),
+          fontWeight: theme('fontWeight.bold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-1'),
+        },
+
+        // body
+        '.body-xxs': {
+          fontSize: theme('fontSize.body-xxs'),
+          lineHeight: theme('lineHeight.h-body'),
+          fontWeight: theme('fontWeight.regular'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.body-xs': {
+          fontSize: theme('fontSize.body-xs'),
+          lineHeight: theme('lineHeight.h-body'),
+          fontWeight: theme('fontWeight.regular'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.body-s': {
+          fontSize: theme('fontSize.body-s'),
+          lineHeight: theme('lineHeight.h-body'),
+          fontWeight: theme('fontWeight.regular'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.body-m': {
+          fontSize: theme('fontSize.body-m'),
+          lineHeight: theme('lineHeight.h-body'),
+          fontWeight: theme('fontWeight.regular'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.body-l': {
+          fontSize: theme('fontSize.body-l'),
+          lineHeight: theme('lineHeight.h-body'),
+          fontWeight: theme('fontWeight.regular'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+
+        // label
+        '.label-xxs': {
+          fontSize: theme('fontSize.label-xxs'),
+          lineHeight: theme('lineHeight.h-label'),
+          fontWeight: theme('fontWeight.regular'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.label-xs': {
+          fontSize: theme('fontSize.label-xs'),
+          lineHeight: theme('lineHeight.h-label'),
+          fontWeight: theme('fontWeight.regular'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.label-s': {
+          fontSize: theme('fontSize.label-s'),
+          lineHeight: theme('lineHeight.h-label'),
+          fontWeight: theme('fontWeight.regular'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.label-m': {
+          fontSize: theme('fontSize.label-m'),
+          lineHeight: theme('lineHeight.h-label'),
+          fontWeight: theme('fontWeight.regular'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+        '.label-l': {
+          fontSize: theme('fontSize.label-l'),
+          lineHeight: theme('lineHeight.h-label'),
+          fontWeight: theme('fontWeight.regular'),
+          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+        },
+
+        // 그림자 유틸리티 클래스
+        '.shadow-1': {
+          boxShadow: theme('boxShadow.shadow-1'),
+        },
+        '.shadow-2': {
+          boxShadow: theme('boxShadow.shadow-2'),
+        },
+        '.shadow-3': {
+          boxShadow: theme('boxShadow.shadow-3'),
+        },
+        '.shadow-4': {
+          boxShadow: theme('boxShadow.shadow-4'),
+        },
+      });
+    },
+  ],
 };

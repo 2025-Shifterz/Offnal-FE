@@ -4,12 +4,11 @@
 @tailwind utilities;
 
 .work-chip-title-style {
-  @apply text-heading-xxxxs font-pretendard font-medium text-text-subtle-inverse;
+  @apply font-pretendard text-heading-xxxxs font-medium text-text-subtle-inverse;
 }
 .work-chip-description-style {
-  @apply text-heading-xxxs font-pretendard font-medium text-text-subtle;
+  @apply font-pretendard text-heading-xxxs font-medium text-text-subtle;
 }
-
 
 @layer base {
   * {
@@ -246,10 +245,20 @@
   --border-width-variable-medium: 2px;
 
   /* Box Shadows */
-  --box-shadow-blur-3: 1px;
-  --box-shadow-y-3: 1px;
-  --box-shadow-blur-4: 2px;
-  --box-shadow-y-4: 2px;
+
+  --box-shadow-y--5: -5px;
+
+  --box-shadow-y-1: 1px;
+  --box-shadow-blur-1: 2px;
+
+  --box-shadow-y-2: 4px;
+  --box-shadow-blur-2: 8px;
+
+  --box-shadow-y-3: 8px;
+  --box-shadow-blur-3: 16px;
+
+  --box-shadow-y-4: 16px;
+  --box-shadow-blur-4: 24px;
 
   /* Spacing (Primitive) */
   --spacing-number-0: 0px;
@@ -310,18 +319,19 @@
   --letter-spacing-0: 0px;
   --letter-spacing-1: 1px;
 
-  /* Line Height */
-  --line-height-h-1: 8px;
-  --line-height-h-2: 16px;
-  --line-height-h-3: 20px;
-  --line-height-h-4: 24px;
-  --line-height-h-5: 32px;
-  --line-height-h-6: 40px;
-  --line-height-h-7: 48px;
-  --line-height-h-8: 56px;
-  --line-height-h-9: 64px;
-  --line-height-h-10: 72px;
-  --line-height-h-11: 80px;
+  /* Line Height (비율) */
+  --line-height-display: 1.5; /* display-xs ~ display-m 동일 */
+  --line-height-body: 1.5; /* body-xxs ~ body-xl 동일 */
+  --line-height-label: 1.5; /* label-xs ~ label-l 동일 */
+
+  --line-height-heading-xxxxs: 1.2;
+  --line-height-heading-xxxs: 1.2;
+  --line-height-heading-xxs: 1.2;
+  --line-height-heading-xs: 1.2;
+  --line-height-heading-s: 1.2;
+  --line-height-heading-m: 1.4;
+  --line-height-heading-l: 1.5;
+  --line-height-heading-xl: 1.5;
 
   /* Border Radius */
   --border-radius-xs: 2px;
@@ -333,13 +343,6 @@
   --border-radius-max: 1000px;
 
   /* Font Sizes */
-  --font-size-boyd-xxxs: 8px;
-  --font-size-body-xxs: 11px;
-  --font-size-body-xs: 13px;
-  --font-size-body-s: 15px;
-  --font-size-body-m: 17px;
-  --font-size-body-l: 19px;
-
   --font-size-display-xs: 24px;
   --font-size-display-s: 28px;
   --font-size-display-m: 32px;
@@ -353,6 +356,13 @@
   --font-size-heading-m: 22px;
   --font-size-heading-l: 24px;
   --font-size-heading-xl: 28px;
+
+  --font-size-body-xxs: 11px;
+  --font-size-body-xs: 13px;
+  --font-size-body-s: 15px;
+  --font-size-body-m: 17px;
+  --font-size-body-l: 19px;
+  --font-size-body-xl: 28px;
 
   --font-size-label-xxs: 11px;
   --font-size-label-xs: 13px;
