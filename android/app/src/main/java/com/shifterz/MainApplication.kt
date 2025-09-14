@@ -13,6 +13,7 @@ import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
 import com.shifterz.imageProcessor.ImageProcessorPackage
 import com.shifterz.schedule.SchedulePackage
+import com.shifterz.sheet.WorkSheetPackage
 
 class MainApplication : Application(), ReactApplication {
 
@@ -22,6 +23,7 @@ class MainApplication : Application(), ReactApplication {
             PackageList(this).packages.apply {
                 add(SchedulePackage())
                 add(ImageProcessorPackage())
+                add(WorkSheetPackage())
             }
 
         override fun getJSMainModuleName(): String = "index"
