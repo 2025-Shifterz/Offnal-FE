@@ -75,9 +75,7 @@ const Item = ({ memo, isFirst, isLast }: MemoItemProps) => {
     <View
       className={`bg-background-gray-subtle1 px-number-6 py-number-4 ${itemBorderClass} ${!isLast ? 'mb-number-1' : ''}`}
     >
-      <Text className="font-pretendard text-body-xxs font-normal text-text-subtle">
-        {memo.text}
-      </Text>
+      <Text className="text-text-subtle body-xxs">{memo.text}</Text>
     </View>
   );
 };

@@ -55,13 +55,13 @@ const MyInfoScreen = () => {
 
           <View className="mb-4 rounded-xl bg-white px-number-8 py-number-3 shadow-sm">
             <TouchableOpacity className="flex-row items-center justify-between py-number-6">
-              <Text className="font-pretendard text-body-xxs text-text-subtle">기타</Text>
+              <Text className="text-text-subtle body-xxs">기타</Text>
             </TouchableOpacity>
             <TouchableOpacity className="flex-row items-center justify-between py-number-6">
-              <Text className="font-pretendard text-body-xs text-text-basic">회원 탈퇴</Text>
+              <Text className="text-text-basic body-xs">회원 탈퇴</Text>
             </TouchableOpacity>
             <TouchableOpacity className="flex-row items-center justify-between py-number-6">
-              <Text className="font-pretendard text-body-xs text-text-basic">로그아웃</Text>
+              <Text className="text-text-basic body-xs">로그아웃</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

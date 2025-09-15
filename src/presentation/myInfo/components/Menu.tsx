@@ -19,9 +19,7 @@ const Item = ({ menuTitle, onPress }: MenuItemProps) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View className="w-full flex-1 justify-start px-number-8 py-number-5">
-        <Text className="font-pretendard text-body-xs font-medium text-text-basic">
-          {menuTitle}
-        </Text>
+        <Text className="text-text-basic body-xs">{menuTitle}</Text>
       </View>
     </TouchableOpacity>
   );

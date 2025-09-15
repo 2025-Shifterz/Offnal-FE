@@ -70,13 +70,13 @@ const EditBottomSheet = forwardRef<BottomSheet, EditBottomSheetProps>(
         <BottomSheetWrapper ref={internalRef}>
           <View className="mt-[5px] gap-[20px] px-p-6">
             <View className="gap-[10px]">
-              <Text className="text-heading-xs font-semibold text-text-basic">근무형태 입력</Text>
+              <Text className="text-text-basic heading-xs">근무형태 입력</Text>
               <View className="rounded-radius-m1 border-[0.5px] border-[#2ECADC1A] bg-surface-primary-light px-p-6 py-p-4">
                 <Text className="text-text-primary label-s">{`선택된 날짜: ${formattedDate}`}</Text>
               </View>
             </View>
             <View className="gap-[11px]">
-              <Text className="text-heading-xxs font-semibold text-text-subtle">간격</Text>
+              <Text className="text-text-subtle heading-xxs">간격</Text>
               <View className="gap-[7px]">
                 {shiftTypes.map(({ id, text }) => {
                   const key = shiftTypeToKey(text);

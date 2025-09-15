@@ -50,7 +50,7 @@ const WithAddableBtn: React.FC<SectionWithAddableBtnProps> = ({
 const OnlyTitle: React.FC<{ title: string }> = ({ title }) => {
   return (
     <View className="flex-row items-center justify-start gap-g-2">
-      <Text className="font-pretendard text-heading-xxs font-semibold text-black">{title}</Text>
+      <Text className="text-black heading-xxs">{title}</Text>
     </View>
   );
 };

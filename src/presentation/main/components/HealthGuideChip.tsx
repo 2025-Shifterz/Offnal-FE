@@ -53,9 +53,7 @@ const HealthGuideChip: React.FC<HealthGuideChipProps> = ({
       </Text>
 
       {/* 하단 */}
-      <Text className="font-pretendard text-heading-xxs font-semibold leading-[1.2] tracking-letter-spacing-0 text-text-basic">
-        {guideTime}
-      </Text>
+      <Text className="text-text-basic heading-xxs">{guideTime}</Text>
     </View>
   );
 };

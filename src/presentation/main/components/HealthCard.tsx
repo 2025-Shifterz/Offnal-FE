@@ -98,14 +98,10 @@ const Weight = () => {
     >
       <View className="mb-number-3 flex-row items-center justify-center">
         <WeightIcon />
-        <Text className="ps-number-3 font-pretendard text-heading-xxxs font-semibold text-text-subtle">
-          몸무게 기록
-        </Text>
+        <Text className="ps-number-3 text-text-subtle heading-xxxs">몸무게 기록</Text>
       </View>
 
-      <Text className="mb-number-3 font-pretendard text-heading-s font-semibold text-text-bolder">
-        기록없음
-      </Text>
+      <Text className="mb-number-3 text-text-bolder heading-s">기록없음</Text>
       <LineChart
         data={weightData}
         width={chartCalculatedWidth}
