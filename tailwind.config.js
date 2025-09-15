@@ -383,7 +383,7 @@ module.exports = {
         'shadow-y-4': 'var(--box-shadow-y-4)',
         'shadow-blur-4': 'var(--box-shadow-blur-4)',
 
-        'shadow-y--5': 'var(--box-shadow-y--5)',
+        'shadow-y-5': 'var(--box-shadow-y-5)',
 
         // 유틸리티
         'shadow-1': `0 var(--box-shadow-y-1) var(--box-shadow-blur-1) 0 var(--color-alpha-shadow1, rgba(0, 0, 0, 0.05)),
@@ -394,7 +394,7 @@ module.exports = {
 
         'shadow-3': `0 0 var(--box-shadow-blur-1) 0 var(--color-alpha-shadow3, rgba(0, 0, 0, 0.12)) ,
                  0 var(--box-shadow-y-3) var(--box-shadow-blur-3) 0 var(--color-alpha-shadow3, rgba(0, 0, 0, 0.12))`,
-        'shadow-4': `0 var(--box-shadow-y--5) var(--box-shadow-blur-1) 0 var(--color-alpha-shadow2, rgba(0, 0, 0, 0.08)),
+        'shadow-4': `0 var(--box-shadow-y-5) var(--box-shadow-blur-1) 0 var(--color-alpha-shadow2, rgba(0, 0, 0, 0.08)),
                  0 var(--box-shadow-y-4) var(--box-shadow-blur-4) 0 var(--color-alpha-shadow3, rgba(0, 0, 0, 0.12))`,
       },
 
@@ -464,35 +464,35 @@ module.exports = {
       // 자간 정의
       letterSpacing: {
         'letter-spacing-0': 'var(--letter-spacing-0)',
+        'letter-spacing-05': 'var(--letter-spacing-05)',
         'letter-spacing-1': 'var(--letter-spacing-1)',
       },
 
       // 줄 높이 정의
       lineHeight: {
-        // 'h-1': 'var(--line-height-h-1)',
-        // 'h-2': 'var(--line-height-h-2)',
-        // 'h-3': 'var(--line-height-h-3)',
-        // 'h-4': 'var(--line-height-h-4)',
-        // 'h-5': 'var(--line-height-h-5)',
-        // 'h-6': 'var(--line-height-h-6)',
-        // 'h-7': 'var(--line-height-h-7)',
-        // 'h-8': 'var(--line-height-h-8)',
-        // 'h-9': 'var(--line-height-h-9)',
-        // 'h-10': 'var(--line-height-h-10)',
-        // 'h-11': 'var(--line-height-h-11)',
-
-        'h-display': 'var(--line-height-h-display)',
-        'h-label': 'var(--line-height-h-label)',
-        'h-body': 'var(--line-height-h-body)',
-
-        'h-heading-xl': 'var(--line-height-h-heading-xl)',
-        'h-heading-l': 'var(--line-height-h-heading-l)',
-        'h-heading-m': 'var(--line-height-h-heading-m)',
-        'h-heading-s': 'var(--line-height-h-heading-s)',
-        'h-heading-xs': 'var(--line-height-h-heading-xs)',
-        'h-heading-xxs': 'var(--line-height-h-heading-xxs)',
-        'h-heading-xxxs': 'var(--line-height-h-heading-xxxs)',
         'h-heading-xxxxs': 'var(--line-height-h-heading-xxxxs)',
+        'h-heading-xxxs': 'var(--line-height-h-heading-xxxs)',
+        'h-heading-xxs': 'var(--line-height-h-heading-xxs)',
+        'h-heading-xs': 'var(--line-height-h-heading-xs)',
+        'h-heading-s': 'var(--line-height-h-heading-s)',
+        'h-heading-m': 'var(--line-height-h-heading-m)',
+        'h-heading-l': 'var(--line-height-h-heading-l)',
+        'h-heading-xl': 'var(--line-height-h-heading-xl)',
+
+        'h-body-xxxs': 'var(--line-height-h-body-xxxs)',
+        'h-body-xxs': 'var(--line-height-h-body-xxs)',
+        'h-body-xs': 'var(--line-height-h-body-xs)',
+        'h-body-s': 'var(--line-height-h-body-s)',
+        'h-body-m': 'var(--line-height-h-body-m)',
+        'h-body-l': 'var(--line-height-h-body-l)',
+        'h-body-xl': 'var(--line-height-h-body-xl)',
+
+        'h-label-xxxs': 'var(--line-height-h-label-xxxs)',
+        'h-label-xxs': 'var(--line-height-h-label-xxs)',
+        'h-label-xs': 'var(--line-height-h-label-xs)',
+        'h-label-s': 'var(--line-height-h-label-s)',
+        'h-label-m': 'var(--line-height-h-label-m)',
+        'h-label-l': 'var(--line-height-h-label-l)',
       },
 
       // 테두리 반경 정의
@@ -508,7 +508,7 @@ module.exports = {
 
       // 폰트 크기 정의
       fontSize: {
-        //'body-xxxs': 'var(--font-size-body-xxxs)',
+        'body-xxxs': 'var(--font-size-body-xxxs)',
         'body-xxs': 'var(--font-size-body-xxs)',
         'body-xs': 'var(--font-size-body-xs)',
         'body-s': 'var(--font-size-body-s)',
@@ -555,136 +555,122 @@ module.exports = {
     function ({ addUtilities, theme }) {
       addUtilities({
         // 텍스트 스타일 유틸리티 클래스
-        // display
-        '.display-xs': {
-          fontSize: theme('fontSize.display-xs'),
-          lineHeight: theme('lineHeight.h-display'),
-          fontWeight: theme('fontWeight.bold'),
-          letterSpacing: theme('letterSpacing.letter-spacing-1'),
-        },
-        '.display-s': {
-          fontSize: theme('fontSize.display-s'),
-          lineHeight: theme('lineHeight.h-display'),
-          fontWeight: theme('fontWeight.bold'),
-          letterSpacing: theme('letterSpacing.letter-spacing-1'),
-        },
-        '.display-m': {
-          fontSize: theme('fontSize.display-m'),
-          lineHeight: theme('lineHeight.h-display'),
-          fontWeight: theme('fontWeight.bold'),
-          letterSpacing: theme('letterSpacing.letter-spacing-0'),
-        },
-
         // heading
         '.heading-xxxxs': {
           fontSize: theme('fontSize.heading-xxxxs'),
           lineHeight: theme('lineHeight.h-heading-xxxxs'),
-          fontWeight: theme('fontWeight.bold'),
-          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+          fontWeight: theme('fontWeight.semibold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-05'),
         },
         '.heading-xxxs': {
           fontSize: theme('fontSize.heading-xxxs'),
           lineHeight: theme('lineHeight.h-heading-xxxs'),
-          fontWeight: theme('fontWeight.bold'),
-          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+          fontWeight: theme('fontWeight.semibold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-05'),
         },
         '.heading-xxs': {
           fontSize: theme('fontSize.heading-xxs'),
           lineHeight: theme('lineHeight.h-heading-xxs'),
-          fontWeight: theme('fontWeight.bold'),
-          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+          fontWeight: theme('fontWeight.semibold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-05'),
         },
         '.heading-xs': {
           fontSize: theme('fontSize.heading-xs'),
           lineHeight: theme('lineHeight.h-heading-xs'),
-          fontWeight: theme('fontWeight.bold'),
-          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+          fontWeight: theme('fontWeight.semibold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-05'),
         },
         '.heading-s': {
           fontSize: theme('fontSize.heading-s'),
           lineHeight: theme('lineHeight.h-heading-s'),
-          fontWeight: theme('fontWeight.bold'),
-          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+          fontWeight: theme('fontWeight.semibold'),
+          letterSpacing: theme('letterSpacing.letter-spacing-05'),
         },
         '.heading-m': {
           fontSize: theme('fontSize.heading-m'),
           lineHeight: theme('lineHeight.h-heading-m'),
-          fontWeight: theme('fontWeight.bold'),
+          fontWeight: theme('fontWeight.semibold'),
           letterSpacing: theme('letterSpacing.letter-spacing-0'),
         },
         '.heading-l': {
           fontSize: theme('fontSize.heading-l'),
           lineHeight: theme('lineHeight.h-heading-l'),
-          fontWeight: theme('fontWeight.bold'),
+          fontWeight: theme('fontWeight.semibold'),
           letterSpacing: theme('letterSpacing.letter-spacing-1'),
         },
         '.heading-xl': {
           fontSize: theme('fontSize.heading-xl'),
           lineHeight: theme('lineHeight.h-heading-xl'),
-          fontWeight: theme('fontWeight.bold'),
+          fontWeight: theme('fontWeight.semibold'),
           letterSpacing: theme('letterSpacing.letter-spacing-1'),
         },
 
         // body
+        '.body-xxxs': {
+          fontSize: theme('fontSize.body-xxxs'),
+          lineHeight: theme('lineHeight.h-body-xxxs'),
+          fontWeight: theme('fontWeight.medium'),
+          letterSpacing: theme('letterSpacing.letter-spacing-05'),
+        },
         '.body-xxs': {
           fontSize: theme('fontSize.body-xxs'),
-          lineHeight: theme('lineHeight.h-body'),
-          fontWeight: theme('fontWeight.regular'),
-          letterSpacing: theme('letterSpacing.letter-spacing-0'),
+          lineHeight: theme('lineHeight.h-body-xxs'),
+          fontWeight: theme('fontWeight.medium'),
+          letterSpacing: theme('letterSpacing.letter-spacing-05'),
         },
         '.body-xs': {
           fontSize: theme('fontSize.body-xs'),
-          lineHeight: theme('lineHeight.h-body'),
-          fontWeight: theme('fontWeight.regular'),
+          lineHeight: theme('lineHeight.h-body-xs'),
+          fontWeight: theme('fontWeight.medium'),
           letterSpacing: theme('letterSpacing.letter-spacing-0'),
         },
         '.body-s': {
           fontSize: theme('fontSize.body-s'),
-          lineHeight: theme('lineHeight.h-body'),
-          fontWeight: theme('fontWeight.regular'),
+          lineHeight: theme('lineHeight.h-body-s'),
+          fontWeight: theme('fontWeight.medium'),
           letterSpacing: theme('letterSpacing.letter-spacing-0'),
         },
         '.body-m': {
           fontSize: theme('fontSize.body-m'),
-          lineHeight: theme('lineHeight.h-body'),
-          fontWeight: theme('fontWeight.regular'),
+          lineHeight: theme('lineHeight.h-body-m'),
+          fontWeight: theme('fontWeight.medium'),
           letterSpacing: theme('letterSpacing.letter-spacing-0'),
         },
         '.body-l': {
           fontSize: theme('fontSize.body-l'),
-          lineHeight: theme('lineHeight.h-body'),
-          fontWeight: theme('fontWeight.regular'),
+          lineHeight: theme('lineHeight.h-body-l'),
+          fontWeight: theme('fontWeight.medium'),
           letterSpacing: theme('letterSpacing.letter-spacing-0'),
         },
 
         // label
         '.label-xxs': {
           fontSize: theme('fontSize.label-xxs'),
-          lineHeight: theme('lineHeight.h-label'),
+          lineHeight: theme('lineHeight.h-label-xxs'),
           fontWeight: theme('fontWeight.regular'),
           letterSpacing: theme('letterSpacing.letter-spacing-0'),
         },
         '.label-xs': {
           fontSize: theme('fontSize.label-xs'),
-          lineHeight: theme('lineHeight.h-label'),
+          lineHeight: theme('lineHeight.h-label-xs'),
           fontWeight: theme('fontWeight.regular'),
           letterSpacing: theme('letterSpacing.letter-spacing-0'),
         },
         '.label-s': {
           fontSize: theme('fontSize.label-s'),
-          lineHeight: theme('lineHeight.h-label'),
+          lineHeight: theme('lineHeight.h-label-s'),
           fontWeight: theme('fontWeight.regular'),
           letterSpacing: theme('letterSpacing.letter-spacing-0'),
         },
         '.label-m': {
           fontSize: theme('fontSize.label-m'),
-          lineHeight: theme('lineHeight.h-label'),
+          lineHeight: theme('lineHeight.h-label-m'),
           fontWeight: theme('fontWeight.regular'),
           letterSpacing: theme('letterSpacing.letter-spacing-0'),
         },
         '.label-l': {
           fontSize: theme('fontSize.label-l'),
-          lineHeight: theme('lineHeight.h-label'),
+          lineHeight: theme('lineHeight.h-label-l'),
           fontWeight: theme('fontWeight.regular'),
           letterSpacing: theme('letterSpacing.letter-spacing-0'),
         },

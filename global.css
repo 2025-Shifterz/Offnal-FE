@@ -245,8 +245,7 @@
   --border-width-variable-medium: 2px;
 
   /* Box Shadows */
-
-  --box-shadow-y--5: -5px;
+  --box-shadow-y-5: -5px;
 
   --box-shadow-y-1: 1px;
   --box-shadow-blur-1: 2px;
@@ -317,13 +316,10 @@
 
   /* Letter Spacing */
   --letter-spacing-0: 0px;
+  --letter-spacing-05: -0.5px;
   --letter-spacing-1: 1px;
 
   /* Line Height (비율) */
-  --line-height-display: 1.5; /* display-xs ~ display-m 동일 */
-  --line-height-body: 1.5; /* body-xxs ~ body-xl 동일 */
-  --line-height-label: 1.5; /* label-xs ~ label-l 동일 */
-
   --line-height-heading-xxxxs: 1.2;
   --line-height-heading-xxxs: 1.2;
   --line-height-heading-xxs: 1.2;
@@ -332,6 +328,21 @@
   --line-height-heading-m: 1.4;
   --line-height-heading-l: 1.5;
   --line-height-heading-xl: 1.5;
+
+  --line-height-body-xxxs: 1;
+  --line-height-body-xxs: 1;
+  --line-height-body-xs: 1.2;
+  --line-height-body-s: 1.2;
+  --line-height-body-m: 1.2;
+  --line-height-body-l: 1.5;
+  --line-height-body-xl: 1.5;
+
+  --line-height-label-xxxs: 1;
+  --line-height-label-xxs: 1;
+  --line-height-label-xs: 1.2;
+  --line-height-label-s: 1.2;
+  --line-height-label-m: 1.2;
+  --line-height-label-l: 1.2;
 
   /* Border Radius */
   --border-radius-xs: 2px;
@@ -343,32 +354,30 @@
   --border-radius-max: 1000px;
 
   /* Font Sizes */
-  --font-size-display-xs: 24px;
-  --font-size-display-s: 28px;
-  --font-size-display-m: 32px;
-  --font-size-display-l: 44px;
 
-  --font-size-heading-xxxxs: 11px;
-  --font-size-heading-xxxs: 13px;
-  --font-size-heading-xxs: 15px;
-  --font-size-heading-xs: 17px;
-  --font-size-heading-s: 19px;
+  --font-size-heading-xxxxs: 12px;
+  --font-size-heading-xxxs: 14px;
+  --font-size-heading-xxs: 16px;
+  --font-size-heading-xs: 18px;
+  --font-size-heading-s: 20px;
   --font-size-heading-m: 22px;
   --font-size-heading-l: 24px;
   --font-size-heading-xl: 28px;
 
-  --font-size-body-xxs: 11px;
-  --font-size-body-xs: 13px;
-  --font-size-body-s: 15px;
-  --font-size-body-m: 17px;
-  --font-size-body-l: 19px;
-  --font-size-body-xl: 28px;
+  --font-size-body-xxxs: 10px;
+  --font-size-body-xxs: 12px;
+  --font-size-body-xs: 14px;
+  --font-size-body-s: 16px;
+  --font-size-body-m: 18px;
+  --font-size-body-l: 20px;
+  --font-size-body-xl: 24px;
 
-  --font-size-label-xxs: 11px;
-  --font-size-label-xs: 13px;
-  --font-size-label-s: 15px;
-  --font-size-label-m: 17px;
-  --font-size-label-l: 19px;
+  --font-size-label-xxxs: 10px;
+  --font-size-label-xxs: 12px;
+  --font-size-label-xs: 14px;
+  --font-size-label-s: 16px;
+  --font-size-label-m: 18px;
+  --font-size-label-l: 20px;
 
   /* Font Weights */
   --font-weight-light: 300;
@@ -498,8 +507,18 @@
   --border-width-variable-medium: 3px;
 
   /* 다크 모드 그림자 */
-  --box-shadow-blur-3: 1px;
-  --box-shadow-blur-4: 2px;
-  --box-shadow-y-3: 2px;
-  --box-shadow-y-4: 3px;
+
+  --box-shadow-y-5: -5px;
+
+  --box-shadow-y-1: 1px;
+  --box-shadow-blur-1: 2px;
+
+  --box-shadow-y-2: 4px;
+  --box-shadow-blur-2: 8px;
+
+  --box-shadow-y-3: 8px;
+  --box-shadow-blur-3: 16px;
+
+  --box-shadow-y-4: 16px;
+  --box-shadow-blur-4: 24px;
 }
