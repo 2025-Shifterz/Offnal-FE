@@ -22,9 +22,7 @@ const AlarmHeaderNoList = ({ headerText }: AlarmHeaderProps) => {
       </TouchableOpacity>
 
       {/* 가운데 텍스트 */}
-      <Text className="font-pretendard text-heading-xs font-semibold leading-[1.2] tracking-letter-spacing-0 text-text-basic">
-        {headerText}
-      </Text>
+      <Text className="text-text-basic heading-xs">{headerText}</Text>
     </View>
   );
 };

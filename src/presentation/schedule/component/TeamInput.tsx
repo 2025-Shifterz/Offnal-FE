@@ -20,7 +20,7 @@ const TeamInput = ({ workGroup, setWorkGroup, isDirect, setIsDirect }: TeamInput
 
   return (
     <View className="flex gap-[9px]">
-      <Text className="text-heading-xxxs font-semibold text-text-subtle">근무조 입력</Text>
+      <Text className="text-text-subtle heading-xxxs">근무조 입력</Text>
       <View className="flex h-[102px] gap-4 rounded-lg bg-white px-[15px] py-[11px]">
         <View className="flex-row gap-[8px]">
           {[1, 2, 3, 4].map(id => (
@@ -51,7 +51,7 @@ const TeamInput = ({ workGroup, setWorkGroup, isDirect, setIsDirect }: TeamInput
               directInputStyle
             )}
           >
-            <Text className={twMerge('text-label-xs', directInputTextStyle)}>직접 입력</Text>
+            <Text className={twMerge('label-xs', directInputTextStyle)}>직접 입력</Text>
           </TouchableOpacity>
           {/* A조 ~~ */}
           {isDirect && (
@@ -62,9 +62,9 @@ const TeamInput = ({ workGroup, setWorkGroup, isDirect, setIsDirect }: TeamInput
                   value={workGroup}
                   placeholder="A조"
                   onChangeText={setWorkGroup}
-                  className="flex-1 text-label-xs placeholder:text-text-disabled"
+                  className="flex-1 label-xs placeholder:text-text-disabled"
                 />
-                <Text className="text-right text-label-xxs text-text-disabled">
+                <Text className="text-right text-text-disabled label-xxs">
                   <Text className="text-text-primary">{workGroup.length}</Text>
                   <Text>/8</Text>
                 </Text>

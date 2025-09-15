@@ -99,7 +99,7 @@ const TopCard = () => {
             paddingHorizontal: 24,
           }}
         >
-          <Text className="font-pretendard text-label-xxs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-disabled-on">
+          <Text className="text-text-disabled-on label-xxs">
             지금은 집중력이 떨어질 수 있어요.{'\n'}
             가벼운 스트레칭이나 물 한 잔 추천드려요.
           </Text>

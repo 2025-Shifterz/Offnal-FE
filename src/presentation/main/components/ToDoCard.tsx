@@ -62,10 +62,8 @@ const Container = ({ todos }: TodoCardProps) => {
 const Nothing = () => {
   return (
     <View className="flex-col items-center justify-center rounded-lg bg-background-gray-subtle1 py-number-9">
-      <Text className="font-pretendard text-body-xxs font-medium text-text-disabled">
-        아직 등록된 할일이 없습니다.
-      </Text>
-      <Text className="font-pretendard text-body-xxs font-medium text-text-disabled">
+      <Text className="text-text-disabled body-xxs">아직 등록된 할일이 없습니다.</Text>
+      <Text className="text-text-disabled body-xxs">
         근무일정에 따른 할 일 리스트를 만들어보세요.
       </Text>
     </View>
@@ -88,9 +86,7 @@ const Item = ({ todo, isFirst, isLast }: TodoItemProps) => {
       ) : (
         <View className="mr-[5px] h-[13px] w-[13px] rounded-[2px] bg-[#cdd1d5]" />
       )}
-      <Text className="font-pretendard text-body-xxs font-normal text-text-subtle">
-        {todo.text}
-      </Text>
+      <Text className="text-text-subtle body-xxs">{todo.text}</Text>
     </View>
   );
 };

@@ -183,9 +183,7 @@ const SelectInputScheduleWithOCRTypeScreen = () => {
   return (
     <View className="flex-1 bg-background-gray-subtle1">
       <View className="flex-1 px-number-8">
-        <Text className="mb-4 mt-[9px] text-start text-heading-m font-semibold">
-          인식할 근무표를 등록해주세요.
-        </Text>
+        <Text className="mb-4 mt-[9px] text-start heading-m">인식할 근무표를 등록해주세요.</Text>
 
         <RegMethod
           Icon={TakePicture}

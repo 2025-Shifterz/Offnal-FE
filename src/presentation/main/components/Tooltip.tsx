@@ -9,37 +9,36 @@ interface TooltipBubbleProps {
 const TooltipBubble = ({ children, style }: TooltipBubbleProps) => {
   return (
     <View style={style} className="absolute z-10">
-      <View className="bg-surface-white rounded-full items-center px-number-6 py-number-3 shadow-md"
-            style={{
-              backgroundColor: '#E0F7FA', // 라이트 블루 (이미지 색상에 맞춰 조정)
-              borderColor: '#B2EBF2', // 테두리 색상
-              borderWidth: 1,
-              borderRadius: 8,
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.1,
-              shadowRadius: 3.84,
-              elevation: 5,
-            }}
+      <View
+        className="items-center rounded-full bg-surface-white px-number-6 py-number-3 shadow-md"
+        style={{
+          backgroundColor: '#E0F7FA', // 라이트 블루 (이미지 색상에 맞춰 조정)
+          borderColor: '#B2EBF2', // 테두리 색상
+          borderWidth: 1,
+          borderRadius: 8,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 3.84,
+          elevation: 5,
+        }}
       >
-        <Text className="text-body-xxs text-text-bolder font-pretendard font-normal">
-          {children}
-        </Text>
+        <Text className="text-text-bolder body-xxs">{children}</Text>
       </View>
       <View
         style={{
           position: 'absolute',
           bottom: -8,
           left: '50%',
-          marginLeft: -8, 
+          marginLeft: -8,
           width: 16,
           height: 16,
-          backgroundColor: '#E0F7FA', 
-          borderColor: '#B2EBF2', 
+          backgroundColor: '#E0F7FA',
+          borderColor: '#B2EBF2',
           borderWidth: 1,
           borderTopColor: 'transparent',
           borderLeftColor: 'transparent',
-          transform: [{ rotate: '45deg' }], 
+          transform: [{ rotate: '45deg' }],
           borderRadius: 2,
         }}
       />

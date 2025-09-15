@@ -13,7 +13,7 @@ const BottomButton = ({ text, onPress }: BottomButtonProps) => {
         className="flex w-full items-center rounded-lg bg-surface-inverse py-[13px]"
         onPress={onPress}
       >
-        <Text className="text-body text-body-m text-text-bolder-inverse">{text}</Text>
+        <Text className="text-text-bolder-inverse body-m">{text}</Text>
       </TouchableOpacity>
     </View>
   );

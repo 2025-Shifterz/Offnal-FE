@@ -4,7 +4,7 @@ const ServiceTermText = () => {
   return (
     <View className="flex-1">
       <ScrollView>
-        <Text className="px-number-8 pb-number-13 pt-number-3 font-pretendard text-label-xxs font-regular leading-[1.2] tracking-letter-spacing-0 text-black">
+        <Text className="px-number-8 pb-number-13 pt-number-3 text-black label-xxs">
           제 1조 (목적) {`\n`}본 약관은 회사가 제공하는 교대 근무자 루틴관리 서비스의 이용과
           관련하여 회사와 회원 간의 권리, 의무 및 책임 사항, 기타 필요한 사항을 규정함을 목적으로
           나타냅니다. {`\n`}

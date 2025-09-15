@@ -10,9 +10,7 @@ type MenuHeaderProps = { headerTitle: string };
 const Header = ({ headerTitle }: MenuHeaderProps) => {
   return (
     <View className="w-full flex-1 justify-start px-number-8 py-number-5">
-      <Text className="font-pretendard text-body-xxs font-medium text-text-subtle">
-        {headerTitle}
-      </Text>
+      <Text className="text-text-subtle body-xxs">{headerTitle}</Text>
     </View>
   );
 };

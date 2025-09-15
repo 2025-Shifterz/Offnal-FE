@@ -55,7 +55,7 @@ const HomeWorkTypeChip: React.FC<HomeWorkTypeChipProps> = ({ dayType, workType }
         <WorkTypeIconComponent />
       </View>
       <View className="flex-col items-start justify-center ps-number-8">
-        <Text className="text-heading-xxxs font-medium text-text-subtle-inverse">{chipTitle}</Text>
+        <Text className="text-text-subtle-inverse heading-xxxs">{chipTitle}</Text>
         <Text className={chipDescriptionClassName}>{workType}</Text>
       </View>
     </View>

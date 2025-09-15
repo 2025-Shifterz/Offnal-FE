@@ -58,7 +58,7 @@ const SelectMonthWithOCRScreen = () => {
               className="flex w-full items-center rounded-lg bg-surface-inverse py-[13px]"
               onPress={handleNext}
             >
-              <Text className="text-body text-body-m text-text-bolder-inverse">다음</Text>
+              <Text className="text-text-bolder-inverse body-m">다음</Text>
             </TouchableOpacity>
           </View>
         </View>

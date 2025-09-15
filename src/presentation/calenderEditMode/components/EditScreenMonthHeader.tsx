@@ -25,7 +25,7 @@ const EditScreenMonthHeader = ({ currentDate, setCurrentDate }: EditScreenMonthH
       <TouchableOpacity className={arrowStyle} onPress={handlePrevMonth}>
         <ArrowLeft />
       </TouchableOpacity>
-      <Text className="text-body-s text-text-basic">{currentDate.format('M월')}</Text>
+      <Text className="text-text-basic body-s">{currentDate.format('M월')}</Text>
       <TouchableOpacity className={arrowStyle} onPress={handleNextMonth}>
         <ArrowRight />
       </TouchableOpacity>

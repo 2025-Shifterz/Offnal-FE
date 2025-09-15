@@ -15,9 +15,7 @@ const TimeTypeInput = ({ text }: TimeTypeInputProps) => {
 
   return (
     <View className="flex-row items-center gap-[13px]">
-      <Text className="px-[7px] py-[5px] text-heading-xxxs font-semibold text-text-subtle">
-        {text}
-      </Text>
+      <Text className="px-[7px] py-[5px] text-text-subtle heading-xxxs">{text}</Text>
       <View className="flex-row items-center gap-[6px]">
         <TimePicker type={type} mode="startTime" />
         <Text>-</Text>

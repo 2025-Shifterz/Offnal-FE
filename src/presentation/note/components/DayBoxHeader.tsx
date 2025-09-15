@@ -30,7 +30,7 @@ const DayBoxHeader = ({ currentDate, setCurrentDate }: DayBoxHeaderProps) => {
       </TouchableOpacity>
       <View className="h-[36px] flex-row items-center justify-center gap-[5px] rounded-radius-max bg-surface-white px-p-4">
         <CalendarIcon />
-        <Text className="text-heading-xxxs font-semibold leading-5 text-text-subtle">
+        <Text className="text-text-subtle heading-xxxs">
           {isToday ? '오늘' : currentDate.format('YYYY년 M월 D일 (dd)')}
         </Text>
       </View>

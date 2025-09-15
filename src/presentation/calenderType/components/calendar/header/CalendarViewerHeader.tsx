@@ -42,7 +42,7 @@ const CalendarViewerHeader = ({
         className="flex-row items-center gap-[4px]"
         onPress={() => setVisible(true)}
       >
-        <Text className="text-heading-xs font-semibold text-text-basic">
+        <Text className="text-text-basic heading-xs">
           {tempYear}년 {tempMonth}월
         </Text>
         <ArrowDown />

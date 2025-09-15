@@ -16,12 +16,12 @@ const TypeSelect = ({ onPressSelect }: TypeSelectProps) => {
     <>
       <CustomDashedLine />
       <TouchableOpacity className="flex-col gap-[9px] rounded-b-radius-m2 bg-surface-white p-[11px]">
-        <Text className="text-body-xs font-semibold text-text-subtle">근무 형태 입력</Text>
+        <Text className="text-text-subtle body-xs">근무 형태 입력</Text>
         <View className="flex gap-[3px]">
           {teams.map(team => (
             <View key={team} className="flex-row items-center gap-[5px]">
               <View className="flex w-[30px] items-center">
-                <Text className="text-label-xxs text-text-subtle">{team}</Text>
+                <Text className="text-text-subtle label-xxs">{team}</Text>
               </View>
 
               <View className="flex-row gap-[6px]">

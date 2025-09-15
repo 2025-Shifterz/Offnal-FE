@@ -17,7 +17,7 @@ const WithTooltipIcon: React.FC<SectionWithTooltipIconProps> = ({ title, onPress
   return (
     <View className="flex-1">
       <View className="flex-row items-center justify-start gap-g-2">
-        <Text className="font-pretendard text-heading-xxs font-semibold text-black">{title}</Text>
+        <Text className="text-black heading-xxs">{title}</Text>
         <TouchableOpacity onPress={() => onPressIcon()}>
           <TooltipIcon />
         </TouchableOpacity>
@@ -34,13 +34,11 @@ const WithAddableBtn: React.FC<SectionWithAddableBtnProps> = ({
   return (
     <View className="flex-1">
       <View className="flex-row items-center justify-between gap-g-2">
-        <Text className="font-pretendard text-heading-xxs font-semibold text-black">{title}</Text>
+        <Text className="text-black heading-xxs">{title}</Text>
 
         <TouchableOpacity onPress={onPressIcon}>
           <View className="flex-row items-center gap-g-2">
-            <Text className="font-pretendard text-heading-xxxxs font-medium text-text-subtle-inverse">
-              {btnContent}
-            </Text>
+            <Text className="text-text-subtle-inverse heading-xxxxs">{btnContent}</Text>
             <AddIcon />
           </View>
         </TouchableOpacity>

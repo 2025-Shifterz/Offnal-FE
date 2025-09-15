@@ -22,19 +22,13 @@ const Walk = () => {
     <View className="flex-1 items-start justify-center rounded-lg bg-surface-white px-number-6 py-number-8">
       <View className="mb-number-3 flex-row items-center justify-center">
         <SneakersIcon />
-        <Text className="ps-number-3 font-pretendard text-heading-xxxs font-semibold text-text-subtle">
-          걸음 수
-        </Text>
+        <Text className="ps-number-3 text-text-subtle heading-xxxs">걸음 수</Text>
       </View>
 
-      <Text className="font-pretendard text-heading-s font-semibold text-text-bolder">0 걸음</Text>
+      <Text className="text-text-bolder heading-s">0 걸음</Text>
       <View className="mb-number-8 flex-row items-center justify-center">
-        <Text className="font-pretendard text-label-xxs font-normal text-text-subtle">
-          어제 보다
-        </Text>
-        <Text className="ms-number-2 font-pretendard text-label-xxs font-normal text-text-information">
-          ▲ 0
-        </Text>
+        <Text className="text-text-subtle label-xxs">어제 보다</Text>
+        <Text className="ms-number-2 text-text-information label-xxs">▲ 0</Text>
       </View>
       <View className="h-number-16 max-w-[88px] flex-row items-end justify-around">
         {weeklySteps.map((steps, index) => (

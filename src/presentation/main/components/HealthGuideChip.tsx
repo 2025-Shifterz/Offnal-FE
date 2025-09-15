@@ -44,16 +44,11 @@ const HealthGuideChip: React.FC<HealthGuideChipProps> = ({
       {/* 상단: 아이콘과 제목 */}
       <View className="flex-row items-center justify-start pb-number-4">
         <HealthGuideIconComponent />
-        <Text className="pl-number-3 font-pretendard text-heading-xxxxs font-semibold leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-          {HealthGuideChipTitle}
-        </Text>
+        <Text className="pl-number-3 text-text-subtle heading-xxxxs">{HealthGuideChipTitle}</Text>
       </View>
 
       {/* 중간 */}
-      <Text
-        className="mb-number-5 font-pretendard text-label-xxs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-disabled"
-        numberOfLines={3}
-      >
+      <Text className="mb-number-5 text-text-disabled label-xxs" numberOfLines={3}>
         {guideContent}
       </Text>
 

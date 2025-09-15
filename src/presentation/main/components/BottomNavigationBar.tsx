@@ -14,7 +14,6 @@ import MyInfoBkIcon from '../../../assets/icons/ic_myinfo_24_bk.svg';
 export const Tab = createBottomTabNavigator();
 
 const BottomNavigationBar = ({ children }: { children: ReactNode }) => {
-
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -58,11 +57,7 @@ const BottomNavigationBar = ({ children }: { children: ReactNode }) => {
               break;
           }
 
-          return (
-            <Text className={`font-pretendard text-heading-xxxxs ${labelColor} font-medium`}>
-              {label}
-            </Text>
-          );
+          return <Text className={`heading-xxxxs ${labelColor}`}>{label}</Text>;
         },
         tabBarStyle: {
           backgroundColor: '#FFFFFF',

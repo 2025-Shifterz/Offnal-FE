@@ -11,7 +11,7 @@ const TeamInput = ({ setWorkGroup }: TeamInputProps) => {
 
   return (
     <View className="flex gap-[9px]">
-      <Text className="text-heading-xxxs font-semibold text-text-subtle">근무조 입력</Text>
+      <Text className="text-text-subtle heading-xxxs">근무조 입력</Text>
       <View className="flex h-[54px] gap-4 rounded-lg bg-white px-[15px] py-[11px]">
         <View className="flex-row gap-[8px]">
           {[1, 2, 3, 4].map(id => (

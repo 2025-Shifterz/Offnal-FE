@@ -54,17 +54,9 @@ export const MonthPicker = ({ onDateChange }: MonthPickerProps) => {
         key={item.id}
         onPress={() => handleMonthSelect(item.id)}
       >
-        <Text
-          className={
-            isSelected
-              ? 'font-pretendard text-label-xs font-medium text-text-primary'
-              : 'font-pretendard text-label-xs font-medium text-text-basic'
-          }
-        >
+        <Text className={isSelected ? 'text-text-primary label-xs' : 'text-text-basic label-xs'}>
           {item.name}
         </Text>
-
-        {/* style={[styles.monthText, isSelected && styles.selectedMonthText]}>{item.name}</Text> */}
       </TouchableOpacity>
     );
   };
@@ -75,9 +67,7 @@ export const MonthPicker = ({ onDateChange }: MonthPickerProps) => {
         <TouchableOpacity onPress={handlePrevYear}>
           <ChervonLeft />
         </TouchableOpacity>
-        <Text className="font-pretendard text-body-m font-bold text-text-subtle">
-          {currentYear}년
-        </Text>
+        <Text className="text-text-subtle body-m">{currentYear}년</Text>
         <TouchableOpacity onPress={handleNextYear}>
           <ChervonRight />
         </TouchableOpacity>

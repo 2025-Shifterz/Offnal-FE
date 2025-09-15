@@ -17,9 +17,7 @@ const CalendarEditorHeader = ({ currentDate, onPrevMonth, onNextMonth }: Calenda
         <TouchableOpacity onPress={onPrevMonth}>
           <ArrowLeft />
         </TouchableOpacity>
-        <Text className="text-heading-xs font-semibold text-text-basic">
-          {currentDate.format('YYYY년 MM월')}
-        </Text>
+        <Text className="text-text-basic heading-xs">{currentDate.format('YYYY년 MM월')}</Text>
         <TouchableOpacity onPress={onNextMonth}>
           <ArrowRight />
         </TouchableOpacity>

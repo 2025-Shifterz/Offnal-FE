@@ -82,7 +82,7 @@ const TCalendarBase = ({
                   } ${isSelected ? 'bg-border-primary' : ''}`}
                 >
                   <Text
-                    className={`text-heading-xxxs`}
+                    className={`heading-xxxs`}
                     style={[{ color: textColor }, isSelected && { color: 'white' }]}
                   >
                     {dayCounter}
@@ -146,7 +146,7 @@ const TCalendarBase = ({
         <View className="ml-[34px] h-[30px] flex-1 flex-row items-center justify-between">
           {daysOfWeek.map((day, index) => (
             <Text
-              className="text-body-xxs text-text-disabled"
+              className="text-text-disabled body-xxs"
               key={index}
               style={[
                 styles.weekDayText,
