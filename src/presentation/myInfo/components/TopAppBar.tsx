@@ -1,8 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../navigation/type';
-
 import ArrowBack from '../../../assets/icons/arrow_left.svg';
 
 type TopBarProps = {
@@ -23,9 +20,7 @@ const TopAppBar = ({ title, enableNavigationBtn }: TopBarProps) => {
           <ArrowBack width={24} height={24} />
         </TouchableOpacity>
       )}
-      <Text className="font-pretendard text-heading-xs font-semibold leading-[1.2] tracking-letter-spacing-0 text-text-basic">
-        {title}
-      </Text>
+      <Text className="text-text-basic heading-xs">{title}</Text>
     </View>
   );
 };

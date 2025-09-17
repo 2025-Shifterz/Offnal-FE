@@ -30,13 +30,13 @@ const Login = () => {
               className="mt-number-18 flex-1 items-center"
               style={{ width: SCREEN_WIDTH }}
             >
-              <Text className="mb-number-8 mt-number-18 h-fit w-fit gap-number-6 rounded-radius-m1 border-border-width-static-regular border-border-gray-light bg-surface-white p-p-3 text-center font-pretendard text-body-xxs font-medium leading-[1.2] text-text-subtle">
+              <Text className="mb-number-8 mt-number-18 h-fit w-fit gap-number-6 rounded-radius-m1 border-border-width-static-regular border-border-gray-light bg-surface-white p-p-3 text-center text-text-subtle body-xxs">
                 {onboarding.keyword}
               </Text>
-              <Text className="mb-number-4 h-fit w-fit text-center font-pretendard text-heading-s font-semibold leading-[1.2] tracking-letter-spacing-0">
+              <Text className="mb-number-4 h-fit w-fit text-center heading-s">
                 {onboarding.title}
               </Text>
-              <Text className="mb-number-16 h-fit w-fit text-center font-pretendard text-body-xs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+              <Text className="mb-number-16 h-fit w-fit text-center text-text-subtle body-xs">
                 {onboarding.subtitle}
               </Text>
 
@@ -51,14 +51,10 @@ const Login = () => {
       <View className="flex items-center justify-center">
         <KaKaoLoginBtn />
         <TouchableOpacity onPress={() => navigation.navigate('ServiceTerm')}>
-          <Text className="mb-number-3 font-pretendard text-label-xs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-            이용약관 확인하기
-          </Text>
+          <Text className="mb-number-3 text-text-subtle label-xs">이용약관 확인하기</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy')}>
-          <Text className="mb-number-21 font-pretendard text-label-xs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-            개인정보처리방침 확인하기
-          </Text>
+          <Text className="mb-number-21 text-text-subtle label-xs">개인정보처리방침 확인하기</Text>
         </TouchableOpacity>
       </View>
     </View>

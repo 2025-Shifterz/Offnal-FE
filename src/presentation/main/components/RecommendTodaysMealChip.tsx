@@ -3,8 +3,6 @@ import { View, Text } from 'react-native';
 import EggIcon from '../../../assets/icons/ic_egg_28.svg';
 import LunchBoxIcon from '../../../assets/icons/ic_lunch_box_28.svg';
 import MoonIcon from '../../../assets/icons/ic_moon_28.svg';
-import PhoIcon from '../../../assets/icons/ic_pho_28.svg';
-import RiceIcon from '../../../assets/icons/ic_rice_28.svg';
 import SweetPotatoIcon from '../../../assets/icons/ic_sweet_potato_28.svg';
 
 interface RecommendTodaysMealProps {
@@ -47,30 +45,22 @@ const RecommendTodaysMealChip: React.FC<RecommendTodaysMealProps> = ({
         </View>
         <View className="flex-col items-start justify-center pl-number-5">
           {label ? (
-            <Text className="font-pretendard text-body-xxs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-              {label}
-            </Text>
+            <Text className="text-text-subtle body-xxs">{label}</Text>
           ) : (
-            <Text className="font-pretendard text-body-xxs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-              식사 시간
-            </Text>
+            <Text className="text-text-subtle body-xxs">식사 시간</Text>
           )}
-          <Text className="font-pretendard text-[8px] font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-            {time} 경
-          </Text>
+          <Text className="text-[8px] leading-[1.2] text-text-subtle">{time} 경</Text>
         </View>
       </View>
       <View className="flex-col items-start justify-center">
         {description ? (
-          <Text className="font-pretendard text-[8px] font-medium leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+          <Text className="text-[8px] font-medium leading-[1.2] text-text-subtle">
             {description}
           </Text>
         ) : (
-          <Text className="font-pretendard text-[8px] font-medium leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-            설명
-          </Text>
+          <Text className="text-[8px] font-medium leading-[1.2] text-text-subtle">설명</Text>
         )}
-        <Text className="pt-[2px] font-pretendard text-heading-xxxs font-semibold leading-[1.2] tracking-letter-spacing-0 text-text-basic">
+        <Text className="pt-[2px] text-text-basic heading-xxxs">
           {Array.isArray(items) && items.length > 0 ? items.join(', ') : '추천 식단 없음'}
         </Text>
       </View>

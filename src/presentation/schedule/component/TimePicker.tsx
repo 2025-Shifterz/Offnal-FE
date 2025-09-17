@@ -6,7 +6,7 @@ import ArrowUp from '../../../assets/icons/arrow-up.svg';
 import ArrowDown from '../../../assets/icons/arrow-down.svg';
 import { useWorkTime } from '../../../context/WorkTimeContext';
 
-const pickerTextStyle = 'text-text-basic text-body-s font-[500px]';
+const pickerTextStyle = 'text-text-basic body-s font-[500px]';
 
 interface TimePickerProps {
   type: 'D' | 'E' | 'N';
@@ -51,7 +51,7 @@ const TimePicker = ({ type, mode }: TimePickerProps) => {
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   const confirmedStyle = isConfirmed ? 'text-text-subtle' : 'text-text-disabled';
-  const sharedPlaceholderStyle = `rounded-radius-s w-[84px] border border-background-gray-subtle1 p-[8px] text-label-xs ${confirmedStyle}`;
+  const sharedPlaceholderStyle = `rounded-radius-s w-[84px] border border-background-gray-subtle1 p-[8px] label-xs ${confirmedStyle}`;
 
   // 초기값 설정
   // workTimes의 (08:00) -> period, hour, minute 로 바꾸기

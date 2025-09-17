@@ -13,10 +13,10 @@ const ScheduleRegRegisterMethod = () => {
   return (
     <View className="h-full w-full flex-1 items-center bg-background-gray-subtle1 px-p-6">
       <View>
-        <Text className="mt-[57px] font-pretendard text-heading-m font-semibold leading-[1.4] tracking-letter-spacing-0 text-text-bolder">
+        <Text className="mt-[57px] text-text-bolder heading-m">
           오프날에 오신걸 환영해요!{`\n`}근무표를 어떤 방법으로 입력할까요?
         </Text>
-        <Text className="mb-number-9 pt-number-7 font-pretendard text-label-xs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
+        <Text className="mb-number-9 pt-number-7 text-text-subtle label-xs">
           회사 근무표 검색 기능은 추후 추가될 예정이에요.
         </Text>
 

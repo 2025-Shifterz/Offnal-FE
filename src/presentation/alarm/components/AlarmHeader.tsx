@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import ArrowBack from '../../../assets/icons/arrow_left.svg';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../navigation/type';
+import { RootStackParamList } from '../../../navigation/types';
 
 type AlarmHeaderProps = {
   headerText: string;
@@ -22,9 +22,7 @@ const AlarmHeaderNoList = ({ headerText }: AlarmHeaderProps) => {
       </TouchableOpacity>
 
       {/* 가운데 텍스트 */}
-      <Text className="font-pretendard text-heading-xs font-semibold leading-[1.2] tracking-letter-spacing-0 text-text-basic">
-        {headerText}
-      </Text>
+      <Text className="text-text-basic heading-xs">{headerText}</Text>
     </View>
   );
 };

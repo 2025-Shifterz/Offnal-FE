@@ -1,8 +1,7 @@
-import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import BottomSheetWrapper from '../../common/component/BottomSheetWrapper';
-import { TimeFrameChildren } from '../../calenderType/components/TimeFrame';
 import SelectShiftBox from './SelectShiftBox';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
@@ -28,7 +27,18 @@ interface EditBottomSheetProps {
 }
 
 const EditBottomSheet = forwardRef<BottomSheet, EditBottomSheetProps>(
-  ({ selectedDate, handleTypeSelect, handleCancel, handleSave, selectedBoxId, setSelectedBoxId, workTimes }, ref) => {
+  (
+    {
+      selectedDate,
+      handleTypeSelect,
+      handleCancel,
+      handleSave,
+      selectedBoxId,
+      setSelectedBoxId,
+      workTimes,
+    },
+    ref
+  ) => {
     // 부모에서 받은 ref를 useImperativeHandle()로 가공해서, 내부의 BottomSheet를 대리로 조작하게 한다.
     // 이 ref를 BottomSheetWrapper에게 전달.
     const internalRef = useRef<BottomSheet>(null);
@@ -43,10 +53,14 @@ const EditBottomSheet = forwardRef<BottomSheet, EditBottomSheetProps>(
 
     const shiftTypeToKey = (type: ShiftType): 'D' | 'E' | 'N' => {
       switch (type) {
-        case '주간': return 'D';
-        case '오후': return 'E';
-        case '야간': return 'N';
-        default: return 'D';
+        case '주간':
+          return 'D';
+        case '오후':
+          return 'E';
+        case '야간':
+          return 'N';
+        default:
+          return 'D';
       }
     };
 
@@ -56,15 +70,13 @@ const EditBottomSheet = forwardRef<BottomSheet, EditBottomSheetProps>(
         <BottomSheetWrapper ref={internalRef}>
           <View className="mt-[5px] gap-[20px] px-p-6">
             <View className="gap-[10px]">
-              <Text className="text-heading-xs font-semibold text-text-basic">근무형태 입력</Text>
+              <Text className="text-text-basic heading-xs">근무형태 입력</Text>
               <View className="rounded-radius-m1 border-[0.5px] border-[#2ECADC1A] bg-surface-primary-light px-p-6 py-p-4">
-                <Text className="text-label-s text-text-primary">
-                  {`선택된 날짜: ${formattedDate}`}
-                </Text>
+                <Text className="text-text-primary label-s">{`선택된 날짜: ${formattedDate}`}</Text>
               </View>
             </View>
             <View className="gap-[11px]">
-              <Text className="text-heading-xxs font-semibold text-text-subtle">간격</Text>
+              <Text className="text-text-subtle heading-xxs">간격</Text>
               <View className="gap-[7px]">
                 {shiftTypes.map(({ id, text }) => {
                   const key = shiftTypeToKey(text);
@@ -89,13 +101,13 @@ const EditBottomSheet = forwardRef<BottomSheet, EditBottomSheetProps>(
                 onPress={handleCancel}
                 className="h-full flex-[3] items-center justify-center rounded-radius-m2 bg-surface-gray-subtle1"
               >
-                <Text className="text-body-m font-medium text-text-basic">취소</Text>
+                <Text className="text-text-basic body-m">취소</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={handleSave} // 저장 버튼에 handleSave 연결
                 className="h-full flex-[7] items-center justify-center rounded-radius-m2 bg-surface-inverse"
               >
-                <Text className="text-body-m font-medium text-text-bolder-inverse">저장</Text>
+                <Text className="text-text-bolder-inverse body-m">저장</Text>
               </TouchableOpacity>
             </View>
           </View>

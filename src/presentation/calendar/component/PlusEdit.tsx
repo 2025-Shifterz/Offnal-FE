@@ -15,7 +15,7 @@ type TextButtonProps = {
 const TextButton = ({ text }: TextButtonProps) => {
   return (
     <View className="rounded-radius-max bg-surface-white px-[9px] py-[6px]">
-      <Text className="text-heading-xxxxs font-medium">{text}</Text>
+      <Text className="heading-xxxxs">{text}</Text>
     </View>
   );
 };

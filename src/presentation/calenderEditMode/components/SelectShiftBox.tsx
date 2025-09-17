@@ -36,12 +36,10 @@ const SelectShiftBox = ({
       )}
     >
       <View className="gap-[3px]">
-        <Text
-          className={twMerge('text-heading-xxxs font-semibold text-text-basic', selectedTextStyle)}
-        >
+        <Text className={twMerge('text-text-basic heading-xxxs', selectedTextStyle)}>
           {typeText}
         </Text>
-        <Text className={twMerge('text-label-xs text-text-disabled', selectedTextStyle)}>
+        <Text className={twMerge('text-text-disabled label-xs', selectedTextStyle)}>
           {startTime ?? '--:--'}~{endTime ?? '--:--'}
         </Text>
       </View>

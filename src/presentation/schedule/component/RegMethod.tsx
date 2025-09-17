@@ -18,12 +18,8 @@ const RegMethod = ({ Icon, title, subtitle, onPress }: RegMethodProps) => {
       <Icon width={32} height={32} className="mr-number-7" />
 
       <View className="flex-col">
-        <Text className="mb-number-4 font-pretendard text-heading-xxs font-semibold leading-[1.2] tracking-letter-spacing-0 text-text-basic">
-          {title}
-        </Text>
-        <Text className="font-pretendard text-label-xxs font-regular leading-[1.2] tracking-letter-spacing-0 text-text-subtle">
-          {subtitle}
-        </Text>
+        <Text className="mb-number-4 text-text-basic heading-xxs">{title}</Text>
+        <Text className="text-text-subtle label-xxs">{subtitle}</Text>
       </View>
     </TouchableOpacity>
   );

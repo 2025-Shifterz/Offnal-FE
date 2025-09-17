@@ -84,7 +84,7 @@ const CalendarBase = ({
               } `}
             >
               <Text
-                className={`text-heading-xxxs text-text-danger`}
+                className={`text-text-danger heading-xxxs`}
                 style={[{ color: textColor }, isSelected && { color: 'white' }]}
               >
                 {i}
@@ -121,7 +121,7 @@ const CalendarBase = ({
       <View className="mt-2 h-[30px] flex-row items-center justify-between">
         {daysOfWeek.map((day, index) => (
           <Text
-            className="text-body-xxs text-text-disabled"
+            className="text-text-disabled body-xxs"
             key={index}
             style={[
               styles.weekDayText,

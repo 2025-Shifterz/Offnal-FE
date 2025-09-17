@@ -30,11 +30,16 @@ const CalendarEditScreen = () => {
 
   const shiftTypeToId = (type: ShiftType | null): number => {
     switch (type) {
-      case '주간': return 1;
-      case '오후': return 2;
-      case '야간': return 3;
-      case '휴일': return 4;
-      default: return 1; // 기본값 '주간'
+      case '주간':
+        return 1;
+      case '오후':
+        return 2;
+      case '야간':
+        return 3;
+      case '휴일':
+        return 4;
+      default:
+        return 1; // 기본값 '주간'
     }
   };
 
@@ -56,7 +61,7 @@ const CalendarEditScreen = () => {
   const openBottomSheet = (date: dayjs.Dayjs) => {
     const key = date.format('YYYY-MM-DD');
     const currentShift = calendarData.get(key) ?? null;
-    
+
     setSelectedDate(date);
     setBackupType(currentShift);
     setSelectedBoxId(shiftTypeToId(currentShift)); // ID 설정
@@ -108,14 +113,10 @@ const CalendarEditScreen = () => {
         {/* 헤더 */}
         <View className="w-full gap-[5px] bg-surface-information-subtle px-p-6 py-[14px]">
           <View className="flex-row justify-between">
-            <Text className="text-heading-xs font-semibold text-text-information">
-              근무표 수정 모드
-            </Text>
+            <Text className="text-text-information heading-xs">근무표 수정 모드</Text>
             <EditScreenHeader currentDate={currentDate} setCurrentDate={setCurrentDate} />
           </View>
-          <Text className="text-body-xs font-medium text-text-subtle">
-            날짜를 탭하여 근무 형태를 변경하세요.
-          </Text>
+          <Text className="text-text-subtle body-xs">날짜를 탭하여 근무 형태를 변경하세요.</Text>
         </View>
         {/* 캘린더 */}
         <View className="flex-1 bg-surface-gray-subtle1 px-[16px] pt-[10px]">

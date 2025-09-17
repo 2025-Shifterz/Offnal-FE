@@ -98,14 +98,6 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
             }}
           />
         )}
-
-        {/* <View className="items-center justify-center bg-surface-white">
-          <Button
-            title="일정 등록 시작"
-            onPress={() => navigation.navigate('OnboardingSchedules')}
-          />
-          <Button title="로그인 시작" onPress={() => navigation.navigate('LoginScreens')} />
-        </View> */}
       </ScrollView>
       {/* { + } 버튼 동작 화면 */}
       <TouchableOpacity
@@ -120,9 +112,7 @@ const HasCalendar = ({ setShowPlus }: HasCalendarProps) => {
       <BottomSheetWrapper ref={sheetRef} handleStyle={{ backgroundColor: '#F4F5F6' }}>
         <View className="flex-1 gap-[11px] bg-surface-gray-subtle1 px-[16px] pt-[12px]">
           <View className="flex-row items-center gap-[8px]">
-            <Text className="w-[42px] text-heading-xxs font-semibold text-text-bolder">
-              {formattedDate}
-            </Text>
+            <Text className="w-[42px] text-text-bolder heading-xxs">{formattedDate}</Text>
             {shiftTypeForSelectedDate && <TimeFrame text={shiftTypeForSelectedDate} />}
           </View>
           <ScrollView>

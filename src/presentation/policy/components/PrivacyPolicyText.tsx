@@ -4,7 +4,7 @@ const PrivacyPolicyText = () => {
   return (
     <View className="flex-1">
       <ScrollView>
-        <Text className="px-number-8 pb-number-13 pt-number-3 font-pretendard text-label-xxs font-regular leading-[1.2] tracking-letter-spacing-0 text-black">
+        <Text className="px-number-8 pb-number-13 pt-number-3 text-black label-xxs">
           서비스 개인정보처리방침 회사는 정보통신망 이용촉진 및 정보보호 등에 관한 법률,
           개인정보보호법 등 관련 법령상의 개인정보보호 규정을 준수하며, 관련 법령에 의거한
           개인정보처리방침을 정하여 이용자 권익 보호에 최선을 다하고 있습니다. 회사는

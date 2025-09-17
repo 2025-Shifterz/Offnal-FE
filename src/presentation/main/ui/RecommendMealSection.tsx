@@ -23,7 +23,7 @@ const RecommnedMealSection = ({ meals }: RecommendMealSectionProps) => {
       {isEmpty ? (
         <View className="mt-number-7 h-[84px] w-full flex-1 flex-col items-center justify-center rounded-radius-m1 bg-surface-white p-number-6">
           <TableWare width={36.87} height={27.94} />
-          <Text className="items-center pt-[6.45px] font-pretendard text-body-xxs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-disabled">
+          <Text className="items-center pt-[6.45px] text-text-disabled body-xxs">
             아직 근무표가 등록되지 않아{'\n'}식사를 추천해드릴 수 없어요.
           </Text>
         </View>

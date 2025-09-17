@@ -41,7 +41,7 @@ const SplashScreen = () => {
           style={{ width: 250, height: 250 }}
           onAnimationFinish={handleAnimationFinish}
         />
-        <Text className="mt-number-2 text-center font-pretendard text-heading-xs font-semibold leading-[1.2] tracking-letter-spacing-0 text-white">
+        <Text className="mt-number-2 text-center text-white heading-xs">
           더 나은 오프날을 위한{'\n'}종합 교대근무 루틴 매니저
         </Text>
       </View>

@@ -36,8 +36,8 @@ const SelectScheduleBox = ({ id, title, subTitle, isSelected, onPress }: SelectB
       <View className="flex items-center gap-[18px]">
         {id === 1 ? <EntirePerson /> : <OnePerson />}
         <View className="flex items-center gap-[10px]">
-          <Text className="text-heading-xxs font-semibold text-text-basic">{title}</Text>
-          <Text className="text-center text-label-xxs text-text-subtle">{subTitle}</Text>
+          <Text className="text-text-basic heading-xxs">{title}</Text>
+          <Text className="text-center text-text-subtle label-xxs">{subTitle}</Text>
         </View>
       </View>
     </TouchableOpacity>

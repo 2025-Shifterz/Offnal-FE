@@ -47,13 +47,13 @@ const HealthGuideSection = ({ health }: HealthGuideSectionProps) => {
           <>
             <View className="h-[102px] w-full flex-1 items-center justify-center rounded-radius-m1 bg-surface-white p-number-6">
               <HourGlass width={26} height={36.9258} className="pb-[1.75px] pt-[1.31px]" />
-              <Text className="pt-number-6 font-pretendard text-body-xxs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-disabled">
+              <Text className="pt-number-6 text-text-disabled body-xxs">
                 아직 근무표가 등록되지 않아{'\n'}공복 시간 추천이 불가해요.
               </Text>
             </View>
             <View className="h-[102px] w-full flex-1 items-center justify-center rounded-radius-m1 bg-surface-white p-number-6">
               <Bed width={35.0006} height={36.5409} className="pb-[1.75px] pt-[1.31px]" />
-              <Text className="pt-number-6 font-pretendard text-body-xxs font-medium leading-[1.2] tracking-letter-spacing-0 text-text-disabled">
+              <Text className="pt-number-6 text-text-disabled body-xxs">
                 아직 근무표가 등록되지 않아{'\n'}수면 시간 추천이 불가해요.
               </Text>
             </View>

@@ -23,7 +23,7 @@ const TeamItem = ({ id, onPress, isSelected, text }: TeamProps) => {
         divSelectedStyle
       )}
     >
-      <Text className={twMerge('text-label-xs text-text-disabled', textSelectedStyle)}>{text}</Text>
+      <Text className={twMerge('text-text-disabled label-xs', textSelectedStyle)}>{text}</Text>
     </TouchableOpacity>
   );
 };

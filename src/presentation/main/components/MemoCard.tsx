@@ -60,12 +60,8 @@ const Container = ({ memos }: MemoCardProps) => {
 const Nothing = () => {
   return (
     <View className="flex-col items-center justify-center rounded-lg bg-background-gray-subtle1 py-number-9">
-      <Text className="font-pretendard text-body-xxs font-medium text-text-disabled">
-        아직 등록된 메모가 없습니다.
-      </Text>
-      <Text className="font-pretendard text-body-xxs font-medium text-text-disabled">
-        메모를 등록해주세요.
-      </Text>
+      <Text className="text-text-disabled body-xxs">아직 등록된 메모가 없습니다.</Text>
+      <Text className="text-text-disabled body-xxs">메모를 등록해주세요.</Text>
     </View>
   );
 };
@@ -79,9 +75,7 @@ const Item = ({ memo, isFirst, isLast }: MemoItemProps) => {
     <View
       className={`bg-background-gray-subtle1 px-number-6 py-number-4 ${itemBorderClass} ${!isLast ? 'mb-number-1' : ''}`}
     >
-      <Text className="font-pretendard text-body-xxs font-normal text-text-subtle">
-        {memo.text}
-      </Text>
+      <Text className="text-text-subtle body-xxs">{memo.text}</Text>
     </View>
   );
 };
