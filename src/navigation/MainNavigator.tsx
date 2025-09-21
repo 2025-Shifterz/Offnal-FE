@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CustomBackButton from '../presentation/common/component/CustomBackButton';
+import CustomBackButton from '../shared/styles/component/CustomBackButton';
 import MainScreen from '../presentation/main/screen/MainScreen';
 import TodoScreen from '../presentation/note/screen/TodoScreen';
 import MemoScreen from '../presentation/note/screen/MemoScreen';

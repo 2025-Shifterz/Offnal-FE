@@ -1,7 +1,7 @@
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { UserRepository } from '../../domain/repositories/UserRepository';
 import { UserProfile } from '../model/UserProfile';
-import { homeService } from '../../di/Dependencies';
+import { homeService } from '../../infrastructure/di/Dependencies';
 
 export class UserRepositoryImpl implements UserRepository {
   async isUserScheduleRegistered(): Promise<boolean> {

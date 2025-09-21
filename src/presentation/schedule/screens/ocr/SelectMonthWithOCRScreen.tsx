@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MonthPicker } from '../../component/MonthPicker';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { onboardingNavigation, OnboardingStackParamList } from '../../../../navigation/types';
-import TitleMessage from '../../../common/component/TitleMessage';
+import TitleMessage from '../../../../shared/styles/component/TitleMessage';
 
 type ScheduleTypeRouteProp = RouteProp<OnboardingStackParamList, 'SelectMonthWithOCR'>;
 

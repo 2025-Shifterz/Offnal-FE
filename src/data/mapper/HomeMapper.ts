@@ -3,7 +3,7 @@ import {
   Meal as ApiMeal,
   Health as ApiHealth,
   TodayRoutine,
-} from '../../remote/response/homeResponse';
+} from '../../infrastructure/remote/response/homeResponse';
 
 // 컴포넌트가 기대하는 타입들 - 백엔드 응답과 동일
 export interface Meal {

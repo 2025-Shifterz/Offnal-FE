@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
-import BottomSheetWrapper from '../../common/component/BottomSheetWrapper';
+import BottomSheetWrapper from '../../../shared/styles/component/BottomSheetWrapper';
 import SelectShiftBox from './SelectShiftBox';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';

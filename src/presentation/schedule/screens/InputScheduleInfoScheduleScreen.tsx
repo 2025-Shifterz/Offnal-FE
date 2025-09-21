@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Alert, SafeAreaView, View } from 'react-native';
 import TimeInput from '../component/TimeInput';
 import TeamInput from '../component/TeamInput';
-import BottomButton from '../../common/component/BottomButton';
+import BottomButton from '../../../shared/styles/component/BottomButton';
 import ScheduleNameInput from '../component/ScheduleNameInput';
-import TitleMessage from '../../common/component/TitleMessage';
+import TitleMessage from '../../../shared/styles/component/TitleMessage';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { onboardingNavigation, OnboardingStackParamList } from '../../../navigation/types';
-import { WorkTimeContext } from '../../../context/WorkTimeContext';
+import { WorkTimeContext } from '../../../shared/context/WorkTimeContext';
 
 type ScheduleInfoInputRouteProp = RouteProp<OnboardingStackParamList, 'ScheduleInfoInput'>;
 

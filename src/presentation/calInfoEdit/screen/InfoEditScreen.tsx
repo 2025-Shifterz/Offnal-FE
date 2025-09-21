@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import BottomButton from '../../common/component/BottomButton';
+import BottomButton from '../../../shared/styles/component/BottomButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { WorkTimeContext } from '../../../context/WorkTimeContext';
+import { WorkTimeContext } from '../../../shared/context/WorkTimeContext';
 import { View } from 'react-native';
 import TeamInput from '../components/TeamInput';
 import TimeInput from '../../schedule/component/TimeInput';

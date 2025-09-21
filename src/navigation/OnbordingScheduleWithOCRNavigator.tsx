@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CustomBackButton from '../presentation/common/component/CustomBackButton';
+import CustomBackButton from '../shared/styles/component/CustomBackButton';
 
 import CompleteCreateScheduleScreen from '../presentation/schedule/screens/CreateCompleteScheduleScreen';
-import StepBar from '../presentation/common/component/StepBar';
+import StepBar from '../shared/styles/component/StepBar';
 
 import SelectMonthWithOCRScreen from '../presentation/schedule/screens/ocr/SelectMonthWithOCRScreen';
 import SelectInputScheduleWithOCRTypeScreen from '../presentation/schedule/screens/ocr/SelectInputScheduleWithOCRTypeScreen';

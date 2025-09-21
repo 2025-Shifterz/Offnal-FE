@@ -4,7 +4,7 @@ import NoCalendar from '../component/NoCalendar';
 import HasCalendar from '../component/HasCalendar';
 import { View } from 'react-native';
 import PlusEdit from '../component/PlusEdit';
-import { userRepository } from '../../../di/Dependencies';
+import { userRepository } from '../../../infrastructure/di/Dependencies';
 
 const CalendarScreen = () => {
   const [noCalendar, setNoCalendar] = useState(false); // 있다고 가정

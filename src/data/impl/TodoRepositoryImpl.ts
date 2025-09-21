@@ -6,7 +6,7 @@ import { Dayjs } from 'dayjs';
 import { Todo, TodoType } from '../../domain/entities/Todo';
 import { TodoRepository } from '../../domain/repositories/TodoRepository';
 
-import { TodoDao } from '../../local/dao/TodoDao';
+import { TodoDao } from '../../infrastructure/local/dao/TodoDao';
 
 export class TodoRepositoryImpl implements TodoRepository {
   constructor(private todoDao: TodoDao) {}

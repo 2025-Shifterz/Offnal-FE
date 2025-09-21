@@ -12,10 +12,8 @@ import HealthCardSection from '../ui/HealthCardSection';
 import TopCard from '../components/TopCard';
 import dayjs from 'dayjs';
 
-import { homeRepository, todoRepository } from '../../../di/Dependencies';
-import { HomeResponse } from '../../../remote/response/homeResponse';
-
-import { memoRepository } from '../../../di/Dependencies';
+import { HomeResponse } from '../../../infrastructure/remote/response/homeResponse';
+import { homeRepository, todoRepository, memoRepository } from '../../../infrastructure/di/Dependencies';
 import { Todo } from '../../../domain/entities/Todo';
 import { useFocusEffect } from '@react-navigation/native';
 

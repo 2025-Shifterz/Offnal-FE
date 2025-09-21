@@ -6,7 +6,7 @@ import PencilIcon from '../../../assets/icons/pr-pencil.svg';
 import { useNavigation } from '@react-navigation/native';
 import { calendarNavigation } from '../../../navigation/types';
 import { Animated } from 'react-native';
-import { useWorkTime } from '../../../context/WorkTimeContext';
+import { useWorkTime } from '../../../shared/context/WorkTimeContext';
 
 // 컴포넌트
 type TextButtonProps = {

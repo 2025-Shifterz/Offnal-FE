@@ -7,7 +7,7 @@ import EditBottomSheet from '../components/EditBottomSheet';
 import CalendarInteractive from '../components/CalendarInteractive';
 import SuccessIcon from '../../../assets/icons/g-success.svg';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { workCalendarRepository } from '../../../di/Dependencies';
+import { workCalendarRepository } from '../../../infrastructure/di/Dependencies';
 import { ShiftType, ShiftsMap } from '../../../data/model/Calendar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { calendarStackParamList } from '../../../navigation/types';

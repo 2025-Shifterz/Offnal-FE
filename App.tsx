@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import RootNavigator from './src/navigation/RootNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { createTodoTable } from './src/local/tables/TodoTable';
+import { createTodoTable } from './src/infrastructure/local/tables/TodoTable';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { WorkTimeProvider } from './src/context/WorkTimeContext';
+import { WorkTimeProvider } from './src/shared/context/WorkTimeContext';
 
 function App(): React.JSX.Element {
   // Todo 테이블 생성

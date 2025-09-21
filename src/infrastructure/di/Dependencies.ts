@@ -1,21 +1,21 @@
 // 의존성 관리
-import { AddTodoUseCase } from '../domain/useCases/AddTodo';
-import { TodoRepositoryImpl } from '../data/impl/TodoRepositoryImpl';
-import { TodoCompletionUseCase } from '../domain/useCases/TodoCompletion';
-import { DeleteTodoUseCase } from '../domain/useCases/DeleteTodo';
-import { GetTodosUseCase } from '../domain/useCases/GetTodos';
+import { AddTodoUseCase } from '../../domain/useCases/AddTodo';
+import { TodoRepositoryImpl } from '../../data/impl/TodoRepositoryImpl';
+import { TodoCompletionUseCase } from '../../domain/useCases/TodoCompletion';
+import { DeleteTodoUseCase } from '../../domain/useCases/DeleteTodo';
+import { GetTodosUseCase } from '../../domain/useCases/GetTodos';
 import { TodoDao } from '../local/dao/TodoDao';
-import { UserRepositoryImpl } from '../data/impl/UserRepositoryImpl';
+import { UserRepositoryImpl } from '../../data/impl/UserRepositoryImpl';
 import { CalendarService } from '../remote/api/CalendarService';
-import { WorkCalendarRepositoryImpl } from '../data/impl/CalendarRepositoryImpl';
+import { WorkCalendarRepositoryImpl } from '../../data/impl/CalendarRepositoryImpl';
 import { HomeService } from '../remote/api/HomeService';
-import { HomeRepositoryImpl } from '../data/impl/HomeRepositoryImpl';
-import { GetHomeDataUseCase } from '../domain/useCases/GetHomeData';
+import { HomeRepositoryImpl } from '../../data/impl/HomeRepositoryImpl';
+import { GetHomeDataUseCase } from '../../domain/useCases/GetHomeData';
 import { FastAPIService } from '../remote/api/FastAPIService';
 import { MemoDao } from '../local/dao/MemoDao';
-import { MemoRepositoryImpl } from '../data/impl/MemoRepositoryImpl';
-import { GetTodosByDateUseCase } from '../domain/useCases/GetToDosByDate';
-import { GetMemosByDateUseCase } from '../domain/useCases/GetMemosByDate';
+import { MemoRepositoryImpl } from '../../data/impl/MemoRepositoryImpl';
+import { GetTodosByDateUseCase } from '../../domain/useCases/GetToDosByDate';
+import { GetMemosByDateUseCase } from '../../domain/useCases/GetMemosByDate';
 
 // 1. 구체적인 데이터 소스 인스턴스 생성
 const todoDao = new TodoDao();

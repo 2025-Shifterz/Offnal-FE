@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Button, Text, View } from 'react-native';
 import ArrowUp from '../../../assets/icons/arrow-up.svg';
 import ArrowDown from '../../../assets/icons/arrow-down.svg';
-import { useWorkTime } from '../../../context/WorkTimeContext';
+import { useWorkTime } from '../../../shared/context/WorkTimeContext';
 
 const pickerTextStyle = 'text-text-basic body-s font-[500px]';
 

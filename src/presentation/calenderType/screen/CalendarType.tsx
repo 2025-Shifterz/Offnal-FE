@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { SafeAreaView, ScrollView, View } from 'react-native';
-import BottomButton from '../../common/component/BottomButton';
-import TitleMessage from '../../common/component/TitleMessage';
+import BottomButton from '../../../shared/styles/component/BottomButton';
+import TitleMessage from '../../../shared/styles/component/TitleMessage';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { onboardingNavigation, OnboardingStackParamList } from '../../../navigation/types';
 import CalendarEditor, { CalendarEditorRef } from '../components/calendar/personal/CalendarEditor';
 import TCalendarEditor from '../components/calendar/team/TCalendarEditor';
-import { useWorkTime } from '../../../context/WorkTimeContext';
+import { useWorkTime } from '../../../shared/context/WorkTimeContext';
 
 type ScheduleTypeRouteProp = RouteProp<OnboardingStackParamList, 'CalendarType'>;
 

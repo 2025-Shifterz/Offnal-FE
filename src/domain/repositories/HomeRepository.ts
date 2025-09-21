@@ -1,4 +1,4 @@
-import { HomeResponse } from '../../remote/response/homeResponse';
+import { HomeResponse } from '../../infrastructure/remote/response/homeResponse';
 import { HomeData } from '../../data/impl/HomeRepositoryImpl';
 
 export interface HomeRepository {

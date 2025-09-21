@@ -1,5 +1,5 @@
 import { WorkCalendarRepository } from '../../domain/repositories/CalendarRepository';
-import { CalendarService } from '../../remote/api/CalendarService';
+import { CalendarService } from '../../infrastructure/remote/api/CalendarService';
 import { toCreateCalendarRequest, toUpdateShiftsRequest, toWorkDayModels } from '../mapper/Mapper';
 import { WorkDay, NewCalendar, ShiftsMap } from '../model/Calendar';
 

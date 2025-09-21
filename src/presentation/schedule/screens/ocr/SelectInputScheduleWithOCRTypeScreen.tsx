@@ -8,7 +8,7 @@ import RegMethod from '../../../schedule/component/RegMethod';
 
 import TakePicture from '../../../../assets/icons/ic_camera_32.svg';
 import OpenGallery from '../../../../assets/icons/ic_gallery_32.svg';
-import ProgressModal from '../../../common/component/ProgressModal';
+import ProgressModal from '../../../../shared/styles/component/ProgressModal';
 
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';

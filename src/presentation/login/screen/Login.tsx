@@ -3,7 +3,7 @@ import Swiper from 'react-native-swiper';
 import { Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import KaKaoLoginBtn from '../components/KakaoLoginBtn';
-import { onboardingList } from '../constants/onboardingList';
+import { onboardingList } from '../../../shared/constants/onboardingList';
 import { loginNavigation } from '../../../navigation/types';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');

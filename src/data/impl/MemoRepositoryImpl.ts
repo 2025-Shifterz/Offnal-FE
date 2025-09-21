@@ -1,7 +1,7 @@
 import { Dayjs } from 'dayjs';
 import { Todo } from '../../domain/entities/Todo';
 import { MemoRepository } from '../../domain/repositories/MemoRepository';
-import { MemoDao } from '../../local/dao/MemoDao';
+import { MemoDao } from '../../infrastructure/local/dao/MemoDao';
 
 export class MemoRepositoryImpl implements MemoRepository {
   constructor(private memoDao: MemoDao) {}

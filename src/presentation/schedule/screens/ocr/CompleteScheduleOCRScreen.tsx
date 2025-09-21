@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import { onboardingNavigation, OnboardingStackParamList } from '../../../../navigation/types';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { toShiftType } from '../../../../data/mapper/Mapper';
-import BottomButton from '../../../common/component/BottomButton';
+import BottomButton from '../../../../shared/styles/component/BottomButton';
 
 import { workCalendarRepository } from '../../../../di/Dependencies';
 import { MonthlySchedule, NewCalendar, ShiftType } from '../../../../data/model/Calendar';

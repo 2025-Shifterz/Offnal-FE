@@ -1,9 +1,9 @@
 // /src/data/mappers/CalendarMapper.ts
 
 import { NewCalendar, ShiftsMap, ShiftType, WorkDay } from '../model/Calendar'; // Domain 모델
-import { GetWorkCalendarResponseData } from '../../remote/response/GetWorkCalendarResponse';;
-import { UpdateShiftsRequest } from '../../remote/request/PatchWorkCalendarReqeust';
-import { CreateCalendarRequest } from '../../remote/request/CreateWorkCalendarRequest';
+import { GetWorkCalendarResponseData } from '../../infrastructure/remote/response/GetWorkCalendarResponse';;
+import { UpdateShiftsRequest } from '../../infrastructure/remote/request/PatchWorkCalendarReqeust';
+import { CreateCalendarRequest } from '../../infrastructure/remote/request/CreateWorkCalendarRequest';
 
 export function fromCodetoShiftType(code: string): ShiftType {
   switch (code) {
